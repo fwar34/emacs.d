@@ -108,7 +108,7 @@
 
 (use-package pyim
   :ensure t
-  :if window-system
+  :if (not (memq window-system '(mac ns)))
   :demand t
   :config
   ;; 激活 basedict 拼音词库，五笔用户请继续阅读 README
@@ -975,7 +975,6 @@
   )
 
 (use-package exec-path-from-shell
-  :disabled
   :if (memq window-system '(mac ns))
   :after evil
   :ensure t
