@@ -77,7 +77,7 @@
     )
 
   (if (equal window-system 'ns)
-      (fwar34/set-fonts englist-font-list 150 chinese-font-list 15)
+      (fwar34/set-fonts englist-font-list 160 chinese-font-list 16)
     (if (string= system-name "Taishiji")
         (fwar34/set-fonts englist-font-list 130 chinese-font-list 33)
       (fwar34/set-fonts englist-font-list 130 chinese-font-list 25)))
