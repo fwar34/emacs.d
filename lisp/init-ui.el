@@ -48,11 +48,15 @@
 
   (defvar englist-font-list '("PragmataPro Mono"
                               "RobotoMono Nerd Font"
+                              "RobotoMono Nerd Font Mono"
                               "Hack"
                               "Courier 10 Pitch"
                               "Courier New"
+                              "RobotoMono NF"
                               "DejaVu Sans Mono"))
   (defvar chinese-font-list '("黑体"
+                              "STHeiti"
+                              "STFangsong"
                               "Microsoft Yahei"
                               "文泉驿等宽微米黑"
                               "新宋体"
@@ -72,9 +76,11 @@
     ;;   (fwar34/set-fonts englist-font-list 130 chinese-font-list 25))
     )
 
-  (if (string= system-name "Taishiji")
-      (fwar34/set-fonts englist-font-list 130 chinese-font-list 33)
-    (fwar34/set-fonts englist-font-list 130 chinese-font-list 25))
+  (if (equal window-system 'ns)
+      (fwar34/set-fonts englist-font-list 150 chinese-font-list 16)
+    (if (string= system-name "Taishiji")
+        (fwar34/set-fonts englist-font-list 130 chinese-font-list 33)
+      (fwar34/set-fonts englist-font-list 130 chinese-font-list 25)))
   )
 
 (defvar font-flag nil)
