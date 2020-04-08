@@ -466,7 +466,7 @@
   ;; By default, this is bound to C-c C-f.
   ;; Placing (setq rust-format-on-save t) in your ~/.emacs will enable automatic
   ;; running of rust-format-buffer when you save a buffer.
-  (setq rust-format-on-save t)
+  ;; (setq rust-format-on-save t)
   )
 
 (use-package which-key
