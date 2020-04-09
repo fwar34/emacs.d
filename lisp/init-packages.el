@@ -1094,6 +1094,11 @@
                 evil-insert-state-map)))
   )
 
+(use-package thrift
+  :ensure t
+  :defer t
+  )
+
 ;; (use-package modern-cpp-font-lock
 ;;   :ensure t)
 
