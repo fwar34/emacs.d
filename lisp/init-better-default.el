@@ -202,6 +202,7 @@
   (delete-selection-mode 1)
 
   (add-to-list 'auto-mode-alist '("\\.zsh\\'" . sh-mode))
+  (add-to-list 'auto-mode-alist '("\\.ice\\'" . c++-mode))
   )
 
 ;; 行号
