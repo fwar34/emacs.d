@@ -44,3 +44,4 @@ diary
 irony/
 irony/*
 request/
+.emacs.desktop*
