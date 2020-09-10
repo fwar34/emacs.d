@@ -46,12 +46,12 @@
         (message (format "set chinese font: %s size: %d" (find-if #'fwar34/font-exist-p chinese-fonts) chinese-font-size)))
     )
 
-  (defvar englist-font-list '("PragmataPro Mono"
+(defvar englist-font-list '("Courier 10 Pitch"
                               "RobotoMono Nerd Font"
+                              "PragmataPro Mono"
                               "RobotoMono Nerd Font Mono"
-                              "Hack"
-                              "Courier 10 Pitch"
                               "Courier New"
+                              "Hack"
                               "RobotoMono NF"
                               "DejaVu Sans Mono"))
   (defvar chinese-font-list '("黑体"
@@ -80,7 +80,11 @@
       (fwar34/set-fonts englist-font-list 160 chinese-font-list 16)
     (if (string= system-name "Taishiji")
         (fwar34/set-fonts englist-font-list 130 chinese-font-list 33)
-      (fwar34/set-fonts englist-font-list 130 chinese-font-list 25)))
+      (if (string= system-name "FL-Notebook")
+          (progn
+            (fwar34/set-fonts englist-font-list 120 chinese-font-list 25)
+            (fwar34/set-fonts '("RobotoMono Nerd Font") 120))
+        (fwar34/set-fonts englist-font-list 120 chinese-font-list 16))))
   )
 
 (defvar font-flag nil)
