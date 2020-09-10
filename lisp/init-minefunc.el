@@ -1,5 +1,6 @@
 ;; -*- coding: utf-8; lexical-binding: t; -*-
 ;; 快速打开配置文件
+(define-namespace fwar34-)
 (defun open-init-file()
   (interactive)
   (find-file "~/.emacs.d/lisp/init-packages.el"))
