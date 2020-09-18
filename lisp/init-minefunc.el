@@ -390,4 +390,11 @@ URL `http://ergoemacs.org/emacs/elisp_run_current_file.html'"
   (interactive)
   (print (point-at-eol)))
 
+(defvar stc-flash "stcflash.py")
+(defun python/run-file (&optional args)
+  "Execute stcflash.py to upload hex to stc51 mcu"
+  (interactive)
+  
+  )
+
 (provide 'init-minefunc)
