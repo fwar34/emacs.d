@@ -453,6 +453,12 @@
                     ;; "mn" 'mc/mark-next-like-this
                     ;; "ms" 'mc/skip-to-next-like-this
                     ;; "xc" 'save-buffers-kill-terminal
+                    "ma" (lambda ()
+                           (interactive)
+                            (shell-command "make"))
+                    "mf" (lambda ()
+                           (interactive)
+                            (shell-command "make flash"))
                     "qq" 'save-buffers-kill-terminal
                     "xz" 'suspend-frame
                     "xx" 'highlight-symbol-remove-all
