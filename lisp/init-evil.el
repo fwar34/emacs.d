@@ -462,6 +462,9 @@
                     "mf" (lambda ()
                            (interactive)
                             (shell-command "make flash"))
+                    "mm" (lambda ()
+                           (interactive)
+                           (shell-command "make stcflash"))
                     "qq" 'save-buffers-kill-terminal
                     "xz" 'suspend-frame
                     "xx" 'highlight-symbol-remove-all
