@@ -244,6 +244,10 @@
                     "hp" 'highlight-symbol-prev
                     "hr" 'highlight-symbol-query-replace
                     "ln" 'highlight-symbol-nav-mode ; use M-n/M-p to navigation between symbols
+                    ;;symbol-overlay默认n,p,i,q在高亮的地方点击为下一个，上一个，取消所有的高亮，替换
+                    "so" 'symbol-overlay-transient
+                    "sp" 'symbol-overlay-put
+                    "sr" 'symbol-overlay-remove-all
                     ;;
                     "ia" 'my-append-semicolon-excursion
                     "ic" 'fwar34/insert-python
@@ -331,7 +335,7 @@
                     "rm" 'counsel-recentf
                     "sf" 'isearch-forward-regexp
                     "sb" 'isearch-backward-regexp
-                    "sr" 'replace-regexp
+                    ;; "sr" 'replace-regexp
                     "ci" 'evilnc-comment-or-uncomment-lines
                     "cl" 'evilnc-quick-comment-or-uncomment-to-the-line
                     ;; "ll" 'evilnc-quick-comment-or-uncomment-to-the-line

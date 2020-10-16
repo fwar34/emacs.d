@@ -667,8 +667,35 @@
 
 
 (use-package highlight-symbol
+  :disabled
   :ensure t
   :defer t
+  )
+
+;; https://github.com/wolray/symbol-overlay/
+;; https://github.com/wolray/symbol-overlay/issues/59
+(use-package symbol-overlay
+  ;;默认n,p,i,q在高亮的地方点击为下一个，上一个，取消所有的高亮，替换
+  :ensure t
+  :defer t
+  :config
+  (define-transient-command symbol-overlay-transient ()
+    "Symbol Overlay transient"
+    ["Symbol Overlay"
+     ["Overlays"
+      ("." "Add/Remove at point" symbol-overlay-put)
+      ("k" "Remove All" symbol-overlay-remove-all)
+      ]
+     ["Move to Symbol"
+      ("n" "Next" symbol-overlay-switch-forward)
+      ("p" "Previous" symbol-overlay-switch-backward)
+      ]
+     ["Other"
+      ("m" "Hightlight symbol-at-point" symbol-overlay-mode)
+      ]
+     ]
+    )
+  ;; (global-set-key (kbd "s-.") 'symbol-overlay-transient)
   )
 
 ;; rainbow-mode
