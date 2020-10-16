@@ -453,13 +453,15 @@
                     ;; "mn" 'mc/mark-next-like-this
                     ;; "ms" 'mc/skip-to-next-like-this
                     ;; "xc" 'save-buffers-kill-terminal
-                    "ma" (lambda () (interactive) (my-make))
-                    "mr" (lambda () (interactive) (my-make "rebuild"))
-                    "mm" (lambda () (interactive) (my-make "flash"))
+                    "ic" 'interrupt-my-commands
+                    "ma" (lambda () (interactive) (my-commands "make"))
+                    "mr" (lambda () (interactive) (my-commands "make" "rebuild"))
+                    "mm" (lambda () (interactive) (my-commands "make" "flash"))
                     ;; "mc" (lambda () (interactive) (shell-command "make stcflash"))
-                    "mc" (lambda () (interactive) (my-make "clean"))
-                    "ms" (lambda () (interactive) (my-make "space"))
-                    "mj" (lambda () (interactive) (my-make "-j" "5"))
+                    "mc" (lambda () (interactive) (my-commands "make" "clean"))
+                    "ms" (lambda () (interactive) (my-commands "make" "space"))
+                    "mj" (lambda () (interactive) (my-commands "make" "-j" "5"))
+                    "md" (lambda () (interactive) (my-commands "cd" "..") (my-commands "fakeroot" "debian/rules" "binary"))
                     "qq" 'save-buffers-kill-terminal
                     "xz" 'suspend-frame
                     "xx" 'highlight-symbol-remove-all

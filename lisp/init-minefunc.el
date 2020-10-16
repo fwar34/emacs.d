@@ -397,17 +397,17 @@ URL `http://ergoemacs.org/emacs/elisp_run_current_file.html'"
   
   )
 
-(defun my-make (&optional arg1 arg2)
-  (switch-to-buffer (get-buffer-create "*make-output*"))
+(defun my-commands (program &rest program-args)
+  (switch-to-buffer (get-buffer-create "*command-output*"))
   (erase-buffer)
-  (with-current-buffer "*make-output*"
+  (with-current-buffer "*command-output*"
     (evil-local-set-key 'normal (kbd "q") #'evil-buffer))
-  (if (not arg1)
-      (start-process "my-make" "*make-output*" "make")
-    (progn
-      (if arg2
-          (start-process "my-make" "*make-output*" "make" arg1 arg2)
-        (start-process "my-make" "*make-output*" "make" arg1))))
+      ;; (start-process "my-make" "*make-output*" "make")
+      (apply #'start-process "mycommands" "*command-output*" program program-args)
   (goto-char (point-max)))
+
+(defun interrupt-my-commands ()
+  (interactive)
+  (interrupt-process "*command-output*"))
 
 (provide 'init-minefunc)
