@@ -456,15 +456,18 @@
                     "ma" (lambda ()
                            (interactive)
                             (shell-command "make"))
-                    "mc" (lambda ()
+                    "mr" (lambda ()
                            (interactive)
-                            (shell-command "make clean; make"))
-                    "mf" (lambda ()
-                           (interactive)
-                            (shell-command "make flash"))
+                            (shell-command "make rebuild"))
                     "mm" (lambda ()
                            (interactive)
+                            (shell-command "make flash"))
+                    "mc" (lambda ()
+                           (interactive)
                            (shell-command "make stcflash"))
+                    "ms" (lambda ()
+                           (interactive)
+                            (shell-command "make space"))
                     "qq" 'save-buffers-kill-terminal
                     "xz" 'suspend-frame
                     "xx" 'highlight-symbol-remove-all
