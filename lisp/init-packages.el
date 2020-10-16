@@ -695,6 +695,8 @@
       ]
      ]
     )
+  (define-key symbol-overlay-map (kbd "r") 'symbol-overlay-query-replace)
+  (define-key symbol-overlay-map (kbd "x") 'symbol-overlay-put)
   ;; (global-set-key (kbd "s-.") 'symbol-overlay-transient)
   )
 
