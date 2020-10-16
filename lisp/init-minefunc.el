@@ -406,6 +406,15 @@ URL `http://ergoemacs.org/emacs/elisp_run_current_file.html'"
       (apply #'start-process "mycommands" "*command-output*" program program-args)
   (goto-char (point-max)))
 
+(defun my-commands-shell (command)
+  (switch-to-buffer (get-buffer-create "*command-output*"))
+  (erase-buffer)
+  (with-current-buffer "*command-output*"
+    (evil-local-set-key 'normal (kbd "q") #'evil-buffer))
+      ;; (start-process "my-make" "*make-output*" "make")
+      (start-process-shell-command "mycommands" "*command-output*" command)
+  (goto-char (point-max)))
+
 (defun interrupt-my-commands ()
   (interactive)
   (interrupt-process "*command-output*"))

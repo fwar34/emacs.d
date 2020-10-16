@@ -454,14 +454,31 @@
                     ;; "ms" 'mc/skip-to-next-like-this
                     ;; "xc" 'save-buffers-kill-terminal
                     "ic" 'interrupt-my-commands
-                    "ma" (lambda () (interactive) (my-commands "make"))
-                    "mr" (lambda () (interactive) (my-commands "make" "rebuild"))
-                    "mm" (lambda () (interactive) (my-commands "make" "flash"))
+                    ;; "ma" (lambda () (interactive) (my-commands "make"))
+                    ;; ;; "mr" (lambda () (interactive) (my-commands "make" "rebuild"))
+                    ;; "mr" (lambda () (interactive) (my-commands "make" "clean" (my-commands "make")))
+                    ;; "mm" (lambda () (interactive) (my-commands "make" "flash"))
+                    ;; ;; "mc" (lambda () (interactive) (shell-command "make stcflash"))
+                    ;; "mc" (lambda () (interactive) (my-commands "make" "clean"))
+                    ;; "ms" (lambda () (interactive) (my-commands "make" "space"))
+                    ;; "mj" (lambda () (interactive) (my-commands "make" "-j" "5"))
+                    ;; "md" (lambda () (interactive) (my-commands "cd" "..") (my-commands "fakeroot" "debian/rules" "binary"))
+                    "ma" (lambda () (interactive) (my-commands-shell "make"))
+                    ;; "mr" (lambda () (interactive) (my-commands "make" "rebuild"))
+                    "mr" (lambda () (interactive) (my-commands-shell "make rebuild"))
+                    "mm" (lambda () (interactive) (my-commands-shell "make flash"))
                     ;; "mc" (lambda () (interactive) (shell-command "make stcflash"))
-                    "mc" (lambda () (interactive) (my-commands "make" "clean"))
-                    "ms" (lambda () (interactive) (my-commands "make" "space"))
-                    "mj" (lambda () (interactive) (my-commands "make" "-j" "5"))
-                    "md" (lambda () (interactive) (my-commands "cd" "..") (my-commands "fakeroot" "debian/rules" "binary"))
+                    "mc" (lambda () (interactive) (my-commands-shell "make clean"))
+                    "ms" (lambda () (interactive) (my-commands-shell "make space"))
+                    ;; 
+                    "mj" (lambda () (interactive) (my-commands-shell "make -j 5"))
+                    "mx" (lambda () (interactive) (my-commands-shell "make clean; make -j 5"))
+                    ;; "md" (lambda () (interactive)
+                    ;;        (let ((default-directory (string-join (butlast (split-string default-directory "/") 2) "/")))
+                    ;;          (my-commands-shell "cd ..; fakeroot debian/rules binary")))
+                    "md" (lambda () (interactive)
+                             (my-commands-shell "cd ..; fakeroot debian/rules binary"))
+                    "mf" (lambda () (interactive) (my-commands-shell "make -j 5 && cd ..; fakeroot debian/rules binary"))
                     "qq" 'save-buffers-kill-terminal
                     "xz" 'suspend-frame
                     "xx" 'highlight-symbol-remove-all
