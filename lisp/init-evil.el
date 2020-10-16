@@ -453,21 +453,13 @@
                     ;; "mn" 'mc/mark-next-like-this
                     ;; "ms" 'mc/skip-to-next-like-this
                     ;; "xc" 'save-buffers-kill-terminal
-                    "ma" (lambda ()
-                           (interactive)
-                            (shell-command "make"))
-                    "mr" (lambda ()
-                           (interactive)
-                            (shell-command "make rebuild"))
-                    "mm" (lambda ()
-                           (interactive)
-                            (shell-command "make flash"))
-                    "mc" (lambda ()
-                           (interactive)
-                           (shell-command "make stcflash"))
-                    "ms" (lambda ()
-                           (interactive)
-                            (shell-command "make space"))
+                    "ma" (lambda () (interactive) (my-make))
+                    "mr" (lambda () (interactive) (my-make "rebuild"))
+                    "mm" (lambda () (interactive) (my-make "flash"))
+                    ;; "mc" (lambda () (interactive) (shell-command "make stcflash"))
+                    "mc" (lambda () (interactive) (my-make "clean"))
+                    "ms" (lambda () (interactive) (my-make "space"))
+                    "mj" (lambda () (interactive) (my-make "-j" "5"))
                     "qq" 'save-buffers-kill-terminal
                     "xz" 'suspend-frame
                     "xx" 'highlight-symbol-remove-all
