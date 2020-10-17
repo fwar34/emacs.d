@@ -695,8 +695,11 @@
       ]
      ]
     )
-  (define-key symbol-overlay-map (kbd "r") 'symbol-overlay-query-replace)
-  (define-key symbol-overlay-map (kbd "x") 'symbol-overlay-put)
+  ;; Or you may prefer to overwrite the keymap
+  (let ((map (make-sparse-keymap)))
+    (define-key map (kbd "r") 'symbol-overlay-query-replace)
+    (define-key map (kbd "x") 'symbol-overlay-remove-all)
+      (setq symbol-overlay-map map))
   ;; (global-set-key (kbd "s-.") 'symbol-overlay-transient)
   )
 
