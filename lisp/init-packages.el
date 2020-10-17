@@ -699,6 +699,8 @@
   (let ((map (make-sparse-keymap)))
     (define-key map (kbd "r") 'symbol-overlay-query-replace)
     (define-key map (kbd "x") 'symbol-overlay-remove-all)
+    (define-key map (kbd "n") 'symbol-overlay-jump-next)
+    (define-key map (kbd "p") 'symbol-overlay-jump-prev)
       (setq symbol-overlay-map map))
   ;; (global-set-key (kbd "s-.") 'symbol-overlay-transient)
   )
