@@ -457,6 +457,7 @@
                     ;; "mn" 'mc/mark-next-like-this
                     ;; "ms" 'mc/skip-to-next-like-this
                     ;; "xc" 'save-buffers-kill-terminal
+                    "cd" 'my-change-default-directory
                     "ic" 'interrupt-my-commands
                     ;; "ma" (lambda () (interactive) (my-commands "make"))
                     ;; ;; "mr" (lambda () (interactive) (my-commands "make" "rebuild"))

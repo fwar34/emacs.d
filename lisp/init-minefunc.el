@@ -415,6 +415,21 @@ URL `http://ergoemacs.org/emacs/elisp_run_current_file.html'"
       (start-process-shell-command "mycommands" "*command-output*" command)
   (goto-char (point-max)))
 
+(defun my-commands-shell-change-default-directory (command)
+  (let ((default-directory (string-join (butlast (split-string buffer-file-name "/") 1) "/")))
+    (start-process-shell-command "mycommands" "*command-output*" command)
+    (switch-to-buffer (get-buffer-create "*command-output*"))
+    (erase-buffer)
+    (with-current-buffer "*command-output*"
+      (evil-local-set-key 'normal (kbd "q") #'evil-buffer))
+    ;; (start-process "my-make" "*make-output*" "make")
+    (goto-char (point-max))))
+
+(defun my-change-default-directory ()
+  (interactive)
+  (setq default-directory (string-join (butlast (split-string buffer-file-name "/") 1) "/"))
+  (message "change default-directory to %s" (string-join (butlast (split-string buffer-file-name "/") 1) "/")))
+
 (defun interrupt-my-commands ()
   (interactive)
   (interrupt-process "*command-output*"))
