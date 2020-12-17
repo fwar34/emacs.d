@@ -13,7 +13,7 @@
                   (replace-match "global/share/gtags/gtags.conf" nil nil str 0)))
       (setenv "GTAGSCONF" "/usr/local/share/gtags/gtags.conf")))
   )
-(my-gtags-init)
+;; (my-gtags-init)
 
 ;; ggtags
 (use-package ggtags
