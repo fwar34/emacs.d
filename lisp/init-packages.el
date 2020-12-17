@@ -1133,6 +1133,14 @@
   :defer t
   )
 
+(use-package lua-mode
+  :ensure t
+  :defer t
+  :config
+  (add-to-list 'auto-mode-alist '("\\.lua$" . lua-mode))
+  (add-to-list 'interpreter-mode-alist '("lua" . lua-mode))
+  )
+
 ;; (use-package modern-cpp-font-lock
 ;;   :ensure t)
 
