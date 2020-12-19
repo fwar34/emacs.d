@@ -76,15 +76,15 @@
     ;;   (fwar34/set-fonts englist-font-list 130 chinese-font-list 25))
     )
 
-  (if (equal window-system 'ns)
-      (fwar34/set-fonts englist-font-list 160 chinese-font-list 16)
-    (if (string= system-name "Taishiji")
-        (fwar34/set-fonts englist-font-list 130 chinese-font-list 33)
-      (if (string= system-name "FL-Notebook")
-          (progn
-            (fwar34/set-fonts englist-font-list 120 chinese-font-list 25)
-            (fwar34/set-fonts '("RobotoMono Nerd Font") 120))
-        (fwar34/set-fonts englist-font-list 120 chinese-font-list 16))))
+  ;; (if (equal window-system 'ns)
+  ;;     (fwar34/set-fonts englist-font-list 160 chinese-font-list 16)
+  ;;   (if (string= system-name "Taishiji")
+  ;;       (fwar34/set-fonts englist-font-list 130 chinese-font-list 33)
+  ;;     (if (string= system-name "FL-Notebook")
+  ;;         (progn
+  ;;           (fwar34/set-fonts englist-font-list 120 chinese-font-list 25)
+  ;;           (fwar34/set-fonts '("RobotoMono Nerd Font") 120))
+  ;;       (fwar34/set-fonts englist-font-list 120 chinese-font-list 16))))
   )
 
 (defvar font-flag nil)
