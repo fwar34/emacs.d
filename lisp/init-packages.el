@@ -406,6 +406,7 @@
 
 (use-package evil-magit
   :ensure t
+  :disabled
   :after (magit evil) 
   :config
   ;; https://www.helplib.com/GitHub/article_131559
