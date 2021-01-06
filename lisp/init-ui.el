@@ -20,7 +20,7 @@
   ;; (x-list-fonts "*")
   ;; (print (font-family-list)) 打印字体
 
-  (require 'cl) ;; find-if is in common list package
+  (require 'cl-lib) ;; find-if is in common list package
 
   (defun fwar34/font-exist-p (font)
     (if (null (x-list-fonts font))

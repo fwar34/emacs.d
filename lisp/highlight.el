@@ -1092,7 +1092,7 @@
 ;;
 ;;; Code:
 
-(eval-when-compile (unless (fboundp 'dolist) (require 'cl))) ;; dolist
+(eval-when-compile (unless (fboundp 'dolist) (require 'cl-lib))) ;; dolist
 (require 'easymenu) ;; easy-menu-add-item
 (require 'frame-fns nil t) ;; (no error if not found): flash-ding
 (require 'menu-bar+ nil t) ;; (no error if not found): menu-bar-edit-region-menu
