@@ -1067,8 +1067,7 @@
    ((equal system-type 'windows-nt) (setq multi-term-program "eshell"))
    ((equal system-type 'gnu/linux) (setq multi-term-program "/usr/bin/zsh")))
 
-  ;; (setq mykey (read-kbd-macro "C-l"))
-  ;; (define-key term-mode-map mykey 'evil-buffer)
+  
   ;; (define-key term-mode-map "\e\C-l" 'evil-buffer)
   ;; (define-key term-raw-map ";bb" 'evil-buffer)
 
@@ -1095,13 +1094,17 @@
             (setq term-buffer target-buffer)
             (throw 'break nil))
           (setq index (1+ index))))
+      ;; (if term-buffer
+      ;;     (progn
+      ;;       (setq orig-default-directory default-directory)
+      ;;       (switch-to-buffer term-buffer)
+      ;;       (term-send-raw-string (concat "cd " orig-default-directory "\C-m"))
+      ;;       )
+      ;;   (multi-term))
       (if term-buffer
-          (progn
-            (setq orig-default-directory default-directory)
-            (switch-to-buffer term-buffer)
-            (term-send-raw-string (concat "cd " orig-default-directory "\C-m"))
-            )
-        (multi-term)))
+          (switch-to-buffer term-buffer)
+        (multi-term))
+      )
     )
 
 ;; (with-parsed-tramp-file-name default-directory path
