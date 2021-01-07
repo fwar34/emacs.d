@@ -214,6 +214,8 @@
                        emacs-lisp-mode-hook
                        matlab-mode-hook
                        rust-mode-hook
+                       go-mode-hook
+                       clojure-mode-hook
                        python-mode-hook
                        c-mode-common-hook
                        ;; org-mode-hook

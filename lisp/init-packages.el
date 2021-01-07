@@ -1148,4 +1148,16 @@
 ;; (use-package modern-cpp-font-lock
 ;;   :ensure t)
 
+(use-package cider
+  :ensure t
+  :config
+  )
+
+(use-package inf-clojure
+  :ensure t
+  ;; :defer t
+  :config
+  (add-hook 'clojure-mode-hook #'inf-clojure-minor-mode)
+  )
+
 (provide 'init-packages)
