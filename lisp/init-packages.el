@@ -1151,9 +1151,11 @@
 (use-package cider
   :ensure t
   :config
+  (add-hook 'clojure-mode-hook #'cider-mode)
   )
 
 (use-package inf-clojure
+  :disabled
   :ensure t
   ;; :defer t
   :config
