@@ -258,6 +258,8 @@
 ;; https://en.wikipedia.org/wiki/Indent_style
 (setq c-default-style "linux")
 (setq default-tab-width 4)
+;; 设置tab为4个宽度
+(setq-default tab-width 4)
 ;; https://www.gnu.org/software/emacs/manual/html_node/ccmode/c_002doffsets_002dalist.html#c_002doffsets_002dalist
 ;; https://www.gnu.org/software/emacs/manual/html_node/ccmode/Style-Variables.html#Style-Variables
 ;; https://www.gnu.org/software/emacs/manual/html_node/ccmode/Custom-Line_002dUp.html#Custom-Line_002dUp
