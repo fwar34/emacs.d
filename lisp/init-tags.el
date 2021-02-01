@@ -36,6 +36,7 @@
   )
 
 (use-package counsel-gtags
+  :disabled
   :ensure t
   :defer t
   :config

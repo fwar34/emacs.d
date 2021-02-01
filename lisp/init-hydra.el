@@ -142,6 +142,26 @@
     (define-key apropos-mode-map (kbd "M-u ap") 'hydra-apropos/body))
 
   ;;-------------------------------------------------------------
+  ;; counsel-etags
+  (defhydra hydra-counsel-etags (:color blue :hint nil)
+    ;; "
+    ;; _a_propos        _c_ommand
+    ;; _d_ocumentation  _l_ibrary
+    ;; _v_ariable       _u_ser-option
+    ;; ^ ^          valu_e_"
+    ("r" counsel-etags-recent-tag "Find tag using tagname from ‘counsel-etags-tag-history’." :column "counsel-etags")
+    ("g" counsel-etags-grep "Grep at project root directory or current directory.")
+    ("f" counsel-etags-find-tag "Find tag in two step.")
+    ("l" counsel-etags-list-tag "List all tags.  Tag is fuzzy and case insensitively matched.")
+    ("d" counsel-etags-find-tag-at-point "Find tag using tagname at point.")
+    ("u" counsel-etags-update-tags-force "Update current tags file using default implementation.")
+    ("F" counsel-etags-grep-current-directory "Grep current directory or LEVEL up parent directory.")
+    ("s" counsel-etags-virtual-update-tags "Scan code and create tags file again.")
+    ("q" nil "cancel" :exit t :column nil))
+  ;; (global-set-key (kbd "M-u ap") 'hydra-apropos/body)
+  (global-set-key (kbd "M-u tt") #'hydra-counsel-etags/body)
+
+  ;;-------------------------------------------------------------
   ;; agenda
   (with-eval-after-load 'org-agenda
     (defhydra hydra-org-agenda-view (:hint none)
