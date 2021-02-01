@@ -300,7 +300,7 @@
                     "hr" 'counsel-etags-recent-tag
                     "hf" 'counsel-etags-find-tag
                     "hg" 'counsel-etags-grep
-                    "hh" 'counsel-etags-list-tag
+                    "hl" 'counsel-etags-list-tag
                     ;; "bm" 'counsel-bookmark-goto
                     ;; "br" 'counsel-browse-kill-ring
                     "kr" 'browse-kill-ring
