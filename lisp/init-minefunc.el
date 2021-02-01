@@ -427,4 +427,35 @@ URL `http://ergoemacs.org/emacs/elisp_run_current_file.html'"
   (interactive)
   (interrupt-process "*command-output*"))
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(defun my-is-char (c)
+  (or (= c ?.)
+      (= c ?-)
+      (= c ?_)
+      (and (>= c ?0) (<= c ?9))
+      (and (>= c ?A) (<= c ?Z))
+      (and (>= c ?a) (<= c ?z))))
+(defun my-word-at-point (&optional search-back)
+  "my search word at point function"
+  (let* ((ret (char-to-string (following-char)))
+         (b (line-beginning-position))
+         (e (line-end-position)))
+
+    ;; backward
+    (when search-back
+      (save-excursion
+        (backward-char)
+        (while (and (>= (point) b) (my-is-char (following-char)))
+          (setq ret (concat (char-to-string (following-char)) ret))
+          (backward-char))))
+
+    ;; forward
+    (save-excursion
+      (forward-char)
+      (while (and (< (point) e) (my-is-char (following-char)))
+        (setq ret (concat ret (char-to-string (following-char))))
+        (forward-char)))
+    ret))
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 (provide 'init-minefunc)

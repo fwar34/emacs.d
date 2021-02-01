@@ -271,7 +271,7 @@
                     ;; "bl" 'buf-move-right
                     "ss" 'swiper
                     "sa" 'swiper-all
-                    "fs" 'occur-dwim
+                    "od" 'occur-dwim
                     "qq" 'quit-window
                     "pa" 'evil-paste-after
                     "pb" 'evil-paste-before
@@ -286,6 +286,8 @@
                     ;; "qg" 'counsel-etags-grep
                     ;; "dd" 'counsel-etags-grep-symbol-at-point
                     "fa" 'counsel-ag
+                    "fw" (lambda () (interactive) (counsel-ag (my-word-at-point 1)))
+                    "fs" (lambda () (interactive) (counsel-ag (my-word-at-point)))
                     ;; "ha" 'helm-ag
                     "fe" 'end-of-defun
                     "fm" 'mark-defun
