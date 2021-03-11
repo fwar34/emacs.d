@@ -269,8 +269,8 @@
                     ;; "bj" 'buf-move-down
                     ;; "bh" 'buf-move-left
                     ;; "bl" 'buf-move-right
-                    "ss" 'swiper
-                    "sa" 'swiper-all
+                    "li" 'swiper
+                    "la" 'swiper-all
                     "od" 'occur-dwim
                     "qq" 'quit-window
                     "pa" 'evil-paste-after
@@ -303,6 +303,7 @@
                     "hf" 'counsel-etags-find-tag
                     "hg" 'counsel-etags-grep
                     "hl" 'counsel-etags-list-tag
+                    "hc" 'counsel-etags-list-tag-in-current-file
                     ;; "bm" 'counsel-bookmark-goto
                     ;; "br" 'counsel-browse-kill-ring
                     "kr" 'browse-kill-ring

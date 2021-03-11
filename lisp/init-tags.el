@@ -49,10 +49,12 @@
   :defer t
   :init
   ;; Setup auto update now
+  ;; (add-hook 'prog-mode-hook
+  ;;           (lambda ()
+  ;;             (add-hook 'after-save-hook
+  ;;                       'counsel-etags-virtual-update-tags 'append 'local)))
   (add-hook 'prog-mode-hook
-            (lambda ()
-              (add-hook 'after-save-hook
-                        'counsel-etags-virtual-update-tags 'append 'local)))
+            (lambda () (add-hook 'after-save-hook 'counsel-etags-virtual-update-tags)))
   :config
   (eval-after-load 'counsel-etags
     '(progn
@@ -66,6 +68,9 @@
        (add-to-list 'counsel-etags-ignore-filenames "TAGS")
        (add-to-list 'counsel-etags-ignore-filenames "*.xml")
        (add-to-list 'counsel-etags-ignore-filenames "*.json")))
+
+  (setq counsel-etags-ctags-options-base "~/.ctags")
+  (setq counsel-etags-update-interval 60)
 
   ;; auto update tags
   ;; Don't ask before rereading the TAGS files if they have changed

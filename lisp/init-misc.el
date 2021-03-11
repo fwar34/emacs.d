@@ -9,6 +9,7 @@
     (add-to-list 'auto-save-exclude "COMMIT_EDITMSG")
     (add-to-list 'auto-save-exclude "TAGS")
     (add-to-list 'auto-save-exclude "tags")
+    (add-to-list 'auto-save-exclude "\\.cpp")
     (setq auto-save-idle 2) ; 2 seconds
     (setq auto-save-slient t)
     (auto-save-enable)
