@@ -47,27 +47,25 @@
 (use-package counsel-etags
   :ensure t
   :defer t
+  :bind (("C-]" . counsel-etags-find-tag-at-point))
   :init
   ;; Setup auto update now
-  ;; (add-hook 'prog-mode-hook
-  ;;           (lambda ()
-  ;;             (add-hook 'after-save-hook
-  ;;                       'counsel-etags-virtual-update-tags 'append 'local)))
   (add-hook 'prog-mode-hook
-            (lambda () (add-hook 'after-save-hook 'counsel-etags-virtual-update-tags)))
+            (lambda ()
+              (add-hook 'after-save-hook
+                        'counsel-etags-virtual-update-tags 'append 'local)))
   :config
-  (eval-after-load 'counsel-etags
-    '(progn
-       ;; counsel-etags-ignore-directories does NOT support wildcast
-       (add-to-list 'counsel-etags-ignore-directories "build_clang")
-       (add-to-list 'counsel-etags-ignore-directories "debian")
-       ;; counsel-etags-ignore-filenames supports wildcast
-       (add-to-list 'counsel-etags-ignore-filenames "*.log")
-       (add-to-list 'counsel-etags-ignore-filenames "*.html")
-       (add-to-list 'counsel-etags-ignore-filenames "*.tag")
-       (add-to-list 'counsel-etags-ignore-filenames "TAGS")
-       (add-to-list 'counsel-etags-ignore-filenames "*.xml")
-       (add-to-list 'counsel-etags-ignore-filenames "*.json")))
+  (with-eval-after-load 'counsel-etags
+    ;; counsel-etags-ignore-directories does NOT support wildcast
+    (add-to-list 'counsel-etags-ignore-directories "build_clang")
+    (add-to-list 'counsel-etags-ignore-directories "debian")
+    ;; counsel-etags-ignore-filenames supports wildcast
+    (add-to-list 'counsel-etags-ignore-filenames "*.log")
+    (add-to-list 'counsel-etags-ignore-filenames "*.html")
+    (add-to-list 'counsel-etags-ignore-filenames "*.tag")
+    (add-to-list 'counsel-etags-ignore-filenames "TAGS")
+    (add-to-list 'counsel-etags-ignore-filenames "*.xml")
+    (add-to-list 'counsel-etags-ignore-filenames "*.json"))
 
   (setq counsel-etags-ctags-options-base "~/.ctags")
   (setq counsel-etags-update-interval 60)
