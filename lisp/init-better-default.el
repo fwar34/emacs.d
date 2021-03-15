@@ -297,10 +297,10 @@
 ;;   )
 
 ;; after execute shell-command goto bottom of output buffer
-(defadvice shell-command (around adivce-shell-command activate)
-  ad-do-it
-  (switch-to-buffer "*Shell Command Output*")
-  (goto-char (point-max)))
+;; (defadvice shell-command (around adivce-shell-command activate)
+;;   ad-do-it
+;;   (switch-to-buffer "*Shell Command Output*")
+;;   (goto-char (point-max)))
 
 ;; advice for evil search
 ;; (defadvice evil-search-next (after advice-for-evil-search-next activate)

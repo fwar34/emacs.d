@@ -205,10 +205,10 @@
   ;;   (with-current-buffer "*Shell Command Output*"
   ;;     (evil-local-set-key 'normal (kbd "q") #'quit-window)))
   ;; (advice-add 'shell-command :after #'my-quit-window)
-  (defadvice shell-command (after advice-find-file activate)
-    (with-current-buffer "*Shell Command Output*"
-      ;; (evil-local-set-key 'normal (kbd "q") #'quit-window)))
-      (evil-local-set-key 'normal (kbd "q") #'kill-this-buffer)))
+  ;; (defadvice shell-command (after advice-find-file activate)
+  ;;   (with-current-buffer "*Shell Command Output*"
+  ;;     ;; (evil-local-set-key 'normal (kbd "q") #'quit-window)))
+  ;;     (evil-local-set-key 'normal (kbd "q") #'kill-this-buffer)))
   )
 
 (use-package undo-tree
