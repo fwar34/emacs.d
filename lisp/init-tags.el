@@ -47,7 +47,6 @@
 (use-package counsel-etags
   :ensure t
   :defer t
-  :bind (("C-]" . counsel-etags-find-tag-at-point))
   :init
   ;; Setup auto update now
   (add-hook 'prog-mode-hook

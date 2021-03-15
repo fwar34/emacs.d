@@ -120,6 +120,7 @@
 (evil-define-key 'normal package-menu-mode-map "s" #'swiper)
 
 ;; (define-key evil-normal-state-map (kbd "M-j") 'pyim-toggle-input-ascii)
+(define-key evil-normal-state-map (kbd "C-]") 'counsel-etags-find-tag-at-point)
 
 ;; evil-surround setting
 (global-evil-surround-mode)
