@@ -218,27 +218,24 @@
                        clojure-mode-hook
                        python-mode-hook
                        c-mode-common-hook
+                       lua-mode-hook
                        ;; org-mode-hook
                        package-menu-mode-hook
                        makefile-gmake-mode-hook
                        ;;  Gnome
                        makefile-bsdmake-mode-hook ; OS X
-                       ess-mode-hook)))  
+                       ess-mode-hook)))
       (setq-default display-line-numbers-width 2)
       (setq-default display-line-numbers-width-start t)  ;; 行数右对齐
       ;; (setq-default display-line-numbers-type 'relative)
       (setq display-line-numbers-current-absolute t)
       (dolist (hook-element hook-list)
         (add-hook hook-element 'display-line-numbers-mode)))
-  (global-linum-mode 1)
-  (when (not (display-graphic-p))
-    (setq linum-format "%d "))) ;; 注意%d后面有空格，即用空格将行号和代码隔
-
+  ) 
 
 ;; abbrev
 ;; (abbrev-mode t)
 ;; (define-abbrev-table 'global-abbrev-table '(("lf" "liang.feng")))
-
 
 ;; When you visit a file, point goes to the last place where it was when you previously visited the same file.
 ;; remember cursor position. When file is opened, put cursor at last position

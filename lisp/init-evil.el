@@ -260,6 +260,7 @@
                     "fz" 'counsel-fzf
                     ;; "wf" 'popup-which-function
                     ;; "ww" 'narrow-or-widen-dwim
+                    "cd" 'my-change-default-directory
                     "ii" 'counsel-imenu
                     "il" 'imenu-list-smart-toggle
                     ;; "tb" 'taglist-list-tags
@@ -461,7 +462,6 @@
                     ;; "mn" 'mc/mark-next-like-this
                     ;; "ms" 'mc/skip-to-next-like-this
                     ;; "xc" 'save-buffers-kill-terminal
-                    "cd" 'my-change-default-directory
                     "ic" 'interrupt-my-commands
                     ;; "ma" (lambda () (interactive) (my-commands "make"))
                     ;; ;; "mr" (lambda () (interactive) (my-commands "make" "rebuild"))
@@ -529,8 +529,10 @@
                     ;;        (if (display-graphic-p)
                     ;;            (git-gutter:next-hunk (line-number-at-pos)) 
                     ;;          (diff-hl-next-hunk)))
-                    "cn" 'git-gutter:next-hunk
-                    "cp" 'git-gutter:previous-hunk
+                    "du" 'git-gutter:popup-hunk
+                    "dr" 'git-gutter:revert-hunk
+                    "dn" 'git-gutter:next-hunk
+                    "dp" 'git-gutter:previous-hunk
                     ;; "cp" (lambda ()
                     ;;        (interactive)
                     ;;        (if (display-graphic-p)
