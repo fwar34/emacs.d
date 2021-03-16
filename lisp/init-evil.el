@@ -529,8 +529,19 @@
                     ;;        (if (display-graphic-p)
                     ;;            (git-gutter:next-hunk (line-number-at-pos)) 
                     ;;          (diff-hl-next-hunk)))
-                    "du" 'git-gutter:popup-hunk
-                    "dr" 'git-gutter:revert-hunk
+                    ;; "du" 'git-gutter:popup-hunk
+                    "du" '(lambda ()
+                           (interactive)
+                           (define-advice git-gutter:popup-hunk (:around (orig-fun &rest args) my-git-gutter:popup-hunk)
+                             (let ((res (apply orig-fun args)))
+                               (when res
+                                 (switch-to-buffer-other-window res)
+                                 (evil-local-set-key 'normal (kbd "q") #'kill-buffer-and-window))))
+                           (git-gutter:popup-hunk))
+                    "dr" '(lambda ()
+                            (interactive)
+                            (advice-remove 'git-gutter:popup-hunk #'git-gutter:popup-hunk@my-git-gutter:popup-hunk)
+                            (git-gutter:revert-hunk))
                     "dn" 'git-gutter:next-hunk
                     "dp" 'git-gutter:previous-hunk
                     ;; "cp" (lambda ()

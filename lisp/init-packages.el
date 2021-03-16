@@ -956,12 +956,6 @@
   ;; you could use this to have git-gutter’s commands for navigating hunks save the current location before jumping:
   (evil-add-command-properties #'git-gutter:next-hunk :jump t)
   (evil-add-command-properties #'git-gutter:previous-hunk :jump t)
-
-  (define-advice git-gutter:popup-hunk (:around (orig-fun) my-git-gutter:popup-hunk)
-    (let ((res (funcall orig-fun)))
-      (when res
-        (switch-to-buffer-other-window res)
-        (evil-define-key 'normal diff-mode-map "q" #'kill-buffer-and-window))))
   )
 
 (use-package git-gutter-fringe

@@ -484,4 +484,5 @@ https://emacs.stackexchange.com/questions/51470/define-advice-vs-advice-add-vs-o
     (let ((res (apply orig-fun args)))
       (message "display-buffer returned %S" res)
       res))
+  (advice-remove 'display-buffer #'display-buffer@his-tracing-function)
 #+END_SRC
