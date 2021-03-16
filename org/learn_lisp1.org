@@ -486,3 +486,14 @@ https://emacs.stackexchange.com/questions/51470/define-advice-vs-advice-add-vs-o
       res))
   (advice-remove 'display-buffer #'display-buffer@his-tracing-function)
 #+END_SRC
+
+* thing-at-point
+测试thing-at-point
+#+begin_src elisp
+  (defun test-thing ()
+    (interactive)
+    (message (thing-at-point 'symbol))
+    (message (thing-at-point 'word))
+    )
+#+end_src
+

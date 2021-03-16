@@ -102,8 +102,6 @@
   (setq track-eol t)
   ;; display time in modeline
   (display-time-mode 1)
-  ;; auto reload file
-  (global-auto-revert-mode t)
   ;; 在使用emacs时，一行文字如果不按回车键，那么它就会一直往右延伸，不会自动换行。这是很不方便的。
   (setq work-wrap 'off)
   ;; 禁用备份文件
@@ -205,6 +203,12 @@
   (add-to-list 'auto-mode-alist '("\\.ice\\'" . c++-mode))
   )
 
+;; https://emacs-china.org/t/emacs-builtin-mode/11937
+;; auto reload File
+(use-package autorevert
+  :ensure nil
+  :hook (after-init . global-auto-revert-mode))
+
 ;; 行号
 (if (>= emacs-major-version 26)
     ;; config built-in "display-line-number-mode" (require Emacs >= 26)
@@ -273,7 +277,7 @@
 (add-hook 'emacs-lisp-mode-hook (lambda () (modify-syntax-entry ?- "w")))
 
 ;; 花括号自动换行的问题
-;; http://tieba.baidu.com/p/3572057629
+;; http://ergoemacs.org/emacs/emacs_insert_brackets_by_pair.html
 (when (fboundp 'electric-pair-mode)
   (electric-pair-mode t)
   (setq electric-pair-inhibit-predicate 'electric-pair-conservative-inhibit))

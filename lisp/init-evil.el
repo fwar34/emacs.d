@@ -191,6 +191,7 @@
                beginning-of-defun
                dired-single-buffer
                dired-jump
+               ivy-done
                end-of-defun
                lispyville-beginning-of-defun
                lispyville-end-of-defun
@@ -279,10 +280,10 @@
                     "pb" 'evil-paste-before
                     ;; "hv" 'describe-variable
                     "ge" 'goto-line
-                    "gg" 'counsel-gtags-dwim ; jump from reference to definition or vice versa
-                    "gs" 'counsel-gtags-find-symbol
-                    "gr" 'counsel-gtags-find-reference
-                    "gu" 'counsel-gtags-update-tags
+                    ;; "gg" 'counsel-gtags-dwim ; jump from reference to definition or vice versa
+                    ;; "gs" 'counsel-gtags-find-symbol
+                    ;; "gr" 'counsel-gtags-find-reference
+                    ;; "gu" 'counsel-gtags-update-tags
                     "ud" 'undo-tree-visualize
                     "ua" 'universal-argument
                     ;; "qg" 'counsel-etags-grep
@@ -295,8 +296,8 @@
                     "fm" 'mark-defun
                     ;; "sc" 'scratch
                     ;; "jd" 'dumb-jump-go
-                    "jd" 'xref-find-definitions
-                    "jr" 'xref-find-references
+                    "xd" 'xref-find-definitions
+                    "xr" 'xref-find-references
                     ;; "jb" 'dumb-jump-back
                     "dj" 'dired-jump ;; open the dired from current file
                     ;; "dj" 'counsel-dired
@@ -373,7 +374,6 @@
                     ;; "gh" 'w3mext-hacker-search ; code search in all engines with firefox
                     "pf" 'project-find-file
                     "pg" 'project-find-regexp
-                    "ma" 'magit
                     "sm" 'smex
                     "sj" 'smex-major-mode-commands
                     "se" 'open-init-file
@@ -423,8 +423,6 @@
                     ;; :non-normal-prefix "M-SPC"
                     "SPC" 'evil-ex
                     "cc" 'convert-file-to-utf8-unix
-                    "ef" 'with-editor-finish
-                    "ec" 'with-editor-cancel
                     ;; "ss" 'wg-create-workgroup ; save windows layout
                     "is" 'evil-iedit-state/iedit-mode ; start iedit in emacs
                     "sc" 'shell-command
@@ -454,6 +452,9 @@
                     ;; "ui" 'gud-stepi
                     ;; "uc" 'gud-cont
                     ;; "uf" 'gud-finish
+                    "ma" 'magit
+                    "mf" 'with-editor-finish
+                    "mc" 'with-editor-cancel
                     ;; "ma" 'mc/mark-all-like-this-dwim
                     ;; "md" 'mc/mark-all-like-this-in-defun
                     ;; "am" 'ace-mc-add-multiple-cursors
@@ -472,22 +473,21 @@
                     ;; "ms" (lambda () (interactive) (my-commands "make" "space"))
                     ;; "mj" (lambda () (interactive) (my-commands "make" "-j" "5"))
                     ;; "md" (lambda () (interactive) (my-commands "cd" "..") (my-commands "fakeroot" "debian/rules" "binary"))
-                    "ma" (lambda () (interactive) (my-commands-shell "make -j 5"))
+                    "bj" (lambda () (interactive) (my-commands-shell "make -j 5"))
                     ;; "mr" (lambda () (interactive) (my-commands "make" "rebuild"))
                     ;; "mr" (lambda () (interactive) (my-commands-shell "make rebuild"))
-                    "mm" (lambda () (interactive) (my-commands-shell "make flash"))
                     ;; "mc" (lambda () (interactive) (shell-command "make stcflash"))
-                    "mc" (lambda () (interactive) (my-commands-shell "make clean"))
-                    "ms" (lambda () (interactive) (my-commands-shell "make space"))
+                    "bc" (lambda () (interactive) (my-commands-shell "make clean"))
+                    "bs" (lambda () (interactive) (my-commands-shell "make space"))
                     ;; 
                     ;; "mj" (lambda () (interactive) (my-commands-shell "make -j 5"))
-                    "mr" (lambda () (interactive) (my-commands-shell "make clean; make -j 5"))
+                    "br" (lambda () (interactive) (my-commands-shell "make clean; make -j 5"))
                     ;; "md" (lambda () (interactive)
                     ;;        (let ((default-directory (string-join (butlast (split-string default-directory "/") 2) "/")))
                     ;;          (my-commands-shell "cd ..; fakeroot debian/rules binary")))
-                    "md" (lambda () (interactive)
+                    "bd" (lambda () (interactive)
                              (my-commands-shell "cd ..; fakeroot debian/rules binary"))
-                    "mf" (lambda () (interactive) (my-commands-shell "make -j 5 && cd ..; fakeroot debian/rules binary"))
+                    "bf" (lambda () (interactive) (my-commands-shell "make -j 5 && cd ..; fakeroot debian/rules binary"))
                     "qq" 'save-buffers-kill-terminal
                     "xz" 'suspend-frame
                     "xx" 'highlight-symbol-remove-all
@@ -529,7 +529,7 @@
                     ;;        (if (display-graphic-p)
                     ;;            (git-gutter:next-hunk (line-number-at-pos)) 
                     ;;          (diff-hl-next-hunk)))
-                    ;; "du" 'git-gutter:popup-hunk
+                    "ds" 'git-gutter:statistic
                     "du" '(lambda ()
                            (interactive)
                            (define-advice git-gutter:popup-hunk (:around (orig-fun &rest args) my-git-gutter:popup-hunk)

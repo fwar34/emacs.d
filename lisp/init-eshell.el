@@ -366,4 +366,12 @@
   )
 (defalias 'licmd #'fwar34/proxy-command-use-lisp)
 
+;; https://emacs-china.org/t/emacs-builtin-mode/11937/83?u=fwar34
+(use-package em-term
+  :ensure nil
+  :custom
+  (eshell-visual-commands '("top" "htop" "less" "more" "bat"))
+  (eshell-visual-subcommands '(("git" "help" "lg" "log" "diff" "show")))
+    (eshell-visual-options '(("git" "--help" "--paginate"))))
+
 (provide 'init-eshell)

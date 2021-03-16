@@ -1063,8 +1063,8 @@
 
 (use-package multi-term
   :ensure t
+  :after evil
   :config
-
   (cond
    ((equal system-type 'windows-nt) (setq multi-term-program "eshell"))
    ((equal system-type 'gnu/linux) (setq multi-term-program "/usr/bin/zsh")))
@@ -1082,8 +1082,17 @@
   ;;    (t (signal 'wrong-type-argument (list 'array bind-key))))
   ;;   (define-key term-raw-map bind-key bind-command))
 
+  ;; https://www.jianshu.com/p/2c1ac913d2cb
+  ;; 如果想保留自己在其他mode下的快捷键，将快捷键添加到 term-bind-key-alist这个列表中
+  ;; (add-to-list 'term-bind-key-alist '("C-j"))
   (add-to-list 'term-bind-key-alist '("M-l" . evil-buffer))
   (add-to-list 'term-bind-key-alist '("M-y" . term-paste))
+  ;; 修改快捷键的map,如果你发你定义自己的快捷键与该major-mode的冲突，可以直接修改它的key-map
+  ;; (define-key term-mode-map (kbd "C-=") 'evil-buffer)
+  ;; (define-key term-raw-map (kbd "C-=") 'evil-buffer)
+  ;; (evil-define-key 'insert term-raw-map ";tm" 'evil-buffer)
+  ;; (evil-define-key 'insert term-raw-map ";" (lambda () (interactive) (term-send-raw-string ";")))
+  ;; (evil-define-key 'insert term-mode-map ";tm" #'evil-buffer)
 
   (defun my-multi-term ()
     (interactive)

@@ -18,7 +18,7 @@
   (defun hydra-vi/post ()
     (set-cursor-color "#ffffff"))
   (global-set-key (kbd "M-u vi")
-                  (defhydra hydra-vi (:pre hydra-vi/pre :post hydra-vi/post :color amaranth)
+                  (defhydra hydra-vi (:pre hydra-vi/pre :post hydra-vi/post :color amaranth :foreign-keys warn)
                     "vi"
                     ("l" forward-char)
                     ("h" backward-char)
@@ -36,7 +36,7 @@
   ;;-------------------------------------------------------------
   ;; window
   (defhydra hydra-window
-    (:color red :hint nil)
+    (:color red :hint nil :foreign-keys warn)
     "
                                -- WINDOW MENU --
     "
@@ -62,7 +62,7 @@
   ;;-------------------------------------------------------------
   ;; org
   (with-eval-after-load 'org
-    (defhydra hydra-org (:color red :hint nil)
+    (defhydra hydra-org (:color red :hint nil :foreign-keys warn)
       "
     ^outline^                              ^org^
     ^^^^^^^^--------------------------------------------------------
@@ -70,11 +70,13 @@
     _l_: next visible heading line         _oc_: org-capture
     _j_: same level forward        
     _k_: same level backward
+    _i_: org-insert-structure-template
     "
       ("h" outline-previous-visible-heading)
       ("l" outline-next-visible-heading)
       ("j" outline-forward-same-level)
       ("k" outline-backward-same-level)
+      ("i" org-insert-structure-template :color blue)
       ("tb" org-cycle)
       ("sb" org-shifttab)
       ("oa" org-agenda :exit t)
@@ -87,7 +89,7 @@
 
   ;;-------------------------------------------------------------
   ;; fwar34
-  (defhydra hydra-fwar34 (:columns 3 :exit t)
+  (defhydra hydra-fwar34 (:columns 3 :exit t :foreign-keys warn)
     "
             -- MY COMMANDS --
     "
@@ -101,7 +103,7 @@
 
   ;;-------------------------------------------------------------
   ;; M-um
-  (defhydra hydra-M-um (:color pink :hint nil)
+  (defhydra hydra-M-um (:color pink :hint nil :foreign-keys warn)
     "
     ^kill-ring^                      ^iedit-mode^        ^fix-word^
     ^^-----------------------------------------------------------------------------
@@ -124,7 +126,7 @@
   ;;-------------------------------------------------------------
   ;; apropos
   (with-eval-after-load 'apropos
-    (defhydra hydra-apropos (:color blue :hint nil)
+    (defhydra hydra-apropos (:color blue :hint nil :foreign-keys warn)
       ;; "
       ;; _a_propos        _c_ommand
       ;; _d_ocumentation  _l_ibrary
@@ -142,8 +144,25 @@
     (define-key apropos-mode-map (kbd "M-u ap") 'hydra-apropos/body))
 
   ;;-------------------------------------------------------------
+  ;; ivy and swiper
+  (defhydra hydra-ivy-swiper (:color blue :hint nil :foreign-keys warn)
+    ("ir" ivy-resume "ivy-resume" :column "ivy and swiper")
+    ("cf" counsel-describe-function "counsel-describe-function")
+    ("cv" counsel-describe-variable "counsel-describe-variable")
+    ("cs" counsel-describe-symbol "counsel-describe-symbol")
+    ("cl" counsel-find-library "counsel-find-library")
+    ("ci" counsel-info-lookup-symbol "counsel-info-lookup-symbol")
+    ("cc" counsel-unicode-char "counsel-unicode-char")
+    ("cg" counsel-git "counsel-git")
+    ("cp" counsel-git-grep "counsel-git-grep")
+    ("cm" counsel-minibuffer-history "counsel-minibuffer-history")
+    ("ch" counsel-command-history "counsel-command-history")
+    ("q" nil "cancel" :exit t :column nil))
+  (global-set-key (kbd "M-u is") #'hydra-ivy-swiper/body)
+
+  ;;-------------------------------------------------------------
   ;; counsel-etags
-  (defhydra hydra-counsel-etags (:color blue :hint nil)
+  (defhydra hydra-counsel-etags (:color blue :hint nil :foreign-keys warn)
     ;; "
     ;; _a_propos        _c_ommand
     ;; _d_ocumentation  _l_ibrary
@@ -164,7 +183,7 @@
   ;;-------------------------------------------------------------
   ;; agenda
   (with-eval-after-load 'org-agenda
-    (defhydra hydra-org-agenda-view (:hint none)
+    (defhydra hydra-org-agenda-view (:hint none :foreign-keys warn)
       "
     _d_: ?d? day        _g_: time grid=?g?  _a_: arch-trees
     _w_: ?w? week       _[_: inactive       _A_: arch-files
@@ -198,7 +217,7 @@
 
   ;;-------------------------------------------------------------
   ;; pyim
-  (defhydra hydra-pyim (:color blue :hint nil)
+  (defhydra hydra-pyim (:color blue :hint nil :foreign-keys warn)
     "
     ^pyim^                  
     ^^^^^^^^-----------------
@@ -223,7 +242,7 @@
   ;;-------------------------------------------------------------
   ;; isearch
   (with-eval-after-load 'isearch
-    (defhydra hydra-isearch (:color blue :hint nil)
+    (defhydra hydra-isearch (:color blue :hint nil :foreign-keys warn)
       "
     ^isearch^                  
     ^^^^^^^^-----------------
@@ -268,7 +287,7 @@
         (shrink-window arg)
       (enlarge-window arg)))
   ;; move window splitter
-  (defhydra hydra-splitter ()
+  (defhydra hydra-splitter (:foreign-keys warn)
     "splitter"
     ("h" hydra-move-splitter-left)
     ("j" hydra-move-splitter-down)
@@ -278,7 +297,7 @@
 
   ;;-------------------------------------------------------------
   ;; jump to error
-  (defhydra hydra-error ()
+  (defhydra hydra-error (:foreign-keys warn)
     "goto-error"
     ("h" first-error "first")
     ("j" next-error "next")
@@ -290,7 +309,7 @@
   ;;-------------------------------------------------------------
   ;; lispyville
   (with-eval-after-load 'lispyville
-       (defhydra hydra-lispyville (:color blue :hint nil)
+       (defhydra hydra-lispyville (:color blue :hint nil :foreign-keys warn)
          ("(" lispyville-wrap-round "wrap round with (" :column "lispyville-wrap")
          ("[" lispyville-wrap-brackets "wrap round with [")
          ("{" lispyville-wrap-braces "wrap round with {")
@@ -301,7 +320,7 @@
   ;;-------------------------------------------------------------
   ;; dired
   (with-eval-after-load 'dired
-    (defhydra hydra-dired (:color blue :hint nil)
+    (defhydra hydra-dired (:color blue :hint nil :foreign-keys warn)
       ("ud" dired-undo "undo in a dired buffer." :column "dired commands")
       ("ha" dired-hide-all "hide all subdirectories, leaving only their header lines.")
       ("q" nil "cancel" :exit t :column nil))
@@ -311,7 +330,7 @@
   ;;-------------------------------------------------------------
   ;; magit
   (with-eval-after-load 'magit
-    (defhydra hydra-magit (:color blue :hint nil)
+    (defhydra hydra-magit (:color blue :hint nil :foreign-keys warn)
       ("rv" magit-revert "Revert existing commits, with or without creating new commits." :column "magit commands")
       ("q" nil "cancel" :exit t :column nil))
     ;; (define-key magit-mode-map (kbd "M-u ma") 'hydra-magit/body)
@@ -323,7 +342,7 @@
   ;;-------------------------------------------------------------
   ;; shell
   (with-eval-after-load 'shell
-    (defhydra hydra-shell (:color blue :hint nil)
+    (defhydra hydra-shell (:color blue :hint nil :foreign-keys warn)
       ("0" (delete-window) "delete window" :column "shell commands")
       ("q" nil "cancel" :exit t :column nil))
     (define-key shell-mode-map (kbd "M-u sh") 'hydra-shell/body))
@@ -331,7 +350,7 @@
   ;;-------------------------------------------------------------
   ;; info
   (with-eval-after-load 'info
-    (defhydra hydra-info (:color blue :hint nil)
+    (defhydra hydra-info (:color blue :hint nil :foreign-keys warn)
       ("ls" elisp-index-search "Look up TOPIC in the indices of the Emacs Lisp Reference Manual." :column "info commands")
       ("es" emacs-index-search "Look up TOPIC in the indices of the Emacs User Manual.")
       ("c" Info-copy-current-node-name "Put the name of the current Info node into the kill ring.")
@@ -346,8 +365,7 @@
   ;;-------------------------------------------------------------
   ;; font settings
   (when (display-graphic-p)
-    
-    (defhydra hydra-font (:color red :hint nil)
+    (defhydra hydra-font (:color red :hint nil :foreign-keys warn)
       ;; 增加字体大小
       ("+" (lambda ()
              (interactive)

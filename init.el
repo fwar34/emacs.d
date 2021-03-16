@@ -56,6 +56,7 @@
                              (require 'init-minefunc)
                              (require 'init-c)))
 (add-hook 'after-init-hook (lambda () (require 'init-misc)))
+(add-hook 'after-init-hook (lambda () (require 'init-keybindings)))
 
 (require 'init-calendar)
 ;; (require 'unicad)
