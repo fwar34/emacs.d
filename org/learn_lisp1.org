@@ -462,3 +462,26 @@ it, Emacs automatically loads the ‘compile’ library first.  In contrast,
 the command ‘M-x recompile’ is not autoloaded, so it is unavailable
 until you load the ‘compile’ library.
 #+END_QUOTE
+
+* define-advice和advice-add
+https://emacs.stackexchange.com/questions/51470/define-advice-vs-advice-add-vs-other
+
+1. advice-add
+#+BEGIN_SRC elisp
+  (defun his-tracing-function (orig-fun &rest args)
+    (message "display-buffer called with args %S" args)
+    (let ((res (apply orig-fun args)))
+      (message "display-buffer returned %S" res)
+      res))
+  (advice-add 'display-buffer :around #'his-tracing-function)
+#+END_SRC
+
+2. define-advice
+#+BEGIN_SRC emacs-lisp
+  (define-advice display-buffer
+      (:around (orig-fun &rest args) his-tracing-function)
+    (message "display-buffer called with args %S" args)
+    (let ((res (apply orig-fun args)))
+      (message "display-buffer returned %S" res)
+      res))
+#+END_SRC
