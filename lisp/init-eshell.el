@@ -104,6 +104,7 @@
 
 (use-package eshell
   :ensure t
+  :after evil
   :commands eshell
   :init
   (setq eshell-aliases-file (concat user-emacs-directory "eshell/alias"))
