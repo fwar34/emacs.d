@@ -366,6 +366,8 @@
                     ;; "dd" 'my-lookup-dict-org
                     ;; "lm" 'lookup-doc-in-man
                     ;; "lf" 'list-funcs
+                    "gw" 'evil-avy-goto-word-or-subword-1
+                    "gc" 'evil-avy-goto-char-2
                     ;; "gs" 'w3m-google-search
                     ;; "gf" 'w3m-google-by-filetype
                     ;; "gd" 'w3m-search-financial-dictionary
@@ -424,7 +426,7 @@
                     "SPC" 'evil-ex
                     "cc" 'convert-file-to-utf8-unix
                     ;; "ss" 'wg-create-workgroup ; save windows layout
-                    "is" 'evil-iedit-state/iedit-mode ; start iedit in emacs
+                    "se" 'evil-iedit-state/iedit-mode ; start iedit in emacs
                     "sc" 'shell-command
                     "st" 'org-shifttab
                     "TAB" 'outline-toggle-children

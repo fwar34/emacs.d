@@ -107,13 +107,13 @@
     "
     ^kill-ring^                      ^iedit-mode^        ^fix-word^
     ^^-----------------------------------------------------------------------------
-    _p_: paste from clipboard        _me_: iedit mode    _u_: fix-word-upcase
+    _p_: paste from clipboard        _se_: iedit mode    _u_: fix-word-upcase
     _y_: grab the symbol at point    ^  ^                _d_: fix-word-downcase
     ^ ^                              ^  ^                _c_: fix-word-capitalize
     "
     ("p" clipboard-yank :exit t)
     ("y" ack-yank-symbol-at-point :exit t)
-    ("me" iedit-mode)
+    ("se" iedit-mode)
     ("u" fix-word-upcase :exit t)
     ("d" fix-word-downcase :exit t)
     ("c" fix-word-capitalize :exit t)

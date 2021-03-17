@@ -192,6 +192,8 @@
   :hook
   (after-init . evil-mode)
   :init
+  ;; disable status in echo area
+  (setq evil-echo-state nil)
   (setq evil-want-integration t) ;; This is optional since it's already set to t by default.
   (setq evil-want-C-i-jump t)
   (setq evil-want-fine-undo "Yes")
@@ -623,13 +625,14 @@
   (evilem-default-keybindings "M-m")
   )
 
-(use-package ace-jump-mode
-  :ensure t
-  :defer t
-  :config
-  (eval-after-load "ace-jump-mode"
-    '(ace-jump-mode-enable-mark-sync))
-  )
+;; (use-package ace-jump-mode
+;;   :disabled
+;;   :ensure t
+;;   :defer t
+;;   :config
+;;   (eval-after-load "ace-jump-mode"
+;;     '(ace-jump-mode-enable-mark-sync))
+;;   )
 
 (use-package evil-matchit
   :ensure t
@@ -1069,7 +1072,6 @@
    ((equal system-type 'windows-nt) (setq multi-term-program "eshell"))
    ((equal system-type 'gnu/linux) (setq multi-term-program "/usr/bin/zsh")))
 
-  
   ;; (define-key term-mode-map "\e\C-l" 'evil-buffer)
   ;; (define-key term-raw-map ";bb" 'evil-buffer)
 
@@ -1084,38 +1086,40 @@
 
   ;; https://www.jianshu.com/p/2c1ac913d2cb
   ;; 如果想保留自己在其他mode下的快捷键，将快捷键添加到 term-bind-key-alist这个列表中
-  ;; (add-to-list 'term-bind-key-alist '("C-j"))
   (add-to-list 'term-bind-key-alist '("M-l" . evil-buffer))
   (add-to-list 'term-bind-key-alist '("M-y" . term-paste))
+  (add-to-list 'term-bind-key-alist '("C-x C-x" . (lambda () (interactive) (term-send-raw-string "\C-x"))))
   ;; 修改快捷键的map,如果你发你定义自己的快捷键与该major-mode的冲突，可以直接修改它的key-map
   ;; (define-key term-mode-map (kbd "C-=") 'evil-buffer)
   ;; (define-key term-raw-map (kbd "C-=") 'evil-buffer)
-  ;; (evil-define-key 'insert term-raw-map ";tm" 'evil-buffer)
-  ;; (evil-define-key 'insert term-raw-map ";" (lambda () (interactive) (term-send-raw-string ";")))
-  ;; (evil-define-key 'insert term-mode-map ";tm" #'evil-buffer)
-
+  (evil-define-key 'insert term-raw-map ";tm" 'evil-buffer)
+  (evil-define-key 'insert term-raw-map ";;" (lambda () (interactive) (term-send-raw-string ";")))
+  (evil-define-key 'insert term-raw-map ";g" 'evil-normal-state)
+ 
   (defun my-multi-term ()
     (interactive)
-    (let ((index 1)
-          (term-buffer))
-      (catch 'break
-        (while (<= index 10)
-          (setq target-buffer (format "*%s<%s>*" multi-term-buffer-name index))
-          (when (buffer-live-p (get-buffer target-buffer))
-            (setq term-buffer target-buffer)
-            (throw 'break nil))
-          (setq index (1+ index))))
-      ;; (if term-buffer
-      ;;     (progn
-      ;;       (setq orig-default-directory default-directory)
-      ;;       (switch-to-buffer term-buffer)
-      ;;       (term-send-raw-string (concat "cd " orig-default-directory "\C-m"))
-      ;;       )
-      ;;   (multi-term))
-      (if term-buffer
-          (switch-to-buffer term-buffer)
-        (multi-term))
-      )
+    (if (string-match "*terminal<[0-9]\\{1,2\\}>*" (buffer-name))
+        (evil-buffer nil)
+      (let ((index 1)
+            (term-buffer))
+        (catch 'break
+          (while (<= index 10)
+            (setq target-buffer (format "*%s<%s>*" multi-term-buffer-name index))
+            (when (buffer-live-p (get-buffer target-buffer))
+              (setq term-buffer target-buffer)
+              (throw 'break nil))
+            (setq index (1+ index))))
+        ;; (if term-buffer
+        ;;     (progn
+        ;;       (setq orig-default-directory default-directory)
+        ;;       (switch-to-buffer term-buffer)
+        ;;       (term-send-raw-string (concat "cd " orig-default-directory "\C-m"))
+        ;;       )
+        ;;   (multi-term))
+        (if term-buffer
+            (switch-to-buffer term-buffer)
+          (multi-term))
+        ))
     )
 
 ;; (with-parsed-tramp-file-name default-directory path

@@ -14,7 +14,7 @@
 (global-set-key (kbd "M-m M-m") 'counsel-find-file)
 
 ;; iedit bind
-(global-set-key (kbd "M-m oe") 'iedit-mode)
+;; (global-set-key (kbd "M-m oe") 'iedit-mode)
 ;; org bind
 (global-set-key (kbd "M-m oa") 'org-agenda)
 ;; minefunc org template
