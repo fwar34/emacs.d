@@ -248,23 +248,32 @@
   ;; Counsel, a collection of Ivy-enhanced versions of common Emacs commands.
   ;; Swiper, an Ivy-enhanced alternative to isearch.
   :ensure t
-  :bind
-  ([remap switch-to-buffer] . #'ivy-switch-buffer)
-  ([remap isearch-forward] . #'swiper)
   :after evil
+  :bind
+  (([remap switch-to-buffer] . ivy-switch-buffer)
+   ([remap isearch-forward] . swiper)
+   :map ivy-minibuffer-map
+   ("M-l" . ivy-restrict-to-matches))
   :config
   (setq ivy-initial-inputs-alist nil
         ivy-wrap t
         ivy-height 15
         ivy-fixed-height-minibuffer t
         ivy-format-function #'ivy-format-function-line
-        ivy-use-virtual-buffers t)
+        ivy-use-virtual-buffers t
+        ivy-count-format "%d/%d ")
   (ivy-mode 1) ;; M-j ivy-yank-word，将光标的word读入minibuffer，很像vim中的功能
                ;; C-y yank，可以在minibuffer中粘贴
   (setq enable-recursive-minibuffers t)
   (define-key minibuffer-local-map (kbd "C-r") 'counsel-minibuffer-history)
   (global-set-key (kbd "C-h f") #'counsel-describe-function)
-  (global-set-key (kbd "C-h v") #'counsel-describe-variable))
+  (global-set-key (kbd "C-h v") #'counsel-describe-variable)
+
+  (general-define-key
+   :keymaps 'ivy-minibuffer-map
+   :prefix "`"
+   "`" 'ivy-restrict-to-matches)
+  )
 
 (use-package smex
   ;; I use this package to display history for M-x

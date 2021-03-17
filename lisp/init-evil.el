@@ -505,7 +505,7 @@
                     ;; "bb" 'back-to-previous-buffer
                     ;; liang.feng
                     ;; "em" 'erase-message-buffer
-                    "fb" 'my-display-function
+                    "fn" 'my-display-function
                     "fa" 'ack
                     "fz" 'fzf
                     "ft" 'fzf-git
