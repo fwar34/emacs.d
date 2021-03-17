@@ -389,40 +389,41 @@
   :defer t
   )
 
-(use-package ack
-  :ensure t
-  :defer t
-  :config
-  ;; (add-hook 'ack-minibuffer-setup-hook 'ack-skel-vc-grep t)
-  ;; (add-hook 'ack-minibuffer-setup-hook 'ack-yank-symbol-at-point t)
-  (evil-define-key 'normal ack-mode-map "q"
-    (lambda ()
-      (interactive)
-      (if (= (length (window-list-1)) 1)
-          (quit-window)
-        (delete-window))))
-  (if (fboundp 'make-thread)
-      (add-hook 'ack-mode-hook
-                (lambda ()
-                  (make-thread (lambda ()
-                                 (while (not (get-buffer-window "*ack*"))
-                                   (sleep-for 0 100))
-                                 (select-window (get-buffer-window "*ack*")))))))
-  )
+;; (use-package ack
+;;   :disabled
+;;   :ensure t
+;;   :defer t
+;;   :config
+;;   ;; (add-hook 'ack-minibuffer-setup-hook 'ack-skel-vc-grep t)
+;;   ;; (add-hook 'ack-minibuffer-setup-hook 'ack-yank-symbol-at-point t)
+;;   (evil-define-key 'normal ack-mode-map "q"
+;;     (lambda ()
+;;       (interactive)
+;;       (if (= (length (window-list-1)) 1)
+;;           (quit-window)
+;;         (delete-window))))
+;;   (if (fboundp 'make-thread)
+;;       (add-hook 'ack-mode-hook
+;;                 (lambda ()
+;;                   (make-thread (lambda ()
+;;                                  (while (not (get-buffer-window "*ack*"))
+;;                                    (sleep-for 0 100))
+;;                                  (select-window (get-buffer-window "*ack*")))))))
+;;   )
 
 (use-package magit
   :ensure t
   :after evil
   )
 
-(use-package evil-magit
-  :ensure t
-  :disabled
-  :after (magit evil) 
-  :config
-  ;; https://www.helplib.com/GitHub/article_131559
-  ;; (evil-define-key evil-magit-state magit-mode-map "?"'evil-search-backward)
-  )
+;; (use-package evil-magit
+;;   :ensure t
+;;   :disabled
+;;   :after (magit evil)
+;;   :config
+;;   ;; https://www.helplib.com/GitHub/article_131559
+;;   ;; (evil-define-key evil-magit-state magit-mode-map "?"'evil-search-backward)
+;;   )
 
 ;; yasnippet setting
 ;; (use-package yasnippet
