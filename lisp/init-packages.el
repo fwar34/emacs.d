@@ -978,34 +978,11 @@
   (evil-define-key 'normal 'magit-mode-map "q" #'kill-buffer-and-window)
   )
 
-;; @see https://github.com/company-mode/company-mode/issues/348
-(use-package company-statistics
-  :ensure t
-  :hook
-  (after-init . company-statistics-mode)
-  )
-
-(use-package company-c-headers
-  :ensure t
-  :after evil
-  :config
-  (add-to-list 'company-backends 'company-c-headers)
-  )
-
 (use-package ace-popup-menu
   :ensure t
   :after evil
   :config
   (ace-popup-menu-mode 1)
-  )
-
-(use-package company-jedi
-  :ensure t
-  :after python
-  :config
-  (defun my/python-mode-hook ()
-    (add-to-list 'company-backends 'company-jedi))
-  (add-hook 'python-mode-hook 'my/python-mode-hook)
   )
 
 (use-package exec-path-from-shell
@@ -1032,15 +1009,6 @@
   ;;-----------------------------------------------------------------------------
   (vhl/define-extension 'undo-tree 'undo-tree-yank 'undo-tree-move)
   (vhl/install-extension 'undo-tree)
-  )
-
-(use-package company-english-helper
-  ;; write by lazycat
-  :after evil
-  :straight
-  (:host github :repo "manateelazycat/company-english-helper")
-  :config
-  ;; toggle-company-english-helper
   )
 
 ;; (use-package vterm
