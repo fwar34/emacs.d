@@ -429,9 +429,9 @@ URL `http://ergoemacs.org/emacs/elisp_run_current_file.html'"
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (defun my-is-char (c)
-  (or (= c ?.)
+  (or ;; (= c ?.)
       (= c ?-)
-      (= c ?_)
+      ;; (= c ?_)
       (and (>= c ?0) (<= c ?9))
       (and (>= c ?A) (<= c ?Z))
       (and (>= c ?a) (<= c ?z))))

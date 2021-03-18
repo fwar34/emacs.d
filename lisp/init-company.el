@@ -62,6 +62,7 @@
   )
 
 (use-package company-tabnine
+  :disabled
   :ensure t
   :config
   (add-to-list 'company-backends #'company-tabnine))
@@ -69,7 +70,6 @@
 ;; https://github.com/redguardtoo/company-ctags
 (use-package company-ctags
   :ensure t
-  :after company
   :config
   (setq company-ctags-extra-tags-files '("$HOME/TAGS" "/usr/include/c++/TAGS"))
   (company-ctags-auto-setup)
