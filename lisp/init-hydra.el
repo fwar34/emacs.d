@@ -217,7 +217,7 @@
 
   ;;-------------------------------------------------------------
   ;; pyim
-  (defhydra hydra-pyim (:color blue :hint nil :foreign-keys warn)
+  (defhydra hydra-pyim (:color blue :hint nil)
     "
     ^pyim^                  
     ^^^^^^^^-----------------

@@ -140,7 +140,7 @@
   (setq-default pyim-punctuation-half-width-functions
                 '(pyim-probe-punctuation-line-beginning
                   pyim-probe-punctuation-after-punctuation))
-
+  
   ;; 开启拼音搜索功能
   ;; (pyim-isearch-mode 1)
 
@@ -170,20 +170,14 @@
   ;;                              (pyim-export "~/.emacs.d/pyim-mine.cipin")
   ;;                              (pyim-export-personal-words "~/.emacs.d/pyim-mine.pyim")))
 
-  :bind
-  (;; ("M-o ;" . pyim-delete-word-from-personal-buffer))
-   ;; ("M-o o" . pyim-convert-string-at-point)
-   ("M-j" . pyim-convert-string-at-point)  ;;与 pyim-probe-dynamic-english 配合
-   ;; ("M-i" . toggle-input-method)   ;; defualt key bind: C-\
-   ;; ("M-j" . pyim-toggle-input-ascii)
-   ("M-i" . pyim-toggle-input-ascii)
-   ;; ("C-<SPC>" . toggle-input-method)
-   )) 
-;; (global-set-key (kbd "C-<SPC>") 'toggle-input-method)
-
-;; (setq evil-want-keybinding nil) must put before load evil
-;; See https://github.com/emacs-evil/evil-collection/issues/60 for more details.
-(setq evil-want-keybinding nil)
+  (general-define-key
+   :keymaps 'insert
+   ;; :prefix "C-i
+   ;; 转换前面的英文字符为中文
+   "M-j" 'pyim-convert-string-at-point
+   ;; 使用C-i或者C-\来进行中英文输入法切换
+   "C-i" 'pyim-toggle-input-ascii)
+  ) 
 
 ;; https://github.com/emacs-evil/evil-collection
 ;; evil
@@ -192,6 +186,9 @@
   :hook
   (after-init . evil-mode)
   :init
+  ;; (setq evil-want-keybinding nil) must put before load evil
+  ;; See https://github.com/emacs-evil/evil-collection/issues/60 for more details.
+  (setq evil-want-keybinding nil)
   ;; disable status in echo area
   (setq evil-echo-state nil)
   (setq evil-want-integration t) ;; This is optional since it's already set to t by default.
