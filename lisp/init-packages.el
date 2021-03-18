@@ -366,22 +366,6 @@
   :defer t
   )
 
-;; 开启全局company
-(use-package company
-  :ensure t
-  :hook
-  (after-init . global-company-mode)
-  :config
-  ;; (add-hook 'after-init-hook 'global-company-mode)
-  ;; 显示候选项的数字号。根据数字号选择候选项
-  (setq company-show-numbers t)
-  ;; make previous/next selection in the popup cycles
-  (setq company-selection-wrap-around t) 
-  ;; Some languages use camel case naming convention,
-  ;; so company should be case sensitive.
-  (setq company-dabbrev-ignore-case nil)
-  (setq company-idle-delay 0.2)
-  )
 
 (use-package fzf
   :ensure t
@@ -994,11 +978,11 @@
   (evil-define-key 'normal 'magit-mode-map "q" #'kill-buffer-and-window)
   )
 
+;; @see https://github.com/company-mode/company-mode/issues/348
 (use-package company-statistics
   :ensure t
-  :after after-init
-  :config
-  (add-hook 'after-init-hook 'company-statistics-mode)
+  :hook
+  (after-init . company-statistics-mode)
   )
 
 (use-package company-c-headers

@@ -1,5 +1,26 @@
 ;; -*- coding: utf-8; lexical-binding: t; -*-
-(add-hook 'after-init-hook 'global-company-mode)
+
+;; 开启全局company
+(use-package company
+  :ensure t
+  :config
+  (global-company-mode)
+  ;; (add-hook 'after-init-hook 'global-company-mode)
+  ;; Number the candidates (use M-1, M-2 etc to select completions).
+  (setq company-show-numbers t)
+  ;; make previous/next selection in the popup cycles
+  (setq company-selection-wrap-around t) 
+  ;; Some languages use camel case naming convention,
+  ;; so company should be case sensitive.
+  (setq company-dabbrev-ignore-case nil)
+  ;; Trigger completion immediately.
+  (setq company-idle-delay 0)
+  ;; I don't like the downcase word in company-dabbrev!
+  (setq company-dabbrev-downcase nil
+        company-clang-insert-arguments nil
+        company-require-match nil
+        company-etags-ignore-case t)
+  )
 
 (if (fboundp 'evil-declare-change-repeat)
     (mapc #'evil-declare-change-repeat
@@ -10,77 +31,59 @@
             company-complete-number
             )))
 
-(eval-after-load 'company
-  '(progn
-     ;; @see https://github.com/company-mode/company-mode/issues/348
-     (company-statistics-mode)
+(with-eval-after-load 'company
+  ;; (add-to-list 'company-backends 'company-cmake)
+  (add-to-list 'company-backends 'company-c-headers)
+  ;; can't work with TRAMP
+  (setq company-backends (delete 'company-ropemacs company-backends))
+  (setq company-backends (delete 'company-capf company-backends))
+  (setq company-backends (delete 'company-clang company-backends))
 
-     ;; (add-to-list 'company-backends 'company-cmake)
-     (add-to-list 'company-backends 'company-c-headers)
-     ;; can't work with TRAMP
-     (setq company-backends (delete 'company-ropemacs company-backends))
-     (setq company-backends (delete 'company-capf company-backends))
-     (setq company-backends (delete 'company-clang company-backends))
 
-     ;; I don't like the downcase word in company-dabbrev!
-     (setq company-dabbrev-downcase nil
-           ;; make previous/next selection in the popup cycles
-           company-selection-wrap-around t
-           ;; Some languages use camel case naming convention,
-           ;; so company should be case sensitive.
-           company-dabbrev-ignore-case nil
-           ;; press M-number to choose candidate
-           company-show-numbers t
-           company-idle-delay 0.2
-           company-clang-insert-arguments nil
-           company-require-match nil
-           company-etags-ignore-case t)
+  ;; @see https://github.com/redguardtoo/emacs.d/commit/2ff305c1ddd7faff6dc9fa0869e39f1e9ed1182d
+  (defadvice company-in-string-or-comment (around company-in-string-or-comment-hack activate)
+    ;; you can use (ad-get-arg 0) and (ad-set-arg 0) to tweak the arguments
+    (if (memq major-mode '(php-mode html-mode web-mode nxml-mode))
+        (setq ad-return-value nil)
+      ad-do-it))
 
-     ;; @see https://github.com/redguardtoo/emacs.d/commit/2ff305c1ddd7faff6dc9fa0869e39f1e9ed1182d
-     (defadvice company-in-string-or-comment (around company-in-string-or-comment-hack activate)
-       ;; you can use (ad-get-arg 0) and (ad-set-arg 0) to tweak the arguments
-       (if (memq major-mode '(php-mode html-mode web-mode nxml-mode))
-           (setq ad-return-value nil)
-         ad-do-it))
+  ;; press SPACE will accept the highlighted candidate and insert a space
+  ;; `M-x describe-variable company-auto-complete-chars` for details
+  ;; That's BAD idea.
+  (setq company-auto-complete nil)
 
-     ;; press SPACE will accept the highlighted candidate and insert a space
-     ;; `M-x describe-variable company-auto-complete-chars` for details
-     ;; That's BAD idea.
-     (setq company-auto-complete nil)
+  ;; NOT to load company-mode for certain major modes.
+  ;; Ironic that I suggested this feature but I totally forgot it
+  ;; until two years later.
+  ;; https://github.com/company-mode/company-mode/issues/29
+  (setq company-global-modes
+        '(not
+          eshell-mode comint-mode erc-mode gud-mode rcirc-mode
+          minibuffer-inactive-mode))
+  ;; reference from https://github.com/zilongshanren/spacemacs-private/commit/58d2f890af1ba65ce81d7a0b814a147dba90227c
+  ;; company-mode，可以使用数字键来选取 condicates
+  ;; (defun ora-company-number ()
+  ;;   "Forward to `company-complete-number'.
+  ;;    Unless the number is potentially part of the candidate.
+  ;;    In that case, insert the number."
+  ;;   (interactive)
+  ;;   (let* ((k (this-command-keys))
+  ;;          (re (concat "^" company-prefix k)))
+  ;;     (if (cl-find-if (lambda (s) (string-match re s))
+  ;;                     company-candidates)
+  ;;         (self-insert-command 1)
+  ;;       (company-complete-number (string-to-number k)))))
 
-     ;; NOT to load company-mode for certain major modes.
-     ;; Ironic that I suggested this feature but I totally forgot it
-     ;; until two years later.
-     ;; https://github.com/company-mode/company-mode/issues/29
-     (setq company-global-modes
-           '(not
-             eshell-mode comint-mode erc-mode gud-mode rcirc-mode
-             minibuffer-inactive-mode))
-     ;; reference from https://github.com/zilongshanren/spacemacs-private/commit/58d2f890af1ba65ce81d7a0b814a147dba90227c
-     ;; company-mode，可以使用数字键来选取 condicates
-     (defun ora-company-number ()
-       "Forward to `company-complete-number'.
-        Unless the number is potentially part of the candidate.
-        In that case, insert the number."
-       (interactive)
-       (let* ((k (this-command-keys))
-              (re (concat "^" company-prefix k)))
-         (if (cl-find-if (lambda (s) (string-match re s))
-                         company-candidates)
-             (self-insert-command 1)
-           (company-complete-number (string-to-number k)))))
-
-     (let ((map company-active-map))
-       (mapc
-        (lambda (x)
-          (define-key map (format "%d" x) 'ora-company-number))
-        (number-sequence 0 9))
-       (define-key map " " (lambda ()
-                             (interactive)
-                             (company-abort)
-                             (self-insert-command 1)))
-       (define-key map (kbd "<return>") nil))
-     )
+  ;; (let ((map company-active-map))
+  ;;   (mapc
+  ;;    (lambda (x)
+  ;;      (define-key map (format "%d" x) 'ora-company-number))
+  ;;    (number-sequence 0 9))
+  ;;   (define-key map " " (lambda ()
+  ;;                         (interactive)
+  ;;                         (company-abort)
+  ;;                         (self-insert-command 1)))
+  ;;   (define-key map (kbd "<return>") nil))
   )
 
 ;; {{ setup company-ispell
@@ -136,7 +139,6 @@
   )
 
 (use-package company-tabnine
-  :disabled
   :ensure t
   :config
   (add-to-list 'company-backends #'company-tabnine))
