@@ -216,6 +216,15 @@
                my-swiper-forward-word
                swiper-thing-at-point
                swiper-all-thing-at-point
+               evil-ace-jump-char-mode
+               ace-jump-mode
+               evil-avy-goto-char-2
+               evil-avy-goto-word-or-subword-1
+               evilem-motion-find-char
+               evilem-motion-forward-word-begin
+               evilem-motion-backward-word-begin
+               evilem-motion-next-line
+               evilem-motion-previous-line
                ))
   (evil-add-command-properties con :jump t))
 
@@ -379,6 +388,7 @@
                     ;; "lf" 'list-funcs
                     "gw" 'evil-avy-goto-word-or-subword-1
                     "gc" 'evil-avy-goto-char-2
+                    "gg" 'evil-ace-jump-char-mode
                     ;; "gs" 'w3m-google-search
                     ;; "gf" 'w3m-google-by-filetype
                     ;; "gd" 'w3m-search-financial-dictionary
