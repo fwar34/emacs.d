@@ -210,6 +210,12 @@
                counsel-ag
                my-search-forward-word
                my-search-whole-word
+               lispyville-beginning-of-defun
+               lispyville-end-of-defun
+               swiper-all
+               my-swiper-forward-word
+               swiper-thing-at-point
+               swiper-all-thing-at-point
                ))
   (evil-add-command-properties con :jump t))
 
@@ -278,7 +284,10 @@
                     ;; "bh" 'buf-move-left
                     ;; "bl" 'buf-move-right
                     "li" 'swiper
-                    "la" 'swiper-all
+                    "lb" 'swiper-all
+                    "ls" 'my-swiper-forward-word
+                    "lw" 'swiper-thing-at-point
+                    "la" 'swiper-all-thing-at-point
                     "od" 'occur-dwim
                     "qq" 'quit-window
                     "pa" 'evil-paste-after
@@ -333,13 +342,10 @@
                     ;; ;;;;;;;;;;;;;;;;;;;;;;;
                     "fo" 'ff-find-other-file
                     "mm" 'evil-jump-item
-                    "mf" 'mf/mirror-region-in-multifile
                     "tt" 'neotree-toggle
                     "yw" 'youdao-dictionary-search-at-point
                     "yy" 'youdao-dictionary-search-at-point+
                     "yd" 'youdao-dictionary-search-from-input
-                    "ls" 'elisp-index-search
-                    "ms" 'emacs-index-search
                     ;; "er" 'er/expand-region
                     ;; "rf" 'recentf-open-files
                     ;; "rm" 'my-recent-file
@@ -581,7 +587,6 @@
                     "df" 'counsel-describe-function
                     "dv" 'counsel-describe-variable
                     "dk" 'describe-key
-                    ;; "dd" 'lispy-describe-inline
                     "dd" (lambda ()
                            (interactive)
                            (lispy-describe-inline)
@@ -601,6 +606,8 @@
                     ;; "trm" 'get-term
                     "wf" 'toggle-frame-fullscreen
                     "wm" 'toggle-frame-maximized
+                    "le" 'elisp-index-search
+                    "ls" 'emacs-index-search
                     ;; "ti" 'fastdef-insert
                     ;; "th" 'fastdef-insert-from-history
                     ;; liang.feng

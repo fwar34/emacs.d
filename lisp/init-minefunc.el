@@ -468,4 +468,8 @@ URL `http://ergoemacs.org/emacs/elisp_run_current_file.html'"
   (interactive)
   (counsel-ag (my-word-at-point)))
 
+(defun my-swiper-forward-word ()
+  (interactive)
+  (swiper (my-word-at-point)))
+
 (provide 'init-minefunc)

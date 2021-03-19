@@ -281,7 +281,9 @@
   (general-define-key
    :keymaps 'ivy-minibuffer-map
    :prefix "`"
-   "`" 'ivy-restrict-to-matches)
+   "`" 'ivy-restrict-to-matches
+   "j" 'swiper-avy
+   )
   )
 
 (use-package smex

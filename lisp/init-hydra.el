@@ -310,13 +310,13 @@
   ;;-------------------------------------------------------------
   ;; lispyville
   (with-eval-after-load 'lispyville
-       (defhydra hydra-lispyville (:color blue :hint nil :foreign-keys warn)
-         ("(" lispyville-wrap-round "wrap round with (" :column "lispyville-wrap")
-         ("[" lispyville-wrap-brackets "wrap round with [")
-         ("{" lispyville-wrap-braces "wrap round with {")
-         ("q" nil "cancel" :exit t :column nil))
-       ;; (global-set-key (kbd "M-u li") #'hydra-lispyville/body)
-       (define-key lispyville-mode-map (kbd "M-u li") 'hydra-lispyville/body))
+    (defhydra hydra-lispyville (:color blue :hint nil :foreign-keys warn)
+      ("(" lispyville-wrap-round "wrap round with (" :column "lispyville-wrap")
+      ("[" lispyville-wrap-brackets "wrap round with [")
+      ("{" lispyville-wrap-braces "wrap round with {")
+      ("q" nil "cancel" :exit t :column nil))
+    ;; (global-set-key (kbd "M-u li") #'hydra-lispyville/body)
+    (define-key lispyville-mode-map (kbd "M-u li") 'hydra-lispyville/body))
   
   ;;-------------------------------------------------------------
   ;; dired
