@@ -21,7 +21,9 @@
 (defun highlight-remove-all ()
   (interactive)
   (hi-lock-mode -1)
-  (hi-lock-mode 1))
+  (hi-lock-mode 1)
+  (highlight-symbol-remove-all)
+  )
 (defun search-highlight-persist ()
   ;; (highlight-regexp (car-safe (if isearch-regexp
   ;;                                 regexp-search-ring
@@ -241,6 +243,7 @@
                     "SPC" 'counsel-M-x
                     "TAB" 'other-window
                     ;; highlight-symbol
+                    ;; "xx" 'highlight-symbol-remove-all ;; map to ";xx"
                     "hs" 'highlight-symbol
                     "hn" 'highlight-symbol-next
                     "hp" 'highlight-symbol-prev
@@ -492,7 +495,6 @@
                     "bf" (lambda () (interactive) (my-commands-shell "make -j 5 && cd ..; fakeroot debian/rules binary"))
                     "qq" 'save-buffers-kill-terminal
                     "xz" 'suspend-frame
-                    "xx" 'highlight-symbol-remove-all
                     "kk" 'scroll-other-window
                     "jj" 'scroll-other-window-up
                     "lm" 'display-line-numbers-mode

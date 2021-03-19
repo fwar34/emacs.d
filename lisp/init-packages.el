@@ -170,6 +170,10 @@
   ;;                              (pyim-export "~/.emacs.d/pyim-mine.cipin")
   ;;                              (pyim-export-personal-words "~/.emacs.d/pyim-mine.pyim")))
 
+  ;; 如何使用其它字符翻页
+  (define-key pyim-mode-map "." 'pyim-page-next-page)
+  (define-key pyim-mode-map "," 'pyim-page-previous-page)
+
   ;; (general-define-key
   ;;  :keymaps 'insert
   ;;  ;; :prefix "C-i"
