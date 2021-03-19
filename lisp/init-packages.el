@@ -621,7 +621,8 @@
   :ensure t
   :after evil
   :config
-  (evilem-default-keybindings "M-m")
+  (evilem-default-keybindings (kbd "-"))
+  ;; (evilem-default-keybindings (kbd "\\"))
   )
 
 ;; (use-package ace-jump-mode
