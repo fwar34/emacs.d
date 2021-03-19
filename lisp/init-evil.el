@@ -132,23 +132,23 @@
 ;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;copy from chenbin.emacs.d;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; As a general RULE, mode specific evil leader keys started
 ;; with uppercased character or 'g' or special character except "=" and "-"
-;; (evil-declare-key 'normal org-mode-map
-;;   "gh" 'outline-up-heading
-;;   "gl" 'outline-next-visible-heading
-;;   "gj" 'outline-forward-same-level
-;;   "gk" 'outline-backward-same-level
-;;   "$" 'org-end-of-line ; smarter behaviour on headlines etc.
-;;   "^" 'org-beginning-of-line ; ditto
-;;   "<" (lambda () (interactive) (org-demote-or-promote 1)) ; out-dent
-;;   ">" 'org-demote-or-promote ; indent
-;;   (kbd "TAB") 'org-cycle)
+(evil-declare-key 'normal org-mode-map
+  "gh" 'outline-up-heading
+  "gl" 'outline-next-visible-heading
+  "gj" 'outline-forward-same-level
+  "gk" 'outline-backward-same-level
+  "$" 'org-end-of-line ; smarter behaviour on headlines etc.
+  "^" 'org-beginning-of-line ; ditto
+  "<" (lambda () (interactive) (org-demote-or-promote 1)) ; out-dent
+  ">" 'org-demote-or-promote ; indent
+  (kbd "TAB") 'org-cycle)
 
-;; (evil-declare-key 'normal markdown-mode-map
-;;   "gh" 'outline-up-heading
-;;   "gl" 'outline-next-visible-heading
-;;   "gj" 'outline-forward-same-level
-;;   "gk" 'outline-backward-same-level
-;;   (kbd "TAB") 'org-cycle)
+(evil-declare-key 'normal markdown-mode-map
+  "gh" 'outline-up-heading
+  "gl" 'outline-next-visible-heading
+  "gj" 'outline-forward-same-level
+  "gk" 'outline-backward-same-level
+  (kbd "TAB") 'org-cycle)
 
 ;; I prefer Emacs way after pressing ":" in evil-mode
 (define-key evil-ex-completion-map (kbd "C-a") 'evil-first-non-blank)
@@ -289,7 +289,7 @@
                     ;; "qg" 'counsel-etags-grep
                     ;; "dd" 'counsel-etags-grep-symbol-at-point
                     "fa" 'counsel-ag
-                    "fw" (lambda () (interactive) (counsel-ag (my-word-at-point 1)))
+                    "fw" (lambda () (interactive) (counsel-ag (my-word-at-point t)))
                     "fs" (lambda () (interactive) (counsel-ag (my-word-at-point)))
                     ;; "ha" 'helm-ag
                     "fe" 'end-of-defun

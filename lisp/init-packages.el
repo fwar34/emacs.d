@@ -662,7 +662,6 @@
 
 
 (use-package highlight-symbol
-  :disabled
   :ensure t
   :defer t
   )

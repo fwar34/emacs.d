@@ -391,6 +391,7 @@ URL `http://ergoemacs.org/emacs/elisp_run_current_file.html'"
   (print (point-at-eol)))
 
 (defun my-commands (program &rest program-args)
+  (interactive)
   (switch-to-buffer (get-buffer-create "*command-output*"))
   (erase-buffer)
   (with-current-buffer "*command-output*"
@@ -400,6 +401,7 @@ URL `http://ergoemacs.org/emacs/elisp_run_current_file.html'"
   (goto-char (point-max)))
 
 (defun my-commands-shell (command)
+  (interactive)
   (switch-to-buffer (get-buffer-create "*command-output*"))
   (erase-buffer)
   (with-current-buffer "*command-output*"
