@@ -460,4 +460,12 @@ URL `http://ergoemacs.org/emacs/elisp_run_current_file.html'"
     ret))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+(defun my-search-whole-word ()
+  (interactive)
+  (counsel-ag (my-word-at-point t)))
+
+(defun my-search-forward-word ()
+  (interactive)
+  (counsel-ag (my-word-at-point)))
+
 (provide 'init-minefunc)

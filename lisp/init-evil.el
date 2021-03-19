@@ -208,6 +208,8 @@
                evil-backward-section-begin
                evil-backward-section-end
                counsel-ag
+               my-search-forward-word
+               my-search-whole-word
                ))
   (evil-add-command-properties con :jump t))
 
@@ -292,8 +294,8 @@
                     ;; "qg" 'counsel-etags-grep
                     ;; "dd" 'counsel-etags-grep-symbol-at-point
                     "fa" 'counsel-ag
-                    "fw" (lambda () (interactive) (counsel-ag (my-word-at-point t)))
-                    "fs" (lambda () (interactive) (counsel-ag (my-word-at-point)))
+                    "fw" 'my-search-whole-word
+                    "fs" 'my-search-forward-word
                     ;; "ha" 'helm-ag
                     "fe" 'end-of-defun
                     "fm" 'mark-defun
