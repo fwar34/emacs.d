@@ -46,7 +46,7 @@
         (message (format "set chinese font: %s size: %d" (find-if #'fwar34/font-exist-p chinese-fonts) chinese-font-size)))
     )
 
-(defvar englist-font-list '("Courier 10 Pitch"
+  (defvar englist-font-list '("Courier 10 Pitch"
                               "RobotoMono Nerd Font"
                               "PragmataPro Mono"
                               "RobotoMono Nerd Font Mono"

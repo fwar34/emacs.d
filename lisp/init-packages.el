@@ -170,13 +170,21 @@
   ;;                              (pyim-export "~/.emacs.d/pyim-mine.cipin")
   ;;                              (pyim-export-personal-words "~/.emacs.d/pyim-mine.pyim")))
 
+  ;; (general-define-key
+  ;;  :keymaps 'insert
+  ;;  ;; :prefix "C-i"
+  ;;  ;; 转换前面的英文字符为中文
+  ;;  "M-j" 'pyim-convert-string-at-point
+  ;;  ;; 使用C-i或者C-\来进行中英文输入法切换
+  ;;  "C-i" 'pyim-toggle-input-ascii)
   (general-define-key
    :keymaps 'insert
-   ;; :prefix "C-i
+   :prefix "C-i"
    ;; 转换前面的英文字符为中文
-   "M-j" 'pyim-convert-string-at-point
+   "C-i" 'pyim-convert-string-at-point
    ;; 使用C-i或者C-\来进行中英文输入法切换
-   "C-i" 'pyim-toggle-input-ascii)
+   ;; "C-i" 'pyim-toggle-input-ascii
+   )
   ) 
 
 ;; https://github.com/emacs-evil/evil-collection
