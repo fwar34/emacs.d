@@ -497,3 +497,16 @@ https://emacs.stackexchange.com/questions/51470/define-advice-vs-advice-add-vs-o
     )
 #+end_src
 
+* dolist
+反转list
+#+begin_src elisp
+  (defun reverse (list)
+    (let (res)
+      (dolist (elt list res)
+        (push elt list))))
+
+  (defun reverse2 (list)
+    (let (res)
+      (dolist (elt list res)
+        (setq res (cons elt res)))))
+#+end_src
