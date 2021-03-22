@@ -510,3 +510,15 @@ https://emacs.stackexchange.com/questions/51470/define-advice-vs-advice-add-vs-o
       (dolist (elt list res)
         (setq res (cons elt res)))))
 #+end_src
+
+* join vector转换list为vector
+#+begin_src elisp
+  (vconcat [3 4] ["a" 1])
+  (vconcat [3 4] '(1 "b"))
+  (vconcat [3 4] "ab")
+#+end_src
+* 转换vector为list，注意nil
+#+begin_src elisp
+(append [1 2] ["b" "a"] nil)
+#+end_src
+

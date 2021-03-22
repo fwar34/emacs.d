@@ -917,7 +917,7 @@
   ;; :bind
   ;; (("SPC c n" . git-gutter:next-hunk)
   ;;  ("SPC c p" . git-gutter:previous-hunk)) 
-  :if (not (display-graphic-p))
+  ;; :if (not (display-graphic-p))
   :ensure t
   :after evil
   ;; :if (display-graphic-p)

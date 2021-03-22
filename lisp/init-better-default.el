@@ -159,32 +159,33 @@
   :hook (after-init . global-auto-revert-mode))
 
 ;; 行号
-(if (>= emacs-major-version 26)
-    ;; config built-in "display-line-number-mode" (require Emacs >= 26)
-    ;; enable line numbering (or "linum-mode")
-    (let ((hook-list '(sh-mode-hook
-                       cmake-mode-hook
-                       emacs-lisp-mode-hook
-                       matlab-mode-hook
-                       rust-mode-hook
-                       go-mode-hook
-                       clojure-mode-hook
-                       python-mode-hook
-                       c-mode-common-hook
-                       lua-mode-hook
-                       ;; org-mode-hook
-                       package-menu-mode-hook
-                       makefile-gmake-mode-hook
-                       ;;  Gnome
-                       makefile-bsdmake-mode-hook ; OS X
-                       ess-mode-hook)))
-      (setq-default display-line-numbers-width 2)
-      (setq-default display-line-numbers-width-start t)  ;; 行数右对齐
-      ;; (setq-default display-line-numbers-type 'relative)
-      (setq display-line-numbers-current-absolute t)
-      (dolist (hook-element hook-list)
-        (add-hook hook-element 'display-line-numbers-mode)))
-  ) 
+;; (if (>= emacs-major-version 26)
+;;     ;; config built-in "display-line-number-mode" (require Emacs >= 26)
+;;     ;; enable line numbering (or "linum-mode")
+;;     (let ((hook-list '(sh-mode-hook
+;;                        cmake-mode-hook
+;;                        emacs-lisp-mode-hook
+;;                        matlab-mode-hook
+;;                        rust-mode-hook
+;;                        go-mode-hook
+;;                        clojure-mode-hook
+;;                        python-mode-hook
+;;                        c-mode-common-hook
+;;                        lua-mode-hook
+;;                        ;; org-mode-hook
+;;                        package-menu-mode-hook
+;;                        makefile-gmake-mode-hook
+;;                        ;;  Gnome
+;;                        makefile-bsdmake-mode-hook ; OS X
+;;                        ess-mode-hook)))
+;;       (setq-default display-line-numbers-width 2)
+;;       (setq-default display-line-numbers-width-start t)  ;; 行数右对齐
+;;       ;; (setq-default display-line-numbers-type 'relative)
+;;       (setq display-line-numbers-current-absolute t)
+;;       (dolist (hook-element hook-list)
+;;         (add-hook hook-element 'display-line-numbers-mode)))
+;;   ) 
+(global-display-line-numbers-mode)
 
 ;; abbrev
 ;; (abbrev-mode t)
