@@ -709,3 +709,28 @@ function cell 或 value cell 可能为空, 这时就被称为 void . 当你获�
   (symbolp x1) ;; nil
   (symbolp 'x1) ;; t
 #+end_src
+
+* throw and catch
+To exit a loop or exit a function:
+
+Use catch and throw to exit loop/function. These are like “break”, “goto” in other programing languages.
+Use error or user-error to signal a error and exit.
+#+begin_src elisp
+  (defun test-exit-f ()
+    "example. using catch/throw to exit function"
+    (interactive)
+    (catch 'aaa
+      (if (y-or-n-p "exit?")
+          (progn
+            (message "existing")
+            (throw 'aaa 3) ; if yes, exit right away, return 3 to catch
+            )
+        (progn ; else, go on
+          (message "went on")
+          4 ; return 4
+          ))))
+
+(defun my-test-catch ()
+(interactive)
+(dotimes ))
+#+end_src
