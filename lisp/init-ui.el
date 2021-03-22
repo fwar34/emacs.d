@@ -158,7 +158,7 @@
    :font (font-spec :name "Sarasa Mono Slab K"
                     :weight 'normal
                     :slant 'normal
-                    :size 17))
+                    :size (if (string= "A12969" system-name) 17 20)))
   (dolist (charset '(kana han symbol cjk-misc bopomofo))
     (set-fontset-font
      (frame-parameter nil 'font)
