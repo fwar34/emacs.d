@@ -12,48 +12,48 @@
 * learn function
 ** symbol #' and symbol-value symbol-function
 #+BEGIN_SRC emacs-lisp 
-(defun double(x) (* x 2))
-(double 1)
-(equal #'double (car (list #'double)))
-((lambda(x) (* x 2)) 3)
-(setq double 2)
-(symbol-value 'double)
-(symbol-function 'double)
-(setq fun1 #'double)
-(setq x #'append)
-(equal (symbol-value 'x) (symbol-function 'append))
-(setf (symbol-function #'double) #'(lambda(x) (* x 3)))
-(double 3)
+  (defun double(x) (* x 2))
+  (double 1)
+  (equal #'double (car (list #'double)))
+  ((lambda(x) (* x 2)) 3)
+  (setq double 2)
+  (symbol-value 'double)
+  (symbol-function 'double)
+  (setq fun1 #'double)
+  (setq x #'append)
+  (equal (symbol-value 'x) (symbol-function 'append))
+  (setf (symbol-function #'double) #'(lambda(x) (* x 3)))
+  (double 3)
 #+END_SRC
 ** function call
 下面几个函数调用都是相同的作用，调用了函数+
 #+BEGIN_SRC emacs-lisp
-(+ 1 2)
-(apply #'+ '(1 2))
-(apply (symbol-function '+) '(1 2))
-(apply #'(lambda(x y) (+ x y)) '(1 2))
-(apply #'+ 1 '(2))
-(funcall #'* 1 2)
+  (+ 1 2)
+  (apply #'+ '(1 2))
+  (apply (symbol-function '+) '(1 2))
+  (apply #'(lambda(x y) (+ x y)) '(1 2))
+  (apply #'+ 1 '(2))
+  (funcall #'* 1 2)
 #+END_SRC
 ** #' mapcar
 #+BEGIN_SRC emacs-lisp
-(mapcar #'(lambda(x) (+ x 10)) '(1 2 3))
-(mapcar #'+
-        '(1 2 3)
-        '(10 100 1000))
+  (mapcar #'(lambda(x) (+ x 10)) '(1 2 3))
+  (mapcar #'+
+          '(1 2 3)
+          '(10 100 1000))
 
-(sort '(1 4 2 5 7 3) #'<)
-(apply #'< (sort '(1 5 2 3 7) #'<))
+  (sort '(1 4 2 5 7 3) #'<)
+  (apply #'< (sort '(1 5 2 3 7) #'<))
 
-(remove-if #'evenp '(1 2 3 4 5 6 7))
+  (remove-if #'evenp '(1 2 3 4 5 6 7))
 
-(defun our-remove-if(fn lst)
-(if (null lst)
-    nil
-    (if (funcall fn (car lst))
-        (our-remove-if fn (cdr lst))
-    (cons (car lst) (our-remove-if fn (cdr lst))))))
-(our-remove-if #'evenp '(1 3 4 5 2))
+  (defun our-remove-if(fn lst)
+    (if (null lst)
+        nil
+      (if (funcall fn (car lst))
+          (our-remove-if fn (cdr lst))
+        (cons (car lst) (our-remove-if fn (cdr lst))))))
+  (our-remove-if #'evenp '(1 3 4 5 2))
 #+END_SRC 
 
 #+BEGIN_EXAMPLE emacs-lisp
@@ -63,11 +63,11 @@
 ** lambda
 用funcall调用lambda表达式，还可以把lambda赋给一个变量然后在用funcall调用
 #+BEGIN_SRC emacs-lisp
-(funcall (lambda(name) (message "Hello %s!" name)) "Emacs")
-(funcall #'(lambda(name) (message "Hello %s!" name)) "Emacs")
-(setq foo (lambda(name) (message "Hello %s!" name)))
-(setq foo #'(lambda(name) (message "Hello %s!" name)))
-(funcall foo "Emacs")
+  (funcall (lambda(name) (message "Hello %s!" name)) "Emacs")
+  (funcall #'(lambda(name) (message "Hello %s!" name)) "Emacs")
+  (setq foo (lambda(name) (message "Hello %s!" name)))
+  (setq foo #'(lambda(name) (message "Hello %s!" name)))
+  (funcall foo "Emacs")
 #+END_SRC
 * learn variable
 ** setq and defvar
@@ -75,8 +75,8 @@ defvar 与 setq 所不同的是，如果变量在声明之前，这个变量已�
 声明的变量值不会改变成声明的那个值。另一个区别是 defvar 可以为变量提供文档字符串， 
 当变量是在文件中定义的话，C-h v 后能给出变量定义的位置。
 #+BEGIN_SRC emacs-lisp
-   (setq foo "I am foo")
-   (defvar foo "Did I have a value?"
+  (setq foo "I am foo")
+  (defvar foo "Did I have a value?"
     "A demo variable")
 #+END_SRC
   
@@ -84,121 +84,121 @@ defvar 与 setq 所不同的是，如果变量在声明之前，这个变量已�
 如果没有局部作用域的变量，都使用全局变量，函数会相当难写。elisp 里可以用 let 和 let* 进行局部变量的绑定。let 使用的形式是：
 (let (bindings) body) bingdings 可以是 (var value) 这样对 var 赋初始值的形式，或者用 var 声明一个初始值为 nil 的变量
 #+BEGIN_SRC emacs-lisp
-(defun circle-area(radix)
-  (let ((pi 3.1415926) area)
-    (setq area (* pi radix radix))
-    (message "直径为 %.2f 的圆的面积是 %.2f" radix area)))
-(circle-area 3)
-;; let* 和 let 的使用形式完全相同，唯一的区别是在 let* 声明中就能使用前面声明的变量
-(defun circle-area2(radix)
-  (let* ((pi 3.1415926) (area (* pi radix radix)))
-  (message "直径为 %.2f 的圆的面积是 %.2f" radix area)))
-(circle-area2 3)
+  (defun circle-area(radix)
+    (let ((pi 3.1415926) area)
+      (setq area (* pi radix radix))
+      (message "直径为 %.2f 的圆的面积是 %.2f" radix area)))
+  (circle-area 3)
+  ;; let* 和 let 的使用形式完全相同，唯一的区别是在 let* 声明中就能使用前面声明的变量
+  (defun circle-area2(radix)
+    (let* ((pi 3.1415926) (area (* pi radix radix)))
+      (message "直径为 %.2f 的圆的面积是 %.2f" radix area)))
+  (circle-area2 3)
 #+END_SRC
 * 控制结构
 ** progn
 #+BEGIN_SRC emacs-lisp
-(progn (setq foo 3) (message "foo set to 3"))
+  (progn (setq foo 3) (message "foo set to 3"))
 #+END_SRC
 ** if 和 cond
 #+BEGIN_SRC emacs-lisp
-(if condition
-  then
- else)
+  (if condition
+      then
+    else)
 
-(cond (case1 do-when-case1)
-(case2 do-when-case2)
-...
-(t do-when-none-meet))
+  (cond (case1 do-when-case1)
+        (case2 do-when-case2)
+        ...
+        (t do-when-none-meet))
 #+END_SRC
 还有两个宏 when 和 unless，从它们的名字也就能知道它们是作什么用的。
 使用这两个宏的好处是使代码可读性提高，when 能省去 if 里的 progn 结构，unless 省去条件为真子句需要的的 nil 表达式。
 ** while
 #+BEGIN_SRC emacs-lisp
-(while condition
-  body)
+  (while condition
+    body)
 #+END_SRC
 * 逻辑运算
 条件的逻辑运算和其它语言都是很类似的， 使用 and、or、not。and 和 or 也同样具有短路性质。
 很多人喜欢在表达式短时，用 and 代替 when，or 代替 unless。 
 当然这时一般不关心它们的返回值，而是在于表达式其它子句的副作用。 比如 or 经常用于设置函数的缺省值，而 and 常用于参数检查：
 #+BEGIN_SRC emacs-lisp
-(defun hello-world(&optional name)
-  (or name (setq name "Emacs"))
-  (message "Hello %s!" name))
-(hello-world)
-(hello-world "Elisp")
+  (defun hello-world(&optional name)
+    (or name (setq name "Emacs"))
+    (message "Hello %s!" name))
+  (hello-world)
+  (hello-world "Elisp")
 #+END_SRC
 * 函数列表
 #+BEGIN_SRC emacs-lisp
-(defun NAME ARGLIST [DOCSTRING] BODY...)
-(defvar SYMBOL &optional INITVALUE DOCSTRING)
-(setq SYM VAL SYM VAL ...)
-(let VARLIST BODY...)
-(let* VARLIST BODY...)
-(lambda ARGS [DOCSTRING] [INTERACTIVE] BODY)
-(progn BODY ...)
-(if COND THEN ELSE...)
-(cond CLAUSES...)
-(when COND BODY ...)
-(unless COND BODY ...)
-(when COND BODY ...)
-(or CONDITIONS ...)
-(and CONDITIONS ...)
-(not OBJECT)
+  (defun NAME ARGLIST [DOCSTRING] BODY...)
+  (defvar SYMBOL &optional INITVALUE DOCSTRING)
+  (setq SYM VAL SYM VAL ...)
+  (let VARLIST BODY...)
+  (let* VARLIST BODY...)
+  (lambda ARGS [DOCSTRING] [INTERACTIVE] BODY)
+  (progn BODY ...)
+  (if COND THEN ELSE...)
+  (cond CLAUSES...)
+  (when COND BODY ...)
+  (unless COND BODY ...)
+  (when COND BODY ...)
+  (or CONDITIONS ...)
+  (and CONDITIONS ...)
+  (not OBJECT)
 #+END_SRC
 * 基本数据类型 
 ** 函数列表
 #+BEGIN_SRC emacs-lisp
-;; 测试函数
-(integerp OBJECT)
-(floatp OBJECT)
-(numberp OBJECT)
-(zerop NUMBER)
-(wholenump OBJECT)
-;; 比较函数
-(> NUM1 NUM2)
-(< NUM1 NUM2)
-(>= NUM1 NUM2)
-(<= NUM1 NUM2)
-(= NUM1 NUM2)
-(eql OBJ1 OBJ2)
-(/= NUM1 NUM2)
-;; 转换函数
-(float ARG)
-(truncate ARG &optional DIVISOR)
-(floor ARG &optional DIVISOR)
-(ceiling ARG &optional DIVISOR)
-(round ARG &optional DIVISOR)
-;; 运算
-(+ &rest NUMBERS-OR-MARKERS)
-(- &optional NUMBER-OR-MARKER &rest MORE-NUMBERS-OR-MARKERS)
-(* &rest NUMBERS-OR-MARKERS)
-(/ DIVIDEND DIVISOR &rest DIVISORS)
-(1+ NUMBER)
-(1- NUMBER)
-(abs ARG)
-(% X Y)
-(mod X Y)
-(sin ARG)
-(cos ARG)
-(tan ARG)
-(asin ARG)
-(acos ARG)
-(atan Y &optional X)
-(sqrt ARG)
-(exp ARG)
-(expt ARG1 ARG2)
-(log ARG &optional BASE)
-(log10 ARG)
-(logb ARG)
-;; 随机数
-(random &optional N)
+  ;; 测试函数
+  (integerp OBJECT)
+  (floatp OBJECT)
+  (numberp OBJECT)
+  (zerop NUMBER)
+  (wholenump OBJECT)
+  ;; 比较函数
+  (> NUM1 NUM2)
+  (< NUM1 NUM2)
+  (>= NUM1 NUM2)
+  (<= NUM1 NUM2)
+  (= NUM1 NUM2)
+  (eql OBJ1 OBJ2)
+  (/= NUM1 NUM2)
+  ;; 转换函数
+  (float ARG)
+  (truncate ARG &optional DIVISOR)
+  (floor ARG &optional DIVISOR)
+  (ceiling ARG &optional DIVISOR)
+  (round ARG &optional DIVISOR)
+  ;; 运算
+  (+ &rest NUMBERS-OR-MARKERS)
+  (- &optional NUMBER-OR-MARKER &rest MORE-NUMBERS-OR-MARKERS)
+  (* &rest NUMBERS-OR-MARKERS)
+  (/ DIVIDEND DIVISOR &rest DIVISORS)
+  (1+ NUMBER)
+  (1- NUMBER)
+  (abs ARG)
+  (% X Y)
+  (mod X Y)
+  (sin ARG)
+  (cos ARG)
+  (tan ARG)
+  (asin ARG)
+  (acos ARG)
+  (atan Y &optional X)
+  (sqrt ARG)
+  (exp ARG)
+  (expt ARG1 ARG2)
+  (log ARG &optional BASE)
+  (log10 ARG)
+  (logb ARG)
+  ;; 随机数
+  (random &optional N)
 #+END_SRC
 ** 变量列表
 #+BEGIN_SRC emacs-lisp
-most-positive-fixnum
-most-negative-fixnum
+  most-positive-fixnum
+  most-negative-fixnum
 #+END_SRC
 * 字符和字符串
 http://www.woola.net/detail/2016-08-23-elisp-string.html
@@ -207,41 +207,41 @@ http://www.woola.net/detail/2016-08-23-elisp-string.html
 nil 时返回 t。 char-or-string-p 测试是否是字符串或者字符类型。
 比较头疼的是 emacs 没有测试字符串是否为空的函数。这是我用的这个测试函数，使用前要测试字符串是否为 nil：
 #+BEGIN_SRC emacs-lisp
-(defun string-emptyp(str)
-  (not (string< "" str)))
+  (defun string-emptyp(str)
+    (not (string< "" str)))
 #+END_SRC
 ** 函数列表
 [[http://www.woola.net/detail/2016-08-23-elisp-string.html]]
 #+BEGIN_SRC emacs-lisp
-;; 测试函数
-(stringp OBJECT)
-(string-or-null-p OBJECT)
-(char-or-string-p OBJECT)
-;; 构建函数
-(make-string LENGTH INIT)
-(string &rest CHARACTERS)
-(substring STRING FROM &optional TO)
-(concat &rest SEQUENCES)
-;; 比较函数
-(char-equal C1 C2)
-(string= S1 S2)
-(string-equal S1 S2)
-(string< S1 S2)
-;; 转换函数
-(char-to-string CHAR)
-(string-to-char STRING)
-(number-to-string NUMBER)
-(string-to-number STRING &optional BASE)
-(downcase OBJ)
-(upcase OBJ)
-(capitalize OBJ)
-(upcase-initials OBJ)
-(format STRING &rest OBJECTS)
-;; 查找与替换
-(string-match REGEXP STRING &optional START)
-(replace-match NEWTEXT &optional FIXEDCASE LITERAL STRING SUBEXP)
-(replace-regexp-in-string REGEXP REP STRING &optional FIXEDCASE LITERAL SUBEXP START)
-(subst-char-in-string FROMCHAR TOCHAR STRING &optional INPLACE)
+  ;; 测试函数
+  (stringp OBJECT)
+  (string-or-null-p OBJECT)
+  (char-or-string-p OBJECT)
+  ;; 构建函数
+  (make-string LENGTH INIT)
+  (string &rest CHARACTERS)
+  (substring STRING FROM &optional TO)
+  (concat &rest SEQUENCES)
+  ;; 比较函数
+  (char-equal C1 C2)
+  (string= S1 S2)
+  (string-equal S1 S2)
+  (string< S1 S2)
+  ;; 转换函数
+  (char-to-string CHAR)
+  (string-to-char STRING)
+  (number-to-string NUMBER)
+  (string-to-number STRING &optional BASE)
+  (downcase OBJ)
+  (upcase OBJ)
+  (capitalize OBJ)
+  (upcase-initials OBJ)
+  (format STRING &rest OBJECTS)
+  ;; 查找与替换
+  (string-match REGEXP STRING &optional START)
+  (replace-match NEWTEXT &optional FIXEDCASE LITERAL STRING SUBEXP)
+  (replace-regexp-in-string REGEXP REP STRING &optional FIXEDCASE LITERAL SUBEXP START)
+  (subst-char-in-string FROMCHAR TOCHAR STRING &optional INPLACE)
 #+END_SRC
 * cons cell 和列表
 [[http://www.woola.net/detail/2016-08-23-elisp-cons-cell.html]]
@@ -255,11 +255,11 @@ cells。car 函数用于取得 cons cell 的 CAR 部分，cdr 取得cons cell �
 
 cons cell 的读入语法是用 . 分开两个部分，比如：
 #+BEGIN_SRC emacs-lisp
-'(1 . 2)                                ; => (1 . 2)
-'(?a . 1)                               ; => (97 . 1)
-'(1 . "a")                              ; => (1 . "a")
-'(1 . nil)                              ; => (1)
-'(nil . nil)                            ; => (nil)
+  '(1 . 2)                                ; => (1 . 2)
+  '(?a . 1)                               ; => (97 . 1)
+  '(1 . "a")                              ; => (1 . "a")
+  '(1 . nil)                              ; => (1)
+  '(nil . nil)                            ; => (nil)
 #+END_SRC
 注意到前面的表达式中都有一个 ' 号，这是什么意思呢？其实理解了 eval-last-sexp 的作用就能明白了。eval-last-sexp 
 其实包含了两个步骤，一是读入前一个 S-表达式，二是对读入的 S-表达式求值。这样如果读入的 S-表达式是一个 cons cell 的话，
@@ -268,12 +268,12 @@ invalid-function。之所以前面没有遇到这个问题，那是因为前面�
 称为自求值表达式（self-evaluating form）。' 号其实是一个特殊的函数 quote，它的作用是将它的参数返回而不作求值。'(1 . 2) 等价于 
 (quote (1 . 2))。为了证明 cons cell 的读入语法确实就是它的输出形式，可以看下面这个语句：
 #+BEGIN_SRC emacs-lisp
-(read "(1 . 2)")                        ; => (1 . 2)
+  (read "(1 . 2)")                        ; => (1 . 2)
 #+END_SRC
 列表包括了 cons cell。但是列表中有一个特殊的元素──空表 nil。
 #+BEGIN_SRC emacs-lisp
-nil                                     ; => nil
-'()                                     ; => nil
+  nil                                     ; => nil
+  '()                                     ; => nil
 #+END_SRC
 *注意*
 按列表最后一个 cons cell 的 CDR 部分的类型分，可以把列表分为三类。
@@ -282,56 +282,56 @@ nil                                     ; => nil
 3. 还有一种可能，它指向列表中之前的一个 cons cell， 则称为环形列表(circular list)。
 这里分别给出一个例子：
 #+BEGIN_SRC emacs-lisp
-'(1 2 3)                                  ; => (1 2 3) cdr->nil
-'(1 2 . 3)                                ; => (1 2 . 3) cdr-> 3, 是不nil也不是cons cell
-'(1 . #1=(2 3 . #1#))                     ; => (1 2 3 . #1) cdr->指向之前的一个cons cell
+  '(1 2 3)                                  ; => (1 2 3) cdr->nil
+  '(1 2 . 3)                                ; => (1 2 . 3) cdr-> 3, 是不nil也不是cons cell
+  '(1 . #1=(2 3 . #1#))                     ; => (1 2 3 . #1) cdr->指向之前的一个cons cell
 #+END_SRC
 从这个例子可以看出前两种列表的读入语法和输出形式都是相同的，而环形列表的读入语法是很古怪的，输出形式不能作为环形列表的读入形式。
 
 如果把真列表最后一个 cons cell 的 nil 省略不写，也就是 (1 . nil) 简写成 (1)，把 ( obj1 . ( obj2 . list)) 
 简写成 (obj1 obj2 . list)，那么列表最后可以写成一个用括号括起的元素列表：
 #+BEGIN_SRC emacs-lisp
-'(1 . (2 . (3 . nil)))                  ; => (1 2 3)
+  '(1 . (2 . (3 . nil)))                  ; => (1 2 3)
 #+END_SRC
 尽管这样写是清爽多了，但是，我觉得看一个列表时还是在脑子里反映的前面的形式，这样在和复杂的 cons cell 打交道时就不会搞不清楚这个 
 cons cell 的 CDR 是一个列表呢，还是一个元素或者是嵌套的列表。
 ** 测试函数
 测试一个对象是否是 cons cell 用 consp，是否是列表用 listp。
 #+BEGIN_SRC emacs-lisp
-(consp '(1 . 2))                        ; => t
-(consp '(1 . (2 . nil)))                ; => t
-(consp nil)                             ; => nil
-(listp '(1 . 2))                        ; => t
-(listp '(1 . (2 . nil)))                ; => t
-(listp nil)                             ; => t
+  (consp '(1 . 2))                        ; => t
+  (consp '(1 . (2 . nil)))                ; => t
+  (consp nil)                             ; => nil
+  (listp '(1 . 2))                        ; => t
+  (listp '(1 . (2 . nil)))                ; => t
+  (listp nil)                             ; => t
 #+END_SRC
 没有内建的方法测试一个列表是不是一个真列表。通常如果一个函数需要一个真列表作为参数，都是在运行时发出错误，而不是进行参数检查，因为检查一个列表是真列表的代价比较高。
 测试一个对象是否是 nil 用 null 函数。只有当对象是空表时，null 才返回空值。
 ** 构造函数
 生成一个 cons cell 可以用 cons 函数。比如：
 #+BEGIN_SRC emacs-lisp
-(cons 1 2)                              ; => (1 . 2)
-(cons 1 '())                            ; => (1)
+  (cons 1 2)                              ; => (1 . 2)
+  (cons 1 '())                            ; => (1)
 #+END_SRC
 也是在列表前面增加元素的方法。比如：
 #+BEGIN_SRC emacs-lisp
-(setq foo '(a b))                       ; => (a b)
-(cons 'x foo)                           ; => (x a b)
+  (setq foo '(a b))                       ; => (a b)
+  (cons 'x foo)                           ; => (x a b)
 #+END_SRC
 值得注意的是前面这个例子的 foo 值并没有改变。事实上有一个宏 push 可以加入元素的同时改变列表的值：
 #+BEGIN_SRC emacs-lisp
-(push 'x foo)                           ; => (x a b)
-foo                                     ; => (x a b)
+  (push 'x foo)                           ; => (x a b)
+  foo                                     ; => (x a b)
 #+END_SRC
 生成一个列表的函数是 list。比如：
 #+BEGIN_SRC emacs-lisp
-(list 1 2 3)                            ; => (1 2 3)
+  (list 1 2 3)                            ; => (1 2 3)
 #+END_SRC
 可能这时你有一个疑惑，前面产生一个列表，我常用 quote（也就是 ' 符号）这个函数，它和这个 cons 和 list 函数有什么区别呢？
 其实区别是很明显的，quote 是把参数直接返回不进行求值，而 list 和 cons 是对参数求值后再生成一个列表或者 cons cell。看下面这个例子：
 #+BEGIN_SRC emacs-lisp
-'((+ 1 2) 3)                            ; => ((+ 1 2) 3)
-(list (+ 1 2) 3)                        ; => (3 3)
+  '((+ 1 2) 3)                            ; => ((+ 1 2) 3)
+  (list (+ 1 2) 3)                        ; => (3 3)
 #+END_SRC
 前一个生成的列表的 CAR 部分是 (+ 1 2) 这个列表，而后一个是先对 (+ 1 2) 求值得到 3 后再生成列表。
 
@@ -341,12 +341,12 @@ https://blog.csdn.net/whackw/article/details/51542457
 换句话说就是： 从第一个元素开始的所有相间元素都是一个用来描述接下来那个元素的符号（原文引用 ：）），在 plist 
 里奇数个元素的写法使用一种特殊的符号--关键字符号（keyword）。
 #+BEGIN_SRC emacs-lisp
-(list :书名 "人间词话" :作者 "王国维" :价格 100 :是否有电子版 t)
+  (list :书名 "人间词话" :作者 "王国维" :价格 100 :是否有电子版 t)
 #+END_SRC
 这里要提到一个属性表的函数 getf ，它可以根据一个 plist 中的某个字段名（属性名）来查询对应的属性值，如下所示，
 我们想要查询刚才建立的 plist 中的 :书名 属性名所对应的属性值：
 #+BEGIN_SRC emacs-lisp
-(getf (list :书名 "人间词话" :作者 "王国维" :价格 100 :是否有电子版 t) :作者)
+  (getf (list :书名 "人间词话" :作者 "王国维" :价格 100 :是否有电子版 t) :作者)
 #+END_SRC
 
 ** 关联列表
@@ -394,9 +394,9 @@ assoc-default可以一步完成这样的操作：
   
 * 函数参数
 #+BEGIN_SRC emacs-lisp
-(REQUIRED-VARS...
- [&optional OPTIONAL-VARS...]
- [&rest REST-VAR])
+  (REQUIRED-VARS...
+   [&optional OPTIONAL-VARS...]
+   [&rest REST-VAR])
 #+END_SRC
 他的意思是说，你必须把提供的参数写在前面，可选的参数写在后面，最后一个符号表示剩余的所有参数(*是一个列表*)，python的函数参数也是同样的规则，不同的地方是最后的关键字参数是个map
 #+BEGIN_SRC emacs-lisp
@@ -416,38 +416,38 @@ assoc-default可以一步完成这样的操作：
 配置 X 并不要求加载 X，Emacs 在加载配置本身上的时间常常可以忽略不计。比如你可以在 Org-mode 没有加载时就配置它，Emacs 已经尽量这么做了：
 
 #+BEGIN_SRC elisp
-;; Emacs autoload 了 org-store-link，即使 org 没有加载，你也能使用它
-(global-set-key (kbd "C-c l") #'org-store-link)
+  ;; Emacs autoload 了 org-store-link，即使 org 没有加载，你也能使用它
+  (global-set-key (kbd "C-c l") #'org-store-link)
 #+END_SRC
 
 #+BEGIN_SRC elisp
-;; setq 有特效，无论 org 什么时候加载，下面设置均有效
-(setq org-agenda-files '("~/Sync/org/"))
+  ;; setq 有特效，无论 org 什么时候加载，下面设置均有效
+  (setq org-agenda-files '("~/Sync/org/"))
 
-;; add-hook 有特效，org-mode-hook 没定义也可以用；
-;; org-bullets-mode 已经被 package.el 自动 autoload
-(add-hook 'org-mode-hook #'org-bullets-mode)
+  ;; add-hook 有特效，org-mode-hook 没定义也可以用；
+  ;; org-bullets-mode 已经被 package.el 自动 autoload
+  (add-hook 'org-mode-hook #'org-bullets-mode)
 #+END_SRC
 
 但是你试图调用 Org-mode 中的某些函数的话，比如
 
 #+BEGIN_SRC elisp
-(org-babel-do-load-languages
- 'org-babel-load-languages
- '((emacs-lisp . t)
-   (shell      . t)
-   (ruby       . t)))
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '((emacs-lisp . t)
+     (shell      . t)
+     (ruby       . t)))
 #+END_SRC
 
 它会迫使 Emacs 启动时就加载 Org-mode，这会严重拖累 Emacs 启动速度，而且也没必要，你完全可以等到你打开 .org 文件时，再执行这段配置
 
 #+BEGIN_SRC elisp
-(with-eval-after-load 'org
-  (org-babel-do-load-languages
-   'org-babel-load-languages
-   '((emacs-lisp . t)
-     (shell      . t)
-     (ruby       . t))))
+  (with-eval-after-load 'org
+    (org-babel-do-load-languages
+     'org-babel-load-languages
+     '((emacs-lisp . t)
+       (shell      . t)
+       (ruby       . t))))
 #+END_SRC
 
 同样你也可以把上面的 setq 和 add-hook 放到 with-eval-after-load 里面来。
@@ -497,6 +497,17 @@ https://emacs.stackexchange.com/questions/51470/define-advice-vs-advice-add-vs-o
     )
 #+end_src
 
+* elips 中最重要的类似 list 的数据类型:
+sequence (并不是一个实际的数据类型) ,又为为 List 和 Array (并不是实际的数据类型)
+1. List 又分为 (Associate List 和 Property List)
+2. Array 又分为(Vector 和 String)
+
+** Vector
+读写元素是常量时间
+元素可以是任意类型
+元素不能被添加或删除. 即 vector 的长度是固定的.
+元素的值可以被修改
+
 * dolist
 反转list
 #+begin_src elisp
@@ -519,6 +530,182 @@ https://emacs.stackexchange.com/questions/51470/define-advice-vs-advice-add-vs-o
 #+end_src
 * 转换vector为list，注意nil
 #+begin_src elisp
-(append [1 2] ["b" "a"] nil)
+  (append [1 2] ["b" "a"] nil)
+#+end_src
+** list访问
+#+begin_src elisp
+  (setq list '(1 "a" 3 4 5))
+  (print list)
+  (message "xxxxxxxxx")
+  (message "%S" (last list 3)) ;;最后3个
+  (print (last list 2)) ;;最后2个
+  (print (last list)) ;;最后1个
+  ;; (car (last list))
+  (nth 2 list) ;;第二个
+  (nthcdr 2 list) ;;第二个到最后一个
+  (print (butlast list 2)) ;;除了最后两个，拷贝
+  (print (nbutlast list 2)) ;;除了最后两个，修改
+  (setcar list "b") ;;修改第一个元素
+  (setcdr list '("c" "d" 3)) ;;修改除了第一个之外的元素
+  (cons "c" list) ;;前向追加
+  (push "d" list) ;;前向追加
+  (pop list) ;;移出头元素
+  (print (append list '(20)))
+  (print (append list ["b" 88]))
+  ;; (print (nth 6 (append list ["b" 88])))
+  (listp (append list ["b" 88] nil))
+#+end_src
+* list转成string
+#+begin_src elisp
+  (mapconcat 'identity '("ab" "cd" "ef") ",")
+  (format "%s" '(1 "two" 3))
+  (substring (format "%s" '(1 "two 3")) 1 -1)
+#+end_src
+* associate list
+> 这是一个 cons 对, 类似 (cons key value) . alist
+> (cons a b) 也可以写为 (a . b)
+> key, value 都可以是任意类型.
+> 可以有重复的 key , 因为它是按顺序来维护的.
+#+begin_src elisp
+  (setq x '(("mary" . 23)
+            ("john" . 24)
+            ("smith" . 33)))
+  (assoc "john" x) ;;通过key查找
+  (cdr (assoc "john" x))
+  (rassoc 24 x) ;;通过value查找
+#+end_src
+* property list
+> '(key1 val1 key2 val2 …)
+> 它通常用于小于50个元素的键值对.它与 alist 的函数一样. 如果超过100个元素, 则建议使用 alist.
+#+begin_src elisp
+  (plist-get '(x 1 y 2) 'y)
+  (setq list '(1 "2" 3 "two" 5))
+  (plist-get list 3)
+  (plist-get list 5)
+#+end_src
+* 过滤list
+依赖：(require 'seq)
+#+begin_src elisp
+  (require 'seq)
+  (setq xx '(1 "a" 2))
+  (seq-filter 'numberp xx) ;;拷贝
+  (print xx)
 #+end_src
 
+* Lisp Symbol
+Symbol 的概念类似于其他编程语言的标识符, 除了:
+1. lisp symbol 可以持有未eval过的, 只是表示自身的, 一个内部名字. 在这种意义下, 它类似于 string.
+2. lisp symbol 可以存储超过一个的值.
+   
+** symbol 的 cell
+每一个 lisp symbol 都拥有以下的 cell 来存储东西
+1. “print name” cell : 一个字符串, 与 symbol 字面值一样. 它是自动设置的, 不能被更改.
+2. “value” cell: 存储 symbol 的值, 当该 cell 不为空时, 该 symbol 被视为一个变量.
+3 .“function” cell: 存储函数定义的对象, Lisp 宏 macros, 或其他可以像 function 那样执行的对象.
+4. “property list” cell: 持有一个 name/value 对的list. 用于存储 symbol 的元数据, 例如: 函数的状态, 字体规则(用于语法高亮), 是否废弃等.
+
+function cell 或 value cell 可能为空, 这时就被称为 void . 当你获取一个 cell 的 value 是 void 时, 会产生一个 lisp 错误. (一个空emtpy cell, 不同于有一个 value 为 nil 的 cell).
+
+** 获取 symbol 的四个 cell 值
+#+begin_src elisp
+  ;; get symbol's name cell value
+  (symbol-name 'sin) ; "sin"
+
+  ;; get symbol's value cell value
+  (symbol-value 'sin) ; void-variable error
+  ;; because the value cell of the symbol sin is void
+  ;; or, we just say that sin isn't a variable
+
+  ;; get symbol's function cell value
+  (symbol-function 'sin) ;#<subr sin>
+  ;; the value is a primitive function (written in C), and has print form of #<subr sin>
+
+  ;; get symbol's property list cell value
+  (symbol-plist 'sin) ; (side-effect-free t)
+#+end_src
+
+** 设置 symbol 的四个 cell 值
+1. 名字是不能修改的.
+2. 设置 value cell
+   #+begin_src elisp
+     ;; set a symbol's value cell
+     (setq y "yes yes")
+     ;; get it
+     (symbol-value 'y) ; "yes yes"
+   #+end_src
+
+检测 value cell 是否为空
+   #+begin_src elisp
+     (boundp 'h) ; nil
+     (setq h 4)
+     (boundp 'h) ; t
+   #+end_src
+
+   3. 设置 function cell
+      #+begin_src elisp
+        ;; a function that returns 4
+        (defun z () 4)
+        ;; Note: return value of defun is not defined
+        ;; get a symbol's function cell value
+        (symbol-function 'z) ; (lambda nil 4)(boundp 'h) ; nil
+      #+end_src
+
+   4. 检测是否是 function
+      #+begin_src elisp
+        (fboundp 'f) ; nil
+        ;; define a function that return 3
+        (defun f () 3)
+        ;; now the fuction cell is filled
+        (fboundp 'f) ; t
+      #+end_src
+      
+   5. 设置 property cell
+   参见上面的 Property List
+   
+** 综合例子
+#+begin_src elisp
+  (setq x "hello world")
+  (defun x (a b)
+    "a + b"
+    (+ a b)
+    )
+  (x 3 4);7
+  (message x);"hello world"
+  (symbol-name 'x);"x"
+  (symbol-value 'x);"hello world"
+  (symbol-function 'x); (lambda (a b) "a + b" (+ a b))
+  (symbol-plist 'x); (group-documentation "The X Window system.")
+#+end_src
+
+** quoting symbol
+一个 symbol , 典型情况下是用于计算来获取它的 value 的. 但你可以通过 quoting symbol 来停止这样子. 例如 (quote x) . 你可以想象 quote 是拥有 evaluation (仅仅持有它, 而不要去计算它).
+
+** 什么时候需要 quote symbol
+一些函数, 它会自动为你进行 quote 参数. 但这并没有语法上的方式来告诉你, 一个函数是否需要它的参数是 quote 的. 最好就是查看函数的文档 (Alt+x describe-function) 来查看一个参数是否需要 quote .
+
+函数 set 与 setq 几乎是一样的, 最主要的不同是 set 并不会自动将第一个参数进行 quote, 而 setq 会.
+#+begin_src elisp
+  (setq f '1+)
+  (setq f 'cos)
+  (setq f 'sqrt)
+#+end_src
+我们用 f 来包装, 因为我们不确定到底使用哪个函数, 直到运行时才能知道.
+然后
+#+begin_src elisp
+  ;; here's our data
+  (setq mylist '(1 2 3))
+
+  ;; normally, when using mapcar, we want first arg quoted
+  (mapcar '1+ mylist)
+
+  ;; here, we don't want first arg quoted
+  (mapcar f mylist)
+#+end_src
+
+** 检测个值是否是 symbol
+#+begin_src elisp
+  (setq x1 123)
+  ;; nil, because x1 is evaluated, and that value is 123, not a symbol
+  (symbolp x1) ;; nil
+  (symbolp 'x1) ;; t
+#+end_src

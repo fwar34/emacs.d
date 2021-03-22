@@ -123,6 +123,8 @@
 
 ;; (define-key evil-normal-state-map (kbd "M-j") 'pyim-toggle-input-ascii)
 (define-key evil-normal-state-map (kbd "C-]") 'counsel-etags-find-tag-at-point)
+(define-key evil-insert-state-map (kbd "C-j") 'evil-next-line)
+(define-key evil-insert-state-map (kbd "C-k") 'evil-previous-line)
 
 ;; evil-surround setting
 (global-evil-surround-mode)
