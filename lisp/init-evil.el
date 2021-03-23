@@ -119,7 +119,7 @@
 (define-key evil-normal-state-map (kbd "ge") 'evil-goto-line)
 (define-key evil-visual-state-map (kbd "gg") 'evil-change-to-previous-state)
 ;; (define-key evil-insert-state-map "///" 'eval-last-sexp)
-(evil-define-key 'normal package-menu-mode-map "s" #'swiper)
+(evil-define-key 'normal package-menu-mode-map "f" #'swiper)
 
 ;; (define-key evil-normal-state-map (kbd "M-j") 'pyim-toggle-input-ascii)
 (define-key evil-normal-state-map (kbd "C-]") 'counsel-etags-find-tag-at-point)

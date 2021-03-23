@@ -59,6 +59,9 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Theme
 (use-package monokai-theme
+  :custom-face
+  (org-block ((t (:extend t))))
+  (org-block-begin-line ((t (:extend t))))
   :ensure t
   :config
   (if (and (equal system-type 'windows-nt) (> emacs-major-version 24))
@@ -71,6 +74,7 @@
         monokai-height-plus-4 1.0)
   ;; If you would like to use variable-pitch-mode you can enable it with:
   (setq monokai-user-variable-pitch t)
+  ;; (custom-set-faces '(hl-line ((t (:extend t)))))
   )
 
 ;; (use-package monokai-pro-theme
@@ -85,6 +89,20 @@
 ;;   :ensure t
 ;;   :config
 ;;   (load-theme 'darkokai t)
+;;   )
+
+;; (use-package zenburn-theme
+;;   :disabled
+;;   :ensure t
+;;   :config
+;;   ;; (load-theme 'zenburn t)
+;;   )
+
+;; (use-package doom-themes
+;;   :disabled
+;;   :ensure t
+;;   :config
+;;   ;; (load-theme 'doom-theme t)
 ;;   )
 
 ;; (use-package monokai-alt-theme
