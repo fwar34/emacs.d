@@ -316,7 +316,9 @@
   ;; dired
   (with-eval-after-load 'dired
     (defhydra hydra-dired (:color blue :hint nil :foreign-keys warn)
-      ("ud" dired-undo "undo in a dired buffer." :column "dired commands")
+      ("ud" dired-undo "undo in a dired buffer." :column "                       dired commands")
+      ("cd" dired-create-directory "create directory")
+      ("cf" dired-create-empty-file "create file")
       ("ha" dired-hide-all "hide all subdirectories, leaving only their header lines.")
       ("q" nil "cancel" :exit t :column nil))
     ;; (define-key dired-mode-map (kbd "M-u dj") 'hydra-dired/body)
@@ -365,12 +367,14 @@
       ("+" (lambda ()
              (interactive)
              (let ((old-face-attribute (face-attribute 'default :height)))
-               (set-face-attribute 'default nil :height (+ old-face-attribute 10)))) "increase font 10" :column "fonts commands")
+               (set-face-attribute 'default nil :height (+ old-face-attribute 10))))
+       "increase font 10" :column "fonts commands")
       ;; 减小字体大小
       ("-" (lambda ()
              (interactive)
              (let ((old-face-attribute (face-attribute 'default :height)))
-               (set-face-attribute 'default nil :height (- old-face-attribute 10)))) "decrease font 10" :column "fonts commands")
+               (set-face-attribute 'default nil :height (- old-face-attribute 10))))
+       "decrease font 10" :column "fonts commands")
       ("q" nil "cancel" :exit t :column nil))
     ;; (define-key magit-mode-map (kbd "M-u ft") 'hydra-font/body)
     (global-set-key (kbd "M-u ft") #'hydra-font/body))
