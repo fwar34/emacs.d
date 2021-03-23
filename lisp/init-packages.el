@@ -61,6 +61,7 @@
 (use-package monokai-theme
   :unless (display-graphic-p)
   :custom-face
+  ;; 可以使用counsel-describe-face来查找face
   (org-block ((t (:extend t))))
   (org-block-begin-line ((t (:extend t))))
   (org-block-end-line ((t (:extend t))))
