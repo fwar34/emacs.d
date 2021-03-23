@@ -1,0 +1,6 @@
+** 容器化环境的日志备份 /NAS/backup/logs/yewu
+
+** awsd环境（内部环境）34.118
+
+** 线下E:
+   audioserver 192.168.35.93
