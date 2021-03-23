@@ -63,6 +63,7 @@
   :custom-face
   (org-block ((t (:extend t))))
   (org-block-begin-line ((t (:extend t))))
+  (org-block-end-line ((t (:extend t))))
   :ensure t
   :config
   (if (and (equal system-type 'windows-nt) (> emacs-major-version 24))
