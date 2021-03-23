@@ -59,6 +59,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Theme
 (use-package monokai-theme
+  :unless (display-graphic-p)
   :custom-face
   (org-block ((t (:extend t))))
   (org-block-begin-line ((t (:extend t))))
@@ -91,12 +92,12 @@
 ;;   (load-theme 'darkokai t)
 ;;   )
 
-;; (use-package zenburn-theme
-;;   :disabled
-;;   :ensure t
-;;   :config
-;;   ;; (load-theme 'zenburn t)
-;;   )
+(use-package zenburn-theme
+  :if (display-graphic-p)
+  :ensure t
+  :config
+  (load-theme 'zenburn t)
+  )
 
 ;; (use-package doom-themes
 ;;   :disabled
