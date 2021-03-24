@@ -499,7 +499,6 @@ URL `http://ergoemacs.org/emacs/elisp_run_current_file.html'"
      (define-key map [?t] #'ivy-yank-word)
      map)
    t))
-(global-set-key (kbd "M-o mm") 'my-transient-yank)
 ;; }}}
 
 (provide 'init-minefunc)
