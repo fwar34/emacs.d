@@ -459,7 +459,7 @@ URL `http://ergoemacs.org/emacs/elisp_run_current_file.html'"
         (forward-char)))
     ret))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
+;; {{{
 (defun my-search-whole-word ()
   (interactive)
   (counsel-ag (my-word-at-point t)))
@@ -471,5 +471,35 @@ URL `http://ergoemacs.org/emacs/elisp_run_current_file.html'"
 (defun my-swiper-forward-word ()
   (interactive)
   (swiper (my-word-at-point)))
+;; }}}
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; {{{
+;; https://emacs-china.org/t/emacs-builtin-mode/11937/63
+;; emacs builtin transient
+(defun transient-winner-undo ()
+  "Transient version of `winner-undo'."
+  (interactive)
+  (winner-mode)
+  (message "Winner: [u]ndo [r]edo")
+  (set-transient-map
+   (let ((map (make-sparse-keymap)))
+     (define-key map [?u] #'winner-undo)
+     (define-key map [?r] #'winner-redo)
+     map)
+   t))
+;; }}}
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; {{{
+(defun my-transient-yank ()
+  (interactive)
+  (message "Yank: [t]ing at point [r]egister")
+  (set-transient-map
+   (let ((map (make-sparse-keymap)))
+     (define-key map [?t] #'isearch-yank-kill)
+     (define-key map [?t] #'ivy-yank-word)
+     map)
+   t))
+(global-set-key (kbd "M-o mm") 'my-transient-yank)
+;; }}}
 
 (provide 'init-minefunc)

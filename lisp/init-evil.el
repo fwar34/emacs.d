@@ -352,7 +352,7 @@
                     "zz" 'save-buffer
                     ;; ;;;;;;;;;;;;;;;;;;;;;;;
                     "fo" 'ff-find-other-file
-                    "mm" 'evil-jump-item
+                    "mm" 'evilmi-jump-items
                     "tt" 'neotree-toggle
                     "yw" 'youdao-dictionary-search-at-point
                     "yy" 'youdao-dictionary-search-at-point+

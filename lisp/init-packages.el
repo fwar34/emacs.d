@@ -533,6 +533,7 @@
   :init
   (setq which-key-allow-imprecise-window-fit t) ; performance
   (setq which-key-separator ":")
+  (setq which-key-show-docstrings t)
   )
 
 (use-package projectile

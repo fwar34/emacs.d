@@ -729,8 +729,62 @@ Use error or user-error to signal a error and exit.
           (message "went on")
           4 ; return 4
           ))))
+#+end_src
 
-(defun my-test-catch ()
-(interactive)
-(dotimes ))
+* interactive
+当参数是 s-expression 时，该表达式会在函数被调用时求值，产生真实的参数。Emacs 
+也提供了很多函数来实现参数的读取，如 read-buffer read-string 等。以下示例是以 不同方式给定的参数，但效果相同:
+#+begin_src elisp
+  (defun bar-1 (arg)
+    (interactive "p")
+    (print arg))
+
+  (defun bar-2 (arg)
+    (interactive
+     (list (prefix-numeric-value current-prefix-arg)))
+    (print arg))
+
+  ;; ------------------------------------------------------------------
+  (defun foo-1 (arg buf)
+    (interactive "P\nbBuffer:")
+    (print arg)
+    (print buf)
+    )
+
+  (defun foo-2 (arg buf)
+    (interactive
+     (list current-prefix-arg (read-buffer "Buffer: " (current-buffer) t)))
+    (print arg)
+    (print buf))
+#+end_src
+
+提示的字符串可以使用 '%' 来包含前一个参数值。例如下面是你读入已经存在的 buffer 名称，然后跟着一个新的名字。
+#+begin_src elisp
+  (defun rename-buffer-1 (old new)
+    (interactive "bBuffer to rename: \nsRename buffer %s to: ")
+    (print old)
+    (print new)
+    )
+#+end_src
+
+** r: 这个是表示这个函数要接受当前选中区域的开始和结束位置。这里 有更多的例子。
+#+begin_src elisp
+  (defun myMark-elisp-region (rStart rEnd)
+    (interactive "r")
+    (message "Region begin at: %d, end at: %d" rStart rEnd)
+    (save-excursion
+      (goto-char rEnd) (insert "\n#+end_src\n")
+      (goto-char rStart) (insert "\n#+begin_src elisp\n")))
+#+end_src
+** 传递一个list
+#+begin_src elisp
+  (defun do-something (x y)
+    (interactive (list "Mary" 22))
+    (message "Name is %s, age is %d" x y))
+
+  (defun do-something-2 (x y)
+    (interactive
+     (list (read-string "Enter your name:")
+           (read-string "Enter your age:")))
+    (message "Name %s, age %s" x y))
 #+end_src
