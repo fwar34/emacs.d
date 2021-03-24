@@ -58,6 +58,7 @@
 (add-hook 'after-init-hook (lambda () (require 'init-misc)))
 (add-hook 'after-init-hook (lambda () (require 'init-keybindings)))
 (add-hook 'after-init-hook (lambda () (require 'init-custom)))
+(add-hook 'after-init-hook (lambda () (require 'init-transient)))
 
 (require 'init-calendar)
 ;; (require 'unicad)

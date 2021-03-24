@@ -105,8 +105,8 @@
     ^^^^^^^^--------------------------------------------------------
     _h_: previous visible heading line     _oa_: org-agenda
     _l_: next visible heading line         _oc_: org-capture
-    _j_: same level forward        
-    _k_: same level backward
+    _j_: same level forward                _sb_: org-shifttab
+    _k_: same level backward               _tb_: org-cycle
     _i_: org-insert-structure-template
     "
       ("h" outline-previous-visible-heading)
@@ -128,7 +128,7 @@
   ;; fwar34
   (defhydra hydra-fwar34 (:columns 3 :exit t :foreign-keys warn)
     "
-            -- MY COMMANDS --
+                       -- MY COMMANDS --
     "
     ("li" fwar34/insert-lisp-commit "lisp commit")
     ("py" fwar34/insert-python "python commit")
@@ -183,7 +183,7 @@
   ;;-------------------------------------------------------------
   ;; ivy and swiper
   (defhydra hydra-ivy-swiper (:color blue :hint nil :foreign-keys warn)
-    ("ir" ivy-resume "ivy-resume" :column "ivy and swiper")
+    ("ir" ivy-resume "ivy-resume" :column "         ivy and swiper")
     ("cf" counsel-describe-function "counsel-describe-function")
     ("cv" counsel-describe-variable "counsel-describe-variable")
     ("cs" counsel-describe-symbol "counsel-describe-symbol")
@@ -195,7 +195,7 @@
     ("cm" counsel-minibuffer-history "counsel-minibuffer-history")
     ("ch" counsel-command-history "counsel-command-history")
     ("q" nil "cancel" :exit t :column nil))
-  (global-set-key (kbd "M-u is") #'hydra-ivy-swiper/body)
+  (global-set-key (kbd "M-u iv") #'hydra-ivy-swiper/body)
 
   ;;-------------------------------------------------------------
   ;; counsel-etags
@@ -205,7 +205,8 @@
     ;; _d_ocumentation  _l_ibrary
     ;; _v_ariable       _u_ser-option
     ;; ^ ^          valu_e_"
-    ("r" counsel-etags-recent-tag "Find tag using tagname from ‘counsel-etags-tag-history’." :column "counsel-etags")
+    ("r" counsel-etags-recent-tag "Find tag using tagname from ‘counsel-etags-tag-history’."
+     :column "                       counsel-etags")
     ("g" counsel-etags-grep "Grep at project root directory or current directory.")
     ("f" counsel-etags-find-tag "Find tag in two step.")
     ("l" counsel-etags-list-tag "List all tags.  Tag is fuzzy and case insensitively matched.")
@@ -256,8 +257,8 @@
   ;; pyim
   (defhydra hydra-pyim (:color blue :hint nil)
     "
-    ^pyim^                  
-    ^^^^^^^^-----------------
+                             ^pyim^                  
+    ^^^^^^^^-------------------------------------------------------
     _si_: set input pyim
     _co_: convert string at point
     _to_: toggle input english
@@ -281,8 +282,8 @@
   (with-eval-after-load 'isearch
     (defhydra hydra-isearch (:color blue :hint nil :foreign-keys warn)
       "
-    ^isearch^                  
-    ^^^^^^^^-----------------
+                            ^isearch^                  
+    ^^^^^^^^--------------------------------------------------------
     _sl_: pull rest of line from buffer into search string.
     "
       ("sl" isearch-yank-line)

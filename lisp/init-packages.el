@@ -311,6 +311,30 @@
    )
   )
 
+(use-package ivy-posframe
+  :ensure t
+  :if (display-graphic-p)
+  :config
+  ;; The following example displays swiper on 20 lines by default for ivy,
+  ;; and displays other functions in posframe at the location specified on 40 lines.
+  ;; (setq ivy-posframe-height-alist '((swiper . 20)
+  ;;                                   (t      . 40)))
+
+  ;; How to show fringe to ivy-posframe
+  (setq ivy-posframe-parameters
+        '((left-fringe . 8)
+          (right-fringe . 8)))
+
+  ;; Per-command mode.
+  ;; Different command can use different display function.
+  (setq ivy-posframe-display-functions-alist
+        '((swiper          . ivy-display-function-fallback)
+          (complete-symbol . ivy-posframe-display)
+          (counsel-M-x     . ivy-posframe-display-at-window-center)
+          (t               . ivy-posframe-display)))
+  (ivy-posframe-mode 1)
+  )
+
 (use-package smex
   ;; I use this package to display history for M-x
   :ensure t
