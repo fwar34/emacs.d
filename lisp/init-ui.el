@@ -155,7 +155,8 @@
   ;; <https://github.com/tumashu/cnfonts>
   (set-face-attribute
    'default nil
-   :font (font-spec :name "Sarasa Mono Slab K"
+   :font (font-spec :name (if (fontp "Sarasa Mono Slab K") "Sarasa Mono Slab K" "nil")
+   ;; :font (font-spec :name "Fira Code"
                     :weight 'normal
                     :slant 'normal
                     :size (if (string= "A12969" system-name) 17 25)))
@@ -163,7 +164,7 @@
     (set-fontset-font
      (frame-parameter nil 'font)
      charset
-     (font-spec :name "nil"
+     (font-spec :name (if (fontp "Microsoft YaHei") "Microsoft YaHei" "nil")
                 :weight 'normal
                 :slant 'normal
                 :size 12.5))))
