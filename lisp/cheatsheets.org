@@ -23,6 +23,7 @@
     6. isearch-describe-bindings可以描述出isearch模式的所有绑定快捷键
     7. 在/或者?(evil-search-forward,evil-search-backward)后isearch-yank-word-or-char(C-w)可以将光标处的word自动填充到搜索栏
     8. 在/或者?(evil-search-forward,evil-search-backward)后isearch-yank-kill(C-y)可以将kill-ring的最后个word自动填充到搜索栏
+    9. (list-colors-display)可以显示颜色
 
 *** *elisp相关*
     1. with-eval-after-load和eval-after-load的区别

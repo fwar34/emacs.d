@@ -1209,11 +1209,12 @@
   (defun my-god-mode-update-modeline ()
     (let ((limited-colors-p (> 257 (length (defined-colors)))))
       (cond (god-local-mode (progn
-                              (set-face-background 'mode-line (if limited-colors-p "red" "#e9e2cb"))
-                              (set-face-background 'mode-line-inactive (if limited-colors-p "red" "#e9e2cb"))))
+                              ;; (set-face-background 'mode-line (if limited-colors-p "red" "#e9e2cb"))
+                              (set-face-background 'mode-line (if limited-colors-p "red" "orange red"))
+                              (set-face-background 'mode-line-inactive (if limited-colors-p "red" "orange red"))))
             (t (progn
-                 (set-face-background 'mode-line (if limited-colors-p "black" "#0a2832"))
-                 (set-face-background 'mode-line-inactive (if limited-colors-p "black" "#0a2832")))))))
+                 (set-face-background 'mode-line (if limited-colors-p "black" "#2B2B2B"))
+                 (set-face-background 'mode-line-inactive (if limited-colors-p "black" "#2B2B2B")))))))
 
   (add-hook 'god-mode-enabled-hook #'my-god-mode-update-modeline)
   (add-hook 'god-mode-disabled-hook #'my-god-mode-update-modeline)
