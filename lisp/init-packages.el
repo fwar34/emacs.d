@@ -1220,7 +1220,12 @@
   (add-hook 'god-mode-disabled-hook #'my-god-mode-update-modeline)
   
   ;; For running occasional and single commands in God mode
-  (evil-define-key 'normal global-map "gm" 'god-execute-with-current-bindings)
+  ;; (evil-define-key 'normal global-map "gm" (lambda (&optional called-interactively) (interactive "d")
+  ;;                                            (if god-local-mode
+  ;;                                                (keyboard-quit)
+  ;;                                              (god-execute-with-current-bindings called-interactively))))
+  (evil-define-key 'normal global-map "gm" #'god-execute-with-current-bindings)
+  
   )
 
 (provide 'init-packages)
