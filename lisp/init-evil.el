@@ -105,6 +105,7 @@
 (define-key minibuffer-local-must-match-map [escape] 'minibuffer-keyboard-quit)
 (define-key minibuffer-local-isearch-map [escape] 'minibuffer-keyboard-quit)
 
+(evil-define-key 'normal global-map "gs" 'evil-ace-jump-char-mode)
 ;; initial apropos-mode to evil-normal-state
 ;; (dolist (p '((apropos-mode . normal)
 ;;              (browse-kill-ring-mode . normal)))

@@ -350,6 +350,9 @@ DEFAULT-TEXT."
 ;; (set-face-background 'modeline "#4466aa")
 ;; (set-face-background 'modeline-inactive "#99aaff")
 ;; (set-face-background 'fringe "#809088")
+(unless (display-graphic-p)
+  (set-face-background 'mode-line "black")
+  (set-face-background 'mode-line-inactive "black"))
 
 ;; Here 's how I get a box around the active mode-line :
 ;; (custom-set-faces '(mode-line ((t (:box (:line-width 2 :color "red"))))))

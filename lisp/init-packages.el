@@ -1201,4 +1201,25 @@
   (add-hook 'clojure-mode-hook #'inf-clojure-minor-mode)
   )
 
+(use-package god-mode
+  :ensure t
+  :after evil
+  :config
+  ;; You can change the entire modeline's foreground and background to indicate whether God mode is active as follows:
+  (defun my-god-mode-update-modeline ()
+    (let ((limited-colors-p (> 257 (length (defined-colors)))))
+      (cond (god-local-mode (progn
+                              (set-face-background 'mode-line (if limited-colors-p "red" "#e9e2cb"))
+                              (set-face-background 'mode-line-inactive (if limited-colors-p "red" "#e9e2cb"))))
+            (t (progn
+                 (set-face-background 'mode-line (if limited-colors-p "black" "#0a2832"))
+                 (set-face-background 'mode-line-inactive (if limited-colors-p "black" "#0a2832")))))))
+
+  (add-hook 'god-mode-enabled-hook #'my-god-mode-update-modeline)
+  (add-hook 'god-mode-disabled-hook #'my-god-mode-update-modeline)
+  
+  ;; For running occasional and single commands in God mode
+  (evil-define-key 'normal global-map "gm" 'god-execute-with-current-bindings)
+  )
+
 (provide 'init-packages)
