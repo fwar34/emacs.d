@@ -234,7 +234,6 @@
   (setq evil-want-Y-yank-to-eol t)
   ;; (setq evil-no-display t)              ;; not display evil state in echo area
   :config
-
   (define-key evil-ex-search-keymap (kbd ";g") #'keyboard-quit)
   ;; for quit shell-command output buffer
   ;; (defun my-quit-window (&rest _)
@@ -245,6 +244,11 @@
   ;;   (with-current-buffer "*Shell Command Output*"
   ;;     ;; (evil-local-set-key 'normal (kbd "q") #'quit-window)))
   ;;     (evil-local-set-key 'normal (kbd "q") #'kill-this-buffer)))
+  (evil-ex-define-cmd "q[uit]" 'kill-this-buffer)
+  :custom
+  ;; https://emacs-china.org/t/evil-insert-state-or-evil-emacs-state/16710/6?u=fwar34
+  (evil-ex-interactive-search-highlight 'selected-window)
+  (evil-want-C-g-bindings t)
   )
 
 (use-package undo-tree

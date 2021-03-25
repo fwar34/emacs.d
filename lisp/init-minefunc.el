@@ -496,7 +496,7 @@ URL `http://ergoemacs.org/emacs/elisp_run_current_file.html'"
   (set-transient-map
    (let ((map (make-sparse-keymap)))
      (define-key map [?t] #'isearch-yank-kill)
-     (define-key map [?t] #'ivy-yank-word)
+     (define-key map [?r] #'ivy-yank-word)
      map)
    t))
 ;; }}}
