@@ -20,7 +20,6 @@
 ;; minefunc org template
 (global-set-key (kbd "M-m oc") 'org-capture)
 
-(global-set-key (kbd "M-o mm") 'my-transient-yank)
 ;; http://ergoemacs.org/emacs/emacs_dired_tips.html
 ;; (require 'dired )
 ;; (define-key dired-mode-map (kbd "RET") 'dired-find-alternate-file) ; was dired-advertised-find-file

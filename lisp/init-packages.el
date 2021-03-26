@@ -313,10 +313,38 @@
         ivy-count-format "%d/%d ")
   (ivy-mode 1) ;; M-j ivy-yank-word，将光标的word读入minibuffer，很像vim中的功能
                ;; C-y yank，可以在minibuffer中粘贴
+  ;; 默认就是fancy
+  ;; (setq ivy-display-style 'fancy)
+  (define-key read-expression-map (kbd "C-r") 'counsel-expression-history)
   (setq enable-recursive-minibuffers t)
   (define-key minibuffer-local-map (kbd "C-r") 'counsel-minibuffer-history)
   (global-set-key (kbd "C-h f") #'counsel-describe-function)
   (global-set-key (kbd "C-h v") #'counsel-describe-variable)
+
+  ;; (setq counsel-fzf-cmd "fd -I --exclude={site-lisp,etc/snippets,themes,/eln-cache,/var,/elpa,quelpa/,/url,/auto-save-list,.cache,doc/} --type f | fzf -f \"%s\" --algo=v1")
+
+  ;; 默认的 rg 配置
+  ;; (setq counsel-rg-base-command "rg -M 240 --with-filename --no-heading --line-number --color never %s")
+  ;; (setq counsel-rg-base-command '("rg"
+  ;;                                 "-M" "240"
+  ;;                                 "--with-filename" "--no-heading" "--line-number" "--color"
+  ;;                                 "never" "%s"
+  ;;                                 "-g" "!package-config.org"
+  ;;                                 "-g" "!TAGS"
+  ;;                                 "-g" "!tags"
+  ;;                                 "-g" "!site-lisp/**"
+  ;;                                 "-g" "!doc/**"
+  ;;                                 "-g" "!themes/**"
+  ;;                                 "-g" "!mysnippets/**"
+  ;;                                 "-g" "!debian/**"
+  ;;                                 "-g" "!auxdir/**"
+  ;;                                 "-g" "!m4/**"
+  ;;                                 ))
+
+  ;; 默认的ag配置
+  ;; (setq counsel-ag-base-command '("ag"
+  ;;                                 "--vimgrep"
+  ;;                                 "%s"))
 
   (general-define-key
    :keymaps 'ivy-minibuffer-map
@@ -327,6 +355,7 @@
   )
 
 (use-package ivy-posframe
+  :disabled
   :ensure t
   :if (display-graphic-p)
   :config
@@ -558,6 +587,7 @@
   :config
   (define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
   (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+  (setq projectile-completion-system 'ivy)
   )
 
 ;; https://www.emacswiki.org/emacs/NeoTree
@@ -827,12 +857,6 @@
          ("\\.md\\'" . markdown-mode)
          ("\\.markdown\\'" . markdown-mode))
   :init (setq markdown-command "multimarkdown")
-  )
-
-(use-package ace-window
-  :disabled
-  :ensure t
-  :defer t
   )
 
 (use-package rainbow-identifiers

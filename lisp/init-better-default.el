@@ -25,7 +25,6 @@
 ;; 解决文件目录的中文名乱码
 (setq-default pathname-coding-system 'utf-8-unix)
 (set-file-name-coding-system 'utf-8-unix)
-(prefer-coding-system 'gb18030-unix)
 (prefer-coding-system 'utf-8-unix)
 
 (when (eq system-type 'windows-nt)
@@ -33,6 +32,23 @@
   (set-next-selection-coding-system 'gbk-dos)
   (set-clipboard-coding-system 'gbk-dos))
 
+;; 自动刷新被修改过的文件
+(global-auto-revert-mode +1)
+
+;; 随时重新加载发生修改过的文件
+(setq load-prefer-newer t)
+
+;; 关闭GUI功能
+(setq use-file-dialog nil
+      use-dialog-box nil
+      inhibit-startup-screen t
+      inhibit-startup-message t)
+
+;; 关闭字体缓存gc
+(setq inhibit-compacting-font-caches nil)
+
+;; 最大单行字符数量
+(setq-default fill-column 80)
 ;; -----------------------------------------------------------------
 (use-package recentf
   :after evil
