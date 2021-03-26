@@ -1241,6 +1241,8 @@
   ;;                                              (god-execute-with-current-bindings called-interactively))))
   ;; (evil-define-key 'normal global-map "gm" #'god-execute-with-current-bindings)
   (evil-define-key 'normal global-map "," #'god-execute-with-current-bindings)
+  (define-key god-local-mode-map (kbd ".") #'repeat)
+  (define-key god-local-mode-map (kbd ",") #'keyboard-quit)
   )
 
 (provide 'init-packages)
