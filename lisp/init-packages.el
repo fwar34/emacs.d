@@ -8,24 +8,35 @@
   ;;                          ("melpa" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/")))
   (setq package-archives '(("gnu" . "http://mirrors.ustc.edu.cn/elpa/gnu/")
                            ("melpa" . "http://mirrors.ustc.edu.cn/elpa/melpa/")
-                           ("melpa-stable" . "http://mirrors.ustc.edu.cn/elpa/melpa-stable/")
+                           ;; ("melpa-stable" . "http://mirrors.ustc.edu.cn/elpa/melpa-stable/")
                            ("org" . "http://mirrors.ustc.edu.cn/elpa/org/")))
   )
 
-(defun require-package (package)
-  "refresh package archives, check package presence and install if it's not installed"
-  (if (null (require package nil t))
-      (progn (let* ((ARCHIVES (if (null package-archive-contents)
-                                  (progn (package-refresh-contents)
-                                         package-archive-contents)
-                                package-archive-contents))
-                    (AVAIL (assoc package ARCHIVES)))
-               (if AVAIL
-                   (package-install package)))
-             (require package))))
+;; (defun require-package (package)
+;;   "refresh package archives, check package presence and install if it's not installed"
+;;   (if (null (require package nil t))
+;;       (progn (let* ((ARCHIVES (if (null package-archive-contents)
+;;                                   (progn (package-refresh-contents)
+;;                                          package-archive-contents)
+;;                                 package-archive-contents))
+;;                     (AVAIL (assoc package ARCHIVES)))
+;;                (if AVAIL
+;;                    (package-install package)))
+;;              (require package))))
 
-;; use-package
-(require-package 'use-package)
+;; ;; use-package
+;; (require-package 'use-package)
+
+;; Initialize packages
+(unless (bound-and-true-p package--initialized) ; To avoid warnings in 27
+  (setq package-enable-at-startup nil)          ; To prevent initializing twice
+  (package-initialize))
+
+;; Setup `use-package'
+(unless (package-installed-p 'use-package)
+  (package-refresh-contents)
+  (package-install 'use-package))
+
 (require 'use-package)
 ;; (setq use-package-always-ensure t)
 
