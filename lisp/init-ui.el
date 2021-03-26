@@ -159,7 +159,7 @@
    ;; :font (font-spec :name "Fira Code"
                     :weight 'normal
                     :slant 'normal
-                    :size (if (string= "A12969" system-name) 17 25)))
+                    :size (if (string= "A12969" system-name) 24 25)))
   (dolist (charset '(kana han symbol cjk-misc bopomofo))
     (set-fontset-font
      (frame-parameter nil 'font)
