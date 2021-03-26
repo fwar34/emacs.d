@@ -504,14 +504,14 @@
   :after evil
   )
 
-;; (use-package evil-magit
-;;   :ensure t
-;;   :disabled
-;;   :after (magit evil)
-;;   :config
-;;   ;; https://www.helplib.com/GitHub/article_131559
-;;   ;; (evil-define-key evil-magit-state magit-mode-map "?"'evil-search-backward)
-;;   )
+(use-package evil-magit
+  :ensure t
+  ;; :disabled
+  :after (magit evil)
+  :config
+  ;; https://www.helplib.com/GitHub/article_131559
+  ;; (evil-define-key evil-magit-state magit-mode-map "?"'evil-search-backward)
+  )
 
 ;; yasnippet setting
 ;; (use-package yasnippet
@@ -1066,10 +1066,10 @@
   )
 
 (use-package diff-hl
-  :disabled
+  ;; :disabled
   :ensure t
   :after evil
-  :if (not (display-graphic-p))
+  ;; :if (not (display-graphic-p))
   :config
   (global-diff-hl-mode)
   (diff-hl-margin-mode) 
@@ -1199,7 +1199,7 @@
 ;; https://github.com/purcell/disable-mouse
 (use-package disable-mouse
   :ensure t
-  :if window-system
+  :if (and (display-graphic-p) (not (string-equal "A12969" system-name)))
   :config
   (global-disable-mouse-mode)
   (with-eval-after-load 'evil
