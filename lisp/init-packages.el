@@ -1228,8 +1228,8 @@
   ;;                                            (if god-local-mode
   ;;                                                (keyboard-quit)
   ;;                                              (god-execute-with-current-bindings called-interactively))))
-  (evil-define-key 'normal global-map "gm" #'god-execute-with-current-bindings)
-  
+  ;; (evil-define-key 'normal global-map "gm" #'god-execute-with-current-bindings)
+  (evil-define-key 'normal global-map "," #'god-execute-with-current-bindings)
   )
 
 (provide 'init-packages)
