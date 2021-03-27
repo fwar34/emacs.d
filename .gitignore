@@ -45,3 +45,4 @@ irony/
 irony/*
 request/
 .emacs.desktop*
+transient/*
