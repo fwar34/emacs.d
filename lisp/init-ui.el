@@ -7,13 +7,16 @@
   ;; (set-default 'cursor-type 'bar)
   ;; (setq cursor-type 'bar)
   (setq cursor-type 'box)
-  ;; 设置窗口位置为屏库左上角(0,0)
-  ;; (set-frame-position (selected-frame) 200 50)
-  (set-frame-position (selected-frame) 0 0)
-  ;; 设置宽和高
-  ;; (set-frame-width (selected-frame) 100)
-  ;; (set-frame-height (selected-frame) 35)
-  (add-to-list 'default-frame-alist '(fullscreen . maximized))
+  (if (string-equal "A12969" system-name)
+      ;; 使用(print (current-frame-configuration))来确认大小
+      (progn
+        (set-frame-position (selected-frame) 350 0)
+        (set-frame-width (selected-frame) 150)
+        (set-frame-height (selected-frame) 44)
+        )
+    (progn
+      (set-frame-position (selected-frame) 0 0)
+      (add-to-list 'default-frame-alist '(fullscreen . maximized))))
 
   ;; font setting start============================================================================================
   ;; http://zhuoqiang.me/torture-emacs.html同样在YoudaoNote中保存
