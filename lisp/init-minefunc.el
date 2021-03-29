@@ -460,13 +460,13 @@ URL `http://ergoemacs.org/emacs/elisp_run_current_file.html'"
     ret))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; {{{
-(defun my-search-whole-word ()
+(defun my-search-whole-word (fn)
   (interactive)
-  (counsel-ag (my-word-at-point t)))
+  (funcall fn (my-word-at-point t)))
 
-(defun my-search-forward-word ()
+(defun my-search-forward-word (fn)
   (interactive)
-  (counsel-ag (my-word-at-point)))
+  (funcall fn (my-word-at-point)))
 
 (defun my-swiper-forward-word ()
   (interactive)

@@ -342,9 +342,15 @@
   ;;                                 ))
 
   ;; 默认的ag配置
-  ;; (setq counsel-ag-base-command '("ag"
-  ;;                                 "--vimgrep"
-  ;;                                 "%s"))
+  (setq counsel-ag-base-command '("ag"
+                                  "--vimgrep"
+                                  "%s"
+                                  "--smart-case"
+                                  "--ignore" "tags"
+                                  "--ignore" "TAGS"
+                                  "--ignore" "Makefile.*"
+                                  "--ignore" "Makefile"
+                                  "--ignore" "*.lo"))
 
   (general-define-key
    :keymaps 'ivy-minibuffer-map

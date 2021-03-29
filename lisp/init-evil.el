@@ -315,8 +315,11 @@
                     ;; "qg" 'counsel-etags-grep
                     ;; "dd" 'counsel-etags-grep-symbol-at-point
                     "fa" 'counsel-ag
-                    "fw" 'my-search-whole-word
-                    "fs" 'my-search-forward-word
+                    "fw" (lambda () (interactive) (my-search-whole-word 'counsel-ag))
+                    "fs" (lambda () (interactive) (my-search-forward-word 'counsel-ag))
+                    "rg" 'counsel-rg
+                    "rw" (lambda () (interactive) (my-search-whole-word 'counsel-rg))
+                    "rs" (lambda () (interactive) (my-search-forward-word 'counsel-rg))
                     ;; "ha" 'helm-ag
                     "fe" 'end-of-defun
                     "fm" 'mark-defun
