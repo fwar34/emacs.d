@@ -506,7 +506,7 @@
 
 (use-package evil-magit
   :ensure t
-  ;; :disabled
+  :disabled
   :after (magit evil)
   :config
   ;; https://www.helplib.com/GitHub/article_131559
@@ -1066,7 +1066,7 @@
   )
 
 (use-package diff-hl
-  ;; :disabled
+  :disabled
   :ensure t
   :after evil
   ;; :if (not (display-graphic-p))
