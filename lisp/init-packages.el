@@ -1264,9 +1264,4 @@
   (define-key god-local-mode-map (kbd ",") #'keyboard-quit)
   )
 
-(use-package unicad
-  :ensure t
-  :config
-  (unicad-mode))
-
 (provide 'init-packages)

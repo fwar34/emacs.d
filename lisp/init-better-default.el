@@ -27,10 +27,30 @@
 (set-file-name-coding-system 'utf-8-unix)
 (prefer-coding-system 'utf-8-unix)
 
-(when (eq system-type 'windows-nt)
-  (set-selection-coding-system 'gbk-dos)
-  (set-next-selection-coding-system 'gbk-dos)
-  (set-clipboard-coding-system 'gbk-dos))
+;; 自动检测文件编码
+;; https://emacs-china.org/t/emacs/7814/7
+(use-package unicad
+  :ensure t
+  :config
+  (unicad-mode))
+
+;; -----------------------------------------------------------------------------
+;; https://emacs-china.org/t/emacs/7814/7
+;; 今天解决了一个困扰了许久的问题，那就是emacs的文件编码问题，个人一直以来都是默认使用utf-8来编辑文件，但是总会遇到别的同事使用gbk来编码，导致查看别人写的代码时显示乱码，之前遇到这种问题，一般都是 C-x ret r revert编码成gbk，很不方便。
+;; 还有一段时间是直接(set-language-environment "Chinese-GB18030")设置编码环境到gbk ，这样看别人的文件是没问题了，但是自己的文件也变成gbk了，更糟糕的是，一些输出会变成乱码，比如 mu4e-view模式下转换邮件到浏览器查看，就会变成乱码。
+;; 目前找到的解决办法 设置emacs 的prefer-coding-system
+;; ;; set coding config, last is highest priority.
+;; ;; https://www.gnu.org/software/emacs/manual/html_node/emacs/Recognize-Coding.html#Recognize-Coding
+;; (prefer-coding-system 'cp950)
+;; (prefer-coding-system 'gb2312)
+;; (prefer-coding-system 'cp936)
+;; (prefer-coding-system 'gb18030)
+;; (prefer-coding-system 'utf-16)
+;; (prefer-coding-system 'utf-8-dos)
+;; (prefer-coding-system 'utf-8-unix)
+;; 这样emacs会按照顺序优先编码，需要注意的是，放在最后的会被最优先选择。上面的设置就是最优先选择utf-8-unix
+;; 这样设置在一些场景下还有一些不够智能，比如magit 看 log信息，会出现 log现实中文正常，进入查看修改内容如果遇到中文会变成乱码
+;; -----------------------------------------------------------------------------
 
 ;; 自动刷新被修改过的文件
 (global-auto-revert-mode +1)
