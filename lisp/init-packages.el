@@ -341,7 +341,6 @@
   ;;                                 "-g" "!m4/**"
   ;;                                 ))
 
-  ;; 默认的ag配置
   (setq counsel-ag-base-command '("ag"
                                   "--vimgrep"
                                   "%s"

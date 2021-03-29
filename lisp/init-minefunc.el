@@ -1,3 +1,4 @@
+
 ;; -*- coding: utf-8; lexical-binding: t; -*-
 ;; 快速打开配置文件
 (define-namespace fwar34-)
@@ -499,6 +500,19 @@ URL `http://ergoemacs.org/emacs/elisp_run_current_file.html'"
      (define-key map [?r] #'ivy-yank-word)
      map)
    t))
+;; }}}
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; {{{
+(defun my-vc-operator ()
+  (interactive)
+  (if (string-match "Git" vc-mode)
+      (let ((branch (substring-no-properties vc-mode 5)))
+        (message "branch %s" branch)
+        ;; (vc-pull (concat "origin " branch))
+        ;; (start-process "git pull" (concat "git pull origin " branch))
+        )
+    (vc-pull)
+    ))
 ;; }}}
 
 (provide 'init-minefunc)

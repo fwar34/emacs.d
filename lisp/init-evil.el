@@ -578,7 +578,8 @@
                     ;;            (git-gutter:previous-hunk (line-number-at-pos))
                     ;;          (diff-hl-previous-hunk)))
                     "c=" 'vc-diff
-                    "cl" 'vc-pull
+                    ;; "cl" 'vc-pull
+                    "cl" 'my-vc-operator
                     "cu" 'vc-push
                     ;; liang.feng
                     ;; "bs" '(lambda () (interactive) (goto-edge-by-comparing-font-face -1))
