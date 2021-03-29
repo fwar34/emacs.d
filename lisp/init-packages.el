@@ -1161,28 +1161,23 @@
  
   (defun my-multi-term ()
     (interactive)
-    (if (string-match "*terminal<[0-9]\\{1,2\\}>*" (buffer-name))
-        (evil-buffer nil)
-      (let ((index 1)
-            (term-buffer))
-        (catch 'break
-          (while (<= index 10)
-            (setq target-buffer (format "*%s<%s>*" multi-term-buffer-name index))
-            (when (buffer-live-p (get-buffer target-buffer))
-              (setq term-buffer target-buffer)
-              (throw 'break nil))
-            (setq index (1+ index))))
-        ;; (if term-buffer
-        ;;     (progn
-        ;;       (setq orig-default-directory default-directory)
-        ;;       (switch-to-buffer term-buffer)
-        ;;       (term-send-raw-string (concat "cd " orig-default-directory "\C-m"))
-        ;;       )
-        ;;   (multi-term))
-        (if term-buffer
-            (switch-to-buffer term-buffer)
-          (multi-term))
-        ))
+    (if (string-equal "w32" window-system)
+        (eshell)
+      (if (string-match "*terminal<[0-9]\\{1,2\\}>*" (buffer-name))
+          (evil-buffer nil)
+        (let ((index 1)
+              (term-buffer))
+          (catch 'break
+            (while (<= index 10)
+              (setq target-buffer (format "*%s<%s>*" multi-term-buffer-name index))
+              (when (buffer-live-p (get-buffer target-buffer))
+                (setq term-buffer target-buffer)
+                (throw 'break nil))
+              (setq index (1+ index))))
+          (if term-buffer
+              (switch-to-buffer term-buffer)
+            (multi-term))
+          )))
     )
 
 ;; (with-parsed-tramp-file-name default-directory path

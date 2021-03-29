@@ -123,6 +123,9 @@
   (evil-set-initial-state 'eshell-mode 'emacs)
   (add-hook 'eshell-mode-hook (lambda ()
                                 (evil-local-set-key 'emacs (kbd "C-w") #'evil-delete-backward-word)))
+
+  ;; (custom-set-variables
+  ;;  '(eshell-visual-options (quote (("git" "log" "diff" "show")))))
   
   ;; (add-hook 'eshell-mode-hook 'company-mode)
   :bind
