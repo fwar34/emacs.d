@@ -221,6 +221,9 @@ DEFAULT-TEXT."
                       'help-echo "Buffer is read-only"))
             "]"))))
 
+(setq my-persp-mode-line
+      '(:eval (propertize (mapconcat #'substring-no-properties (persp-mode-line) "") 'face 'font-lock-evil-emacs-face)))
+
 (setq flycheck-status-mode-line
   (quote (:eval (pcase flycheck-last-status-change
           (`finished
@@ -276,6 +279,8 @@ DEFAULT-TEXT."
        "["
        window-number
        "]"
+       " "
+       my-persp-mode-line
        " %1"
        buffer-name-mode-line
        ;; "%1 "

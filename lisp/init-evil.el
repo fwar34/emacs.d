@@ -347,7 +347,7 @@
                     ;; "bk" 'kill-buffer
                     ;; "wk" 'kill-buffer-and-window
                     ;; "kb" 'kill-buffer
-                    "kb" 'persp-kill-buffer
+                    "kb" 'persp-kill-buffer*
                     "kw" 'kill-buffer-and-window
                     ;; "bs" 'switch-to-buffer
                     ;; "bs" 'counsel-switch-buffer

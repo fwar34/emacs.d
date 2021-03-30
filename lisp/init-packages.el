@@ -1297,6 +1297,8 @@
   (("C-x C-b" . persp-ivy-switch-buffer) ; or use a nicer switcher, see below
    ("C-x b" . persp-switch-to-buffer*)
    ("C-x k" . persp-kill-buffer*)
+   ([remap switch-to-buffer] . persp-switch-to-buffer*)
+   ([remap kill-buffer] . persp-kill-buffer*)
    )
   :custom
   ;; (persp-interactive-completion-function 'ivy-completing-read)
@@ -1337,8 +1339,6 @@
 
 (use-package info-colors
   :ensure t
-  ;; :hook
-  ;; ('Info-selection . 'info-colors-fontify-node)
   :config
   (add-hook 'Info-selection-hook 'info-colors-fontify-node))
 
