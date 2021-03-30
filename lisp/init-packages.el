@@ -482,37 +482,9 @@
   :defer t
   )
 
-;; (use-package ack
-;;   :disabled
-;;   :ensure t
-;;   :defer t
-;;   :config
-;;   ;; (add-hook 'ack-minibuffer-setup-hook 'ack-skel-vc-grep t)
-;;   ;; (add-hook 'ack-minibuffer-setup-hook 'ack-yank-symbol-at-point t)
-;;   (evil-define-key 'normal ack-mode-map "q"
-;;     (lambda ()
-;;       (interactive)
-;;       (if (= (length (window-list-1)) 1)
-;;           (quit-window)
-;;         (delete-window))))
-;;   (if (fboundp 'make-thread)
-;;       (add-hook 'ack-mode-hook
-;;                 (lambda ()
-;;                   (make-thread (lambda ()
-;;                                  (while (not (get-buffer-window "*ack*"))
-;;                                    (sleep-for 0 100))
-;;                                  (select-window (get-buffer-window "*ack*")))))))
-;;   )
-
 (use-package magit
   :ensure t
   :after evil
-  )
-
-(use-package evil-magit
-  :ensure t
-  :disabled
-  :after (magit evil)
   :config
   ;; https://www.helplib.com/GitHub/article_131559
   ;; (evil-define-key evil-magit-state magit-mode-map "?"'evil-search-backward)
@@ -1301,7 +1273,7 @@
    ([remap kill-buffer] . persp-kill-buffer*)
    )
   :custom
-  ;; (persp-interactive-completion-function 'ivy-completing-read)
+  (persp-interactive-completion-function 'ivy-completing-read)
   (persp-sort 'created)
   (persp-mode-prefix-key (kbd "C-x C-i"))
   (persp-state-default-file "~/.emacs.d/perspective.save")
@@ -1325,8 +1297,8 @@
   ;; Display workgroups in Mode Line?
   (setq wg-mode-line-display-on t)          ; Default: (not (featurep 'powerline))
   (setq wg-flag-modified t)                 ; Display modified flags as well
-  (setq wg-mode-line-decor-left-brace "["
-        wg-mode-line-decor-right-brace "]"  ; how to surround it
+  (setq wg-mode-line-decor-left-brace "<"
+        wg-mode-line-decor-right-brace ">"  ; how to surround it
         wg-mode-line-decor-divider ":")
 
   ;; ;; What to do on Emacs exit / workgroups-mode exit?

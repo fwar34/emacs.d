@@ -517,7 +517,8 @@
                     ;; "mr" (lambda () (interactive) (my-commands-shell "make rebuild"))
                     ;; "mc" (lambda () (interactive) (shell-command "make stcflash"))
                     "bc" (lambda () (interactive) (my-commands-shell "make clean"))
-                    "bs" (lambda () (interactive) (my-commands-shell "make space"))
+                    ;; "bs" (lambda () (interactive) (my-commands-shell "make space"))
+                    "bs" 'persp-switch-to-buffer
                     ;; 
                     ;; "mj" (lambda () (interactive) (my-commands-shell "make -j 5"))
                     "br" (lambda () (interactive) (my-commands-shell "make clean; make -j 5"))
