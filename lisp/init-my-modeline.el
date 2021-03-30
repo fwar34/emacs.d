@@ -222,7 +222,7 @@ DEFAULT-TEXT."
             "]"))))
 
 (setq my-persp-mode-line
-      '(:eval (propertize (mapconcat #'substring-no-properties (persp-mode-line) "") 'face 'font-lock-evil-emacs-face)))
+      '(:eval (propertize (mapconcat #'substring-no-properties (persp-mode-line) "") 'face 'font-lock-preprocessor-face)))
 
 (setq flycheck-status-mode-line
   (quote (:eval (pcase flycheck-last-status-change
