@@ -72,6 +72,7 @@
 ;; https://github.com/redguardtoo/company-ctags
 (use-package company-ctags
   :ensure t
+  :after company
   :config
   (setq company-ctags-extra-tags-files '("$HOME/TAGS" "/usr/include/c++/TAGS"))
   (company-ctags-auto-setup)
@@ -88,10 +89,17 @@
            (company-ctags-fuzzy-match-p t))
       (counsel-company)))
 
+  ;; In insert mode, press "rr" in 0.2 second to trigger my-counsel-company
+  (require 'general)
+  (general-define-key
+   :states 'insert
+   "r" (general-key-dispatch 'self-insert-command
+         :timeout 0.2
+         "r" 'my-counsel-company))
+
   ;; Use rusty-tags to generate tags file for Rust programming language.
   ;; Add below code into ~/.emacs,
-  (setq company-ctags-tags-file-name "rusty-tags.emacs")
-  )
+  (setq company-ctags-tags-file-name "rusty-tags.emacs"))
 
 ;; @see https://github.com/company-mode/company-mode/issues/348
 (use-package company-statistics
