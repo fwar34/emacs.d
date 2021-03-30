@@ -4,6 +4,9 @@
   :ensure t
   :custom
   (company-minimum-prefix-length 1)
+  :bind
+  (:map company-active-map
+   ("C-w" . evil-delete-backward-word))
   :config
   (global-company-mode)
   ;; (add-hook 'after-init-hook 'global-company-mode)
@@ -76,26 +79,6 @@
   :config
   (setq company-ctags-extra-tags-files '("$HOME/TAGS" "/usr/include/c++/TAGS"))
   (company-ctags-auto-setup)
-
-  ;; Set company-ctags-fuzzy-match-p to fuzzy match the candidates.
-  ;; The input could match any part of the candidate instead of the beginning of the candidate.
-  ;; Here is example how to combine counsel with company-ctags,
-  (require 'counsel)
-  (defun my-counsel-company ()
-    "Input code from company backend using fuzzy matching."
-    (interactive)
-    (company-abort)
-    (let* ((company-backends '(company-ctags))
-           (company-ctags-fuzzy-match-p t))
-      (counsel-company)))
-
-  ;; In insert mode, press "rr" in 0.2 second to trigger my-counsel-company
-  (require 'general)
-  (general-define-key
-   :states 'insert
-   "r" (general-key-dispatch 'self-insert-command
-         :timeout 0.2
-         "r" 'my-counsel-company))
 
   ;; Use rusty-tags to generate tags file for Rust programming language.
   ;; Add below code into ~/.emacs,
