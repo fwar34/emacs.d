@@ -2,6 +2,8 @@
 
 (use-package company
   :ensure t
+  :custom
+  (company-minimum-prefix-length 1)
   :config
   (global-company-mode)
   ;; (add-hook 'after-init-hook 'global-company-mode)

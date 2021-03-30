@@ -503,16 +503,16 @@ URL `http://ergoemacs.org/emacs/elisp_run_current_file.html'"
 ;; }}}
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; {{{
-(defun my-vc-operator ()
-  (interactive)
-  (if (string-match "Git" vc-mode)
-      (let ((branch (substring-no-properties vc-mode 5)))
-        (message "branch %s" branch)
-        ;; (vc-pull (concat "origin " branch))
-        ;; (start-process "git pull" (concat "git pull origin " branch))
-        )
-    (vc-pull)
-    ))
+;; (defun my-vc-operator ()
+;;   (interactive)
+;;   (if (string-match "Git" vc-mode)
+;;       (let ((branch (substring-no-properties vc-mode 5)))
+;;         (message "branch %s" branch)
+;;         ;; (vc-pull (concat "origin " branch))
+;;         ;; (start-process "git pull" (concat "git pull origin " branch))
+;;         )
+;;     (vc-pull)
+;;     ))
 ;; }}}
 
 (provide 'init-minefunc)

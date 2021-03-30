@@ -46,3 +46,6 @@ irony/*
 request/
 .emacs.desktop*
 transient/*
+.emacs_workgroups~
+.emacs_workgroups
+perspective.save

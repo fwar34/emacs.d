@@ -604,7 +604,8 @@
   ;; Note: For users who want to use the icons theme. Pls make sure you have
   ;; installed the all-the-icons package and its fonts.
   ;; (setq neo-theme (if (display-graphic-p) 'icons 'arrow))
-  (setq neo-theme (when (display-graphic-p) 'icons))
+  ;; (setq neo-theme (when (display-graphic-p) 'icons))
+  (setq neo-theme 'arrow)
   ;; Every time when the neotree window is opened, let it find current file and jump to node.
   (setq neo-smart-open t)
   ;; When running ‘projectile-switch-project’ (C-c p p), ‘neotree’ will change root automatically.
@@ -1268,5 +1269,91 @@
   (define-key god-local-mode-map (kbd ".") #'repeat)
   (define-key god-local-mode-map (kbd ",") #'keyboard-quit)
   )
+
+(use-package indent-guide
+  :ensure t
+  :hook
+  (after-init . indent-guide-global-mode))
+
+(use-package caps-lock
+  :ensure t)
+
+;; (use-package eyebrowse
+;;   :ensure t
+;;   :hook
+;;   (after-init . eyebrowse-mode)
+;;   :config
+;;   (eyebrowse-setup-opinionated-keys)
+;;   ;; (eyebrowse-setup-evil-keys)
+;;   )
+
+(use-package perspective
+  :ensure t
+  ;; :init
+  ;; (setq persp-mode-prefix-key (kbd "C-M-g"))
+  :hook
+  (after-init . persp-mode)
+  :bind
+  (("C-x C-b" . persp-ivy-switch-buffer) ; or use a nicer switcher, see below
+   ("C-x b" . persp-switch-to-buffer*)
+   ("C-x k" . persp-kill-buffer*)
+   )
+  :custom
+  ;; (persp-interactive-completion-function 'ivy-completing-read)
+  (persp-sort 'created)
+  (persp-mode-prefix-key (kbd "C-x C-i"))
+  (persp-state-default-file "~/.emacs.d/perspective.save")
+  ;; (persp-show-modestring 'header)
+  (persp-modestring-short t)
+  :config
+  (add-hook 'kill-emacs-hook #'persp-state-save)
+  )
+
+(use-package workgroups2
+  :disabled
+  :ensure t
+  :hook
+  (after-init . workgroups-mode)
+  :init
+  ;; Change prefix key (before activating WG)
+  ;; ;; (setq wg-prefix-key (kbd "M-p"))
+  (setq wg-prefix-key (kbd "C-c C-c"))
+  :config
+  ;; Mode Line changes
+  ;; Display workgroups in Mode Line?
+  (setq wg-mode-line-display-on t)          ; Default: (not (featurep 'powerline))
+  (setq wg-flag-modified t)                 ; Display modified flags as well
+  (setq wg-mode-line-decor-left-brace "["
+        wg-mode-line-decor-right-brace "]"  ; how to surround it
+        wg-mode-line-decor-divider ":")
+
+  ;; ;; What to do on Emacs exit / workgroups-mode exit?
+  ;; ;; (setq wg-emacs-exit-save-behavior           'save)      ; Options: 'save 'ask nil
+  ;; ;; (setq wg-workgroups-mode-exit-save-behavior 'save)      ; Options: 'save 'ask nil
+
+  ;; ;; Change workgroups session file
+  (setq wg-session-file "~/.emacs.d/.emacs_workgroups")
+  )
+
+(use-package info-colors
+  :ensure t
+  ;; :hook
+  ;; ('Info-selection . 'info-colors-fontify-node)
+  :config
+  (add-hook 'Info-selection-hook 'info-colors-fontify-node))
+
+;; Display ^L glyphs as horizontal lines
+;; https://depp.brause.cc/form-feed/
+(use-package form-feed
+  :ensure t
+  ;; :hook
+  ;; (help-mode . form-feed-mode)
+  :config
+  (global-form-feed-mode)
+  )
+
+;; 文字生成拼写的大字
+(use-package figlet
+  :ensure t)
 
 (provide 'init-packages)

@@ -346,11 +346,13 @@
                     ;; buffer ;;;;;
                     ;; "bk" 'kill-buffer
                     ;; "wk" 'kill-buffer-and-window
-                    "kb" 'kill-buffer
+                    ;; "kb" 'kill-buffer
+                    "kb" 'persp-kill-buffer
                     "kw" 'kill-buffer-and-window
                     ;; "bs" 'switch-to-buffer
                     ;; "bs" 'counsel-switch-buffer
-                    "bs" 'ivy-switch-buffer
+                    ;; "bs" 'ivy-switch-buffer
+                    "bs" 'persp-ivy-switch-buffer
                     "bp" 'switch-to-prev-buffer
                     "bb" 'evil-buffer
                     "zz" 'save-buffer
@@ -450,12 +452,20 @@
                     ;; :states '(normal insert emacs)
                     :prefix "SPC"
                     ;; :non-normal-prefix "M-SPC"
+                    "1" (lambda () (interactive) (persp-switch-by-number 1))
+                    "2" (lambda () (interactive) (persp-switch-by-number 2))
+                    "3" (lambda () (interactive) (persp-switch-by-number 3))
+                    "4" (lambda () (interactive) (persp-switch-by-number 4))
+                    "5" (lambda () (interactive) (persp-switch-by-number 5))
+                    "6" (lambda () (interactive) (persp-switch-by-number 6))
+                    "7" (lambda () (interactive) (persp-switch-by-number 7))
                     "SPC" 'evil-ex
                     "cc" 'convert-file-to-utf8-unix
                     ;; "ss" 'wg-create-workgroup ; save windows layout
                     "se" 'evil-iedit-state/iedit-mode ; start iedit in emacs
                     "sc" 'shell-command
                     "st" 'org-shifttab
+                    "sp" 'caps-lock-mode
                     "TAB" 'outline-toggle-children
                     "eh" 'toggle-company-english-helper
                     ;; "ss" 'sr-speedbar-toggle
@@ -578,8 +588,8 @@
                     ;;            (git-gutter:previous-hunk (line-number-at-pos))
                     ;;          (diff-hl-previous-hunk)))
                     "c=" 'vc-diff
-                    ;; "cl" 'vc-pull
-                    "cl" 'my-vc-operator
+                    "cl" 'vc-pull
+                    ;; "cl" 'my-vc-operator
                     "cu" 'vc-push
                     ;; liang.feng
                     ;; "bs" '(lambda () (interactive) (goto-edge-by-comparing-font-face -1))
@@ -750,9 +760,19 @@
                            (interactive)
                            (pyim-import "~/.emacs.d/pyim-mine.cipin"))
                     "ar" 'align-regexp
-                    "ww" 'ace-jump-mode
-                    "ec" 'ace-jump-char-mode
-                    "el" 'ace-jump-line-mode
+                    ;; "ww" 'ace-jump-mode
+                    ;; "ec" 'ace-jump-char-mode
+                    ;; "el" 'ace-jump-line-mode
+                    "ww" 'persp-switch ;; Query a perspective to switch to, or create
+                    "bb" 'persp-switch-last
+                    "wr" 'persp-rename
+                    "wa" 'persp-add-buffer ;; Query an open buffer to add to current perspective
+                    "wd" 'persp-remove-buffer ;; Query a buffer to remove from current perspective
+                    "wk" 'persp-kill ;; Query a perspective to kill
+                    "wn" 'persp-next ;; Switch to next perspective
+                    "wp" 'persp-prev ;; Switch to previous perspective
+                    "ws" 'persp-state-save ;; Save all perspectives in all frames to a file
+                    "wl" 'persp-state-load ;; Load all perspectives from a file
                     ;; "xx" 'er/expand-region
                     ;; "xf" 'ido-find-file
                     ;; "xb" 'ivy-switch-buffer-by-pinyin
