@@ -126,6 +126,8 @@
 (define-key evil-normal-state-map (kbd "C-]") 'counsel-etags-find-tag-at-point)
 (define-key evil-insert-state-map (kbd "C-j") 'evil-next-line)
 (define-key evil-insert-state-map (kbd "C-k") 'evil-previous-line)
+(define-key evil-insert-state-map (kbd "C-u") 'evil-delete-whole-line)
+(define-key evil-insert-state-map (kbd "C-d") 'evil-delete-line)
 
 ;; evil-surround setting
 (global-evil-surround-mode)
