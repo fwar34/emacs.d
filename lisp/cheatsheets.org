@@ -26,6 +26,7 @@
     9. (list-colors-display)可以显示颜色
     10. (read-color)可以显示颜色
     11. 可以M-x搜索color相关函数
+    12. emacs卡顿的话可以使用M-x profiler-start来统计cpu或者内存，等卡顿过后使用profiler-report来看是什么导致的卡顿
 
 *** *elisp相关*
     1. with-eval-after-load和eval-after-load的区别

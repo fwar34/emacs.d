@@ -25,14 +25,6 @@
 ;; 解决文件目录的中文名乱码
 (setq-default pathname-coding-system 'utf-8-unix)
 (set-file-name-coding-system 'utf-8-unix)
-(prefer-coding-system 'utf-8-unix)
-
-;; 自动检测文件编码
-;; https://emacs-china.org/t/emacs/7814/7
-(use-package unicad
-  :ensure t
-  :config
-  (unicad-mode))
 
 ;; -----------------------------------------------------------------------------
 ;; https://emacs-china.org/t/emacs/7814/7
@@ -50,6 +42,13 @@
 ;; (prefer-coding-system 'utf-8-unix)
 ;; 这样emacs会按照顺序优先编码，需要注意的是，放在最后的会被最优先选择。上面的设置就是最优先选择utf-8-unix
 ;; 这样设置在一些场景下还有一些不够智能，比如magit 看 log信息，会出现 log现实中文正常，进入查看修改内容如果遇到中文会变成乱码
+
+;; 自动检测文件编码
+;; https://emacs-china.org/t/emacs/7814/7
+(use-package unicad
+  :ensure t
+  :config
+  (unicad-mode))
 ;; -----------------------------------------------------------------------------
 
 ;; 自动刷新被修改过的文件

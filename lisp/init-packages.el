@@ -557,15 +557,16 @@
   (setq which-key-show-docstrings t)
   )
 
-(use-package projectile
-  :ensure t
-  :hook
-  (evil-mode . projectile-mode)
-  :config
-  (define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
-  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
-  (setq projectile-completion-system 'ivy)
-  )
+;; (use-package projectile
+;;   :disabled
+;;   :ensure t
+;;   :hook
+;;   (evil-mode . projectile-mode)
+;;   :config
+;;   (define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
+;;   (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+;;   (setq projectile-completion-system 'ivy)
+;;   )
 
 ;; https://www.emacswiki.org/emacs/NeoTree
 (use-package neotree
@@ -581,20 +582,20 @@
   ;; Every time when the neotree window is opened, let it find current file and jump to node.
   (setq neo-smart-open t)
   ;; When running ‘projectile-switch-project’ (C-c p p), ‘neotree’ will change root automatically.
-  (setq projectile-switch-project-action 'neotree-projectile-action)
+  ;; (setq projectile-switch-project-action 'neotree-projectile-action)
   ;; Similar to find-file-in-project, NeoTree can be opened (toggled) at projectile project root as follows:
-  (defun neotree-project-dir ()
-    "Open NeoTree using the git root."
-    (interactive)
-    (let ((project-dir (projectile-project-root))
-          (file-name (buffer-file-name)))
-      (neotree-toggle)
-      (if project-dir
-          (if (neo-global--window-exists-p)
-              (progn
-                (neotree-dir project-dir)
-                (neotree-find file-name)))
-        (message "Could not find git project root."))))
+  ;; (defun neotree-project-dir ()
+  ;;   "Open NeoTree using the git root."
+  ;;   (interactive)
+  ;;   (let ((project-dir (projectile-project-root))
+  ;;         (file-name (buffer-file-name)))
+  ;;     (neotree-toggle)
+  ;;     (if project-dir
+  ;;         (if (neo-global--window-exists-p)
+  ;;             (progn
+  ;;               (neotree-dir project-dir)
+  ;;               (neotree-find file-name)))
+  ;;       (message "Could not find git project root."))))
   ;; If you use evil-mode, by default some of evil key bindings conflict with neotree-mode keys. For example,
   ;; you cannot use q to hide NeoTree. To make NeoTree key bindings in effect, you can bind those keys
   ;; in evil-normal-state-local-map in neotree-mode-hook, as shown in below code:

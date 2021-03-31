@@ -185,10 +185,10 @@ DEFAULT-TEXT."
               'face face))
 
 
-(setq projectile-mode-line
-      (quote (:eval (when (and (bound-and-true-p projectile-mode) (projectile-project-p)) 
-                      (propertize (format " P[%s]" (projectile-project-name))
-                                  'face 'font-lock-variable-name-face)))))
+;; (setq projectile-mode-line
+;;       (quote (:eval (when (and (bound-and-true-p projectile-mode) (projectile-project-p)) 
+;;                       (propertize (format " P[%s]" (projectile-project-name))
+;;                                   'face 'font-lock-variable-name-face)))))
 
 (setq buffer-name-mode-line
       (quote (:eval (propertize "%b " 'face 'font-lock-string-face))))
@@ -337,8 +337,8 @@ DEFAULT-TEXT."
        file-status-mode-line
        ;; " "
        ;; '(:eval (zilongshanren/display-mode-indent-width))
-       projectile-mode-line
-       " "
+       ;; projectile-mode-line
+       ;; " "
        my-selection-info
        " "
        (zilong/modeline--evil-substitute)

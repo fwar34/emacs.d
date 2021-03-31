@@ -124,6 +124,11 @@
   (add-hook 'eshell-mode-hook (lambda ()
                                 (evil-local-set-key 'emacs (kbd "C-w") #'evil-delete-backward-word)))
 
+  ;; windows中eshell设置中文
+  (when (string-equal window-system "w32")
+    (with-eval-after-load 'eshell
+      (set-language-environment "chinese-GB")))
+
   ;; (custom-set-variables
   ;;  '(eshell-visual-options (quote (("git" "log" "diff" "show")))))
   
