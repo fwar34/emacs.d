@@ -179,10 +179,15 @@ DEFAULT-TEXT."
   (unless reserve (setq reserve 20))
   (when (and (display-graphic-p) (eq 'right (get-scroll-bar-mode)))
     (setq reserve (- reserve 3)))
-  (propertize " "
-              'display `((space :align-to
-                                (- (+ right right-fringe right-margin) ,reserve 1.4)))
-              'face face))
+  (if (and (equal system-type 'windows-nt) (string-equal system-name "FL-Notebook"))
+      (propertize " " 'display `((space :align-to
+                                        (- (+ right right-fringe right-margin) ,reserve 1.4)))
+                  'face face)
+    (propertize " " 'display `((space :align-to
+                                      (- (+ right right-fringe right-margin) ,reserve)))
+                'face face)
+    )
+  )
 
 
 ;; (setq projectile-mode-line
