@@ -135,8 +135,8 @@ DEFAULT-TEXT."
       '(:eval
         (concat "["
                 ;; (propertize (format-time-string "[%H:%M]") 'face 'font-lock-constant-face)
-                (propertize (format-time-string "%H:%M") 'face 'font-lock-constant-face) 
-                "]")))
+                (propertize (format-time-string "%H:%M") 'face 'font-lock-constant-face 'help-echo (emacs-uptime "%D, %z%2h:%.2m")) 
+               "]")))
 
 (defun zilongshanren/display-mode-indent-width ()
   (let ((mode-indent-level
@@ -177,7 +177,7 @@ DEFAULT-TEXT."
 (defun mode-line-fill (face reserve)
   "Return empty space using FACE and leaving RESERVE space on the right."
   (unless reserve (setq reserve 20))
-  (when (and window-system (eq 'right (get-scroll-bar-mode)))
+  (when (and (display-graphic-p) (eq 'right (get-scroll-bar-mode)))
     (setq reserve (- reserve 3)))
   (propertize " "
               'display `((space :align-to
@@ -222,7 +222,12 @@ DEFAULT-TEXT."
             "]"))))
 
 (setq my-persp-mode-line
-      '(:eval (propertize (mapconcat #'substring-no-properties (persp-mode-line) "") 'face 'font-lock-preprocessor-face)))
+      ;; https://www.gnu.org/software/emacs/manual/html_node/elisp/Face-Attributes.html
+      ;; '(:eval (propertize (mapconcat #'substring-no-properties (persp-mode-line) "") 'face '(:family "Monaco" font-lock-preprocessor-face))))
+      ;; '(:eval (propertize (mapconcat #'substring-no-properties (persp-mode-line) "") 'face '(:box (:color "orange" :style pressed-button) font-lock-preprocessor-face))))
+      (if (display-graphic-p)
+          '(:eval (propertize (mapconcat #'substring-no-properties (persp-mode-line) "") 'face '(:box (:color "orange") font-lock-preprocessor-face)))
+        '(:eval (propertize (mapconcat #'substring-no-properties (persp-mode-line) "") 'face 'font-lock-preprocessor-face))))
 
 (setq flycheck-status-mode-line
   (quote (:eval (pcase flycheck-last-status-change
@@ -242,11 +247,12 @@ DEFAULT-TEXT."
                          'face face)))))))
 
 (setq line-column-mode-line
-  (concat "("
-   (propertize "%02l" 'face 'font-lock-type-face)
-   ":"
-   (propertize "%02c" 'face 'font-lock-type-face)
-   ")"))
+      (concat "("
+              ;; '%02' to set to 2 chars at least; prevents flickering
+              (propertize "%02l" 'face 'font-lock-type-face)
+              ":"
+              (propertize "%02c" 'face 'font-lock-type-face)
+              ")"))
 
 (defun encoding-string ()
   (concat (pcase (coding-system-eol-type buffer-file-coding-system)

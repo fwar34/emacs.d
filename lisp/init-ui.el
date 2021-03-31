@@ -158,7 +158,8 @@
   ;; <https://github.com/tumashu/cnfonts>
   (set-face-attribute
    'default nil
-   :font (font-spec :name (if (member "Sarasa Mono Slab K" (font-family-list)) "Sarasa Mono Slab K" "nil")
+   ;; :font (font-spec :name (if (member "Sarasa Mono Slab K" (font-family-list)) "Sarasa Mono Slab K" "nil")
+   :font (font-spec :name (if (member "Sarasa Fixed Slab K" (font-family-list)) "Sarasa Fixed Slab K" "nil")
    ;; :font (font-spec :name "Fira Code"
                     :weight 'normal
                     :slant 'normal
