@@ -17,21 +17,22 @@
     (set-cursor-color "#e52b50"))
   (defun hydra-vi/post ()
     (set-cursor-color "#ffffff"))
-  (global-set-key (kbd "M-u vi")
-                  (defhydra hydra-vi (:pre hydra-vi/pre :post hydra-vi/post :color amaranth :foreign-keys warn)
-                    "vi"
-                    ("l" forward-char)
-                    ("h" backward-char)
-                    ("j" next-line)
-                    ("k" previous-line)
-                    ("m" set-mark-command "mark")
-                    ;; ("a" move-beginning-of-line "beg")
-                    ("a" evil-first-non-blank "beg")
-                    ("e" move-end-of-line "end")
-                    ("d" delete-region "del" :color blue)
-                    ("y" kill-ring-save "yank" :color blue)
-                    ("q" nil "quit")))
+  (defhydra hydra-vi (:pre hydra-vi/pre :post hydra-vi/post :color amaranth :foreign-keys warn)
+    "vi"
+    ("l" forward-char)
+    ("h" backward-char)
+    ("j" next-line)
+    ("k" previous-line)
+    ("m" set-mark-command "mark")
+    ;; ("a" move-beginning-of-line "beg")
+    ("a" evil-first-non-blank "beg")
+    ("e" move-end-of-line "end")
+    ("d" delete-region "del" :color blue)
+    ("y" kill-ring-save "yank" :color blue)
+    ("q" nil "quit"))
   (hydra-set-property 'hydra-vi :verbosity 1)
+  (global-set-key (kbd "M-u vi") 'hydra-vi/body)
+  (global-set-key (kbd "M-u C-v C-i") 'hydra-vi/body)
 
   ;;-------------------------------------------------------------
   ;; window
@@ -94,6 +95,7 @@
     ("L" hydra-move-splitter-right "resize right" :color red)
     ("q" nil "quit menu" :color blue :column nil))
   (global-set-key (kbd "M-u wi") #'hydra-window/body)
+  (global-set-key (kbd "M-u C-w C-i") #'hydra-window/body)
   ;; (evil-define-key '(normal insert) 'global (kbd "M-u wi") #'hydra-window/body)
 
   ;;-------------------------------------------------------------
@@ -119,7 +121,9 @@
       ("oa" org-agenda :exit t)
       ("oc" org-capture :exit t)
       ("q" nil "cancel" :color bule))
-    (define-key org-mode-map (kbd "M-u og") 'hydra-org/body))
+    (define-key org-mode-map (kbd "M-u or") 'hydra-org/body)
+    (evil-define-key 'normal org-mode-map (kbd "M-u C-o C-r") 'hydra-org/body)
+    )
   ;; (evil-define-key '(normal insert) 'global (kbd "M-u og") #'hydra-org/body)
   ;; (with-eval-after-load 'org
   ;;   (define-key org-mode-map (kbd "M-u og") 'hydra-org/body))
@@ -137,25 +141,29 @@
   ;; (define-key evil-normal-state-map (kbd "M-u f") #'hydra-fwar34/body)
   ;; (evil-define-key '(normal insert) 'global (kbd "M-u fw") #'hydra-fwar34/body)
   (global-set-key (kbd "M-u fw") #'hydra-fwar34/body)
+  (global-set-key (kbd "M-u C-f C-w") #'hydra-fwar34/body)
 
   ;;-------------------------------------------------------------
   ;; M-um
-  (defhydra hydra-M-um (:color pink :hint nil :foreign-keys warn)
+  (defhydra hydra-M-um (:color pink :hint nil)
     "
     ^kill-ring^                      ^iedit-mode^        ^fix-word^
     ^^-----------------------------------------------------------------------------
-    _p_: paste from clipboard        _se_: iedit mode    _u_: fix-word-upcase
-    _y_: grab the symbol at point    ^  ^                _d_: fix-word-downcase
-    ^ ^                              ^  ^                _c_: fix-word-capitalize
+    _p_: paste from clipboard        _se_: iedit mode    _up_: fix-word-upcase
+    _y_: grab the symbol at point    ^  ^                _dw_: fix-word-downcase
+    ^ ^                              ^  ^                _ca_: fix-word-capitalize
+    ^ ^                              ^  ^                _cp_: caps-lock-mode
     "
     ("p" clipboard-yank :exit t)
     ("y" ack-yank-symbol-at-point :exit t)
     ("se" iedit-mode)
-    ("u" fix-word-upcase :exit t)
-    ("d" fix-word-downcase :exit t)
-    ("c" fix-word-capitalize :exit t)
+    ("up" fix-word-upcase :exit t)
+    ("dw" fix-word-downcase :exit t)
+    ("ca" fix-word-capitalize :exit t)
+    ("cp" caps-lock-mode)
     ("q" nil "cancale" :color blue))
   (global-set-key (kbd "M-u mm") #'hydra-M-um/body)
+  (global-set-key (kbd "M-u C-m C-m") #'hydra-M-um/body)
   ;; (evil-define-key '(normal insert) 'global (kbd "M-u mm") #'hydra-M-um/body)
   ;; (define-key evil-ex-completion-map (kbd "M-u m") #'hydra-M-um/body)
   ;; (define-key evil-ex-search-keymap (kbd "M-u m") #'hydra-M-um/body)
@@ -178,7 +186,9 @@
       ("e" apropos-value "value")
       ("q" nil "cancel" :exit t :column nil))
     ;; (global-set-key (kbd "M-u ap") 'hydra-apropos/body)
-    (define-key apropos-mode-map (kbd "M-u ap") 'hydra-apropos/body))
+    (define-key apropos-mode-map (kbd "M-u ap") 'hydra-apropos/body)
+    (evil-define-key 'normal apropos-mode-map "M-u C-a C-p" 'hydra-apropos/body)
+    )
 
   ;;-------------------------------------------------------------
   ;; ivy and swiper
@@ -196,6 +206,7 @@
     ("ch" counsel-command-history "counsel-command-history")
     ("q" nil "cancel" :exit t :column nil))
   (global-set-key (kbd "M-u iv") #'hydra-ivy-swiper/body)
+  (global-set-key (kbd "M-u C-i C-v") #'hydra-ivy-swiper/body)
 
   ;;-------------------------------------------------------------
   ;; counsel-etags
@@ -217,6 +228,7 @@
     ("q" nil "cancel" :exit t :column nil))
   ;; (global-set-key (kbd "M-u ap") 'hydra-apropos/body)
   (global-set-key (kbd "M-u tt") #'hydra-counsel-etags/body)
+  (global-set-key (kbd "M-u C-t C-t") #'hydra-counsel-etags/body)
 
   ;;-------------------------------------------------------------
   ;; agenda
@@ -251,7 +263,9 @@
              (message "Display now includes inactive timestamps as well")))
       ("q" (message "Abort") :exit t)
       ("v" nil))
-      (define-key org-agenda-mode-map (kbd "M-u ag") 'hydra-org-agenda-view/body))
+      (define-key org-agenda-mode-map (kbd "M-u ad") 'hydra-org-agenda-view/body)
+      (evil-define-key 'normal org-agenda-mode-map (kbd "M-u C-a C-d") 'hydra-org-agenda-view/body)
+      )
 
   ;;-------------------------------------------------------------
   ;; pyim
@@ -268,10 +282,13 @@
     ("to" pyim-toggle-input-ascii)
     ("q" nil "cancale" :color blue))
   (global-set-key (kbd "M-u py") #'hydra-pyim/body)
+  (global-set-key (kbd "M-u C-p C-y") #'hydra-pyim/body)
   (with-eval-after-load 'isearch 
       ;;这里是给像vim的/和?(evil-search-forward和evil-search-backward)搜索切换输入法添加快捷键
       ;; 上面两个搜索内部使用的是isearch相关的函数
-      (define-key isearch-mode-map (kbd "M-u py") 'hydra-pyim/body))
+    (define-key isearch-mode-map (kbd "M-u py") 'hydra-pyim/body)
+    (evil-define-key 'normal isearch-mode-map (kbd "M-u C-p C-y") 'hydra-pyim/body)
+    )
   ;; (add-hook 'isearch-mode-hook #'(lambda ()
   ;;                                  (local-set-key (kbd "M-u py") #'hydra-pyim/body)))
   ;; (define-key evil-motion-state-map (kbd "M-u py") #'hydra-pyim/body)
@@ -289,6 +306,7 @@
       ("sl" isearch-yank-line)
       ("q" nil "cancale" :color blue))
       (define-key isearch-mode-map (kbd "M-u is") 'hydra-isearch/body)
+      (evil-define-key 'normal isearch-mode-map (kbd "M-u C-i C-s") 'hydra-isearch/body)
     )
 
   ;;-------------------------------------------------------------
@@ -301,6 +319,7 @@
     ("v" recenter-top-bottom "recenter")
     ("q" nil "quit"))
   (global-set-key (kbd "M-u er") #'hydra-error/body)
+  (global-set-key (kbd "M-u C-e C-r") #'hydra-error/body)
 
   ;;-------------------------------------------------------------
   ;; lispyville
@@ -311,7 +330,9 @@
       ("{" lispyville-wrap-braces "wrap round with {")
       ("q" nil "cancel" :exit t :column nil))
     ;; (global-set-key (kbd "M-u li") #'hydra-lispyville/body)
-    (define-key lispyville-mode-map (kbd "M-u li") 'hydra-lispyville/body))
+    (define-key lispyville-mode-map (kbd "M-u li") 'hydra-lispyville/body)
+    (evil-define-key 'normal lispyville-mode-map (kbd "M-u C-l C-i") 'hydra-lispyville/body)
+    )
   
   ;;-------------------------------------------------------------
   ;; dired
@@ -322,8 +343,9 @@
       ("cf" dired-create-empty-file "create file")
       ("ha" dired-hide-all "hide all subdirectories, leaving only their header lines.")
       ("q" nil "cancel" :exit t :column nil))
-    ;; (define-key dired-mode-map (kbd "M-u dj") 'hydra-dired/body)
-      (define-key dired-mode-map (kbd "M-u dj") 'hydra-dired/body))
+    (define-key dired-mode-map (kbd "M-u dj") 'hydra-dired/body)
+    (evil-define-key 'normal dired-mode-map (kbd "M-u C-d C-j") 'hydra-dired/body)
+    )
 
   ;;-------------------------------------------------------------
   ;; magit
@@ -358,7 +380,9 @@
       ("l" Info-final-node "Go to the final node in this file.")
       ("q" nil "cancel" :exit t :column nil))
     ;; (global-set-key (kbd "M-u if") #'hydra-info/body)
-    (define-key Info-mode-map (kbd "M-u if") #'hydra-info/body))
+    (define-key Info-mode-map (kbd "M-u if") #'hydra-info/body)
+    (evil-define-key 'normal Info-mode-map (kbd "M-u C-i C-f") #'hydra-info/body)
+    )
 
   ;;-------------------------------------------------------------
   ;; font settings
@@ -378,7 +402,9 @@
        "decrease font 10" :column "fonts commands")
       ("q" nil "cancel" :exit t :column nil))
     ;; (define-key magit-mode-map (kbd "M-u ft") 'hydra-font/body)
-    (global-set-key (kbd "M-u ft") #'hydra-font/body))
+    (global-set-key (kbd "M-u ft") #'hydra-font/body)
+    (global-set-key (kbd "M-u C-f C-t") #'hydra-font/body)
+    )
   ;; (evil-define-key 'normal 'global (kbd "M-u ft") #'hydra-font/body)
   )
 

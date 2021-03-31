@@ -213,8 +213,9 @@
                counsel-ag
                my-search-forward-word
                my-search-whole-word
-               lispyville-beginning-of-defun
-               lispyville-end-of-defun
+               ;; lispyville-beginning-of-defun
+               ;; lispyville-end-of-defun
+               lispyville--maybe-enter-special
                swiper-all
                my-swiper-forward-word
                swiper-thing-at-point
@@ -465,7 +466,7 @@
                     "se" 'evil-iedit-state/iedit-mode ; start iedit in emacs
                     "sc" 'shell-command
                     "st" 'org-shifttab
-                    "sp" 'caps-lock-mode
+                    "cp" 'caps-lock-mode
                     "TAB" 'outline-toggle-children
                     "eh" 'toggle-company-english-helper
                     ;; "ss" 'sr-speedbar-toggle
