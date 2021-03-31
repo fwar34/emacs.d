@@ -256,6 +256,11 @@
   ;;     ;; (evil-local-set-key 'normal (kbd "q") #'quit-window)))
   ;;     (evil-local-set-key 'normal (kbd "q") #'kill-this-buffer)))
   (evil-ex-define-cmd "q[uit]" 'kill-this-buffer)
+
+  ;; https://emacs-china.org/t/customize-evil-undo-system-for-redo-functionality/14969/3
+  (global-undo-tree-mode)
+  (evil-set-undo-system 'undo-tree)
+
   :custom
   ;; https://emacs-china.org/t/evil-insert-state-or-evil-emacs-state/16710/6?u=fwar34
   (evil-ex-interactive-search-highlight 'selected-window)
