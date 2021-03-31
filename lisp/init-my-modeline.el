@@ -181,7 +181,7 @@ DEFAULT-TEXT."
     (setq reserve (- reserve 3)))
   (propertize " "
               'display `((space :align-to
-                                (- (+ right right-fringe right-margin) ,reserve)))
+                                (- (+ right right-fringe right-margin) ,reserve 1.4)))
               'face face))
 
 

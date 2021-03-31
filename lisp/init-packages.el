@@ -259,7 +259,8 @@
 
   ;; https://emacs-china.org/t/customize-evil-undo-system-for-redo-functionality/14969/3
   (global-undo-tree-mode)
-  (evil-set-undo-system 'undo-tree)
+  (when (fboundp 'evil-set-undo-system)
+    (evil-set-undo-system 'undo-tree))
 
   :custom
   ;; https://emacs-china.org/t/evil-insert-state-or-evil-emacs-state/16710/6?u=fwar34
