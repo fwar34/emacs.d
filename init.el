@@ -1,14 +1,15 @@
 ;; -*- coding: utf-8; lexical-binding: t; -*-
-;; (require 'org-install)
-;; (require 'ob-tangle)
-;; (org-babel-load-file (expand-file-name "liang.org" user-emacs-directory))
-;; (setq gc-cons-threshold (* 2 1000 1000))
 
-;; this is master write
-;; master write 2
+;; 设置垃圾回收，在windows下，emacs25版本会频繁发出垃圾回收
+(when (equal system-type 'windows-nt)
+  (setq gc-cons-threshold (* 512 1024 1024))
+  (setq gc-cons-percentage 0.5)
+  (run-with-idle-timer 5 t #'garbage-collect)
+  ;; 显示垃圾回收信息，可以作为调试用
+  (setq garbage-collect-message t))
 
-(setq gc-cons-threshold 402653184
-      gc-cons-percentage 0.6)
+;; (setq gc-cons-threshold 402653184
+;;       gc-cons-percentage 0.6)
 
 ;; http://www.sohu.com/a/301863132_100034897
 ;; -q ignores personal Emacs files but loads the site files.
