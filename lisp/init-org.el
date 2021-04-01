@@ -42,11 +42,17 @@
   :after org
   ) 
 
-
 (use-package evil-org
+  ;; https://github.com/Somelauw/evil-org-mode/blob/master/doc/keythemes.org
   :ensure t
-  :after (evil org)
-  (evil-org-mode)
+  :hook
+  (org-mode . evil-org-mode)
+  :config
+  (evil-org-set-key-theme '(textobjects insert navigation additional shift todo heading return))
+  ;; If you want < and > to promote / demote headings and items on a single press, add the following to your org setup:
+  (evil-define-key 'normal evil-org-mode-map
+    (kbd ">") 'org-meta-right
+    (kbd "<") 'org-meta-left)
   )
 
 ;; org-pomodoro setting
