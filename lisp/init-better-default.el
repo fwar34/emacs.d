@@ -33,13 +33,13 @@
 ;; 目前找到的解决办法 设置emacs 的prefer-coding-system
 ;; ;; set coding config, last is highest priority.
 ;; ;; https://www.gnu.org/software/emacs/manual/html_node/emacs/Recognize-Coding.html#Recognize-Coding
-;; (prefer-coding-system 'cp950)
-;; (prefer-coding-system 'gb2312)
-;; (prefer-coding-system 'cp936)
-;; (prefer-coding-system 'gb18030)
-;; (prefer-coding-system 'utf-16)
-;; (prefer-coding-system 'utf-8-dos)
-;; (prefer-coding-system 'utf-8-unix)
+(prefer-coding-system 'cp950)
+(prefer-coding-system 'gb2312)
+(prefer-coding-system 'cp936)
+(prefer-coding-system 'gb18030)
+(prefer-coding-system 'utf-16)
+(prefer-coding-system 'utf-8-dos)
+(prefer-coding-system 'utf-8-unix)
 ;; 这样emacs会按照顺序优先编码，需要注意的是，放在最后的会被最优先选择。上面的设置就是最优先选择utf-8-unix
 ;; 这样设置在一些场景下还有一些不够智能，比如magit 看 log信息，会出现 log现实中文正常，进入查看修改内容如果遇到中文会变成乱码
 
