@@ -116,7 +116,7 @@
 
 ;; TAB and C-i is the same
 ;; (define-key evil-normal-state-map (kbd "TAB") 'other-window)
-(define-key evil-normal-state-map (kbd "C-i") 'evil-jump-forward)
+;; (define-key evil-normal-state-map (kbd "C-i") 'evil-jump-forward)
 (define-key evil-normal-state-map (kbd "ge") 'evil-goto-line)
 (define-key evil-visual-state-map (kbd "gg") 'evil-change-to-previous-state)
 ;; (define-key evil-insert-state-map "///" 'eval-last-sexp)

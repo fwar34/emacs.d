@@ -173,7 +173,7 @@
 ;; (require 'evil-org-agenda)
 ;; (evil-org-agenda-set-keys)
 ;; https://github.com/Somelauw/evil-org-mode#common-issues
-(setq evil-want-C-i-jump nil)
+;; (setq evil-want-C-i-jump nil)
 
 ;; 默认情况下，Org Mode没有打开Markdown文档的转换功能，需要将下面的小代码放到Emacs 的启动配置文件中：
 ;; (setq org-export-backends (quote (ascii html icalendar latex md)))
