@@ -200,8 +200,6 @@
                dired-jump
                ivy-done
                end-of-defun
-               lispyville-beginning-of-defun
-               lispyville-end-of-defun
                counsel-etags-find-tag-at-point
                counsel-etags-list-tag
                counsel-etags-grep
@@ -215,8 +213,8 @@
                counsel-ag
                my-search-forward-word
                my-search-whole-word
-               ;; lispyville-beginning-of-defun
-               ;; lispyville-end-of-defun
+               lispyville-beginning-of-defun
+               lispyville-end-of-defun
                lispyville--maybe-enter-special
                swiper-all
                my-swiper-forward-word
