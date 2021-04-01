@@ -2,6 +2,13 @@
 ;;-------------------------------------------------------------
 ;; init-hydra
 ;; https://github.com/abo-abo/hydra/blob/05871dd6c8af7b2268bd1a10eb9f8a3e423209cd/hydra-examples.el#L190
+;; | color    | toggle                     |
+;; |----------+----------------------------|
+;; | red      |                            |
+;; | blue     | :exit t                    |
+;; | amaranth | :foreign-keys warn         |
+;; | teal     | :foreign-keys warn :exit t |
+;; | pink     | :foreign-keys run          |
 ;;-------------------------------------------------------------
 (use-package hydra
   :after evil
@@ -101,7 +108,7 @@
   ;;-------------------------------------------------------------
   ;; org
   (with-eval-after-load 'org
-    (defhydra hydra-org (:color red :hint nil :foreign-keys warn)
+    (defhydra hydra-org (:hint nil :foreign-keys run)
       "
     ^outline^                              ^org^
     ^^^^^^^^--------------------------------------------------------
@@ -130,7 +137,7 @@
 
   ;;-------------------------------------------------------------
   ;; fwar34
-  (defhydra hydra-fwar34 (:columns 3 :exit t :foreign-keys warn)
+  (defhydra hydra-fwar34 (:columns 3 :exit t)
     "
                        -- MY COMMANDS --
     "
@@ -171,7 +178,7 @@
   ;;-------------------------------------------------------------
   ;; apropos
   (with-eval-after-load 'apropos
-    (defhydra hydra-apropos (:color blue :hint nil :foreign-keys warn)
+    (defhydra hydra-apropos (:color blue :hint nil)
       ;; "
       ;; _a_propos        _c_ommand
       ;; _d_ocumentation  _l_ibrary
@@ -192,7 +199,7 @@
 
   ;;-------------------------------------------------------------
   ;; ivy and swiper
-  (defhydra hydra-ivy-swiper (:color blue :hint nil :foreign-keys warn)
+  (defhydra hydra-ivy-swiper (:color blue :hint nil)
     ("ir" ivy-resume "ivy-resume" :column "         ivy and swiper")
     ("cf" counsel-describe-function "counsel-describe-function")
     ("cv" counsel-describe-variable "counsel-describe-variable")
@@ -210,7 +217,7 @@
 
   ;;-------------------------------------------------------------
   ;; counsel-etags
-  (defhydra hydra-counsel-etags (:color blue :hint nil :foreign-keys warn)
+  (defhydra hydra-counsel-etags (:color blue :hint nil)
     ;; "
     ;; _a_propos        _c_ommand
     ;; _d_ocumentation  _l_ibrary
@@ -233,7 +240,7 @@
   ;;-------------------------------------------------------------
   ;; agenda
   (with-eval-after-load 'org-agenda
-    (defhydra hydra-org-agenda-view (:hint none :foreign-keys warn)
+    (defhydra hydra-org-agenda-view (:hint none)
       "
     _d_: ?d? day        _g_: time grid=?g?  _a_: arch-trees
     _w_: ?w? week       _[_: inactive       _A_: arch-files
@@ -297,7 +304,7 @@
   ;;-------------------------------------------------------------
   ;; isearch
   (with-eval-after-load 'isearch
-    (defhydra hydra-isearch (:color blue :hint nil :foreign-keys warn)
+    (defhydra hydra-isearch (:color blue :hint nil)
       "
                             ^isearch^                  
     ^^^^^^^^--------------------------------------------------------
@@ -311,7 +318,7 @@
 
   ;;-------------------------------------------------------------
   ;; jump to error
-  (defhydra hydra-error (:foreign-keys warn)
+  (defhydra hydra-error (:foreign-keys run)
     "goto-error"
     ("h" first-error "first")
     ("j" next-error "next")
@@ -324,7 +331,7 @@
   ;;-------------------------------------------------------------
   ;; lispyville
   (with-eval-after-load 'lispyville
-    (defhydra hydra-lispyville (:color blue :hint nil :foreign-keys warn)
+    (defhydra hydra-lispyville (:hint nil :foreign-keys run)
       ("(" lispyville-wrap-round "wrap round with (" :column "lispyville-wrap")
       ("[" lispyville-wrap-brackets "wrap round with [")
       ("{" lispyville-wrap-braces "wrap round with {")
@@ -337,7 +344,7 @@
   ;;-------------------------------------------------------------
   ;; dired
   (with-eval-after-load 'dired
-    (defhydra hydra-dired (:color blue :hint nil :foreign-keys warn)
+    (defhydra hydra-dired (:hint nil :foreign-keys run)
       ("ud" dired-undo "undo in a dired buffer." :column "                       dired commands")
       ("cd" dired-create-directory "create directory")
       ("cf" dired-create-empty-file "create file")
@@ -350,7 +357,7 @@
   ;;-------------------------------------------------------------
   ;; magit
   (with-eval-after-load 'magit
-    (defhydra hydra-magit (:color blue :hint nil :foreign-keys warn)
+    (defhydra hydra-magit (:color blue :hint nil)
       ("rv" magit-revert "Revert existing commits, with or without creating new commits." :column "magit commands")
       ("q" nil "cancel" :exit t :column nil))
     ;; (define-key magit-mode-map (kbd "M-u ma") 'hydra-magit/body)
@@ -362,7 +369,7 @@
   ;;-------------------------------------------------------------
   ;; shell
   (with-eval-after-load 'shell
-    (defhydra hydra-shell (:color blue :hint nil :foreign-keys warn)
+    (defhydra hydra-shell (:color blue :hint nil)
       ("0" (delete-window) "delete window" :column "shell commands")
       ("q" nil "cancel" :exit t :column nil))
     (define-key shell-mode-map (kbd "M-u sh") 'hydra-shell/body))
@@ -370,7 +377,7 @@
   ;;-------------------------------------------------------------
   ;; info
   (with-eval-after-load 'info
-    (defhydra hydra-info (:color blue :hint nil :foreign-keys warn)
+    (defhydra hydra-info (:color blue :hint nil)
       ("ls" elisp-index-search "Look up TOPIC in the indices of the Emacs Lisp Reference Manual." :column "info commands")
       ("es" emacs-index-search "Look up TOPIC in the indices of the Emacs User Manual.")
       ("c" Info-copy-current-node-name "Put the name of the current Info node into the kill ring.")
@@ -387,7 +394,7 @@
   ;;-------------------------------------------------------------
   ;; font settings
   (when (display-graphic-p)
-    (defhydra hydra-font (:color red :hint nil :foreign-keys warn)
+    (defhydra hydra-font (:color red :hint nil :foreign-keys run)
       ;; 增加字体大小
       ("+" (lambda ()
              (interactive)
