@@ -108,29 +108,6 @@ DEFAULT-TEXT."
        (multi-line (propertize (format "%d lines" lines) 'face 'font-lock-evil-visual-face))
        (t (propertize (format "%d chars" (if evil chars (1- chars))) 'face 'font-lock-evil-visual-face)))))))
 
-(setq my-flycheck-mode-line
-      '(:eval
-        (when
-            (and (bound-and-true-p flycheck-mode)
-                 (or flycheck-current-errors
-                     (eq 'running flycheck-last-status-change)))
-          (pcase flycheck-last-status-change
-            ((\` not-checked) nil)
-            ((\` no-checker) (propertize " -" 'face 'warning))
-            ((\` running) (propertize " ✷" 'face 'success))
-            ((\` errored) (propertize " !" 'face 'error))
-            ((\` finished)
-             (let* ((error-counts (flycheck-count-errors flycheck-current-errors))
-                    (no-errors (cdr (assq 'error error-counts)))
-                    (no-warnings (cdr (assq 'warning error-counts)))
-                    (face (cond (no-errors 'error)
-                                (no-warnings 'warning)
-                                (t 'success))))
-               (propertize (format "[%s/%s]" (or no-errors 0) (or no-warnings 0))
-                           'face face)))
-            ((\` interrupted) " -")
-            ((\` suspicious) '(propertize " ?" 'face 'warning))))))
-
 (setq my-modeline-time
       '(:eval
         (concat "["
@@ -234,23 +211,6 @@ DEFAULT-TEXT."
           '(:eval (propertize (mapconcat #'substring-no-properties (persp-mode-line) "") 'face '(:box (:color "orange") font-lock-preprocessor-face)))
         '(:eval (propertize (mapconcat #'substring-no-properties (persp-mode-line) "") 'face 'font-lock-preprocessor-face))))
 
-(setq flycheck-status-mode-line
-  (quote (:eval (pcase flycheck-last-status-change
-          (`finished
-           (let* ((error-counts (flycheck-count-errors flycheck-current-errors))
-              (errors (cdr (assq 'error error-counts)))
-              (warnings (cdr (assq 'warning error-counts)))
-              (face (cond (errors 'error)
-                      (warnings 'warn)
-                      (t 'success))))
-             (propertize (concat "["
-                     (cond
-                      (errors (format "✗:%s" errors))
-                      (warnings (format "❗:%s" warnings))
-                      (t "✔"))
-                     "]")
-                         'face face)))))))
-
 (setq line-column-mode-line
       (concat "("
               ;; '%02' to set to 2 chars at least; prevents flickering
@@ -289,8 +249,7 @@ DEFAULT-TEXT."
        ;; " %1"
        "["
        window-number
-       "]"
-       " "
+       "] "
        my-persp-mode-line
        " %1"
        buffer-name-mode-line
@@ -347,10 +306,6 @@ DEFAULT-TEXT."
        my-selection-info
        " "
        (zilong/modeline--evil-substitute)
-       ;; " "
-       ;; flycheck-status-mode-line
-       "%1 "
-       my-flycheck-mode-line
        '(:eval (mode-line-fill 'mode-line (+ 7 (string-width (encoding-string)))))
        encoding-mode-line
        " "
