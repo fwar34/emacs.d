@@ -624,18 +624,18 @@
   :unless window-system
   )
 
-(use-package lispy
-  :ensure t
-  :disabled
-  :hook
-  (emacs-lisp-mode . lispy-mode)
-  :config
-  ;; (define-key lispy-mode-map (kbd “<delete>”) #'lispy-delete)
-  ;; (define-key lispy-mode-map (kbd “C-d”) #'lispy-delete-backward)
-  ;; (define-key lispy-mode-map (kbd “C-k”) #'lispy-kill)
-  ;; (define-key lispy-mode-map (kbd “C-y”) #'lispy-yank)
-  ;; (define-key lispy-mode-map (kbd “C-e”) #'lispy-move-end-of-line) 
-  )
+;; (use-package lispy
+;;   :ensure t
+;;   :disabled
+;;   :hook
+;;   (emacs-lisp-mode . lispy-mode)
+;;   :config
+;;   ;; (define-key lispy-mode-map (kbd “<delete>”) #'lispy-delete)
+;;   ;; (define-key lispy-mode-map (kbd “C-d”) #'lispy-delete-backward)
+;;   ;; (define-key lispy-mode-map (kbd “C-k”) #'lispy-kill)
+;;   ;; (define-key lispy-mode-map (kbd “C-y”) #'lispy-yank)
+;;   ;; (define-key lispy-mode-map (kbd “C-e”) #'lispy-move-end-of-line) 
+;;   )
 
 ;; https://github.com/noctuid/lispyville
 (use-package lispyville
@@ -659,7 +659,7 @@
    ;; '((escape insert emacs) 
    ;;   additional-movement prettify atom-motions slurp/barf-cp additional additional-wrap))
    '((escape insert emacs) 
-     additional-movement slurp/barf-cp additional)))
+     additional-movement slurp/barf-cp additional commentary text-objects atom-motions wrap)))
 
 ;; linum-relative
 ;; (use-package linum-relative
