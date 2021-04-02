@@ -248,6 +248,9 @@
   (:map isearch-mode-map
         ("<up>" . 'isearch-ring-retreat)
         ("<down>" . isearch-ring-advance))
+  (:map evil-normal-state-map
+        ("C-a" . evil-first-non-blank)
+        ("C-e" . evil-end-of-line))
   :config
   (define-key evil-ex-search-keymap (kbd ";g") #'keyboard-quit)
   ;; for quit shell-command output buffer
