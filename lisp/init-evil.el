@@ -1,14 +1,14 @@
 ;; -*- coding: utf-8; lexical-binding: t; -*-
 
-(use-package evil-ex-registers
-  :disabled
-  :after evil
-  :load-path "lisp"
-  ;; :straight
-  ;; (:host github :repo "tarao/evil-plugins")
-  :config
-  (define-key evil-ex-completion-map (kbd "C-r") #'evil-ex-paste-from-register)
-  )
+;; (use-package evil-ex-registers
+;;   :disabled
+;;   :after evil
+;;   :load-path "lisp"
+;;   ;; :straight
+;;   ;; (:host github :repo "tarao/evil-plugins")
+;;   :config
+;;   (define-key evil-ex-completion-map (kbd "C-r") #'evil-ex-paste-from-register)
+;;   )
 
 ;; https://emacs.stackexchange.com/questions/31334/history-of-search-terms-for-evil-mode
 ;; (setq-default evil-search-module 'evil-search)
@@ -23,6 +23,7 @@
   (hi-lock-mode -1)
   (hi-lock-mode 1)
   (highlight-symbol-remove-all)
+  (symbol-overlay-remove-all)
   )
 (defun search-highlight-persist ()
   ;; (highlight-regexp (car-safe (if isearch-regexp
@@ -301,7 +302,8 @@
                     "ls" 'my-swiper-forward-word
                     "lw" 'swiper-thing-at-point
                     "la" 'swiper-all-thing-at-point
-                    "od" 'occur-dwim
+                    "oc" 'occur-dwim
+                    "oi" 'isearch-occur
                     "qq" 'quit-window
                     "pa" 'evil-paste-after
                     "pb" 'evil-paste-before

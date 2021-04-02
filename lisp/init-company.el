@@ -9,7 +9,9 @@
         ("C-w" . evil-delete-backward-word)
         ("C-u" . company-previous-page)
         ("C-d" . company-next-page)
-        ("C-s" . company-filter-candidates))
+        ;; ("C-s" . company-filter-candidates)
+        ("C-s" . counsel-company))
+
   :config
   (global-company-mode)
   ;; (add-hook 'after-init-hook 'global-company-mode)

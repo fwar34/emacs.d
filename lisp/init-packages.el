@@ -321,9 +321,13 @@
                ;; C-y yank，可以在minibuffer中粘贴
   ;; 默认就是fancy
   ;; (setq ivy-display-style 'fancy)
-  (define-key read-expression-map (kbd "C-r") 'counsel-expression-history)
+  ;; (define-key read-expression-map (kbd "C-r") 'counsel-expression-history)
   (setq enable-recursive-minibuffers t)
-  (define-key minibuffer-local-map (kbd "C-r") 'counsel-minibuffer-history)
+  (define-key ivy-minibuffer-map (kbd "C-i") 'counsel-evil-registers)
+  ;; (define-key isearch-mode-map (kbd "C-i") 'counsel-evil-registers)
+  ;; (define-key isearch-mode-map (kbd "C-n") 'ivy-next-line)
+  ;; (define-key isearch-mode-map (kbd "C-p") 'ivy-previous-line)
+  ;; (define-key ivy-minibuffer-map (kbd "C-r") 'counsel-minibuffer-history)
   (global-set-key (kbd "C-h f") #'counsel-describe-function)
   (global-set-key (kbd "C-h v") #'counsel-describe-variable)
 
@@ -768,7 +772,7 @@
   :ensure t
   :defer t
   :config
-  (define-transient-command symbol-overlay-transient ()
+  (transient-define-prefix symbol-overlay-transient ()
     "Symbol Overlay transient"
     ["Symbol Overlay"
      ["Overlays"
@@ -791,7 +795,6 @@
     (define-key map (kbd "n") 'symbol-overlay-jump-next)
     (define-key map (kbd "p") 'symbol-overlay-jump-prev)
       (setq symbol-overlay-map map))
-  ;; (global-set-key (kbd "s-.") 'symbol-overlay-transient)
   )
 
 ;; rainbow-mode
