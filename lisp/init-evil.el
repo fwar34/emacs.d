@@ -260,8 +260,8 @@
                     "hr" 'highlight-symbol-query-replace
                     "ln" 'highlight-symbol-nav-mode ; use M-n/M-p to navigation between symbols
                     ;;symbol-overlay默认n,p,i,q在高亮的地方点击为下一个，上一个，取消所有的高亮，替换
-                    "so" 'symbol-overlay-transient
-                    "sp" 'symbol-overlay-put
+                    "st" 'symbol-overlay-transient
+                    "so" 'symbol-overlay-put
                     "sr" 'symbol-overlay-remove-all
                     ;;
                     "ia" 'my-append-semicolon-excursion
