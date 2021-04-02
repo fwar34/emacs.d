@@ -284,6 +284,8 @@
   (after-init . global-undo-tree-mode))
 
 (use-package goto-chg
+  ;; Goto Last Change
+  ;; Goto the point of the most recent edit in the buffer.
   :after evil
   :ensure t
   )
