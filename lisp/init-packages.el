@@ -144,7 +144,7 @@
 
 (use-package pyim
   :ensure t
-  :if (and window-system (not (equal window-system 'ns)))
+  :if (and (display-graphic-p) (string-equal "A12969" system-name) (not (equal system-type 'windows-nt)))
   :demand t
   :config
   ;; 激活 basedict 拼音词库，五笔用户请继续阅读 README
