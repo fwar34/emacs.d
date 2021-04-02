@@ -152,23 +152,24 @@
 
   ;;-------------------------------------------------------------
   ;; M-um
-  (defhydra hydra-M-um (:color pink :hint nil)
+  (defhydra hydra-M-um (:color blue)
     "
-    ^kill-ring^                      ^iedit-mode^        ^fix-word^
-    ^^-----------------------------------------------------------------------------
-    _p_: paste from clipboard        _se_: iedit mode    _up_: fix-word-upcase
-    _y_: grab the symbol at point    ^  ^                _dw_: fix-word-downcase
-    ^ ^                              ^  ^                _ca_: fix-word-capitalize
-    ^ ^                              ^  ^                _cp_: caps-lock-mode
+    ^kill-ring^                      ^iedit-mode^             ^fix-word^
+    ^^----------------------------------------------------------------------------------
+    _p_: paste from clipboard        _se_: iedit mode         _up_: fix-word-upcase
+    _y_: grab the symbol at point    _lv_: lispyville-mode    _dw_: fix-word-downcase
+    ^ ^                              ^  ^                     _ca_: fix-word-capitalize
+    ^ ^                              ^  ^                     _cp_: caps-lock-mode
     "
-    ("p" clipboard-yank :exit t)
-    ("y" ack-yank-symbol-at-point :exit t)
+    ("p" clipboard-yank)
+    ("y" ack-yank-symbol-at-point)
+    ("lv" lispyville-mode)
     ("se" iedit-mode)
-    ("up" fix-word-upcase :exit t)
-    ("dw" fix-word-downcase :exit t)
-    ("ca" fix-word-capitalize :exit t)
+    ("up" fix-word-upcase)
+    ("dw" fix-word-downcase)
+    ("ca" fix-word-capitalize)
     ("cp" caps-lock-mode)
-    ("q" nil "cancale" :color blue))
+    ("q" nil "cancale"))
   (global-set-key (kbd "M-u mm") #'hydra-M-um/body)
   (global-set-key (kbd "M-u C-m C-m") #'hydra-M-um/body)
   ;; (evil-define-key '(normal insert) 'global (kbd "M-u mm") #'hydra-M-um/body)

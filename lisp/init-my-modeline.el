@@ -70,7 +70,7 @@ DEFAULT-TEXT."
   "Display lispy mode in modeline"
   '(:eval
     (let ((enable-mode '(emacs-lisp-mode lisp-interaction-mode)))
-      (and (member major-mode enable-mode) (not (bound-and-true-p lispy-mode))
+      (and (member major-mode enable-mode) (not (bound-and-true-p lispyville-mode))
            (propertize " PASTE(lisp)" 'face 'font-lock-evil-emacs-face)))))
 
 ;; reference from spaceline
@@ -203,13 +203,28 @@ DEFAULT-TEXT."
                       'help-echo "Buffer is read-only"))
             "]"))))
 
+(defun my-persp-mode-line-string ()
+  (let ((index 0)
+        (names (persp-names))
+        (current-name (persp-current-name))
+        (max (length (persp-names))))
+    (catch 'exit
+      (dolist (elt names)
+        (when (string-equal elt current-name)
+          (throw 'exit nil))
+        (setq index (1+ index))
+        ))
+    (1+ index))
+  )
+
 (setq my-persp-mode-line
       ;; https://www.gnu.org/software/emacs/manual/html_node/elisp/Face-Attributes.html
       ;; '(:eval (propertize (mapconcat #'substring-no-properties (persp-mode-line) "") 'face '(:family "Monaco" font-lock-preprocessor-face))))
       ;; '(:eval (propertize (mapconcat #'substring-no-properties (persp-mode-line) "") 'face '(:box (:color "orange" :style pressed-button) font-lock-preprocessor-face))))
       (if (display-graphic-p)
-          '(:eval (propertize (mapconcat #'substring-no-properties (persp-mode-line) "") 'face '(:box (:color "orange") font-lock-preprocessor-face)))
-        '(:eval (propertize (mapconcat #'substring-no-properties (persp-mode-line) "") 'face 'font-lock-preprocessor-face))))
+          '(:eval (propertize (format "%s<%d/%d>" (mapconcat #'substring-no-properties (persp-mode-line) "") (my-persp-mode-line-string) (length (persp-names))) 'face '(:box (:color "orange") font-lock-preprocessor-face)))
+        '(:eval (propertize (format "%s<%d/%d>" (mapconcat #'substring-no-properties (persp-mode-line) "") (my-persp-mode-line-string) (length (persp-names))) 'face 'font-lock-preprocessor-face)))
+      )
 
 (setq line-column-mode-line
       (concat "("

@@ -10,6 +10,9 @@
 
 ;; (setq gc-cons-threshold 402653184
 ;;       gc-cons-percentage 0.6)
+;; (add-hook 'emacs-startup-hook (lambda ()
+;;                                 (setq gc-cons-threshold 16777216
+;;                                       gc-cons-percentage 0.1)))
 
 ;; http://www.sohu.com/a/301863132_100034897
 ;; -q ignores personal Emacs files but loads the site files.
@@ -69,8 +72,3 @@
             (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
             (if (file-exists-p (expand-file-name "custom.el"))
                 (load-file custom-file))))
-
-(global-set-key [f9] #'lispyville-mode)
-(add-hook 'emacs-startup-hook (lambda ()
-                                (setq gc-cons-threshold 16777216
-                                      gc-cons-percentage 0.1)))

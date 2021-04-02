@@ -19,6 +19,7 @@
 (global-set-key (kbd "M-m oa") 'org-agenda)
 ;; minefunc org template
 (global-set-key (kbd "M-m oc") 'org-capture)
+(global-set-key [F9] #'lispyville-mode)
 
 ;; http://ergoemacs.org/emacs/emacs_dired_tips.html
 ;; (require 'dired )
