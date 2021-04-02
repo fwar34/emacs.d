@@ -244,6 +244,10 @@
   (setq evil-want-fine-undo "Yes")
   (setq evil-want-Y-yank-to-eol t)
   ;; (setq evil-no-display t)              ;; not display evil state in echo area
+  :bind
+  (:map isearch-mode-map
+        ("<up>" . 'isearch-ring-retreat)
+        ("<down>" . isearch-ring-advance))
   :config
   (define-key evil-ex-search-keymap (kbd ";g") #'keyboard-quit)
   ;; for quit shell-command output buffer
@@ -256,6 +260,9 @@
   ;;     ;; (evil-local-set-key 'normal (kbd "q") #'quit-window)))
   ;;     (evil-local-set-key 'normal (kbd "q") #'kill-this-buffer)))
   (evil-ex-define-cmd "q[uit]" 'kill-this-buffer)
+
+  ;; https://emacs.stackexchange.com/questions/31334/history-of-search-terms-for-evil-mode
+  ;; (custom-set-variables '(evil-search-module 'evil-search))
 
   ;; https://emacs-china.org/t/customize-evil-undo-system-for-redo-functionality/14969/3
   (global-undo-tree-mode)
@@ -583,7 +590,6 @@
   :ensure t
   :defer t
   :config
-  (global-set-key [f8] 'neotree-toggle)
   ;; Note: For users who want to use the icons theme. Pls make sure you have
   ;; installed the all-the-icons package and its fonts.
   ;; (setq neo-theme (if (display-graphic-p) 'icons 'arrow))
@@ -591,41 +597,13 @@
   (setq neo-theme 'arrow)
   ;; Every time when the neotree window is opened, let it find current file and jump to node.
   (setq neo-smart-open t)
-  ;; When running ‘projectile-switch-project’ (C-c p p), ‘neotree’ will change root automatically.
-  ;; (setq projectile-switch-project-action 'neotree-projectile-action)
-  ;; Similar to find-file-in-project, NeoTree can be opened (toggled) at projectile project root as follows:
-  ;; (defun neotree-project-dir ()
-  ;;   "Open NeoTree using the git root."
-  ;;   (interactive)
-  ;;   (let ((project-dir (projectile-project-root))
-  ;;         (file-name (buffer-file-name)))
-  ;;     (neotree-toggle)
-  ;;     (if project-dir
-  ;;         (if (neo-global--window-exists-p)
-  ;;             (progn
-  ;;               (neotree-dir project-dir)
-  ;;               (neotree-find file-name)))
-  ;;       (message "Could not find git project root."))))
-  ;; If you use evil-mode, by default some of evil key bindings conflict with neotree-mode keys. For example,
-  ;; you cannot use q to hide NeoTree. To make NeoTree key bindings in effect, you can bind those keys
-  ;; in evil-normal-state-local-map in neotree-mode-hook, as shown in below code:
-  (add-hook 'neotree-mode-hook
-            (lambda ()
-              (define-key evil-normal-state-local-map (kbd "TAB") 'neotree-enter)
-              (define-key evil-normal-state-local-map (kbd "SPC") 'neotree-quick-look)
-              (define-key evil-normal-state-local-map (kbd "q") 'neotree-hide)
-              (define-key evil-normal-state-local-map (kbd "RET") 'neotree-enter)
-              (define-key evil-normal-state-local-map (kbd "g") 'neotree-refresh)
-              (define-key evil-normal-state-local-map (kbd "n") 'neotree-next-line)
-              (define-key evil-normal-state-local-map (kbd "p") 'neotree-previous-line)
-              (define-key evil-normal-state-local-map (kbd "A") 'neotree-stretch-toggle)
-              (define-key evil-normal-state-local-map (kbd "H") 'neotree-hidden-file-toggle)))
   )
 
 (use-package all-the-icons
+  :disabled
   :ensure t
   :defer t
-  :unless window-system
+  :if (display-graphic-p)
   )
 
 ;; (use-package lispy

@@ -1,17 +1,5 @@
 ;; -*- coding: utf-8; lexical-binding: t; -*-
 
-;; (use-package evil-ex-registers
-;;   :disabled
-;;   :after evil
-;;   :load-path "lisp"
-;;   ;; :straight
-;;   ;; (:host github :repo "tarao/evil-plugins")
-;;   :config
-;;   (define-key evil-ex-completion-map (kbd "C-r") #'evil-ex-paste-from-register)
-;;   )
-
-;; https://emacs.stackexchange.com/questions/31334/history-of-search-terms-for-evil-mode
-;; (setq-default evil-search-module 'evil-search)
 
 ;; highlight persistent
 ;; https://stackoverflow.com/questions/25768036/emacs-evil-non-incremental-search-and-persistent-highlighting/34252236#34252236
@@ -427,27 +415,6 @@
                     "sh" 'eshell
                     "rr" 'fwar34/counsel-goto-recent-directory
                     "rc" 'fwar34/run-current-file)
-;; }}
-
-;; {{ 
-(general-define-key
- :states 'motion
- ;; swap ; and :
- ":" 'evil-ex
- ";" 'evil-repeat-find-char)
-;; }}
-
-;; {{
-;; (general-define-key
-;;  :keymaps 'lispyville-mode-map
-;;  "gcc" 'lispyville-comment-or-uncomment
-;;  "[" 'lispyville-previous-opening 
-;;  "]" 'lispyville-next-closing)
-
-(evil-define-key 'normal lispyville-mode-map
-  "gc"  #'lispyville-comment-or-uncomment
-   "[" 'lispyville-previous-opening 
-   "]" 'lispyville-next-closing)
 ;; }}
 
  ;; {{ Use `SPC` as one leader key
