@@ -12,6 +12,7 @@
   (hi-lock-mode 1)
   (highlight-symbol-remove-all)
   (symbol-overlay-remove-all)
+  (lazy-highlight-cleanup t)
   )
 (defun search-highlight-persist ()
   ;; (highlight-regexp (car-safe (if isearch-regexp

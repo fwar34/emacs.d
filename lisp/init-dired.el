@@ -4,6 +4,22 @@
 ;; (use-package dired+
 ;;   :straight t)
 
+;; https://emacs-china.org/t/emacs-builtin-mode/11937/20
+;; 显示或隐藏隐藏文件，按键P
+(define-advice dired-do-print (:override (&optional _))
+    "Show/hide dotfiles."
+    (interactive)
+    (if (or (not (boundp 'dired-dotfiles-show-p)) dired-dotfiles-show-p)
+        (progn
+          (setq-local dired-dotfiles-show-p nil)
+          (dired-mark-files-regexp "^\\.")
+          (dired-do-kill-lines))
+      (revert-buffer)
+      (setq-local dired-dotfiles-show-p t)))
+
+;; dired显示选项
+(setq dired-listing-switches "-Afhlvt")
+
 (with-eval-after-load 'dired
   ;; dired递归copy delete
   (setq dired-recursive-copies 'always)

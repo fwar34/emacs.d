@@ -506,7 +506,7 @@
 
 (use-package magit
   :ensure t
-  :after evil
+  :commands magit
   :config
   ;; https://www.helplib.com/GitHub/article_131559
   ;; (evil-define-key evil-magit-state magit-mode-map "?"'evil-search-backward)
@@ -748,12 +748,16 @@
   :defer t
   )
 
+(use-package transient
+  :ensure t)
+
 ;; https://github.com/wolray/symbol-overlay/
 ;; https://github.com/wolray/symbol-overlay/issues/59
 (use-package symbol-overlay
   ;;默认n,p,i,q在高亮的地方点击为下一个，上一个，取消所有的高亮，替换
   :ensure t
-  :defer t
+  :after transient
+  :commands symbol-overlay
   :config
   (transient-define-prefix symbol-overlay-transient ()
     "Symbol Overlay transient"

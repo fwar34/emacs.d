@@ -13,4 +13,36 @@
   (ediff-quit . winner-undo)
   )
 
+(use-package isearch
+  :config
+  :bind
+  (:map isearch-mode-map
+        ([remap isearch-delete-char] . isearch-del-char))
+  :custom
+  (isearch-lazy-count t)
+  (lazy-count-prefix-format "%s/%s ")
+  (lazy-highlight-cleanup nil))
+
+;; 功能             原生        evil-mode
+;; hs-hide-block	C-c @ C-h	zc
+;; hs-show-block	C-c @ C-s	zo
+;; hs-hide-all	    C-c @ C-M-h	zm
+;; hs-show-all      C-c @ C-M-s	zr
+;; hs-hide-level	C-c @ C-l	无
+;; hs-toggle-hiding	C-c @ C-c	za
+(use-package hideshow
+  :ensure nil
+  :hook (prog-mode . hs-minor-mode)
+  :config
+  (defconst hideshow-folded-face '((t (:inherit 'font-lock-comment-face :box t))))
+
+  (defun hideshow-folded-overlay-fn (ov)
+    (when (eq 'code (overlay-get ov 'hs))
+      (let* ((nlines (count-lines (overlay-start ov) (overlay-end ov)))
+             (info (format " ... #%d " nlines)))
+        (overlay-put ov 'display (propertize info 'face hideshow-folded-face)))))
+
+  (setq hs-set-up-overlay 'hideshow-folded-overlay-fn)
+  )
+
 (provide 'init-builtin)
