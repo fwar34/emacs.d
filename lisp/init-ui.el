@@ -1,7 +1,7 @@
 ;; -*- coding: utf-8; lexical-binding: t; -*-
 (setq print-font nil)
 
-(when window-system
+(when (display-graphic-p)
   ;; 更改光标样式
   ;; (set-default 'cursor-type 'box)
   ;; (set-default 'cursor-type 'bar)
@@ -23,61 +23,61 @@
   ;; (x-list-fonts "*")
   ;; (print (font-family-list)) 打印字体
 
-  (require 'cl-lib) ;; find-if is in common list package
+  ;; (require 'cl-lib) ;; find-if is in common list package
 
-  (defun fwar34/font-exist-p (font)
-    (if (null (x-list-fonts font))
-        nil
-      t))
+  ;; (defun fwar34/font-exist-p (font)
+  ;;   (if (null (x-list-fonts font))
+  ;;       nil
+  ;;     t))
 
-  (defun fwar34/set-fonts (english-fonts englist-font-size &optional chinese-fonts chinese-font-size)
-    ;; 英文字体设置
-    (set-face-attribute 'default nil
-                        :height englist-font-size
-                        ;; :weight 'bold
-                        ;; :slant 'Oblique
-                        :font (find-if #'fwar34/font-exist-p english-fonts)) 
-    (message (format "set englist font: %s size: %d" (find-if #'fwar34/font-exist-p english-fonts) englist-font-size))
+  ;; (defun fwar34/set-fonts (english-fonts englist-font-size &optional chinese-fonts chinese-font-size)
+  ;;   ;; 英文字体设置
+  ;;   (set-face-attribute 'default nil
+  ;;                       :height englist-font-size
+  ;;                       ;; :weight 'bold
+  ;;                       ;; :slant 'Oblique
+  ;;                       :font (find-if #'fwar34/font-exist-p english-fonts)) 
+  ;;   (message (format "set englist font: %s size: %d" (find-if #'fwar34/font-exist-p english-fonts) englist-font-size))
 
-    ;; 中文字体设置
-    (when chinese-fonts
-        (dolist (charset '(kana han symbol cjk-misc bopomofo))
-          ;; (set-fontset-font (frame-parameter nil 'font) charset (font-spec :family "微软雅黑" :size 18))
-          (set-fontset-font (frame-parameter nil 'font)
-                            charset (font-spec :family (find-if #'fwar34/font-exist-p chinese-fonts)
-                                               :size chinese-font-size)))
-        (message (format "set chinese font: %s size: %d" (find-if #'fwar34/font-exist-p chinese-fonts) chinese-font-size)))
-    )
+  ;;   ;; 中文字体设置
+  ;;   (when chinese-fonts
+  ;;       (dolist (charset '(kana han symbol cjk-misc bopomofo))
+  ;;         ;; (set-fontset-font (frame-parameter nil 'font) charset (font-spec :family "微软雅黑" :size 18))
+  ;;         (set-fontset-font (frame-parameter nil 'font)
+  ;;                           charset (font-spec :family (find-if #'fwar34/font-exist-p chinese-fonts)
+  ;;                                              :size chinese-font-size)))
+  ;;       (message (format "set chinese font: %s size: %d" (find-if #'fwar34/font-exist-p chinese-fonts) chinese-font-size)))
+  ;;   )
 
-  (defvar englist-font-list '("Courier 10 Pitch"
-                              "RobotoMono Nerd Font"
-                              "PragmataPro Mono"
-                              "RobotoMono Nerd Font Mono"
-                              "Courier New"
-                              "Hack"
-                              "RobotoMono NF"
-                              "DejaVu Sans Mono"))
-  (defvar chinese-font-list '("黑体"
-                              "STHeiti"
-                              "STFangsong"
-                              "Microsoft Yahei"
-                              "文泉驿等宽微米黑"
-                              "新宋体"
-                              "宋体"))
+  ;; (defvar englist-font-list '("Courier 10 Pitch"
+  ;;                             "RobotoMono Nerd Font"
+  ;;                             "PragmataPro Mono"
+  ;;                             "RobotoMono Nerd Font Mono"
+  ;;                             "Courier New"
+  ;;                             "Hack"
+  ;;                             "RobotoMono NF"
+  ;;                             "DejaVu Sans Mono"))
+  ;; (defvar chinese-font-list '("黑体"
+  ;;                             "STHeiti"
+  ;;                             "STFangsong"
+  ;;                             "Microsoft Yahei"
+  ;;                             "文泉驿等宽微米黑"
+  ;;                             "新宋体"
+  ;;                             "宋体"))
 
-  (let ((is-set-chinese nil))
-    (if (file-readable-p "/etc/os-release")
-        (with-temp-buffer
-           (insert-file-contents "/etc/os-release")
-           (if (string-match "ID=arch" (buffer-string))
-               (setq is-set-chinese t))))
-    ;; (if is-set-chinese
-    ;;     ;; 设置英文和中文
-    ;;     (fwar34/set-fonts englist-font-list 130 chinese-font-list 25)
-    ;;   ;; 设置英文
-    ;;   ;; (fwar34/set-fonts englist-font-list 120)
-    ;;   (fwar34/set-fonts englist-font-list 130 chinese-font-list 25))
-    )
+  ;; (let ((is-set-chinese nil))
+  ;;   (if (file-readable-p "/etc/os-release")
+  ;;       (with-temp-buffer
+  ;;          (insert-file-contents "/etc/os-release")
+  ;;          (if (string-match "ID=arch" (buffer-string))
+  ;;              (setq is-set-chinese t))))
+  ;;   ;; (if is-set-chinese
+  ;;   ;;     ;; 设置英文和中文
+  ;;   ;;     (fwar34/set-fonts englist-font-list 130 chinese-font-list 25)
+  ;;   ;;   ;; 设置英文
+  ;;   ;;   ;; (fwar34/set-fonts englist-font-list 120)
+  ;;   ;;   (fwar34/set-fonts englist-font-list 130 chinese-font-list 25))
+  ;;   )
 
   ;; (if (equal window-system 'ns)
   ;;     (fwar34/set-fonts englist-font-list 160 chinese-font-list 16)
@@ -90,13 +90,13 @@
   ;;       (fwar34/set-fonts englist-font-list 120 chinese-font-list 16))))
   )
 
-(defvar font-flag nil)
-(defun my-change-englist-font ()
-  (interactive)
-  (if font-flag
-      (fwar34/set-fonts '("PragmataPro Mono") 130)
-    (fwar34/set-fonts '("RobotoMono Nerd Font") 120))
-  (setq font-flag (not font-flag)))
+;; (defvar font-flag nil)
+;; (defun my-change-englist-font ()
+;;   (interactive)
+;;   (if font-flag
+;;       (fwar34/set-fonts '("PragmataPro Mono") 130)
+;;     (fwar34/set-fonts '("RobotoMono Nerd Font") 120))
+;;   (setq font-flag (not font-flag)))
 
 ;; (use-package emacs-pragmatapro-ligatures
 ;;   ;; :defer t
@@ -113,8 +113,8 @@
 ;; https://github.com/tumashu/cnfonts
 (use-package cnfonts
   :ensure t
-  :if window-system
-  :defer t
+  :if (display-graphic-p)
+  :commands (cnfonts-edit-profile cnfonts-insert-fontname cnfonts-insert-fonts-configure)
   :config
   ;; (cnfonts-enable)
 
@@ -172,5 +172,42 @@
                 :weight 'normal
                 :slant 'normal
                 :size 12.0))))
+
+;; https://github.com/MatthewZMD/.emacs.d/blob/master/README.md#smooth-scrolling
+;; {{ 平滑滚动
+;; Vertical Scroll
+(setq scroll-step 1)
+(setq scroll-margin 1)
+(setq scroll-conservatively 101)
+(setq scroll-up-aggressively 0.01)
+(setq scroll-down-aggressively 0.01)
+(setq auto-window-vscroll nil)
+(setq fast-but-imprecise-scrolling nil)
+(setq mouse-wheel-scroll-amount '(1 ((shift) . 1)))
+(setq mouse-wheel-progressive-speed nil)
+;; Horizontal Scroll
+(setq hscroll-step 1)
+(setq hscroll-margin 1)
+;; }}
+
+;; {{
+;; (global-prettify-symbols-mode 1)
+;; (defun add-pretty-lambda ()
+;;   "Make some word or string show as pretty Unicode symbols.  See https://unicodelookup.com for more."
+;;   (setq prettify-symbols-alist
+;;         '(
+;;           ("lambda" . 955)
+;;           ("delta" . 120517)
+;;           ("epsilon" . 120518)
+;;           ("->" . 8594)
+;;           ("<=" . 8804)
+;;           (">=" . 8805)
+;;           )))
+;; (add-hook 'prog-mode-hook 'add-pretty-lambda)
+;; (add-hook 'org-mode-hook 'add-pretty-lambda)
+;; }}
+
+;; (display-time-mode 1)
+;; (display-battery-mode 1)
 
 (provide 'init-ui)

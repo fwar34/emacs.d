@@ -1194,8 +1194,10 @@
 
 (use-package cider
   :ensure t
-  :config
-  (add-hook 'clojure-mode-hook #'cider-mode)
+  :hook
+  (clojure-mode . cider-mode)
+  ;; :config
+  ;; (add-hook 'clojure-mode-hook #'cider-mode)
   )
 
 (use-package inf-clojure
@@ -1208,7 +1210,10 @@
 
 (use-package god-mode
   :ensure t
+  :init
+  (define-key evil-normal-state-map (kbd ",") 'god-execute-with-current-bindings)
   :after evil
+  :commands god-execute-with-current-bindings
   :config
   ;; You can change the entire modeline's foreground and background to indicate whether God mode is active as follows:
   (defun my-god-mode-update-modeline ()
@@ -1230,7 +1235,6 @@
   ;;                                                (keyboard-quit)
   ;;                                              (god-execute-with-current-bindings called-interactively))))
   ;; (evil-define-key 'normal global-map "gm" #'god-execute-with-current-bindings)
-  (evil-define-key 'normal global-map "," #'god-execute-with-current-bindings)
   (define-key god-local-mode-map (kbd ".") #'repeat)
   (define-key god-local-mode-map (kbd ",") #'keyboard-quit)
   )
@@ -1241,6 +1245,7 @@
   (after-init . indent-guide-global-mode))
 
 (use-package caps-lock
+  :commands caps-lock-mode
   :ensure t)
 
 ;; (use-package eyebrowse
@@ -1304,8 +1309,11 @@
 
 (use-package info-colors
   :ensure t
-  :config
-  (add-hook 'Info-selection-hook 'info-colors-fontify-node))
+  :hook
+  (Info-selection . info-colors-fontify-node)
+  ;; :config
+  ;; (add-hook 'Info-selection-hook 'info-colors-fontify-node)
+  )
 
 ;; Display ^L glyphs as horizontal lines
 ;; https://depp.brause.cc/form-feed/
@@ -1319,6 +1327,20 @@
 
 ;; 文字生成拼写的大字
 (use-package figlet
+  :commands figlet
+  :if (executable-find "figlet")
+  :ensure t)
+
+(use-package benchmark-init
+  :ensure t
+  :config
+  ;; To disable collection of benchmark data after init is done.
+  (add-hook 'after-init-hook 'benchmark-init/deactivate)
+  )
+
+(use-package quickrun
+  :commands quickrun
+  :unless (string-equal "windows-nt" system-type)
   :ensure t)
 
 (provide 'init-packages)
