@@ -6,7 +6,10 @@
   (company-minimum-prefix-length 1)
   :bind
   (:map company-active-map
-   ("C-w" . evil-delete-backward-word))
+        ("C-w" . evil-delete-backward-word)
+        ("C-u" . company-previous-page)
+        ("C-d" . company-next-page)
+        ("C-s" . company-filter-candidates))
   :config
   (global-company-mode)
   ;; (add-hook 'after-init-hook 'global-company-mode)
