@@ -106,14 +106,13 @@
       (evil-define-key 'emacs dired-mode-map "q" #'kill-this-buffer)
       (evil-define-key 'normal dired-mode-map "f" #'swiper)
       (evil-define-key 'normal dired-mode-map "h" (lambda () (interactive) (dired-single-buffer "..")))
+      (evil-define-key 'normal dired-mode-map "l" 'dired-single-buffer)
       (evil-define-key 'normal dired-mode-map "^" (lambda () (interactive) (dired-single-buffer "..")))
       (if (display-graphic-p)
           (progn
             (evil-define-key 'normal dired-mode-map [return] 'dired-single-buffer)
             (evil-define-key 'normal dired-mode-map [mouse-1] 'dired-single-buffer-mouse))
-        (progn
-          (evil-define-key 'normal dired-mode-map (kbd "RET") 'dired-single-buffer)
-          (evil-define-key 'normal dired-mode-map (kbd "l") 'dired-single-buffer))))
+        (evil-define-key 'normal dired-mode-map (kbd "RET") 'dired-single-buffer)))
     ;; if dired's already loaded, then the keymap will be bound
     (if (boundp 'dired-mode-map)
         ;; we're good to go; just add our bindings
