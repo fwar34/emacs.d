@@ -102,6 +102,7 @@
   (push 'monokai-theme dump-packages))
 
 (dolist (package dump-packages)
+  (print package)
   (require package))
 
 ;; pre-load themes
