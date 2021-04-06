@@ -110,7 +110,6 @@
   :hook
   (eshell-mode . company-mode)
   :config
-  (message "SSSSSSSSS")
   (progn
     (when (not (functionp 'eshell/rgrep))
       (defun eshell/rgrep (&rest args)

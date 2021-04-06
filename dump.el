@@ -16,11 +16,10 @@
                       company-ctags
                       company-statistics
                       company-c-headers
-                      ;; company-english-helper
                       ivy
                       counsel
                       general
-                      ;; use-package
+                      use-package
                       which-key 
                       swiper
                       winner
@@ -32,65 +31,58 @@
                       magit
                       ;;
                       undo-tree
-                      ;; evil
-                      ;; evil-collection
                       hungry-delete
                       transient
                       ivy-xref
                       ivy-rich
-                      js2-mode
-                      web-mode
+                      ;; js2-mode
+                      ;; web-mode
                       goto-chg
                       ;;
                       popwin
                       winum
-                      ;; youdao-dictionary
-                      neotree
-                      ;; lispyville
+                      ;; neotree
                       beacon
                       symbol-overlay
                       ;;
                       rainbow-mode
                       fix-word
-                      ;; browse-kill-ring
-                      markdown-mode
+                      ;; markdown-mode
                       highlight-numbers
                       highlight-quoted
                       highlight-defined
                       highlight-parentheses
                       imenu-list
                       git-gutter
-                      ;; taglist
                       ;;
                       ace-popup-menu
                       volatile-highlights
-                      dired
-                      dired-k
-                      dired-single
-                      ;; org
+                      ;; dired
+                      ;; dired-k
+                      ;; dired-single
                       lispy
                       highlight-symbol
                       ace-popup-menu
-                      multi-term
-                      thrift
-                      lua-mode
-                      cider
+                      ;; multi-term
+                      ;; thrift
+                      ;; lua-mode
+                      ;; cider
                       god-mode
                       ;;
                       indent-guide
-                      caps-lock
+                      ;; caps-lock
                       perspective
-                      info-colors
+                      ;; info-colors
                       form-feed
-                      cc-mode
+                      ;; cc-mode
                       ;;
-                      go-mode
-                      rust-mode
+                      ;; go-mode
+                      ;; rust-mode
                       unicad
                       recentf
                       hideshow
                       isearch
-                      ediff
+                      ;; ediff
                       hydra
                       ))
 
