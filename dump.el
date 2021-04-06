@@ -14,7 +14,6 @@
                    company
                    ivy
                    counsel
-                   ;; org
                    general
                    ;; use-package
                    which-key 
@@ -61,6 +60,27 @@
                    ;;;
                    ace-popup-menu
                    volatile-highlights
+                   dired
+                   ;; org
+                   lispy
+                   highlight-symbol
+                   ace-popup-menu
+                   multi-term
+                   thrift
+                   lua-mode
+                   cider
+                   inf-clojure
+                   god-mode
+                   ;;;;;
+                   indent-guide
+                   caps-lock
+                   perspective
+                   info-colors
+                   form-feed
+                   cc-mode
+                   ;;;;
+                   go-mode
+                   rust-mode
                    ))
   (require package))
 
