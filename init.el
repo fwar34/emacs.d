@@ -7,6 +7,10 @@
 (defvar fwar34-dumped-load-path nil
   "restore load path")
 
+(if fwar34-dumped                 
+    (message "emacs start with dump")   
+  (message "emacs start without dump"))
+
 (defmacro fwar34-if-dump (then &rest else)
   "Evaluate IF if running with a dump file, else evaluate ELSE."
   (declare (indent 1))
@@ -26,11 +30,6 @@
 		  (lisp-interaction-mode)))))
   ;;
   (package-initialize))
-
-(when (display-graphic-p)
-  (fwar34-if-dump
-    (enable-theme 'zenburn)
-    nil))
 
 ;; 设置垃圾回收，在windows下，emacs25版本会频繁发出垃圾回收
 (when (equal system-type 'windows-nt)
