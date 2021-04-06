@@ -405,13 +405,13 @@
   (ivy-posframe-mode 1)
   )
 
-(use-package smex
-  ;; I use this package to display history for M-x
-  :ensure t
-  :after evil
-  :config
-  (smex-initialize)
-  )
+;; (use-package smex
+;;   ;; I use this package to display history for M-x
+;;   :ensure t
+;;   :after evil
+;;   :config
+;;   (smex-initialize)
+;;   )
 
 (use-package ivy-xref
   :ensure t
@@ -465,14 +465,14 @@
   (define-key web-mode-map (kbd "C-n") 'web-mode-tag-match)
   )
 
-(use-package emmet-mode
-  :ensure t
-  :hook
-  ((sgml-mdoe . emmet-mode)    ;; Auto-start on any markup modes
-   (html-mode . emmet-mode)    ;; enable Emmet's css abbreviation.
-   (web-mode . emmet-mode)
-   (css-mode . emmet-mode))
-  )
+;; (use-package emmet-mode
+;;   :ensure t
+;;   :hook
+;;   ((sgml-mdoe . emmet-mode)    ;; Auto-start on any markup modes
+;;    (html-mode . emmet-mode)    ;; enable Emmet's css abbreviation.
+;;    (web-mode . emmet-mode)
+;;    (css-mode . emmet-mode))
+;;   )
 
 ;; popwin setting
 (use-package popwin
@@ -490,11 +490,11 @@
   (setq winum-auto-setup-mode-line nil)
   )
 
-(use-package powershell
-  :ensure t
-  :if (equal system-type 'windows-nt)
-  :defer t
-  )
+;; (use-package powershell
+;;   :ensure t
+;;   :if (equal system-type 'windows-nt)
+;;   :defer t
+;;   )
 
 
 (use-package fzf
