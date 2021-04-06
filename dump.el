@@ -94,12 +94,8 @@
                    ediff
                    ;;;;
                    hydra
+                   zenburn-theme
                    ))
-
-;; theme
-(when (display-graphic-p)
-  (push 'zenburn-theme dump-packages)
-  (push 'monokai-theme dump-packages))
 
 (dolist (package dump-packages)
   (print package)
