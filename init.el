@@ -30,7 +30,7 @@
 (when (display-graphic-p)
   (fwar34-if-dump
     (enable-theme 'zenburn)
-    (load-theme 'zenburn)))
+    nil))
 
 ;; 设置垃圾回收，在windows下，emacs25版本会频繁发出垃圾回收
 (when (equal system-type 'windows-nt)
