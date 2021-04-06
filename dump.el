@@ -75,7 +75,6 @@
                       thrift
                       lua-mode
                       cider
-                      inf-clojure
                       god-mode
                       ;;
                       indent-guide

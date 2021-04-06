@@ -1197,19 +1197,20 @@
 
 (use-package cider
   :ensure t
+  :defer t
   :hook
   (clojure-mode . cider-mode)
   ;; :config
   ;; (add-hook 'clojure-mode-hook #'cider-mode)
   )
 
-(use-package inf-clojure
-  :disabled
-  :ensure t
-  ;; :defer t
-  :config
-  (add-hook 'clojure-mode-hook #'inf-clojure-minor-mode)
-  )
+;; (use-package inf-clojure
+;;   :disabled
+;;   :ensure t
+;;   ;; :defer t
+;;   :config
+;;   (add-hook 'clojure-mode-hook #'inf-clojure-minor-mode)
+;;   )
 
 (use-package god-mode
   :ensure t
