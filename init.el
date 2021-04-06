@@ -1,5 +1,37 @@
 ;; -*- coding: utf-8; lexical-binding: t; -*-
 
+;; https://archive.casouri.cat/note/2020/painless-transition-to-portable-dumper/index.html
+(defvar fwar34-dumped nil
+  "non-nil when a dump file is loaded.(Because dump.el sets this variable).")
+
+(defvar fwar34-dumped-load-path nil
+  "restore load path")
+
+(defmacro fwar34-if-dump (then &rest else)
+  "Evaluate IF if running with a dump file, else evaluate ELSE."
+  (declare (indent 1))
+  `(if fwar34-dumped
+     ,then
+     ,@else))
+
+(fwar34-if-dump
+  (progn
+    (setq load-path fwar34-dumped-load-path)
+    (global-font-lock-mode)
+    (transient-mark-mode)
+    (add-hook 'after-init-hook
+	      (lambda ()
+		(save-excursion
+		  (switch-to-buffer "*scratch*")
+		  (lisp-interaction-mode)))))
+  ;;
+  nil)
+
+(when (display-graphic-p)
+  (fwar34-if-dump
+    (enable-theme 'zenburn)
+    (load-theme 'zenburn)))
+
 ;; 设置垃圾回收，在windows下，emacs25版本会频繁发出垃圾回收
 (when (equal system-type 'windows-nt)
   (setq gc-cons-threshold (* 512 1024 1024))

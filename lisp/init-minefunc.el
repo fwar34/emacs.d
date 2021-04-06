@@ -515,4 +515,17 @@ URL `http://ergoemacs.org/emacs/elisp_run_current_file.html'"
 ;;     ))
 ;; }}}
 
+(defun fwar34-dump ()
+  "Dump Emacs."
+  (interactive)
+  (let ((buf "*dump process*"))
+    (make-process
+      :name "dump"
+      :buffer buf
+      ;; :command (list "D:\\emax\\emax64\\bin\\emacs.exe" "--batch" "-q"
+      :command (list "emacs" "--batch" "-q"
+		     "-l" (expand-file-name "dump.el"
+					    user-emacs-directory)))
+    (display-buffer buf)))
+
 (provide 'init-minefunc)
