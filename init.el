@@ -25,7 +25,7 @@
 		  (switch-to-buffer "*scratch*")
 		  (lisp-interaction-mode)))))
   ;;
-  nil)
+  (package-initialize))
 
 (when (display-graphic-p)
   (fwar34-if-dump
