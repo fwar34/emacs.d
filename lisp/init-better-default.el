@@ -74,6 +74,8 @@
   ;; :defer 2
   :config
   (recentf-mode 1)
+  ;; 补充一下，recentf 展示时，可以对文件名预处理，比如把家目录替换为 ~
+  (add-to-list 'recentf-filename-handlers 'abbreviate-file-name)
   (setq recentf-max-menu-item 10)
   (global-prettify-symbols-mode t)
   ;; 禁用响铃

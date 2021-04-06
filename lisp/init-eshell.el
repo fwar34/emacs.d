@@ -125,7 +125,7 @@
                                 (evil-local-set-key 'emacs (kbd "C-w") #'evil-delete-backward-word)))
 
   ;; windows中eshell设置中文
-  (when (string-equal window-system "w32")
+  (when (string-equal system-type "windows-nt")
     (with-eval-after-load 'eshell
       (set-language-environment "chinese-GB")))
 
@@ -381,6 +381,6 @@
   :custom
   (eshell-visual-commands '("top" "htop" "less" "more" "bat"))
   (eshell-visual-subcommands '(("git" "help" "lg" "log" "diff" "show")))
-    (eshell-visual-options '(("git" "--help" "--paginate"))))
+  (eshell-visual-options '(("git" "--help" "--paginate"))))
 
 (provide 'init-eshell)

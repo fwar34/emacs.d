@@ -1,4 +1,6 @@
 ;; -*- coding: utf-8; lexical-binding: t; -*-
+;; https://emacs-china.org/t/emacs-builtin-mode/11937/63
+
 (use-package winner-mode
   :ensure nil ;; emacs自带
   :hook
