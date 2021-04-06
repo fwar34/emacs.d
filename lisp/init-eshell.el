@@ -104,13 +104,13 @@
 
 (use-package eshell
   :ensure t
-  :after evil
   :commands eshell
   :init
   (setq eshell-aliases-file (concat user-emacs-directory "eshell/alias"))
   :hook
   (eshell-mode . company-mode)
   :config
+  (message "SSSSSSSSS")
   (progn
     (when (not (functionp 'eshell/rgrep))
       (defun eshell/rgrep (&rest args)
@@ -147,13 +147,13 @@
 
 (use-package esh-autosuggest
   :ensure t
+  :after eshell
   :hook
   ;; eshell-banner-message "What would you like to do?\n\n"
   (eshell-mode . esh-autosuggest-mode)
   ;; If you have use-package-hook-name-suffix set to nil, uncomment and use the
   ;; line below instead:
   ;; :hook (eshell-mode-hook . esh-autosuggest-mode)
-  :ensure t
   )
 
 (use-package eshell-prompt-extras

@@ -12,6 +12,10 @@
 ;; those we want manually
 (dolist (package '(
                    company
+                   company-ctags
+                   company-statistics
+                   company-c-headers
+                   ;; company-english-helper
                    ivy
                    counsel
                    general
@@ -83,6 +87,13 @@
                    ;;;;
                    go-mode
                    rust-mode
+                   unicad
+                   recentf
+                   hideshow
+                   isearch
+                   ediff
+                   ;;;;
+                   hydra
                    ))
   (require package))
 
