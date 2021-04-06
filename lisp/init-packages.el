@@ -645,7 +645,7 @@
    ;; '((escape insert emacs) 
    ;;   additional-movement prettify atom-motions slurp/barf-cp additional additional-wrap))
    '((escape insert emacs) 
-     additional-movement slurp/barf-cp additional commentary atom-motions wrap)))
+     additional-movement slurp/barf-cp additional commentary text-objects wrap)))
 
 ;; linum-relative
 ;; (use-package linum-relative
