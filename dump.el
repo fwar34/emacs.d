@@ -61,6 +61,8 @@
                    ace-popup-menu
                    volatile-highlights
                    dired
+                   dired-k
+                   dired-single
                    ;; org
                    lispy
                    highlight-symbol
