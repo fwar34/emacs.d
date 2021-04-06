@@ -11,6 +11,8 @@
                            ("org" . "http://mirrors.ustc.edu.cn/elpa/org/")))
   )
 
+    (require 'cl)
+
 ;; (defun require-package (package)
 ;;   "refresh package archives, check package presence and install if it's not installed"
 ;;   (if (null (require package nil t))
@@ -697,15 +699,6 @@
   ;; (evilem-default-keybindings (kbd "\\"))
   )
 
-;; (use-package ace-jump-mode
-;;   :disabled
-;;   :ensure t
-;;   :defer t
-;;   :config
-;;   (eval-after-load "ace-jump-mode"
-;;     '(ace-jump-mode-enable-mark-sync))
-;;   )
-
 (use-package evil-matchit
   :ensure t
   :after evil
@@ -1053,12 +1046,12 @@
 ;;   (evil-define-key 'normal 'magit-mode-map "q" #'kill-buffer-and-window)
 ;;   )
 
-(use-package ace-popup-menu
-  :ensure t
-  :after evil
-  :config
-  (ace-popup-menu-mode 1)
-  )
+;; (use-package ace-popup-menu
+;;   :ensure t
+;;   :after evil
+;;   :config
+;;   (ace-popup-menu-mode 1)
+;;   )
 
 (use-package exec-path-from-shell
   :if (memq window-system '(mac ns))

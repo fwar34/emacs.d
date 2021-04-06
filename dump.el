@@ -55,7 +55,7 @@
                       imenu-list
                       git-gutter
                       ;;
-                      ace-popup-menu
+                      ;; ace-popup-menu
                       volatile-highlights
                       ;; dired
                       ;; dired-k

@@ -211,7 +211,6 @@
                swiper-thing-at-point
                swiper-all-thing-at-point
                evil-ace-jump-char-mode
-               ace-jump-mode
                evil-avy-goto-char-2
                evil-avy-goto-word-or-subword-1
                evilem-motion-find-char

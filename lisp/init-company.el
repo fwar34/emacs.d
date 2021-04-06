@@ -112,12 +112,12 @@
   (add-hook 'python-mode-hook 'my/python-mode-hook)
   )
 
-(use-package company-english-helper
-  ;; write by lazycat
-  :straight
-  (:host github :repo "manateelazycat/company-english-helper")
-  :config
-  ;; toggle-company-english-helper
-  )
+;; (use-package company-english-helper
+;;   ;; write by lazycat
+;;   :straight
+;;   (:host github :repo "manateelazycat/company-english-helper")
+;;   :config
+;;   ;; toggle-company-english-helper
+;;   )
 
 (provide 'init-company)
