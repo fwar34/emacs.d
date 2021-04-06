@@ -8,13 +8,23 @@
       fwar34-dumped t)
 ;; (package-initialize) doens’t require each package, we need to load
 ;; those we want manually
-(dolist (package '(use-package company ivy counsel org helpful
-                    general helpful use-package which-key
-                    recentf-ext swiper ivy-prescient find-char
-                    aggressive-indent windman winner elec-pair 
-                    rainbow-delimiters highlight-parentheses hl-todo buffer-move
-                    savehist minions ws-butler
-                    expand-region isolate outshine magit eglot))
+(dolist (package '(
+                   company
+                   ivy
+                   counsel
+                   ;; org
+                   general
+                   ;; use-package
+                   which-key 
+                   swiper
+                   winner
+                   elec-pair 
+                   rainbow-delimiters
+                   highlight-parentheses 
+                   savehist 
+                   expand-region
+                   magit
+                   ))
   (require package))
 ;; pre-load themes
 (load-theme 'zenburn t t)

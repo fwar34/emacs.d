@@ -1,7 +1,6 @@
 ;; -*- coding: utf-8; lexical-binding: t; -*-
 (when (>= emacs-major-version 24)
   (require 'package)
-  (if (< emacs-major-version 27) (package-initialize))
   ;; (setq package-archives '(("gnu"   . "https://elpa.emacs-china.org/gnu/")
   ;;                         ("melpa" . "https://elpa.emacs-china.org/melpa/"))))
   ;; (setq package-archives '(("gnu"   . "http://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/")
@@ -28,9 +27,9 @@
 ;; (require-package 'use-package)
 
 ;; Initialize packages
-(unless (bound-and-true-p package--initialized) ; To avoid warnings in 27
-  (setq package-enable-at-startup nil)          ; To prevent initializing twice
-  (package-initialize))
+;; (unless (bound-and-true-p package--initialized) ; To avoid warnings in 27
+;;   (setq package-enable-at-startup nil)          ; To prevent initializing twice
+;;   (package-initialize))
 
 ;; Setup `use-package'
 (unless (package-installed-p 'use-package)

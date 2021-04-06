@@ -71,7 +71,6 @@
              (format "~/.emacs.d/site-lisp/%s/%s" pkg pkg))))
           t t)))
 
-(package-initialize)
 (add-to-list 'load-path "~/.emacs.d/lisp")
 (require 'init-packages)
 (require 'init-ui)

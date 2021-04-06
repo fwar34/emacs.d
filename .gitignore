@@ -49,3 +49,4 @@ transient/*
 .emacs_workgroups~
 .emacs_workgroups
 perspective.save
+emacs.pdmp
