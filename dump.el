@@ -10,7 +10,7 @@
 
 (setq evil-want-keybinding nil)
 ;; those we want manually
-(dolist (package '(
+(setq dump-packages '(
                    company
                    company-ctags
                    company-statistics
@@ -95,9 +95,16 @@
                    ;;;;
                    hydra
                    ))
+
+;; theme
+(if (display-graphic-p)
+    (push 'zenburn-theme dump-packages)
+  (push 'monokai-theme dump-packages))
+
+(dolist (package dump-packages)
   (require package))
 
 ;; pre-load themes
-(load-theme 'zenburn t t)
+;; (load-theme 'zenburn t t)
 ;; dump image
 (dump-emacs-portable "~/.emacs.d/emacs.pdmp")
