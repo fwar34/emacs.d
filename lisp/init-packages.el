@@ -1039,19 +1039,19 @@
   (set-face-foreground 'git-gutter-fr:deleted  "red")
   )
 
-(use-package diff-hl
-  :disabled
-  :ensure t
-  :after evil
-  ;; :if (not (display-graphic-p))
-  :config
-  (global-diff-hl-mode)
-  (diff-hl-margin-mode) 
-  (advice-add 'svn-status-update-modeline :after #'diff-hl-update)
-  (add-hook 'magit-pre-refresh-hook 'diff-hl-magit-pre-refresh)
-  (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh)
-  (evil-define-key 'normal 'magit-mode-map "q" #'kill-buffer-and-window)
-  )
+;; (use-package diff-hl
+;;   :disabled
+;;   :ensure t
+;;   :after evil
+;;   ;; :if (not (display-graphic-p))
+;;   :config
+;;   (global-diff-hl-mode)
+;;   (diff-hl-margin-mode) 
+;;   (advice-add 'svn-status-update-modeline :after #'diff-hl-update)
+;;   (add-hook 'magit-pre-refresh-hook 'diff-hl-magit-pre-refresh)
+;;   (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh)
+;;   (evil-define-key 'normal 'magit-mode-map "q" #'kill-buffer-and-window)
+;;   )
 
 (use-package ace-popup-menu
   :ensure t

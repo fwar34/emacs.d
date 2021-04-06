@@ -60,7 +60,6 @@
                       highlight-parentheses
                       imenu-list
                       git-gutter
-                      diff-hl
                       ;; taglist
                       ;;
                       ace-popup-menu
