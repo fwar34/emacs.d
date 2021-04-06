@@ -97,13 +97,15 @@
                    ))
 
 ;; theme
-(if (display-graphic-p)
-    (push 'zenburn-theme dump-packages)
+(when (display-graphic-p)
+  (push 'zenburn-theme dump-packages)
   (push 'monokai-theme dump-packages))
 
 (dolist (package dump-packages)
   (print package)
   (require package))
+
+(message "dump require complete.")
 
 ;; pre-load themes
 ;; (load-theme 'zenburn t t)
