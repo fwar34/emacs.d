@@ -218,6 +218,9 @@
                evilem-motion-backward-word-begin
                evilem-motion-next-line
                evilem-motion-previous-line
+               find-function
+               find-variable
+               find-function-on-key
                ))
   (evil-add-command-properties con :jump t))
 
