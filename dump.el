@@ -84,6 +84,7 @@
                       isearch
                       ;; ediff
                       hydra
+                      wgrep
                       ))
 
 (dolist (package dump-packages)

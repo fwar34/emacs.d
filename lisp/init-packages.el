@@ -331,12 +331,12 @@
         ivy-use-virtual-buffers t
         ivy-count-format "%d/%d ")
   (ivy-mode 1) ;; M-j ivy-yank-word，将光标的word读入minibuffer，很像vim中的功能
-               ;; C-y yank，可以在minibuffer中粘贴
+  ;; C-y yank，可以在minibuffer中粘贴
   ;; 默认就是fancy
   ;; (setq ivy-display-style 'fancy)
   ;; (define-key read-expression-map (kbd "C-r") 'counsel-expression-history)
   (setq enable-recursive-minibuffers t)
-  (define-key ivy-minibuffer-map (kbd "C-i") 'counsel-evil-registers)
+  ;; (define-key ivy-minibuffer-map (kbd "C-i") 'counsel-evil-registers)
   ;; (define-key isearch-mode-map (kbd "C-i") 'counsel-evil-registers)
   ;; (define-key isearch-mode-map (kbd "C-n") 'ivy-next-line)
   ;; (define-key isearch-mode-map (kbd "C-p") 'ivy-previous-line)
@@ -380,46 +380,102 @@
    "`" 'ivy-restrict-to-matches
    "j" 'swiper-avy
    )
+
+  
+
+  (use-package ivy-posframe
+    :disabled
+    :ensure t
+    :if (display-graphic-p)
+    :config
+    ;; The following example displays swiper on 20 lines by default for ivy,
+    ;; and displays other functions in posframe at the location specified on 40 lines.
+    ;; (setq ivy-posframe-height-alist '((swiper . 20)
+    ;;                                   (t      . 40)))
+
+    ;; How to show fringe to ivy-posframe
+    (setq ivy-posframe-parameters
+          '((left-fringe . 8)
+            (right-fringe . 8)))
+
+    ;; Per-command mode.
+    ;; Different command can use different display function.
+    (setq ivy-posframe-display-functions-alist
+          '((swiper          . ivy-display-function-fallback)
+            (complete-symbol . ivy-posframe-display)
+            (counsel-M-x     . ivy-posframe-display-at-window-center)
+            (t               . ivy-posframe-display)))
+    (ivy-posframe-mode 1)
+    )
+
+  ;; (use-package smex
+  ;;   ;; I use this package to display history for M-x
+  ;;   :ensure t
+  ;;   :after evil
+  ;;   :config
+  ;;   (smex-initialize)
+  ;;   )
+
+  (use-package ivy-xref
+    :ensure t
+    :init
+    ;; xref initialization is different in Emacs 27 - there are two different
+    ;; variables which can be set rather than just one
+    (when (>= emacs-major-version 27)
+      (setq xref-show-definitions-function #'ivy-xref-show-defs))
+    ;; Necessary in Emacs <27. In Emacs 27 it will affect all xref-based
+    ;; commands other than xref-find-definitions (e.g. project-find-regexp)
+    ;; as well
+    (setq xref-show-xrefs-function #'ivy-xref-show-xrefs))
+
+  ;; {{{
+  ;; https://emacs-china.org/t/ivy-occur/12083
+  (defvar ivy-occur-filter-prefix ">>> ")
+
+;;;###autoload
+  (defun ivy-occur/filter-lines ()
+    (interactive)
+    (unless (string-prefix-p "ivy-occur" (symbol-name major-mode))
+      (user-error "Current buffer is not in ivy-occur mode"))
+
+    (let ((inhibit-read-only t)
+          (regexp (read-regexp "Regexp(! for flush)"))
+          (start (save-excursion
+                   (goto-char (point-min))
+                   (re-search-forward "[0-9]+ candidates:"))))
+      (if (string-prefix-p "!" regexp)
+          (flush-lines (substring regexp 1) start (point-max))
+        (keep-lines regexp start (point-max)))
+      (save-excursion
+        (goto-char (point-min))
+        (let ((item (propertize (format "[%s]" regexp) 'face 'ivy-current-match)))
+          (if (looking-at ivy-occur-filter-prefix)
+              (progn
+                (goto-char (line-end-position))
+                (insert item))
+            (insert ivy-occur-filter-prefix item "\n"))))))
+
+;;;###autoload
+  (defun ivy-occur/undo ()
+    (interactive)
+    (let ((inhibit-read-only t))
+      (if (save-excursion
+            (goto-char (point-min))
+            (looking-at ivy-occur-filter-prefix))
+          (undo)
+        (user-error "Filter stack is empty"))))
+
+  (defun ivy|occur-mode-setup ()
+    (local-set-key "/" #'ivy-occur/filter-lines)
+    (local-set-key (kbd "C-/") #'ivy-occur/undo))
+
+  (add-hook 'ivy-occur-mode-hook 'ivy|occur-mode-setup)
+  (add-hook 'ivy-occur-grep-mode-hook 'ivy|occur-mode-setup)
+  ;; }}}
   )
 
-(use-package ivy-posframe
-  :disabled
+(use-package wgrep
   :ensure t
-  :if (display-graphic-p)
-  :config
-  ;; The following example displays swiper on 20 lines by default for ivy,
-  ;; and displays other functions in posframe at the location specified on 40 lines.
-  ;; (setq ivy-posframe-height-alist '((swiper . 20)
-  ;;                                   (t      . 40)))
-
-  ;; How to show fringe to ivy-posframe
-  (setq ivy-posframe-parameters
-        '((left-fringe . 8)
-          (right-fringe . 8)))
-
-  ;; Per-command mode.
-  ;; Different command can use different display function.
-  (setq ivy-posframe-display-functions-alist
-        '((swiper          . ivy-display-function-fallback)
-          (complete-symbol . ivy-posframe-display)
-          (counsel-M-x     . ivy-posframe-display-at-window-center)
-          (t               . ivy-posframe-display)))
-  (ivy-posframe-mode 1)
-  )
-
-;; (use-package smex
-;;   ;; I use this package to display history for M-x
-;;   :ensure t
-;;   :after evil
-;;   :config
-;;   (smex-initialize)
-;;   )
-
-(use-package ivy-xref
-  :ensure t
-  :after ivy
-  :init
-  (setq xref-show-xrefs-function #'ivy-xref-show-xrefs)
   )
 
 (use-package ivy-rich

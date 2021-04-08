@@ -595,9 +595,9 @@
                                (select-window (get-buffer-window "*lispy-help*"))))
                     "da" 'lispy-arglist-inline
                     "ss" 'fa-show
-                    "gg" 'ggtags-find-tag-dwim
-                    "gs" 'ggtags-find-other-symbol
-                    "gr" 'ggtags-find-reference
+                    ;; "gg" 'ggtags-find-tag-dwim
+                    ;; "gs" 'ggtags-find-other-symbol
+                    ;; "gr" 'ggtags-find-reference
                     ;; "ip" 'find-file-in-project
                     ;; liang.feng
                     ;; "kk" 'find-filem-in-project-by-selected
@@ -723,8 +723,8 @@
                              (org-capture)))
                     ;; "oc" 'org-capture
                     ;; "om" 'toggle-org-or-message-mode
-                    "pf" 'projectile-find-file-dwim
-                    "pg" 'projectile-grep
+                    ;; "pf" 'projectile-find-file-dwim
+                    ;; "pg" 'projectile-grep
                     ;; "ps" 'projectile-speedbar-toggle
                     "py" (lambda ()
                            (interactive)
