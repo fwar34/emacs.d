@@ -11,7 +11,7 @@
                            ("org" . "http://mirrors.ustc.edu.cn/elpa/org/")))
   )
 
-    (require 'cl)
+(require 'cl)
 
 ;; (defun require-package (package)
 ;;   "refresh package archives, check package presence and install if it's not installed"
@@ -831,7 +831,7 @@
     (define-key map (kbd "x") 'symbol-overlay-remove-all)
     (define-key map (kbd "n") 'symbol-overlay-jump-next)
     (define-key map (kbd "p") 'symbol-overlay-jump-prev)
-      (setq symbol-overlay-map map))
+    (setq symbol-overlay-map map))
   )
 
 ;; rainbow-mode
@@ -935,10 +935,10 @@
   ;; Integration into avy/evil-easymotion
   ;; This will allow you to quickly hop into avy/evil-easymotion right after a snipe.
   (define-key evil-snipe-parent-transient-map (kbd "C-;")
-  (evilem-create 'evil-snipe-repeat
-                 :bind ((evil-snipe-scope 'buffer)
-                        (evil-snipe-enable-highlight)
-                        (evil-snipe-enable-incremental-highlight))))
+    (evilem-create 'evil-snipe-repeat
+                   :bind ((evil-snipe-scope 'buffer)
+                          (evil-snipe-enable-highlight)
+                          (evil-snipe-enable-incremental-highlight))))
 
   ;; Evil-snipe can override evil-mode's native motions with 1-char sniping:
   ;; https://github.com/hlissner/evil-snipe
@@ -1183,7 +1183,7 @@
   (evil-define-key 'insert term-raw-map ";tm" 'evil-buffer)
   (evil-define-key 'insert term-raw-map ";;" (lambda () (interactive) (term-send-raw-string ";")))
   (evil-define-key 'insert term-raw-map ";g" 'evil-normal-state)
- 
+  
   (defun my-multi-term ()
     (interactive)
     (if (string-equal "w32" window-system)
@@ -1205,14 +1205,14 @@
           )))
     )
 
-;; (with-parsed-tramp-file-name default-directory path
-;;       (let ((method (cadr (assoc `tramp-login-program (assoc path-method tramp-methods)))))
-;;         (message (concat method " " (when path-user (concat path-user "@")) path-host "\C-m"))
-;;         (message (concat "cd " path-localname "\C-m"))))
+  ;; (with-parsed-tramp-file-name default-directory path
+  ;;       (let ((method (cadr (assoc `tramp-login-program (assoc path-method tramp-methods)))))
+  ;;         (message (concat method " " (when path-user (concat path-user "@")) path-host "\C-m"))
+  ;;         (message (concat "cd " path-localname "\C-m"))))
 
-;; (with-parsed-tramp-file-name default-directory path
-;;   (message path-user)
-;;   )
+  ;; (with-parsed-tramp-file-name default-directory path
+  ;;   (message path-user)
+  ;;   )
 
   )
 
