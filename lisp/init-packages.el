@@ -379,6 +379,7 @@
    :prefix "`"
    "`" 'ivy-restrict-to-matches
    "j" 'swiper-avy
+   "o" 'ivy-occur
    )
 
   
@@ -476,6 +477,7 @@
 
 (use-package wgrep
   :ensure t
+  :defer t
   )
 
 (use-package ivy-rich
