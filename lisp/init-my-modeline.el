@@ -156,7 +156,7 @@ DEFAULT-TEXT."
   (unless reserve (setq reserve 20))
   (when (and (display-graphic-p) (eq 'right (get-scroll-bar-mode)))
     (setq reserve (- reserve 3)))
-  (if (and (equal system-type 'windows-nt) (string-equal system-name "FL-Notebook"))
+  (if (and (equal system-type 'windows-nt) (string-equal (upcase system-name) "FL-NOTEBOOK"))
       (propertize " " 'display `((space :align-to
                                         (- (+ right right-fringe right-margin) ,reserve 1.4)))
                   'face face)
