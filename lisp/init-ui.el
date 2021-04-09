@@ -1,6 +1,8 @@
 ;; -*- coding: utf-8; lexical-binding: t; -*-
 
-(when (display-graphic-p)
+(use-package faces
+  :if (display-graphic-p)
+  :config
   ;; 更改光标样式
   ;; (set-default 'cursor-type 'box)
   ;; (set-default 'cursor-type 'bar)
@@ -64,23 +66,23 @@
                 :slant 'normal
                 :size 24)))
   ;; }}}
-  )
+  
 
-;; https://github.com/tumashu/cnfonts
-(use-package cnfonts
-  :ensure t
-  :if (display-graphic-p)
-  :commands (cnfonts-edit-profile cnfonts-insert-fontname cnfonts-insert-fonts-configure)
-  ;; :config
-  ;; (cnfonts-enable)
+  ;; https://github.com/tumashu/cnfonts
+  (use-package cnfonts
+    :ensure t
+    :if (display-graphic-p)
+    :commands (cnfonts-edit-profile cnfonts-insert-fontname cnfonts-insert-fonts-configure)
+    ;; :config
+    ;; (cnfonts-enable)
 
-  ;; 1. 在scratch执行后，就会在 scratch 中插入当前可用字体的名称列表，这是一个很有用的技巧。
-  ;; (cl-prettyprint (font-family-list))
-  ;; (cl-prettyprint (x-list-fonts "*"))
-  ;; 2. 命令：`cnfonts-insert-fontname', 可以让用户选择一个可用字体插入到当前光 标处。
-  ;; 3. 使用命令: `describe-char' 可以了解光标处字符使用什么字体。
+    ;; 1. 在scratch执行后，就会在 scratch 中插入当前可用字体的名称列表，这是一个很有用的技巧。
+    ;; (cl-prettyprint (font-family-list))
+    ;; (cl-prettyprint (x-list-fonts "*"))
+    ;; 2. 命令：`cnfonts-insert-fontname', 可以让用户选择一个可用字体插入到当前光 标处。
+    ;; 3. 使用命令: `describe-char' 可以了解光标处字符使用什么字体。
+    )
   )
-;; font setting end============================================================================================
 
 ;; 高亮当前行
 (global-hl-line-mode 1)
