@@ -27,7 +27,7 @@
     10. (read-color)可以显示颜色
     11. 可以M-x搜索color相关函数
     12. emacs卡顿的话可以使用M-x profiler-start来统计cpu或者内存，等卡顿过后使用profiler-report来看是什么导致的卡顿
-    13. C-u C-x = (describe-char)可以看光标所在的字符的具体字符信息，包括了字符大小等，
+    13. C-u C-x = (describe-char)可以看光标所在的字符的具体字符信息，包括了字符大小等，\\
         例如harfbuzz:-outline-Sarasa Fixed Slab SC-normal-normal-normal-mono-24-*-*-*-c-*-iso8859-1 (#x3F3F) 就是Sarasa Fixed Slab SC字体，大小是24
 
 *** *elisp相关*
