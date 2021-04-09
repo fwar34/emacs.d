@@ -85,6 +85,8 @@
                       ;; ediff
                       hydra
                       wgrep
+                      projectile
+                      ace-jump-mode
                       ))
 
 (dolist (package dump-packages)

@@ -724,9 +724,9 @@
                              (org-capture)))
                     ;; "oc" 'org-capture
                     ;; "om" 'toggle-org-or-message-mode
-                    ;; "pf" 'projectile-find-file-dwim
-                    ;; "pg" 'projectile-grep
-                    ;; "ps" 'projectile-speedbar-toggle
+                    "pf" 'projectile-find-file-dwim
+                    "pg" 'projectile-grep
+                    "ps" 'projectile-speedbar-toggle
                     "py" (lambda ()
                            (interactive)
                            (pyim-export-personal-words "~/.emacs.d/pyim-mine.pyim")

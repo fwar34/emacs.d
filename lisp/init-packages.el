@@ -273,6 +273,9 @@
   (when (fboundp 'evil-set-undo-system)
     (evil-set-undo-system 'undo-tree))
 
+  (use-package ace-jump-mode
+    :ensure t)
+
   :custom
   ;; https://emacs-china.org/t/evil-insert-state-or-evil-emacs-state/16710/6?u=fwar34
   (evil-ex-interactive-search-highlight 'selected-window)
@@ -638,16 +641,15 @@
   (setq which-key-show-docstrings t)
   )
 
-;; (use-package projectile
-;;   :disabled
-;;   :ensure t
-;;   :hook
-;;   (evil-mode . projectile-mode)
-;;   :config
-;;   (define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
-;;   (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
-;;   (setq projectile-completion-system 'ivy)
-;;   )
+(use-package projectile
+  :ensure t
+  :hook
+  (evil-mode . projectile-mode)
+  :config
+  (define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
+  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+  (setq projectile-completion-system 'ivy)
+  )
 
 ;; https://www.emacswiki.org/emacs/NeoTree
 (use-package neotree
