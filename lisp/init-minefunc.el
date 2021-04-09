@@ -528,4 +528,8 @@ URL `http://ergoemacs.org/emacs/elisp_run_current_file.html'"
 					    user-emacs-directory)))
     (display-buffer buf)))
 
+(defun my-find-other-file (&optional in-other-window)
+  (interactive "P")
+  (ff-find-other-file in-other-window t))
+
 (provide 'init-minefunc)

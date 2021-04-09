@@ -351,7 +351,8 @@
                     "bb" 'evil-buffer
                     "zz" 'save-buffer
                     ;; ;;;;;;;;;;;;;;;;;;;;;;;
-                    "fo" 'ff-find-other-file
+                    ;; "fo" 'ff-find-other-file
+                    "fo" 'my-find-other-file
                     "mm" 'evilmi-jump-items
                     "tt" 'neotree-toggle
                     "yw" 'youdao-dictionary-search-at-point
