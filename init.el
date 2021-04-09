@@ -73,6 +73,7 @@
 (add-to-list 'load-path "~/.emacs.d/lisp")
 (require 'init-packages)
 (require 'init-ui)
+(require 'init-fonts)
 (require 'init-hydra)
 (require 'init-modeline)
 
