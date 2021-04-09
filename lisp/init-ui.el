@@ -207,7 +207,12 @@
 ;; (add-hook 'org-mode-hook 'add-pretty-lambda)
 ;; }}
 
-;; (display-time-mode 1)
-;; (display-battery-mode 1)
+;; https://github.com/casouri/valign
+;; 这个包能对齐 Org Mode、Markdown和table.el 的表格。它能对齐包含不等宽字体、中日韩字符、图片的表格。valign 不会影响 Org Mode（或 Markdown mode）基于等宽字符的对齐。）
+;; (use-package valign
+;;   :ensure t
+;;   :hook
+;;   (org-mode . valign-mode)
+;;   )
 
 (provide 'init-ui)
