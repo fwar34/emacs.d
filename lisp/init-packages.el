@@ -583,7 +583,10 @@
 
 (use-package youdao-dictionary
   :ensure t
-  :defer t
+  :commands
+  (youdao-dictionary-search-at-point
+   youdao-dictionary-search-at-point+
+   youdao-dictionary-search-from-input)
   :config
   ;; Enable Cache
   (setq url-automatic-caching t)
