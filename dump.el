@@ -28,7 +28,7 @@
                       highlight-parentheses 
                       savehist 
                       expand-region
-                      magit
+                      ;; magit
                       ;;
                       undo-tree
                       hungry-delete

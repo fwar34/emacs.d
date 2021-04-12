@@ -49,8 +49,8 @@
          ;; WSL
          ('gnu/linux (when (member "Iosevka Curly Slab" font-list)
                        (setq english-font "Iosevka Curly Slab"
-                             english-font-size 25
-                             chinese-font-size 26))))))
+                             english-font-size 24
+                             chinese-font-size 24))))))
     ;; -----------------------------------------------------------------------------
     (message "english-font %s" english-font)
     (message "english-font-size %s" english-font-size)
