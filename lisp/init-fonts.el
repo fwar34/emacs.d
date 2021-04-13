@@ -12,9 +12,9 @@
 ;;       nil
 ;;     t))
 
-(use-package faces
-  :if (display-graphic-p)
-  :config
+(defun fwar34-set-fonts ()
+  "My change fonts"
+  (interactive)
   (let ((font-list (font-family-list))
         (english-font "nil")
         (english-font-size 24)
@@ -72,7 +72,12 @@
                   :weight 'normal
                   :slant 'normal
                   :size chinese-font-size))))
+  )
 
+(use-package faces
+  :if (display-graphic-p)
+  :config
+  (fwar34-set-fonts)
 
   ;; https://github.com/tumashu/cnfonts
   (use-package cnfonts
