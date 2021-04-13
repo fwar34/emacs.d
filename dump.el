@@ -62,7 +62,6 @@
                       ;; dired-single
                       lispy
                       highlight-symbol
-                      ace-popup-menu
                       ;; multi-term
                       ;; thrift
                       ;; lua-mode
