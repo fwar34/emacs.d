@@ -17,8 +17,8 @@
   ;; https://stackoverflow.com/questions/15773354/indent-code-in-org-babel-src-blocks
   (setq org-src-tab-acts-natively t)
   ;; https://emacs-china.org/t/topic/440/10
-  (case system-type
-    (gnu/linux
+  (cl-case system-type
+    ('gnu/linux
      (custom-set-faces
       ;; custom-set-faces was added by Custom.
       ;; If you edit it by hand, you could mess it up, so be careful.
