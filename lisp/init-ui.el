@@ -6,16 +6,17 @@
   ;; (set-default 'cursor-type 'bar)
   ;; (setq cursor-type 'bar)
   (setq cursor-type 'box)
-  (if (string-equal "A12969" system-name)
+  (if (and (string-equal "A12969" system-name) (equal system-type 'windows-nt))
       ;; 使用(print (current-frame-configuration))来确认大小
       (progn
         (set-frame-position (selected-frame) 350 0)
         (set-frame-width (selected-frame) 150)
         (set-frame-height (selected-frame) 44)
         )
-    (progn
-      (set-frame-position (selected-frame) 0 0)
-      (add-to-list 'default-frame-alist '(fullscreen . maximized))))
+    ;; (progn
+    ;;   (set-frame-position (selected-frame) 0 0)
+    ;;   (add-to-list 'default-frame-alist '(fullscreen . maximized)))
+    )
   )
 
 ;; 高亮当前行
