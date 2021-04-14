@@ -5,26 +5,26 @@
 ;;;; 设置编辑环境
 ;; 设置为中文简体语言环境
 ;; (set-language-environment 'Chinese-GB)
-(set-language-environment 'UTF-8)
-(set-default-coding-systems 'utf-8-unix)
-;; 设置emacs 使用 utf-8-unix
-(setq locale-coding-system 'utf-8-unix)
-;; 设置键盘输入时的字符编码
-(set-keyboard-coding-system 'utf-8-unix)
-(set-selection-coding-system 'utf-8-unix)
-;; 文件默认保存为 utf-8-unix
-(set-buffer-file-coding-system 'utf-8-unix)
-(set-default buffer-file-coding-system 'utf-8-unix)
-(set-default-coding-systems 'utf-8-unix)
-;; 解决粘贴中文出现乱码的问题
-(set-clipboard-coding-system 'utf-8-unix)
-;; 终端中文乱码
-(set-terminal-coding-system 'utf-8-unix)
-(modify-coding-system-alist 'process "*" 'utf-8-unix)
-(setq default-process-coding-system '(utf-8-unix . utf-8-unix))
-;; 解决文件目录的中文名乱码
-(setq-default pathname-coding-system 'utf-8-unix)
-(set-file-name-coding-system 'utf-8-unix)
+;; (set-language-environment 'UTF-8)
+;; (set-default-coding-systems 'utf-8-unix)
+;; ;; 设置emacs 使用 utf-8-unix
+;; (setq locale-coding-system 'utf-8-unix)
+;; ;; 设置键盘输入时的字符编码
+;; (set-keyboard-coding-system 'utf-8-unix)
+;; (set-selection-coding-system 'utf-8-unix)
+;; ;; 文件默认保存为 utf-8-unix
+;; (set-buffer-file-coding-system 'utf-8-unix)
+;; (set-default buffer-file-coding-system 'utf-8-unix)
+;; (set-default-coding-systems 'utf-8-unix)
+;; ;; 解决粘贴中文出现乱码的问题
+;; (set-clipboard-coding-system 'utf-8-unix)
+;; ;; 终端中文乱码
+;; (set-terminal-coding-system 'utf-8-unix)
+;; (modify-coding-system-alist 'process "*" 'utf-8-unix)
+;; (setq default-process-coding-system '(utf-8-unix . utf-8-unix))
+;; ;; 解决文件目录的中文名乱码
+;; (setq-default pathname-coding-system 'utf-8-unix)
+;; (set-file-name-coding-system 'utf-8-unix)
 
 ;; -----------------------------------------------------------------------------
 ;; https://emacs-china.org/t/emacs/7814/7
@@ -33,23 +33,42 @@
 ;; 目前找到的解决办法 设置emacs 的prefer-coding-system
 ;; ;; set coding config, last is highest priority.
 ;; ;; https://www.gnu.org/software/emacs/manual/html_node/emacs/Recognize-Coding.html#Recognize-Coding
-(prefer-coding-system 'cp950)
-(prefer-coding-system 'gb2312)
-(prefer-coding-system 'cp936)
-(prefer-coding-system 'gb18030)
-(prefer-coding-system 'utf-16)
-(prefer-coding-system 'utf-8-dos)
-(prefer-coding-system 'utf-8-unix)
+;; (prefer-coding-system 'cp950)
+;; (prefer-coding-system 'gb2312)
+;; (prefer-coding-system 'cp936)
+;; (prefer-coding-system 'gb18030)
+;; (prefer-coding-system 'utf-16)
+;; (prefer-coding-system 'utf-8-dos)
+;; (prefer-coding-system 'utf-8-unix)
 ;; 这样emacs会按照顺序优先编码，需要注意的是，放在最后的会被最优先选择。上面的设置就是最优先选择utf-8-unix
 ;; 这样设置在一些场景下还有一些不够智能，比如magit 看 log信息，会出现 log现实中文正常，进入查看修改内容如果遇到中文会变成乱码
+
+;; https://stackoverflow.com/questions/63644928/emacs-failed-quit-with-error-of-utf-8-cannot-encode
+;; utf-8-unix cannot encode these可以使用下面的代码来看具体是什么文字
+;; (decode-coding-string (unibyte-string #o326 #o334 #o301 #o371) 'chinese-gbk)
 
 ;; 自动检测文件编码
 ;; https://emacs-china.org/t/emacs/7814/7
 (use-package unicad
+  :disabled
   :ensure t
   :config
   (unicad-mode))
 ;; -----------------------------------------------------------------------------
+;; https://stackoverflow.com/questions/2901541/which-coding-system-should-i-use-in-emacs
+(setq utf-translate-cjk-mode nil) ; disable CJK coding/encoding (Chinese/Japanese/Korean characters)
+(set-language-environment 'utf-8)
+(set-keyboard-coding-system 'utf-8-mac) ; For old Carbon emacs on OS X only
+(setq locale-coding-system 'utf-8)
+(set-default-coding-systems 'utf-8)
+(set-terminal-coding-system 'utf-8)
+(set-selection-coding-system
+ (if (eq system-type 'windows-nt)
+     'utf-16-le  ;; https://rufflewind.com/2014-07-20/pasting-unicode-in-emacs-on-windows
+   'utf-8))
+(prefer-coding-system 'utf-8)
+;; -----------------------------------------------------------------------------
+
 
 ;; 自动刷新被修改过的文件
 (global-auto-revert-mode +1)
