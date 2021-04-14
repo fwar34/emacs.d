@@ -4,8 +4,8 @@
 ;; https://blog.csdn.net/yo746862873/article/details/52291780
 ;;;; 设置编辑环境
 ;; 设置为中文简体语言环境
-;; (set-language-environment 'Chinese-GB)
-;; (set-language-environment 'UTF-8)
+;; (set-language-environment 'Chinese-GBK)
+;; ;; (set-language-environment 'UTF-8)
 ;; (set-default-coding-systems 'utf-8-unix)
 ;; ;; 设置emacs 使用 utf-8-unix
 ;; (setq locale-coding-system 'utf-8-unix)
