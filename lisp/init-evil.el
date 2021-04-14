@@ -189,6 +189,8 @@
                dired-single-buffer
                dired-jump
                ivy-done
+               ;; ivy--done
+               ;; ivy-immediate-done
                end-of-defun
                counsel-etags-find-tag-at-point
                counsel-etags-list-tag
@@ -221,6 +223,12 @@
                find-function
                find-variable
                find-function-on-key
+               ;; push-button
+               ;; persp-ivy-switch-buffer
+               counsel-describe-function
+               counsel-describe-variable
+               counsel-describe-symbol
+               counsel-recentf
                ))
   (evil-add-command-properties con :jump t))
 

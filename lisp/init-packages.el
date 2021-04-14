@@ -5,10 +5,10 @@
   ;;                         ("melpa" . "https://elpa.emacs-china.org/melpa/"))))
   ;; (setq package-archives '(("gnu"   . "http://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/")
   ;;                          ("melpa" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/")))
+  ;; (setq package-archives '(("gnu"   . "http://mirrors.cloud.tencent.com/elpa/gnu/")
+  ;;                        ("melpa" . "http://mirrors.cloud.tencent.com/elpa/melpa/")))
   (setq package-archives '(("gnu" . "http://mirrors.ustc.edu.cn/elpa/gnu/")
-                           ("melpa" . "http://mirrors.ustc.edu.cn/elpa/melpa/")
-                           ;; ("melpa-stable" . "http://mirrors.ustc.edu.cn/elpa/melpa-stable/")
-                           ("org" . "http://mirrors.ustc.edu.cn/elpa/org/")))
+                           ("melpa" . "http://mirrors.ustc.edu.cn/elpa/melpa/")))
   )
 
 (require 'cl)
@@ -269,14 +269,19 @@
   ;; (custom-set-variables '(evil-search-module 'evil-search))
 
   ;; https://emacs-china.org/t/customize-evil-undo-system-for-redo-functionality/14969/3
-  (global-undo-tree-mode)
   (when (fboundp 'evil-set-undo-system)
-    (evil-set-undo-system 'undo-tree))
+    (evil-set-undo-system (if (>= emacs-major-version 28) 'undo-redo 'undo-tree)))
+
+  ;; (when (< emacs-major-version 28)
+  ;;   (use-package undo-fu
+  ;;     :ensure t))
 
   (use-package ace-jump-mode
     :ensure t)
 
   :custom
+  ;; undo will never freeze my Emacs
+  ;; (evil-undo-system (if (>= emacs-major-version 28) 'undo-redo 'undo-fu))
   ;; https://emacs-china.org/t/evil-insert-state-or-evil-emacs-state/16710/6?u=fwar34
   (evil-ex-interactive-search-highlight 'selected-window)
   (evil-want-C-g-bindings t)
