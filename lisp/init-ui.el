@@ -42,18 +42,21 @@
 ;; https://github.com/MatthewZMD/.emacs.d/blob/master/README.md#smooth-scrolling
 ;; {{ 平滑滚动
 ;; Vertical Scroll
-;; (setq scroll-step 1)
-;; (setq scroll-margin 1)
-;; (setq scroll-conservatively 101)
-;; (setq scroll-up-aggressively 0.01)
-;; (setq scroll-down-aggressively 0.01)
-;; (setq auto-window-vscroll nil)
-;; (setq fast-but-imprecise-scrolling nil)
-;; (setq mouse-wheel-scroll-amount '(1 ((shift) . 1)))
-;; (setq mouse-wheel-progressive-speed nil)
-;; ;; Horizontal Scroll
-;; (setq hscroll-step 1)
-;; (setq hscroll-margin 1)
+(setq scroll-step 2)
+(setq scroll-margin 10)
+(setq scroll-conservatively 101)
+(setq scroll-up-aggressively 0.01)
+(setq scroll-down-aggressively 0.01)
+(setq auto-window-vscroll nil)
+(setq fast-but-imprecise-scrolling nil)
+(setq mouse-wheel-scroll-amount '(4 ((shift) . 4)))
+(setq mouse-wheel-progressive-speed nil)
+;; Horizontal Scroll
+(setq hscroll-step 2)
+(setq hscroll-margin 2)
+(setq scroll-preserve-screen-position 'always)
 ;; }}
+
+(setq mouse-yank-at-point nil)
 
 (provide 'init-ui)
