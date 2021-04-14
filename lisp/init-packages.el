@@ -616,6 +616,18 @@
   ;;             (define-key evil-normal-state-local-map (kbd "q") 'quit-window)))
   )
 
+(use-package go-translate
+  :disabled
+  :ensure t
+  :custom
+  (go-translate-base-url "https://translate.google.cn")
+  (go-translate-local-language "zh-CN")
+  (go-translate-buffer-follow-p t) ;;翻译完成后总是将光标切换到翻译窗口
+  :config
+  ;; https://emacs-china.org/t/google/14407/48?u=fwar34
+  (setq go-translate-token-current (cons 430675 2721866130))
+  )
+
 (use-package go-mode
   :ensure t
   :preface
