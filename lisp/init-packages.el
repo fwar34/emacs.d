@@ -90,6 +90,8 @@
   ;; If you would like to use variable-pitch-mode you can enable it with:
   (setq monokai-user-variable-pitch t)
   ;; (custom-set-faces '(hl-line ((t (:extend t)))))
+  (custom-set-faces '(org-block-begin-line ((t (:extend t)))))
+  (custom-set-faces '(org-block-end-line ((t (:extend t)))))
   )
 
 ;; (use-package monokai-pro-theme
@@ -354,8 +356,19 @@
 
   ;; (setq counsel-fzf-cmd "fd -I --exclude={site-lisp,etc/snippets,themes,/eln-cache,/var,/elpa,quelpa/,/url,/auto-save-list,.cache,doc/} --type f | fzf -f \"%s\" --algo=v1")
 
-  ;; 默认的 rg 配置
+  ;; 默认的rg配置
   ;; (setq counsel-rg-base-command "rg -M 240 --with-filename --no-heading --line-number --color never %s")
+  (setq counsel-rg-base-command '("rg"
+                                  "--max-columns" "240"
+                                  "--with-filename" "--no-heading" "--line-number" "--color"
+                                  "never" "%s"
+                                  "--path-separator"
+                                  "/"
+                                  "--iglob" "!tags"
+                                  "--iglob" "!makefile"
+                                  "--iglob" "!makefile.*"
+                                  "--iglob" "!*.lo"
+                                  "."))
   ;; (setq counsel-rg-base-command '("rg"
   ;;                                 "-M" "240"
   ;;                                 "--with-filename" "--no-heading" "--line-number" "--color"
@@ -372,15 +385,21 @@
   ;;                                 "-g" "!m4/**"
   ;;                                 ))
 
-  (setq counsel-ag-base-command '("ag"
-                                  "--vimgrep"
-                                  "%s"
-                                  "--smart-case"
-                                  "--ignore" "tags"
-                                  "--ignore" "TAGS"
-                                  "--ignore" "Makefile.*"
-                                  "--ignore" "Makefile"
-                                  "--ignore" "*.lo"))
+  ;; (setq counsel-ag-base-command '("ag"
+  ;;                                 "--vimgrep"
+  ;;                                 "%s"
+  ;;                                 "--smart-case"
+  ;;                                 "--ignore" "tags"
+  ;;                                 "--ignore" "TAGS"
+  ;;                                 "--ignore" "Makefile.*"
+  ;;                                 "--ignore" "Makefile"
+  ;;                                 "--ignore" "*.lo"))
+
+
+  ;; https://emacs-china.org/t/emacs-helm-ag/6764
+  ;; 支持中文搜索，但是只有两个汉字以上才能搜索到结果，还不清楚原因
+  (modify-coding-system-alist 'process "ag" '(utf-8 . chinese-gbk-dos))
+  (modify-coding-system-alist 'process "rg" '(utf-8 . chinese-gbk-dos))
 
   (general-define-key
    :keymaps 'ivy-minibuffer-map
