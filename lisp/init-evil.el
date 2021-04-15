@@ -319,9 +319,9 @@
                     "fa" 'counsel-ag
                     "fw" (lambda () (interactive) (my-search-whole-word 'counsel-ag))
                     "fs" (lambda () (interactive) (my-search-forward-word 'counsel-ag))
-                    "rg" 'counsel-rg
-                    "rw" (lambda () (interactive) (my-search-whole-word 'counsel-rg))
-                    "rs" (lambda () (interactive) (my-search-forward-word 'counsel-rg))
+                    "gg" 'counsel-rg
+                    "gw" (lambda () (interactive) (my-search-whole-word 'counsel-rg))
+                    "gs" (lambda () (interactive) (my-search-forward-word 'counsel-rg))
                     ;; "ha" 'helm-ag
                     "fe" 'end-of-defun
                     "fm" 'mark-defun
@@ -397,9 +397,9 @@
                     ;; "dd" 'my-lookup-dict-org
                     ;; "lm" 'lookup-doc-in-man
                     ;; "lf" 'list-funcs
-                    "gw" 'evil-avy-goto-word-or-subword-1
+                    ;; "gw" 'evil-avy-goto-word-or-subword-1
                     "gc" 'evil-avy-goto-char-2
-                    "gg" 'evil-ace-jump-char-mode
+                    ;; "gg" 'evil-ace-jump-char-mode
                     ;; "gs" 'w3m-google-search
                     ;; "gf" 'w3m-google-by-filetype
                     ;; "gd" 'w3m-search-financial-dictionary
