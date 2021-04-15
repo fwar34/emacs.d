@@ -388,6 +388,8 @@
    "`" 'ivy-restrict-to-matches
    "j" 'swiper-avy
    "o" 'ivy-occur
+   "h" 'ivy-beginning-of-buffer
+   "l" 'ivy-end-of-buffer
    )
 
   
