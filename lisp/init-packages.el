@@ -359,7 +359,7 @@
   ;; 默认的rg配置
   ;; (setq counsel-rg-base-command "rg -M 240 --with-filename --no-heading --line-number --color never %s")
   (setq counsel-rg-base-command '("rg"
-                                  "--max-columns" "240"
+                                  ;; "--max-columns" "240"
                                   "--with-filename" "--no-heading" "--line-number" "--color"
                                   "never" "%s"
                                   "--path-separator"
