@@ -208,4 +208,4 @@
 
 ;; }}}
 
-(provide 'test-transient)
+(provide 'init-transient)
