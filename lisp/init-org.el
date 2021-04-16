@@ -131,6 +131,7 @@
   )
 
 ;; reference from http://ju.outofmemory.cn/entry/348743
+;; https://www.zmonster.me/2018/02/28/org-mode-capture.html#orgbfd201a
 (with-eval-after-load 'org
   (setq org-agenda-files '("~/.emacs.d"))
   (setq org-default-notes-file "~/.emacs.d/org/inbox.org")
