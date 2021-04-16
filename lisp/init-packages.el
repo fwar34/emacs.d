@@ -330,6 +330,9 @@
   :bind
   (([remap switch-to-buffer] . ivy-switch-buffer)
    ([remap isearch-forward] . swiper)
+   ([remap describe-function] . counsel-describe-function)
+   ([remap describe-variable] . counsel-describe-variable)
+   ([remap describe-symbol] . counsel-describe-symbol)
    :map ivy-minibuffer-map
    ("M-l" . ivy-restrict-to-matches))
   :config
@@ -351,8 +354,8 @@
   ;; (define-key isearch-mode-map (kbd "C-n") 'ivy-next-line)
   ;; (define-key isearch-mode-map (kbd "C-p") 'ivy-previous-line)
   ;; (define-key ivy-minibuffer-map (kbd "C-r") 'counsel-minibuffer-history)
-  (global-set-key (kbd "C-h f") #'counsel-describe-function)
-  (global-set-key (kbd "C-h v") #'counsel-describe-variable)
+  ;; (global-set-key (kbd "C-h f") #'counsel-describe-function)
+  ;; (global-set-key (kbd "C-h v") #'counsel-describe-variable)
 
   ;; (setq counsel-fzf-cmd "fd -I --exclude={site-lisp,etc/snippets,themes,/eln-cache,/var,/elpa,quelpa/,/url,/auto-save-list,.cache,doc/} --type f | fzf -f \"%s\" --algo=v1")
 
