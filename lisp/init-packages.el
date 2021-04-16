@@ -397,12 +397,12 @@
   ;;                                 "--ignore" "Makefile"
   ;;                                 "--ignore" "*.lo"))
 
-
   ;; https://emacs-china.org/t/emacs-helm-ag/6764
   ;; 支持中文搜索，但是只有两个汉字以上才能搜索到结果，还不清楚原因
-  (when (equal system-type 'windows-nt)
-    (modify-coding-system-alist 'process "ag" '(utf-8 . chinese-gbk-dos))
-    (modify-coding-system-alist 'process "rg" '(utf-8 . chinese-gbk-dos)))
+  ;; (when (equal system-type 'windows-nt)
+  ;; win10如果默认改成了utf8编码则不需要底下这个配置
+  ;;   (modify-coding-system-alist 'process "ag" '(utf-8 . chinese-gbk-dos))
+  ;;   (modify-coding-system-alist 'process "rg" '(utf-8 . chinese-gbk-dos)))
 
   (general-define-key
    :keymaps 'ivy-minibuffer-map
