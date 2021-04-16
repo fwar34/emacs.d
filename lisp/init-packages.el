@@ -1447,6 +1447,7 @@
   :defer t
   :bind
   ("C-c s" . rg-menu)
+  ("C-c C-s" . rg-menu)
   :config
   (rg-enable-menu)
   )
