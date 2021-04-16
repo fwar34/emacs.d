@@ -406,7 +406,11 @@
                     ;; "gj" 'w3m-search-js-api-mdn
                     ;; "ga" 'w3m-java-search
                     ;; "gh" 'w3mext-hacker-search ; code search in all engines with firefox
-                    "pf" 'project-find-file
+                    ;; "pf" 'project-find-file
+                    "pf" (lambda () (interactive)
+                           (unless (featurep 'counsel)
+                             (require 'counsel))
+                           (project-find-file))
                     "pg" 'project-find-regexp
                     "sm" 'smex
                     "sj" 'smex-major-mode-commands
