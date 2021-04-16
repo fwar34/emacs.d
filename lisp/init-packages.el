@@ -1442,4 +1442,13 @@
   :unless (string-equal "windows-nt" system-type)
   :ensure t)
 
+(use-package rg
+  :ensure t
+  :defer t
+  :bind
+  ("C-c s" . rg-menu)
+  :config
+  (rg-enable-menu)
+  )
+
 (provide 'init-packages)
