@@ -448,6 +448,7 @@
 
   (use-package ivy-xref
     :ensure t
+    :defer t
     :init
     ;; xref initialization is different in Emacs 27 - there are two different
     ;; variables which can be set rather than just one
@@ -502,16 +503,16 @@
   (add-hook 'ivy-occur-mode-hook 'ivy|occur-mode-setup)
   (add-hook 'ivy-occur-grep-mode-hook 'ivy|occur-mode-setup)
   ;; }}}
+  )
 
-  (use-package ivy-rich
-    :ensure t
-    :after ivy
-    :config
-    (ivy-rich-mode 1)
-    (setq ivy-format-function #'ivy-format-function-line)
-    ;; To abbreviate paths using abbreviate-file-name (e.g. replace “/home/username” with “~”)
-    (setq ivy-rich-path-style 'abbrev)
-    )
+(use-package ivy-rich
+  :ensure t
+  :after ivy
+  :config
+  (ivy-rich-mode 1)
+  (setq ivy-format-function #'ivy-format-function-line)
+  ;; To abbreviate paths using abbreviate-file-name (e.g. replace “/home/username” with “~”)
+  (setq ivy-rich-path-style 'abbrev)
   )
 
 (use-package wgrep

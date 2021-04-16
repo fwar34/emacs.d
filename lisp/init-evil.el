@@ -327,8 +327,19 @@
                     "fm" 'mark-defun
                     ;; "sc" 'scratch
                     ;; "jd" 'dumb-jump-go
-                    "xd" 'xref-find-definitions
-                    "xr" 'xref-find-references
+                    ;; "xd" 'xref-find-definitions
+                    ;; "xr" 'xref-find-references
+                    "xd" (lambda (identifier)
+                           (interactive (list (xref--read-identifier "Find references of: ")))
+                           (unless (featurep 'ivy-xref)
+                             (require 'ivy-xref))
+                           (xref-find-definitions identifier))
+
+                    "xr" (lambda (identifier)
+                           (interactive (list (xref--read-identifier "Find references of: ")))
+                           (unless (featurep 'ivy-xref)
+                             (require 'ivy-xref))
+                           (xref-find-references identifier))
                     ;; "jb" 'dumb-jump-back
                     "dj" 'dired-jump ;; open the dired from current file
                     ;; "dj" 'counsel-dired
