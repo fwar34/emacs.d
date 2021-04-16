@@ -316,12 +316,12 @@
                     "ua" 'universal-argument
                     ;; "qg" 'counsel-etags-grep
                     ;; "dd" 'counsel-etags-grep-symbol-at-point
-                    "fa" 'counsel-ag
-                    "fw" (lambda () (interactive) (my-search-whole-word 'counsel-ag))
-                    "fs" (lambda () (interactive) (my-search-forward-word 'counsel-ag))
-                    "gg" 'counsel-rg
-                    "gw" (lambda () (interactive) (my-search-whole-word 'counsel-rg))
-                    "gs" (lambda () (interactive) (my-search-forward-word 'counsel-rg))
+                    "fa" 'counsel-rg
+                    "fw" (lambda () (interactive) (my-search-whole-word 'counsel-rg))
+                    "fs" (lambda () (interactive) (my-search-forward-word 'counsel-rg))
+                    "gg" 'counsel-ag
+                    "gw" (lambda () (interactive) (my-search-whole-word 'counsel-ag))
+                    "gs" (lambda () (interactive) (my-search-forward-word 'counsel-ag))
                     ;; "ha" 'helm-ag
                     "fe" 'end-of-defun
                     "fm" 'mark-defun
