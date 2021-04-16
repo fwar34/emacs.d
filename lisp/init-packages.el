@@ -5,10 +5,10 @@
   ;;                         ("melpa" . "https://elpa.emacs-china.org/melpa/"))))
   ;; (setq package-archives '(("gnu"   . "http://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/")
   ;;                          ("melpa" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/")))
-  ;; (setq package-archives '(("gnu"   . "http://mirrors.cloud.tencent.com/elpa/gnu/")
-  ;;                        ("melpa" . "http://mirrors.cloud.tencent.com/elpa/melpa/")))
-  (setq package-archives '(("gnu" . "http://mirrors.ustc.edu.cn/elpa/gnu/")
-                           ("melpa" . "http://mirrors.ustc.edu.cn/elpa/melpa/")))
+  (setq package-archives '(("gnu"   . "http://mirrors.cloud.tencent.com/elpa/gnu/")
+                         ("melpa" . "http://mirrors.cloud.tencent.com/elpa/melpa/")))
+  ;; (setq package-archives '(("gnu" . "http://mirrors.ustc.edu.cn/elpa/gnu/")
+  ;;                          ("melpa" . "http://mirrors.ustc.edu.cn/elpa/melpa/")))
   )
 
 (require 'cl)
@@ -326,7 +326,7 @@
   ;; Counsel, a collection of Ivy-enhanced versions of common Emacs commands.
   ;; Swiper, an Ivy-enhanced alternative to isearch.
   :ensure t
-  :after evil
+  :defer t
   :bind
   (([remap switch-to-buffer] . ivy-switch-buffer)
    ([remap isearch-forward] . swiper)
@@ -439,13 +439,12 @@
     (ivy-posframe-mode 1)
     )
 
-  ;; (use-package smex
-  ;;   ;; I use this package to display history for M-x
-  ;;   :ensure t
-  ;;   :after evil
-  ;;   :config
-  ;;   (smex-initialize)
-  ;;   )
+  (use-package amx
+    :ensure t
+    :defer t
+    :config
+    (amx-mode)
+    )
 
   (use-package ivy-xref
     :ensure t
@@ -503,6 +502,16 @@
   (add-hook 'ivy-occur-mode-hook 'ivy|occur-mode-setup)
   (add-hook 'ivy-occur-grep-mode-hook 'ivy|occur-mode-setup)
   ;; }}}
+
+  (use-package ivy-rich
+    :ensure t
+    :after ivy
+    :config
+    (ivy-rich-mode 1)
+    (setq ivy-format-function #'ivy-format-function-line)
+    ;; To abbreviate paths using abbreviate-file-name (e.g. replace “/home/username” with “~”)
+    (setq ivy-rich-path-style 'abbrev)
+    )
   )
 
 (use-package wgrep
@@ -510,15 +519,7 @@
   :defer t
   )
 
-(use-package ivy-rich
-  :ensure t
-  :after ivy
-  :config
-  (ivy-rich-mode 1)
-  (setq ivy-format-function #'ivy-format-function-line)
-  ;; To abbreviate paths using abbreviate-file-name (e.g. replace “/home/username” with “~”)
-  (setq ivy-rich-path-style 'abbrev)
-  )
+
 
 ;; smartparens setting
 (use-package smartparens
