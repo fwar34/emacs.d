@@ -77,6 +77,10 @@
 (prefer-coding-system 'utf-8)
 ;; -----------------------------------------------------------------------------
 
+;; 使用英文 day-name, 而不是中文： “星期XX”，在org-capture中windows中文里面一直乱码
+(when (equal system-type 'windows-nt)
+  (setq system-time-locale "C"))
+
 
 ;; 自动刷新被修改过的文件
 (global-auto-revert-mode +1)
