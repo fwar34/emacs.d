@@ -81,6 +81,12 @@
 (when (equal system-type 'windows-nt)
   (setq system-time-locale "C"))
 
+;; {{{
+;; https://github.com/syl20bnr/spacemacs/issues/192
+;; https://andrewjamesjohnson.com/suppressing-ad-handle-definition-warnings-in-emacs/
+;; Suppressing ad-handle-definition Warnings in Emacs
+(setq ad-redefinition-action 'accept)
+;; }}}
 
 ;; 自动刷新被修改过的文件
 (global-auto-revert-mode +1)

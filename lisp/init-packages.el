@@ -90,8 +90,6 @@
   ;; If you would like to use variable-pitch-mode you can enable it with:
   (setq monokai-user-variable-pitch t)
   ;; (custom-set-faces '(hl-line ((t (:extend t)))))
-  (custom-set-faces '(org-block-begin-line ((t (:extend t)))))
-  (custom-set-faces '(org-block-end-line ((t (:extend t)))))
   )
 
 ;; (use-package monokai-pro-theme
