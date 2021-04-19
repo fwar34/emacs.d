@@ -2,8 +2,6 @@
 
 (use-package company
   :ensure t
-  :hook
-  (after-init . global-company-mode)
   :custom
   (company-minimum-prefix-length 1)
   :bind
@@ -16,7 +14,10 @@
         ("C-m" . company-complete-selection) ;; RET选中当前补全选项
         ("C-l" . yas-expand))
   :config
-  ;; (add-hook 'after-init-hook 'global-company-mode)
+  (global-company-mode)
+  ;; (define-key company-active-map [return] 'company-complete-selection)
+  ;; (define-key company-active-map (kbd "return") 'company-complete-selection)
+
   ;; Number the candidates (use M-1, M-2 etc to select completions).
   (setq company-show-numbers t)
   ;; make previous/next selection in the popup cycles
@@ -59,7 +60,6 @@ In that case, insert the number."
 
        (t
         (company-complete-number n)))))
-
 
   ;;   (defun ora-company-number ()
   ;;     "Forward to `company-complete-number'.
