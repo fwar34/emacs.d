@@ -336,7 +336,10 @@ DEFAULT-TEXT."
 ;; (set-face-background 'modeline "#4466aa")
 ;; (set-face-background 'modeline-inactive "#99aaff")
 ;; (set-face-background 'fringe "#809088")
-(unless (display-graphic-p)
+(if (display-graphic-p)
+    (progn
+      (set-face-background 'mode-line "color-28")
+      (set-face-background 'mode-line-inactive "color-28"))
   (set-face-background 'mode-line "black")
   (set-face-background 'mode-line-inactive "black"))
 

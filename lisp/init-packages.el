@@ -1330,8 +1330,9 @@
 (use-package god-mode
   :ensure t
   :init
-  (define-key evil-normal-state-map (kbd ",") 'god-execute-with-current-bindings)
-  :after evil
+  (general-define-key
+   :states 'normal
+   "," 'god-execute-with-current-bindings)
   :commands god-execute-with-current-bindings
   :config
   ;; which-key support god-mode
