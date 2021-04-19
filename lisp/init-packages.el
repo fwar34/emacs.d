@@ -699,6 +699,7 @@
   (setq which-key-allow-imprecise-window-fit t) ; performance
   (setq which-key-separator ":")
   (setq which-key-show-docstrings t)
+  (which-key-setup-minibuffer)
   )
 
 (use-package projectile
@@ -1332,6 +1333,8 @@
   :after evil
   :commands god-execute-with-current-bindings
   :config
+  ;; which-key support god-mode
+  (which-key-enable-god-mode-support)
   ;; You can change the entire modeline's foreground and background to indicate whether God mode is active as follows:
   (defun my-god-mode-update-modeline ()
     (let ((limited-colors-p (> 257 (length (defined-colors)))))
@@ -1340,8 +1343,10 @@
                               (set-face-background 'mode-line (if limited-colors-p "red" "orange red"))
                               (set-face-background 'mode-line-inactive (if limited-colors-p "red" "orange red"))))
             (t (progn
-                 (set-face-background 'mode-line (if limited-colors-p "black" "#2B2B2B"))
-                 (set-face-background 'mode-line-inactive (if limited-colors-p "black" "#2B2B2B")))))))
+                 ;; (set-face-background 'mode-line (if limited-colors-p "black" "#2B2B2B"))
+                 ;; (set-face-background 'mode-line-inactive (if limited-colors-p "black" "#2B2B2B"))))
+                 (set-face-background 'mode-line (if limited-colors-p "black" "color-28"))
+                 (set-face-background 'mode-line-inactive (if limited-colors-p "black" "color-28")))))))
 
   (add-hook 'god-mode-enabled-hook #'my-god-mode-update-modeline)
   (add-hook 'god-mode-disabled-hook #'my-god-mode-update-modeline)
