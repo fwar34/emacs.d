@@ -623,8 +623,15 @@
 (use-package yasnippet
   :ensure t
   :config
-  (setq yas-snippet-dirs '("~/.emacs.d/mysnippets"))
   (run-with-idle-timer 0.5 nil #'yas-global-mode)
+  (setq yas-snippet-dirs '("~/.emacs.d/mysnippets"))
+
+  (use-package ivy-yasnippet
+    :ensure t
+    :after yasnippet
+    :config
+    (setq ivy-yasnippet-expand-keys nil)
+    )
   )
 
 (use-package youdao-dictionary

@@ -158,7 +158,7 @@
     ^^----------------------------------------------------------------------------------
     _p_: paste from clipboard        _se_: iedit mode         _up_: fix-word-upcase
     _y_: grab the symbol at point    _lv_: lispyville-mode    _dw_: fix-word-downcase
-    ^ ^                              ^  ^                     _ca_: fix-word-capitalize
+    ^ ^                              _cl_: ivy-yasnippet      _ca_: fix-word-capitalize
     ^ ^                              ^  ^                     _cp_: caps-lock-mode
     "
     ("p" clipboard-yank)
@@ -169,6 +169,7 @@
     ("dw" fix-word-downcase)
     ("ca" fix-word-capitalize)
     ("cp" caps-lock-mode)
+    ("cl" ivy-yasnippet)
     ("q" nil "cancale"))
   (global-set-key (kbd "M-u mm") #'hydra-M-um/body)
   (global-set-key (kbd "M-u C-m C-m") #'hydra-M-um/body)
