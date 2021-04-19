@@ -203,6 +203,7 @@
                evil-backward-section-begin
                evil-backward-section-end
                counsel-ag
+               counsel-rg
                my-search-forward-word
                my-search-whole-word
                lispyville-beginning-of-defun
