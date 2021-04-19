@@ -86,6 +86,7 @@
                       wgrep
                       projectile
                       avy
+                      yasnippet
                       ))
 
 (dolist (package dump-packages)

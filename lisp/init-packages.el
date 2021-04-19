@@ -277,16 +277,15 @@
   ;; https://emacs.stackexchange.com/questions/31334/history-of-search-terms-for-evil-mode
   ;; (custom-set-variables '(evil-search-module 'evil-search))
 
+  (when (< emacs-major-version 28)
+    (use-package undo-fu :ensure t))
+
   ;; https://emacs-china.org/t/customize-evil-undo-system-for-redo-functionality/14969/3
   (when (fboundp 'evil-set-undo-system)
-    (evil-set-undo-system (if (>= emacs-major-version 28) 'undo-redo 'undo-tree)))
+    ;; (evil-set-undo-system (if (>= emacs-major-version 28) 'undo-redo 'undo-tree))
+    (evil-set-undo-system (if (>= emacs-major-version 28) 'undo-redo 'undo-fu)))
 
-  ;; (when (< emacs-major-version 28)
-  ;;   (use-package undo-fu
-  ;;     :ensure t))
-
-  (use-package avy
-    :ensure t)
+  (use-package avy :ensure t)
 
   :custom
   ;; undo will never freeze my Emacs
@@ -620,11 +619,12 @@
   )
 
 ;; yasnippet setting
-;; (use-package yasnippet
-;;   :disabled
-;;   :ensure t
-;;   :defer t
-;;   )
+(use-package yasnippet
+  :ensure t
+  :config
+  (setq yas-snippet-dirs '("~/.emacs.d/mysnippets"))
+  (yas-global-mode)
+  )
 
 (use-package youdao-dictionary
   :ensure t
