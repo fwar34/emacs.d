@@ -11,7 +11,7 @@
         ("C-d" . company-next-page)
         ("C-j" . company-filter-candidates)
         ("C-s" . counsel-company)
-        ("C-m" . company-complete-selection) ;; RET选中当前补全选项
+        ("C-m" . company-complete-selection) ;; RET选中当前补全选项(RET和C-m关系@see http://zhangley.com/article/emacs-ret/)
         ("C-l" . yas-expand))
   :config
   (global-company-mode)
