@@ -2,6 +2,7 @@
 
 (use-package company
   :ensure t
+  :after evil
   :custom
   (company-minimum-prefix-length 1)
   :bind
@@ -15,8 +16,10 @@
         ("C-l" . yas-expand))
   :config
   (global-company-mode)
+
   ;; (define-key company-active-map [return] 'company-complete-selection)
-  ;; (define-key company-active-map (kbd "return") 'company-complete-selection)
+  ;; (define-key company-active-map (kbd "<return>") 'company-complete-selection)
+  ;; (define-key company-active-map (kbd "C-j") 'company-filter-candidates)
 
   ;; Number the candidates (use M-1, M-2 etc to select completions).
   (setq company-show-numbers t)
