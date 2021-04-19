@@ -624,7 +624,7 @@
   :ensure t
   :config
   (setq yas-snippet-dirs '("~/.emacs.d/mysnippets"))
-  (run-with-idle-timer 0.5 t #'yas-global-mode)
+  (run-with-idle-timer 0.5 nil #'yas-global-mode)
   )
 
 (use-package youdao-dictionary
