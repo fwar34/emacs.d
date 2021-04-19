@@ -338,8 +338,8 @@ DEFAULT-TEXT."
 ;; (set-face-background 'fringe "#809088")
 (if (display-graphic-p)
     (progn
-      (set-face-background 'mode-line "color-28")
-      (set-face-background 'mode-line-inactive "color-28"))
+      (set-face-background 'mode-line "gray26")
+      (set-face-background 'mode-line-inactive "gray26"))
   (set-face-background 'mode-line "black")
   (set-face-background 'mode-line-inactive "black"))
 

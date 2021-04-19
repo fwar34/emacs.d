@@ -1347,12 +1347,13 @@
             (t (progn
                  ;; (set-face-background 'mode-line (if limited-colors-p "black" "#2B2B2B"))
                  ;; (set-face-background 'mode-line-inactive (if limited-colors-p "black" "#2B2B2B"))))
-                 (set-face-background 'mode-line (if limited-colors-p "black" "color-28"))
-                 (set-face-background 'mode-line-inactive (if limited-colors-p "black" "color-28")))))))
+                 ;; 使用counsel-color-emacs可以查看
+                 (set-face-background 'mode-line (if limited-colors-p "black" "gray26"))
+                 (set-face-background 'mode-line-inactive (if limited-colors-p "black" "gray26")))))))
 
   (add-hook 'god-mode-enabled-hook #'my-god-mode-update-modeline)
   (add-hook 'god-mode-disabled-hook #'my-god-mode-update-modeline)
-  
+
   ;; For running occasional and single commands in God mode
   ;; (evil-define-key 'normal global-map "gm" (lambda (&optional called-interactively) (interactive "d")
   ;;                                            (if god-local-mode
