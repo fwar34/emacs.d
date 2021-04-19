@@ -33,7 +33,8 @@
         company-require-match nil
         company-etags-ignore-case t)
 
-  ;; {{{ 使用1-9来选择company补全选项, 0来使用company-filter-candidates(使用my-company-zero-key-for-filter来开关)
+  ;; {{{
+  ;; 使用1-9来选择company补全选项, 0来使用company-filter-candidates(使用my-company-zero-key-for-filter来开关)
   ;; https://emacs-china.org/t/tab-company-yasnippet/15590/9
   ;; https://github.com/abo-abo/oremacs/blob/9c1dd95f52bd6f65313c50c1a85c8bacdde74581/modes/ora-company.el
   (defvar my-company-zero-key-for-filter nil
