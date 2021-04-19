@@ -2,6 +2,8 @@
 
 (use-package company
   :ensure t
+  :hook
+  (after-init . global-company-mode)
   :custom
   (company-minimum-prefix-length 1)
   :bind
@@ -9,11 +11,11 @@
         ("C-w" . evil-delete-backward-word)
         ("C-u" . company-previous-page)
         ("C-d" . company-next-page)
-        ;; ("C-s" . company-filter-candidates)
+        ("C-j" . company-filter-candidates)
         ("C-s" . counsel-company)
+        ("C-m" . company-complete-selection) ;; RET选中当前补全选项
         ("C-l" . yas-expand))
   :config
-  (global-company-mode)
   ;; (add-hook 'after-init-hook 'global-company-mode)
   ;; Number the candidates (use M-1, M-2 etc to select completions).
   (setq company-show-numbers t)
@@ -21,7 +23,7 @@
   (setq company-selection-wrap-around t) 
   ;; Some languages use camel case naming convention,
   ;; so company should be case sensitive.
-  ;; (setq company-dabbrev-ignore-case nil)
+  (setq company-dabbrev-ignore-case nil)
   ;; Trigger completion immediately.
   (setq company-idle-delay 0)
   ;; I don't like the downcase word in company-dabbrev!
@@ -30,25 +32,52 @@
         company-require-match nil
         company-etags-ignore-case t)
 
-  ;; {{{ 使用数字来选择company补全选项
+  ;; {{{ 使用1-9来选择company补全选项, 0来使用company-filter-candidates(使用my-company-zero-key-for-filter来开关)
+  ;; https://emacs-china.org/t/tab-company-yasnippet/15590/9
   ;; https://github.com/abo-abo/oremacs/blob/9c1dd95f52bd6f65313c50c1a85c8bacdde74581/modes/ora-company.el
+  (defvar my-company-zero-key-for-filter nil
+    "If t, pressing 0 calls `company-filter-candidates' per company's status.")
+
   (defun ora-company-number ()
     "Forward to `company-complete-number'.
 Unless the number is potentially part of the candidate.
 In that case, insert the number."
     (interactive)
     (let* ((k (this-command-keys))
-           (re (concat "^" company-prefix k)))
-      (if (or (cl-find-if (lambda (s) (string-match re s))
-                          company-candidates)
-              (> (string-to-number k)
-                 (length company-candidates))
-              (looking-back "[0-9]+\\.[0-9]*" (line-beginning-position)))
-          (self-insert-command 1)
-        (company-complete-number
-         (if (equal k "0")
-             10
-           (string-to-number k))))))
+           (re (concat "^" company-prefix k))
+           (n (if (equal k "0") 10 (string-to-number k)))
+           ;; 数字、小数直接输入
+           (digits "^[[:digit:].]+"))
+      (cond
+       ((or (cl-find-if (lambda (s) (or (string-match re s) (string-match digits s))) company-candidates)
+            (> n (length company-candidates))
+            (looking-back "[0-9]+\\.[0-9]*" (line-beginning-position)))
+        (self-insert-command 1))
+
+       ((and (eq n 10) my-company-zero-key-for-filter)
+        (company-filter-candidates))
+
+       (t
+        (company-complete-number n)))))
+
+
+  ;;   (defun ora-company-number ()
+  ;;     "Forward to `company-complete-number'.
+  ;; Unless the number is potentially part of the candidate.
+  ;; In that case, insert the number."
+  ;;     (interactive)
+  ;;     (let* ((k (this-command-keys))
+  ;;            (re (concat "^" company-prefix k)))
+  ;;       (if (or (cl-find-if (lambda (s) (string-match re s))
+  ;;                           company-candidates)
+  ;;               (> (string-to-number k)
+  ;;                  (length company-candidates))
+  ;;               (looking-back "[0-9]+\\.[0-9]*" (line-beginning-position)))
+  ;;           (self-insert-command 1)
+  ;;         (company-complete-number
+  ;;          (if (equal k "0")
+  ;;              10
+  ;;            (string-to-number k))))))
 
   (defun ora--company-good-prefix-p (orig-fn prefix)
     (unless (and (stringp prefix) (string-match-p "\\`[0-9]+\\'" prefix))
@@ -58,11 +87,12 @@ In that case, insert the number."
   (let ((map company-active-map))
     (mapc (lambda (x) (define-key map (format "%d" x) 'ora-company-number))
           (number-sequence 0 9))
-    (define-key map " " (lambda ()
-                          (interactive)
-                          (company-abort)
-                          (self-insert-command 1)))
-    (define-key map (kbd "<return>") nil))
+    ;; (define-key map " " (lambda ()
+    ;;                       (interactive)
+    ;;                       (company-abort)
+    ;;                       (self-insert-command 1)))
+    ;; (define-key map (kbd "<return>") nil)
+    )
   ;; }}}
   )
 
