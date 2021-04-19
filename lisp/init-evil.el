@@ -95,7 +95,7 @@
 (define-key minibuffer-local-must-match-map [escape] 'minibuffer-keyboard-quit)
 (define-key minibuffer-local-isearch-map [escape] 'minibuffer-keyboard-quit)
 
-(evil-define-key 'normal global-map "gs" 'evil-ace-jump-char-mode)
+(evil-define-key 'normal global-map "gs" 'evil-avy-goto-char)
 ;; initial apropos-mode to evil-normal-state
 ;; (dolist (p '((apropos-mode . normal)
 ;;              (browse-kill-ring-mode . normal)))
@@ -212,7 +212,7 @@
                my-swiper-forward-word
                swiper-thing-at-point
                swiper-all-thing-at-point
-               evil-ace-jump-char-mode
+               evil-avy-goto-char
                evil-avy-goto-char-2
                evil-avy-goto-word-or-subword-1
                evilem-motion-find-char

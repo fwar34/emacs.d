@@ -5,7 +5,7 @@
   ;; (set-default 'cursor-type 'box)
   (set-default 'cursor-type 'bar)
   ;; (setq cursor-type 'bar)
-  ;; (setq cursor-type 'box)
+  (setq cursor-type 'box)
   (if (and (string-equal "A12969" system-name) (equal system-type 'windows-nt))
       ;; 使用(print (current-frame-configuration))来确认大小
       (progn

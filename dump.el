@@ -55,7 +55,7 @@
                       imenu-list
                       git-gutter
                       ;;
-                      ;; ace-popup-menu
+                      ace-popup-menu
                       volatile-highlights
                       ;; dired
                       ;; dired-k
@@ -85,7 +85,7 @@
                       hydra
                       wgrep
                       projectile
-                      ace-jump-mode
+                      avy
                       ))
 
 (dolist (package dump-packages)

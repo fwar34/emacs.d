@@ -253,6 +253,15 @@
         ("C-a" . evil-first-non-blank)
         ("C-e" . evil-end-of-line))
   :config
+  ;; 设置光标样式
+  (setq evil-motion-state-cursor 'box)  ; 
+  (setq evil-visual-state-cursor 'box)  ; 
+  (setq evil-normal-state-cursor 'box)  ; 
+  (setq evil-insert-state-cursor 'bar)  ; 
+  (setq evil-emacs-state-cursor  'hbar) ; _
+  (setq evil-insert-state-cursor '((hbar . 5) "yellow")
+        evil-normal-state-cursor '(box "purple"))
+
   (define-key evil-ex-search-keymap (kbd ";g") #'keyboard-quit)
   ;; for quit shell-command output buffer
   ;; (defun my-quit-window (&rest _)
@@ -276,7 +285,7 @@
   ;;   (use-package undo-fu
   ;;     :ensure t))
 
-  (use-package ace-jump-mode
+  (use-package avy
     :ensure t)
 
   :custom
@@ -333,6 +342,13 @@
    :map ivy-minibuffer-map
    ("M-l" . ivy-restrict-to-matches))
   :config
+  ;; 调整 counsel 搜索的方式: 忽略单词顺序
+  (setq ivy-re-builders-alist
+        '((counsel-rg . ivy--regex-plus)
+          (swiper . ivy--regex-plus)
+          (swiper-isearch . ivy--regex-plus)
+          (t . ivy--regex-ignore-order)))
+
   (setq ivy-initial-inputs-alist nil
         ivy-wrap t
         ivy-height 15
@@ -1150,12 +1166,12 @@
 ;;   (evil-define-key 'normal 'magit-mode-map "q" #'kill-buffer-and-window)
 ;;   )
 
-;; (use-package ace-popup-menu
-;;   :ensure t
-;;   :after evil
-;;   :config
-;;   (ace-popup-menu-mode 1)
-;;   )
+(use-package ace-popup-menu
+  :ensure t
+  :after evil
+  :config
+  (ace-popup-menu-mode 1)
+  )
 
 (use-package exec-path-from-shell
   :if (memq window-system '(mac ns))

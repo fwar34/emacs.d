@@ -61,6 +61,12 @@
   :after org
   )
 
+(use-package org-bullets
+  :ensure t
+  :hook
+  (org-mode . (lambda () (org-bullets-mode 1)))
+  )
+
 (use-package org2jekyll
   :ensure t
   :after org
