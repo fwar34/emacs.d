@@ -107,8 +107,8 @@
   :commands eshell
   :init
   (setq eshell-aliases-file (concat user-emacs-directory "eshell/alias"))
-  :hook
-  (eshell-mode . company-mode)
+  ;; :hook
+  ;; (eshell-mode . company-mode)
   :config
   (progn
     (when (not (functionp 'eshell/rgrep))
@@ -121,7 +121,8 @@
                                   (setq-local global-hl-line-mode nil))))
   (evil-set-initial-state 'eshell-mode 'emacs)
   (add-hook 'eshell-mode-hook (lambda ()
-                                (evil-local-set-key 'emacs (kbd "C-w") #'evil-delete-backward-word)))
+                                (evil-local-set-key 'emacs (kbd "C-w") #'evil-delete-backward-word)
+                                (evil-local-set-key 'emacs (kbd "C-r") #'fwar34/ivy-eshell-history)))
 
   ;; windows中eshell设置中文
   (when (string-equal system-type "windows-nt")
@@ -130,19 +131,8 @@
 
   ;; (custom-set-variables
   ;;  '(eshell-visual-options (quote (("git" "log" "diff" "show")))))
-  
-  ;; (add-hook 'eshell-mode-hook 'company-mode)
-  :bind
-  (;; ([remap samray/smarter-move-beginning-of-line] . eshell-bol)
-   ;; ("C-a" . eshell-bol)
-   ;; ([remap kill-region] . samray/kill-word-backward)
-   ;; ("C-w" . samray/kill-word-backward)
-   ;; ([remap evil-insert-digraph] . paredit-kill)
-   ;; ("C-k" . paredit-kill)
-   ([remap evil-paste-from-register] . samray/esh-history)
-   ;; ("C-r" . samray/esh-history)
-   ;; ("C-l" . fwar34/eshell-clear-buffer))
-   ))
+
+  )
 
 (use-package esh-autosuggest
   :ensure t
@@ -241,55 +231,6 @@
         (eshell)
         (funcall change-cwd))))
   )
-
-(require 'company)
-(require 'cl-lib)
-(defun samray/company-eshell-autosuggest-candidates (prefix)
-  "Select the first eshell history candidate with prefix PREFIX."
-  (let* ((esh-history (when (> (ring-size eshell-history-ring) 0)
-                        (ring-elements eshell-history-ring)))
-         (all-shell-history (append esh-history (samray/parse-zsh-history) (samray/parse-bash-history)))
-         (history
-          (delete-dups ;; 列表去重
-           (mapcar (lambda (str) ;; 去掉原始文本的前后空格
-                     (string-trim (substring-no-properties str)))
-                   all-shell-history)))
-         (most-similar (cl-find-if
-                        (lambda (str)
-                          (string-prefix-p prefix str))
-                        history)))
-    (when most-similar
-      `(,most-similar)))
-  )
-
-(defun samray/company-eshell-autosuggest--prefix ()
-  "Get current eshell input"
-  (let ((prefix
-         (string-trim-left
-          (buffer-substring-no-properties
-           (save-excursion
-             (eshell-bol))
-           (save-excursion (end-of-line) (point))))))
-    (if (not (string-empty-p prefix))
-        prefix
-      'stop))
-  )
-
-(defun samray/company-eshell-autosuggest (command &optional arg &rest ignored)
-  "`company-mode' backend to provide eshell history suggestion."
-  (interactive (list 'interactive))
-  (cl-case command
-    (interactive (company-begin-backend 'company-eshell))
-    (prefix (and (eq major-mode 'eshell-mode)
-                 (samray/company-eshell-autosuggest--prefix)))
-    (candidates (samray/company-eshell-autosuggest-candidates arg))))
-
-(defun samray/setup-company-eshell-autosuggest ()
-  "Set up company completion for Eshell."
-  (with-eval-after-load 'company
-    (setq-local company-backends '(samray/company-eshell-autosuggest))
-    (setq-local company-frontends '(company-preview-frontend))))
-;; (add-hook 'eshell-mode-hook 'samray/setup-company-eshell-autosuggest)
 
 ;;-------------------------------------------------------------
 ;; https://blog.csdn.net/argansos/article/details/6867575
