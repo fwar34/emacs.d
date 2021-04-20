@@ -6,12 +6,12 @@
 (define-prefix-command 'M-m-map)
 (global-set-key (kbd "M-m") 'M-m-map)
 ;; swiper setting
-(global-set-key "\C-s" 'swiper)
-(global-set-key (kbd "M-m p") 'clipboard-yank)
-(global-set-key (kbd "M-m u") 'eval-last-sexp)
+;; (global-set-key "\C-s" 'swiper)
+;; (global-set-key (kbd "M-m p") 'clipboard-yank)
+;; (global-set-key (kbd "M-m u") 'eval-last-sexp)
 ;; (global-set-key (kbd "C-c C-r") 'ivy-resume)
-(global-set-key (kbd "M-x") 'counsel-M-x)
-(global-set-key (kbd "M-m M-m") 'counsel-find-file)
+;; (global-set-key (kbd "M-x") 'counsel-M-x)
+;; (global-set-key (kbd "M-m M-m") 'counsel-find-file)
 
 ;; iedit bind
 ;; (global-set-key (kbd "M-m oe") 'iedit-mode)
@@ -32,19 +32,9 @@
 ;;   (define-key dired-mode-map (kbd "RET") 'dired-find-alternate-file)
 ;;   (define-key dired-mode-map (kbd "^") (lambda () (interactive) (find-alternate-file ".."))))  ; was dired-up-directory
 
-
-;; 使用 c-n/c-p 来选择 company 的候选补全项
-(with-eval-after-load 'company
-  (define-key company-active-map (kbd "M-n") nil)
-  (define-key company-active-map (kbd "M-p") nil)
-  (define-key company-active-map (kbd "TAB") #'company-select-next-if-tooltip-visible-or-complete-selection)
-  (define-key company-active-map (kbd "C-n") #'company-select-next)
-  (define-key company-active-map (kbd "C-p") #'company-select-previous)
-  )
-
 ;; auto-yasnippet bind
-(global-set-key (kbd "H-w") #'aya-create)
-(global-set-key (kbd "H-y") #'aya-expand)
+;; (global-set-key (kbd "H-w") #'aya-create)
+;; (global-set-key (kbd "H-y") #'aya-expand)
 
 ;; set C-w delte a word backward
 ;; (global-set-key (kbd "C-w") 'backward-kill-word)
@@ -52,9 +42,9 @@
 (global-set-key (kbd "M-m y") 'browse-kill-ring)
 
 ;; fix-word
-(global-set-key (kbd "M-u") 'fix-word-upcase)
-(global-set-key (kbd "M-l") 'fix-word-downcase)
-(global-set-key (kbd "M-c") 'fix-word-capitalize)
+;; (global-set-key (kbd "M-u") 'fix-word-upcase)
+;; (global-set-key (kbd "M-l") 'fix-word-downcase)
+;; (global-set-key (kbd "M-c") 'fix-word-capitalize)
 
 ;; function-args
 ;; (global-set-key (kbd "M-g") 'fa-abort)

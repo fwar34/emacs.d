@@ -12,14 +12,20 @@
         ("C-d" . company-next-page)
         ("C-j" . company-filter-candidates)
         ("C-s" . counsel-company)
-        ("C-m" . company-complete-selection) ;; RET选中当前补全选项(RET和C-m关系@see http://zhangley.com/article/emacs-ret/)
+        ;; ("C-m" . company-complete-selection) ;; RET选中当前补全选项(RET和C-m关系@see http://zhangley.com/article/emacs-ret/)
+        ("C-m" . (lambda () (interactive)
+                   (if company-selection
+                       (company-complete-selection)
+                     (newline)))) ;; RET判断当前是否有选中的补全，如果有则直接补全，如果没有就换行
         ("C-l" . yas-expand))
   :config
   (global-company-mode)
 
-  ;; (define-key company-active-map [return] 'company-complete-selection)
-  ;; (define-key company-active-map (kbd "<return>") 'company-complete-selection)
-  ;; (define-key company-active-map (kbd "C-j") 'company-filter-candidates)
+  ;; (setq company-auto-commit t)
+  ;; 32 空格, 41 右圆括号, 46 是 dot 字符
+  ;; 这里我们移除空格，添加逗号(44), 分号(59)
+  ;; 注意： C-x = 用来检测光标下字符的数字，(insert 数字) 用来测试数字对应的字符。
+  ;; (setq company-auto-commit-chars '(41 46 44 59 13))
 
   ;; Number the candidates (use M-1, M-2 etc to select completions).
   (setq company-show-numbers t)
@@ -110,6 +116,12 @@ In that case, insert the number."
             )))
 
 (with-eval-after-load 'company
+  ;; 使用 c-n/c-p 来选择 company 的候选补全项
+  (define-key company-active-map (kbd "M-n") nil)
+  (define-key company-active-map (kbd "M-p") nil)
+  (define-key company-active-map (kbd "TAB") #'company-select-next-if-tooltip-visible-or-complete-selection)
+  (define-key company-active-map (kbd "C-n") #'company-select-next)
+  (define-key company-active-map (kbd "C-p") #'company-select-previous)
   ;; (add-to-list 'company-backends 'company-cmake)
   ;; (add-to-list 'company-backends 'company-c-headers)
   ;; can't work with TRAMP
