@@ -91,7 +91,6 @@
                              (require 'init-minefunc)
                              (require 'init-c)))
 (add-hook 'after-init-hook (lambda () (require 'init-misc)))
-(add-hook 'after-init-hook (lambda () (require 'init-keybindings)))
 (add-hook 'after-init-hook (lambda () (require 'init-custom)))
 (add-hook 'after-init-hook (lambda () (require 'init-builtin)))
 (require 'init-transient)
