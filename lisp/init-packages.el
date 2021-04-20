@@ -9,7 +9,13 @@
                          ("melpa" . "http://mirrors.cloud.tencent.com/elpa/melpa/")))
   ;; (setq package-archives '(("gnu" . "http://mirrors.ustc.edu.cn/elpa/gnu/")
   ;;                          ("melpa" . "http://mirrors.ustc.edu.cn/elpa/melpa/")))
+
+  (add-to-list 'package-archives '("myelpa" . "https://github.com/fwar34/myelpa/"))
   )
+
+;; 使用本地的备份直接打开这个注释
+;; myelpa is the ONLY repository now, dont forget trailing slash in the directory
+;; (setq package-archives '(("myelpa" . "~/myelpa/")))
 
 (require 'cl)
 
