@@ -1485,4 +1485,9 @@
   (rg-enable-menu)
   )
 
+(use-package elpa-mirror
+  :ensure t
+  :config
+  (setq elpamr-default-output-directory "~/.myelpa"))
+
 (provide 'init-packages)
