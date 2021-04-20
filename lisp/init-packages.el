@@ -15,7 +15,7 @@
 
 ;; 使用本地的备份直接打开这个注释
 ;; myelpa is the ONLY repository now, dont forget trailing slash in the directory
-(setq package-archives '(("myelpa" . "~/.myelpa/")))
+;; (setq package-archives '(("myelpa" . "~/.myelpa/")))
 
 (require 'cl)
 
