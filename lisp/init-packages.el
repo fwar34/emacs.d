@@ -1496,4 +1496,9 @@
   :config
   (setq elpamr-default-output-directory "~/.myelpa"))
 
+(use-package powershell
+  :ensure t
+  :defer t
+  )
+
 (provide 'init-packages)
