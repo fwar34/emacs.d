@@ -39,6 +39,10 @@
     (end-of-line))
   )
 
+(defun my/eshell-init-keymap ()
+  (evil-define-key 'insert eshell-mode-map (kbd "C-r") #'fwar34/ivy-eshell-history))
+(add-hook 'eshell-first-time-mode-hook #'my/eshell-init-keymap)
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; https://github.com/samrayleung/emacs.d/blob/master/lisp/init-eshell.el
 ;;; Inspire by http://blog.binchen.org/posts/use-ivy-mode-to-search-bash-history.html
@@ -110,19 +114,14 @@
   ;; :hook
   ;; (eshell-mode . company-mode)
   :config
-  (progn
-    (when (not (functionp 'eshell/rgrep))
-      (defun eshell/rgrep (&rest args)
-        "Use Emacs grep facility instead of calling external grep."
-        (eshell-grep "rgrep" args t)))
-    (add-hook 'eshell-mode-hook
-              (lambda ()(eshell-cmpl-initialize)))
-    (add-hook 'eshell-mode-hook (lambda ()
-                                  (setq-local global-hl-line-mode nil))))
-  (evil-set-initial-state 'eshell-mode 'emacs)
-  (add-hook 'eshell-mode-hook (lambda ()
-                                (evil-local-set-key 'emacs (kbd "C-w") #'evil-delete-backward-word)
-                                (evil-local-set-key 'emacs (kbd "C-r") #'fwar34/ivy-eshell-history)))
+  ;; (progn
+  ;;   (when (not (functionp 'eshell/rgrep))
+  ;;     (defun eshell/rgrep (&rest args)
+  ;;       "Use Emacs grep facility instead of calling external grep."
+  ;;       (eshell-grep "rgrep" args t)))
+  ;;   (add-hook 'eshell-mode-hook
+  ;;             (lambda ()(eshell-cmpl-initialize)))
+    (add-hook 'eshell-mode-hook (lambda () (setq-local global-hl-line-mode nil)))
 
   ;; windows中eshell设置中文
   (when (string-equal system-type "windows-nt")
@@ -316,11 +315,11 @@
 (defalias 'licmd #'fwar34/proxy-command-use-lisp)
 
 ;; https://emacs-china.org/t/emacs-builtin-mode/11937/83?u=fwar34
-(use-package em-term
-  :ensure nil
-  :custom
-  (eshell-visual-commands '("top" "htop" "less" "more" "bat"))
-  (eshell-visual-subcommands '(("git" "help" "lg" "log" "diff" "show")))
-  (eshell-visual-options '(("git" "--help" "--paginate"))))
+;; (use-package em-term
+;;   :ensure nil
+;;   :custom
+;;   (eshell-visual-commands '("top" "htop" "less" "more" "bat"))
+;;   (eshell-visual-subcommands '(("git" "help" "lg" "log" "diff" "show")))
+;;   (eshell-visual-options '(("git" "--help" "--paginate"))))
 
 (provide 'init-eshell)
