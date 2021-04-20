@@ -16,7 +16,7 @@
         ("C-m" . (lambda () (interactive)
                    (if company-selection
                        (company-complete-selection)
-                     (newline)))) ;; RET判断当前是否有选中的补全，如果有则直接补全，如果没有就换行
+                     (newline-and-indent)))) ;; RET判断当前是否有选中的补全，如果有则直接补全，如果没有就换行
         ("C-l" . yas-expand))
   :config
   (global-company-mode)

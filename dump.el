@@ -87,6 +87,8 @@
                       projectile
                       avy
                       yasnippet
+                      rg
+                      elpa-mirror
                       ))
 
 (dolist (package dump-packages)
