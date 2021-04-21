@@ -1263,8 +1263,8 @@
   
   (defun my-multi-term ()
     (interactive)
-    (if (string-equal "w32" window-system)
-        (eshell)
+    (if (equal 'windows-nt system-type)
+        (aweshell-toggle)
       (if (string-match "*terminal<[0-9]\\{1,2\\}>*" (buffer-name))
           (evil-buffer nil)
         (let ((index 1)

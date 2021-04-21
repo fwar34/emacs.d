@@ -440,7 +440,7 @@
                     ;;          (ansi-term "/usr/bin/zsh")
                     ;;          ))
                     ;; "sh" 'multi-term
-                    "sh" 'eshell
+                    "sh" 'aweshell-toggle
                     "rr" 'fwar34/counsel-goto-recent-directory
                     "rc" 'fwar34/run-current-file)
 ;; }}
