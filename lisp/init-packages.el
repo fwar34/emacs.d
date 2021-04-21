@@ -348,6 +348,21 @@
    :map ivy-minibuffer-map
    ("M-l" . ivy-restrict-to-matches))
   :config
+  (general-define-key
+   :states 'emacs
+   :keymaps 'ivy-occur-grep-mode-map
+   "q" 'quit-window
+   "gw" 'ivy-wgrep-change-to-wgrep-mode)
+
+  (general-define-key
+   :states 'emacs
+   :keymaps 'wgrep-mode-map
+   :prefix "`"
+   "gq" 'wgrep-abort-changes
+   "gz" 'wgrep-finish-edit
+   "gs" 'evil-avy-goto-char
+   )
+
   ;; 调整 counsel 搜索的方式: 忽略单词顺序
   (setq ivy-re-builders-alist
         '((counsel-rg . ivy--regex-plus)
