@@ -358,9 +358,9 @@
    :states 'emacs
    :keymaps 'wgrep-mode-map
    :prefix "`"
-   "gq" 'wgrep-abort-changes
-   "gz" 'wgrep-finish-edit
-   "gs" 'evil-avy-goto-char
+   "`" 'wgrep-abort-changes
+   "z" 'wgrep-finish-edit
+   "g" 'evil-avy-goto-char
    )
 
   ;; 调整 counsel 搜索的方式: 忽略单词顺序
@@ -535,7 +535,7 @@
 
   (defun ivy|occur-mode-setup ()
     (local-set-key "/" #'ivy-occur/filter-lines)
-    (local-set-key (kbd "C-/") #'ivy-occur/undo))
+    (local-set-key (kbd "M-/") #'ivy-occur/undo))
 
   (add-hook 'ivy-occur-mode-hook 'ivy|occur-mode-setup)
   (add-hook 'ivy-occur-grep-mode-hook 'ivy|occur-mode-setup)
