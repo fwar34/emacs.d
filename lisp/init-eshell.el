@@ -42,6 +42,7 @@
 (defun my/eshell-init-keymap ()
   (evil-define-key 'insert eshell-mode-map (kbd "C-r") #'fwar34/ivy-eshell-history)
   (evil-define-key 'insert eshell-mode-map ";tm" #'aweshell-toggle)
+  (evil-define-key 'insert eshell-mode-map ";sh" #'aweshell-toggle)
   (evil-define-key 'insert eshell-mode-map ";;" #'self-insert-command)
   )
 (add-hook 'eshell-first-time-mode-hook #'my/eshell-init-keymap)
