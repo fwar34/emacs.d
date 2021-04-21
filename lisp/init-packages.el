@@ -352,15 +352,17 @@
    :states 'emacs
    :keymaps 'ivy-occur-grep-mode-map
    "q" 'quit-window
+   "gs" 'evil-avy-goto-char
    "gw" 'ivy-wgrep-change-to-wgrep-mode)
 
   (general-define-key
    :states 'emacs
    :keymaps 'wgrep-mode-map
-   :prefix "`"
-   "`" 'wgrep-abort-changes
-   "z" 'wgrep-finish-edit
-   "g" 'evil-avy-goto-char
+   :prefix ","
+   "qq" 'wgrep-abort-changes
+   "zz" 'wgrep-finish-edit
+   "gs" 'evil-avy-goto-char
+   "," 'self-insert-command
    )
 
   ;; 调整 counsel 搜索的方式: 忽略单词顺序
@@ -441,14 +443,14 @@
 
   (general-define-key
    :keymaps 'ivy-minibuffer-map
-   :prefix "`"
-   "`" 'ivy-restrict-to-matches
-   "j" 'swiper-avy
-   "o" 'ivy-occur
-   "h" 'ivy-beginning-of-buffer
-   "l" 'ivy-end-of-buffer
+   :prefix ","
+   "," 'self-insert-command
+   "s" 'ivy-restrict-to-matches
+   "d" 'swiper-avy
+   "c" 'ivy-occur
+   "a" 'ivy-beginning-of-buffer
+   "e" 'ivy-end-of-buffer
    )
-
   
 
   (use-package ivy-posframe
