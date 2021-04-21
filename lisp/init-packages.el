@@ -345,6 +345,7 @@
    ([remap describe-function] . counsel-describe-function)
    ([remap describe-variable] . counsel-describe-variable)
    ([remap describe-symbol] . counsel-describe-symbol)
+   ("M-x" . counsel-M-x)
    :map ivy-minibuffer-map
    ("M-l" . ivy-restrict-to-matches))
   :config

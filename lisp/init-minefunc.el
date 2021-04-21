@@ -433,11 +433,12 @@ URL `http://ergoemacs.org/emacs/elisp_run_current_file.html'"
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (defun my-is-char (c)
   (or ;; (= c ?.)
-      (= c ?-)
-      (= c ?_)
-      (and (>= c ?0) (<= c ?9))
-      (and (>= c ?A) (<= c ?Z))
-      (and (>= c ?a) (<= c ?z))))
+   (when (equal major-mode 'emacs-lisp-mode)
+     (= c ?-))
+   (= c ?_)
+   (and (>= c ?0) (<= c ?9))
+   (and (>= c ?A) (<= c ?Z))
+   (and (>= c ?a) (<= c ?z))))
 (defun my-word-at-point (&optional search-back)
   "my search word at point function"
   (let* ((ret (char-to-string (following-char)))
