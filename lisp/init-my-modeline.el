@@ -53,7 +53,7 @@ DEFAULT-TEXT."
         (progn
           (set-face-background 'mode-line "orange")
           (set-face-background 'mode-line-inactive "orange"))
-      (unless (boundp 'god-local-mode)
+      (unless (bound-and-true-p god-local-mode)
         (set-face-background 'mode-line (if (display-graphic-p) "gray26" "black"))
         (set-face-background 'mode-line-inactive (if (display-graphic-p) "gray26" "black")))
       )))
