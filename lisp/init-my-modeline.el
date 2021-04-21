@@ -46,6 +46,18 @@ DEFAULT-TEXT."
 ;;       )) 
 ;;   )
 
+(defun fwar34/wgrep-state ()
+  "Change modeline background color"
+  '(:eval
+    (if (and (not buffer-read-only) (equal major-mode 'ivy-occur-grep-mode))
+        (progn
+          (set-face-background 'mode-line "orange")
+          (set-face-background 'mode-line-inactive "orange"))
+      (unless god-local-mode
+        (set-face-background 'mode-line (if (display-graphic-p) "gray26" "black"))
+        (set-face-background 'mode-line-inactive (if (display-graphic-p) "gray26" "black")))
+      )))
+
 (defun fwar34/evil-state ()
   "Display evil state in differente color"
   '(:eval
@@ -287,6 +299,7 @@ DEFAULT-TEXT."
        (fwar34/evil-state)
        '(:eval (when (featurep 'lispyville)
                  (lispyville-mode-line-string " @lispy-special@")))
+       (fwar34/wgrep-state)
        (fwar34/lispy-state)
        " "
        ;; git info
