@@ -133,16 +133,30 @@
 
   )
 
-(use-package esh-autosuggest
-  :ensure t
-  :after eshell
-  :hook
-  ;; eshell-banner-message "What would you like to do?\n\n"
-  (eshell-mode . esh-autosuggest-mode)
-  ;; If you have use-package-hook-name-suffix set to nil, uncomment and use the
-  ;; line below instead:
-  ;; :hook (eshell-mode-hook . esh-autosuggest-mode)
-  )
+;; (use-package esh-autosuggest
+;;   :disabled
+;;   :ensure t
+;;   :after eshell
+;;   :hook
+;;   ;; eshell-banner-message "What would you like to do?\n\n"
+;;   (eshell-mode . esh-autosuggest-mode)
+;;   ;; If you have use-package-hook-name-suffix set to nil, uncomment and use the
+;;   ;; line below instead:
+;;   ;; :hook (eshell-mode-hook . esh-autosuggest-mode)
+;;   :config
+;;   (setq evil-collection-company-use-tng nil)
+
+;;   (defun setup-eshell-ivy-completion ()
+;;     (define-key eshell-mode-map [remap eshell-pcomplete] 'completion-at-point)
+;;     ;; only if you want to use the minibuffer for completions instead of the
+;;     ;; in-buffer interface
+;;     ;; (setq-local ivy-display-functions-alist
+;;     ;;             (remq (assoc 'ivy-completion-in-region ivy-display-functions-alist)
+;;     ;;                   ivy-display-functions-alist))
+;;     )
+
+;;   (add-hook 'eshell-first-time-mode-hook #'setup-eshell-ivy-completion)
+;;   )
 
 (use-package eshell-prompt-extras
   :after eshell
@@ -278,8 +292,8 @@
 ;;     (shell-command (concat "foxy.sh " command))))
 ;; (defalias 'foxy #'fwar34/foxy-command)
 
-(defalias 'q #'kill-this-buffer)
-(defalias 'exit #'kill-this-buffer)
+;; (defalias 'q #'kill-this-buffer)
+;; (defalias 'exit #'kill-this-buffer)
 
 ;;-------------------------------------------------------------
 ;; impliment
@@ -315,11 +329,19 @@
 (defalias 'licmd #'fwar34/proxy-command-use-lisp)
 
 ;; https://emacs-china.org/t/emacs-builtin-mode/11937/83?u=fwar34
-;; (use-package em-term
-;;   :ensure nil
-;;   :custom
-;;   (eshell-visual-commands '("top" "htop" "less" "more" "bat"))
-;;   (eshell-visual-subcommands '(("git" "help" "lg" "log" "diff" "show")))
-;;   (eshell-visual-options '(("git" "--help" "--paginate"))))
+(use-package em-term
+  :ensure nil
+  :custom
+  (eshell-visual-commands '("top" "htop" "less" "more" "bat"))
+  (eshell-visual-subcommands '(("git" "help" "lg" "log" "diff" "show")))
+  (eshell-visual-options '(("git" "--help" "--paginate")))
+  )
+
+(use-package aweshell
+  :straight
+  (:host github :repo "manateelazycat/aweshell")
+  :ensure t
+  :after eshell
+  )
 
 (provide 'init-eshell)
