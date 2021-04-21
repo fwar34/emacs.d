@@ -146,7 +146,7 @@
   "gj" 'outline-forward-same-level
   "gk" 'outline-backward-same-level
   (kbd "TAB") 'org-cycle)
-
+;; 
 ;; I prefer Emacs way after pressing ":" in evil-mode
 (define-key evil-ex-completion-map (kbd "C-a") 'evil-first-non-blank)
 (define-key evil-ex-completion-map (kbd "C-b") 'backward-char)
