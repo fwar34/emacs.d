@@ -16,7 +16,9 @@
         ("C-m" . (lambda () (interactive)
                    (if company-selection
                        (company-complete-selection)
-                     (newline-and-indent)))) ;; RET判断当前是否有选中的补全，如果有则直接补全，如果没有就换行
+                     (if (equal major-mode 'eshell-mode)
+                         (eshell-send-input)
+                       (newline-and-indent))))) ;; RET判断当前是否有选中的补全，如果有则直接补全，如果没有就换行(排除eshell-mode)
         ("C-l" . yas-expand))
   :config
   (global-company-mode)
