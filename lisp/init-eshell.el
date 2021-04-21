@@ -124,16 +124,16 @@
   ;;       (eshell-grep "rgrep" args t)))
   ;;   (add-hook 'eshell-mode-hook
   ;;             (lambda ()(eshell-cmpl-initialize)))
-    (add-hook 'eshell-mode-hook (lambda () (setq-local global-hl-line-mode nil)))
+  (add-hook 'eshell-mode-hook (lambda () (setq-local global-hl-line-mode nil)))
 
+  ;; 如果win10没有改默认编码为utf8则打开下面的注释
   ;; windows中eshell设置中文
-  (when (string-equal system-type "windows-nt")
-    (with-eval-after-load 'eshell
-      (set-language-environment "chinese-GB")))
+  ;; (when (string-equal system-type "windows-nt")
+  ;;   (with-eval-after-load 'eshell
+  ;;     (set-language-environment "chinese-GB")))
 
   ;; (custom-set-variables
   ;;  '(eshell-visual-options (quote (("git" "log" "diff" "show")))))
-
   )
 
 ;; (use-package esh-autosuggest
@@ -295,8 +295,7 @@
 ;;     (shell-command (concat "foxy.sh " command))))
 ;; (defalias 'foxy #'fwar34/foxy-command)
 
-;; (defalias 'q #'kill-this-buffer)
-;; (defalias 'exit #'kill-this-buffer)
+(defalias 'q #'aweshell-toggle)
 
 ;;-------------------------------------------------------------
 ;; impliment
