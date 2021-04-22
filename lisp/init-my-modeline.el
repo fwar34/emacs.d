@@ -51,10 +51,12 @@ DEFAULT-TEXT."
   '(:eval
     (if (and (not buffer-read-only) (equal major-mode 'ivy-occur-grep-mode))
         (progn
+          ;; (message "IF................")
           (set-face-background 'mode-line "orange")
-            ;; (set-face-background 'mode-line-inactive "orange")
-            )
+          ;; (set-face-background 'mode-line-inactive "orange")
+          )
       (unless (bound-and-true-p god-local-mode)
+        ;; (message "ELSE................")
         (set-face-background 'mode-line (if (display-graphic-p) "gray26" "black"))
         ;; (set-face-background 'mode-line-inactive (if (display-graphic-p) "gray26" "black"))
         )
