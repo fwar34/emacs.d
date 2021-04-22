@@ -49,7 +49,7 @@ DEFAULT-TEXT."
 (defun fwar34/wgrep-state ()
   "Change modeline background color"
   '(:eval
-    (if (and (not buffer-read-only) (equal major-mode 'ivy-occur-grep-mode))
+    (if (and (not buffer-read-only) (or (equal major-mode 'ivy-occur-grep-mode) (equal major-mode 'rg-mode)))
         (progn
           ;; (message "IF................")
           (set-face-background 'mode-line "orange")

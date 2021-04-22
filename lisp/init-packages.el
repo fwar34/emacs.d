@@ -3,10 +3,10 @@
   (require 'package)
   ;; (setq package-archives '(("gnu"   . "https://elpa.emacs-china.org/gnu/")
   ;;                         ("melpa" . "https://elpa.emacs-china.org/melpa/"))))
-  ;; (setq package-archives '(("gnu"   . "http://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/")
-  ;;                          ("melpa" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/")))
-  (setq package-archives '(("gnu"   . "http://mirrors.cloud.tencent.com/elpa/gnu/")
-                         ("melpa" . "http://mirrors.cloud.tencent.com/elpa/melpa/")))
+  (setq package-archives '(("gnu"   . "http://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/")
+                           ("melpa" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/")))
+  ;; (setq package-archives '(("gnu"   . "http://mirrors.cloud.tencent.com/elpa/gnu/")
+  ;;                        ("melpa" . "http://mirrors.cloud.tencent.com/elpa/melpa/")))
   ;; (setq package-archives '(("gnu" . "http://mirrors.ustc.edu.cn/elpa/gnu/")
   ;;                          ("melpa" . "http://mirrors.ustc.edu.cn/elpa/melpa/")))
 
@@ -356,16 +356,6 @@
    "gs" 'evil-avy-goto-char
    "gw" 'ivy-wgrep-change-to-wgrep-mode)
 
-  (general-define-key
-   :states 'emacs
-   :keymaps 'wgrep-mode-map
-   :prefix ","
-   "qq" 'wgrep-abort-changes
-   "zz" 'wgrep-finish-edit
-   "gs" 'evil-avy-goto-char
-   "," 'self-insert-command
-   )
-
   ;; 调整 counsel 搜索的方式: 忽略单词顺序
   (setq ivy-re-builders-alist
         '((counsel-rg . ivy--regex-plus)
@@ -558,6 +548,16 @@
 (use-package wgrep
   :ensure t
   :defer t
+  :config
+  (general-define-key
+   :states 'emacs
+   :keymaps 'wgrep-mode-map
+   :prefix ","
+   "qq" 'wgrep-abort-changes
+   "zz" 'wgrep-finish-edit
+   "gs" 'evil-avy-goto-char
+   "," 'self-insert-command
+   )
   )
 
 
@@ -571,6 +571,7 @@
   :config
   (sp-local-pair 'emacs-lisp-mode "'" nil :actions nil)
   (sp-local-pair 'lisp-interaction-mode "'" nil :actions nil)
+
   )
 
 ;; js2-mode setting
@@ -1505,8 +1506,10 @@
   :ensure t
   :defer t
   :bind
-  ("C-c s" . rg-menu)
-  ("C-c C-s" . rg-menu)
+  (("C-c s" . rg-menu)
+   ("C-c C-s" . rg-menu)
+   :map rg-mode-map
+   ("w" . wgrep-change-to-wgrep-mode))
   :config
   (rg-enable-menu)
   )
