@@ -52,11 +52,12 @@ DEFAULT-TEXT."
     (if (and (not buffer-read-only) (equal major-mode 'ivy-occur-grep-mode))
         (progn
           (set-face-background 'mode-line "orange")
-          (when (display-graphic-p)
-            (set-face-background 'mode-line-inactive "orange")))
+            ;; (set-face-background 'mode-line-inactive "orange")
+            )
       (unless (bound-and-true-p god-local-mode)
         (set-face-background 'mode-line (if (display-graphic-p) "gray26" "black"))
-        (set-face-background 'mode-line-inactive (if (display-graphic-p) "gray26" "black")))
+        ;; (set-face-background 'mode-line-inactive (if (display-graphic-p) "gray26" "black"))
+        )
       )))
 
 (defun fwar34/evil-state ()

@@ -1374,13 +1374,15 @@
       (cond (god-local-mode (progn
                               ;; (set-face-background 'mode-line (if limited-colors-p "red" "#e9e2cb"))
                               (set-face-background 'mode-line (if limited-colors-p "red" "orange red"))
-                              (set-face-background 'mode-line-inactive (if limited-colors-p "red" "orange red"))))
+                              ;; (set-face-background 'mode-line-inactive (if limited-colors-p "red" "orange red"))
+                              ))
             (t (progn
                  ;; (set-face-background 'mode-line (if limited-colors-p "black" "#2B2B2B"))
                  ;; (set-face-background 'mode-line-inactive (if limited-colors-p "black" "#2B2B2B"))))
                  ;; 使用counsel-color-emacs可以查看
                  (set-face-background 'mode-line (if limited-colors-p "black" "gray26"))
-                 (set-face-background 'mode-line-inactive (if limited-colors-p "black" "gray26")))))))
+                 ;; (set-face-background 'mode-line-inactive (if limited-colors-p "black" "gray26"))
+                 )))))
 
   (add-hook 'god-mode-enabled-hook #'my-god-mode-update-modeline)
   (add-hook 'god-mode-disabled-hook #'my-god-mode-update-modeline)
