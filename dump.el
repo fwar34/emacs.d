@@ -89,6 +89,7 @@
                       yasnippet
                       rg
                       elpa-mirror
+                      amx
                       ))
 
 (dolist (package dump-packages)
