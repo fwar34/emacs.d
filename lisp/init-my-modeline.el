@@ -52,7 +52,8 @@ DEFAULT-TEXT."
     (if (and (not buffer-read-only) (equal major-mode 'ivy-occur-grep-mode))
         (progn
           (set-face-background 'mode-line "orange")
-          (set-face-background 'mode-line-inactive "orange"))
+          (when (display-graphic-p)
+            (set-face-background 'mode-line-inactive "orange")))
       (unless (bound-and-true-p god-local-mode)
         (set-face-background 'mode-line (if (display-graphic-p) "gray26" "black"))
         (set-face-background 'mode-line-inactive (if (display-graphic-p) "gray26" "black")))
