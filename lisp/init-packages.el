@@ -1509,9 +1509,19 @@
   (("C-c s" . rg-menu)
    ("C-c C-s" . rg-menu)
    :map rg-mode-map
-   ("w" . wgrep-change-to-wgrep-mode))
+   ("w" . wgrep-change-to-wgrep-mode)
+   ("j" . compilation-next-error)
+   ("k" . compilation-previous-error))
   :config
   (rg-enable-menu)
+  (add-hook 'rg-mode-hook (lambda () (evil-set-initial-state 'rg-mode 'emacs)))
+
+  (general-define-key
+   :states 'emacs
+   :prefix ","
+   :keymaps 'rg-mode-map
+   "," 'self-insert-command
+   "gs" 'evil-avy-goto-char)
   )
 
 (use-package elpa-mirror

@@ -102,8 +102,7 @@
 ;;   (evil-set-initial-state (car p) (cdr p)))
 (loop for (mode . state) in '((apropos-mode . normal)
                               (browse-kill-ring-mode . normal)
-                              (ivy-occur-grep-mode . emacs)
-                              (rg-mode . emacs))
+                              (ivy-occur-grep-mode . emacs))
       do (evil-set-initial-state mode state))
 
 ;; TAB and C-i is the same
