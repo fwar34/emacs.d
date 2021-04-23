@@ -460,6 +460,8 @@
                     "7" (lambda () (interactive) (persp-switch-by-number 7))
                     "SPC" 'evil-ex
                     "cc" 'convert-file-to-utf8-unix
+                    "cn" 'my-convert-radix-word
+                    "cv" 'my-convert-radix
                     ;; "ss" 'wg-create-workgroup ; save windows layout
                     "se" 'evil-iedit-state/iedit-mode ; start iedit in emacs
                     "sc" 'shell-command

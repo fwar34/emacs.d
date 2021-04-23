@@ -534,6 +534,34 @@ URL `http://ergoemacs.org/emacs/elisp_run_current_file.html'"
 ;; {{{
 ;; http://smacs.github.io/elisp/04-string.html
 ;; http://ergoemacs.org/emacs/elisp_converting_hex_decimal.html
+(defun my-is-number (c)
+  (or
+   (and (>= c ?a) (<= c ?f))
+   (and (>= c ?A) (<= c ?F))
+   (and (>= c ?0) (<= c ?9))))
+
+(defun my-number-at-point (&optional search-back)
+  "my search number at point function"
+  (let* ((ret (char-to-string (following-char)))
+         (b (line-beginning-position))
+         (e (line-end-position)))
+
+    ;; backward
+    (when search-back
+      (save-excursion
+        (backward-char)
+        (while (and (>= (point) b) (my-is-number (following-char)))
+          (setq ret (concat (char-to-string (following-char)) ret))
+          (backward-char))))
+
+    ;; forward
+    (save-excursion
+      (forward-char)
+      (while (and (< (point) e) (my-is-number (following-char)))
+        (setq ret (concat ret (char-to-string (following-char))))
+        (forward-char)))
+    ret))
+
 (defun my-convert-use-calculator (arg)
   (unless (featurep 'calculator)
     (require 'calculator))
@@ -558,11 +586,16 @@ URL `http://ergoemacs.org/emacs/elisp_run_current_file.html'"
             ((string-equal output-radix "10")
              (format "convert %s to decimal => %#d" arg number))
             ((string-equal output-radix "16")
-             (format "convert %s to hex => %#X" arg number))
+             (format "convert %s to hex => %X" arg number))
             (t
              "not convert")
             )))
       (error "no number to convert")))
+
+(defun my-convert-radix-word (input-radix output-radix)
+  (interactive (list (read-string "input radix[2-16]:")
+                     (read-string "output radix[2-16]:")))
+  (my-convert-radix input-radix output-radix (my-number-at-point t)))
 ;; }}}
 
 (provide 'init-minefunc)
