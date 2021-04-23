@@ -301,6 +301,16 @@ Important actors in this film are:
 * 获取天气
 https://emacs-china.org/t/org-journal/13153/3
 #+begin_src sh :results raw
-curl -H "Accept-Language: zh-cn" "wttr.in/xi'an?0Q"
+# curl -H "Accept-Language: zh-cn" "wttr.in/xi'an?0Q"
 curl -H "Accept-Language: zh-cn" "wttr.in/xi'an?0T"
 #+end_src
+
+C-c C-c直接计算结果如下:
+#+RESULTS:
+天气预报： xi'an
+
+   _`/"".-.     小阵雨
+    ,\_(   ).   16 °C          
+     /(___(__)  ↙ 15 km/h      
+       ‘ ‘ ‘ ‘  10 km          
+      ‘ ‘ ‘ ‘   0.1 mm         

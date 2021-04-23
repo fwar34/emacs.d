@@ -521,16 +521,48 @@ URL `http://ergoemacs.org/emacs/elisp_run_current_file.html'"
   (interactive)
   (let ((buf "*dump process*"))
     (make-process
-      :name "dump"
-      :buffer buf
-      ;; :command (list "D:\\emax\\emax64\\bin\\emacs.exe" "--batch" "-q"
-      :command (list "emacs" "--batch" "-q"
-		     "-l" (expand-file-name "dump.el"
-					    user-emacs-directory)))
+     :name "dump"
+     :buffer buf
+     ;; :command (list "D:\\emax\\emax64\\bin\\emacs.exe" "--batch" "-q"
+     :command (list "emacs" "--batch" "-q" "-l" (expand-file-name "dump.el" user-emacs-directory)))
     (display-buffer buf)))
 
 (defun my-find-other-file (&optional in-other-window)
   (interactive "P")
   (ff-find-other-file in-other-window t))
+
+;; {{{
+;; http://smacs.github.io/elisp/04-string.html
+;; http://ergoemacs.org/emacs/elisp_converting_hex_decimal.html
+(defun my-convert-use-calculator (arg)
+  (unless (featurep 'calculator)
+    (require 'calculator))
+  (let ((calculator-output-radix 'bin)
+        (calculator-radix-grouping-mode nil))
+    (calculator-number-to-string arg)))
+
+(defun my-convert-radix (input-radix output-radix arg)
+  ;; (interactive "p\nsnumber to convert:")
+  (interactive (list (read-string "input radix[2-16]:")
+                     (read-string "output radix[2-16]:")
+                     (read-string "number to convert:")))
+    (if arg
+        (let ((number (string-to-number arg (string-to-number input-radix))))
+          (print number)
+          (message
+           (cond
+            ((string-equal output-radix "2")
+             (format "convert %s to bin => %s" arg (my-convert-use-calculator number)))
+            ((string-equal output-radix "8")
+             (format "convert decimal %s to octal => %#o" arg number))
+            ((string-equal output-radix "10")
+             (format "convert %s to decimal => %#d" arg number))
+            ((string-equal output-radix "16")
+             (format "convert %s to hex => %#X" arg number))
+            (t
+             "not convert")
+            )))
+      (error "no number to convert")))
+;; }}}
 
 (provide 'init-minefunc)

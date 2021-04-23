@@ -103,7 +103,8 @@
 (loop for (mode . state) in '((apropos-mode . normal)
                               (browse-kill-ring-mode . normal)
                               (ivy-occur-grep-mode . emacs)
-                              (calc-mode . emacs))
+                              (calc-mode . emacs)
+                              (calculator-mode . emacs))
       do (evil-set-initial-state mode state))
 
 ;; TAB and C-i is the same
