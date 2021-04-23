@@ -347,7 +347,8 @@
    ([remap describe-symbol] . counsel-describe-symbol)
    ("M-x" . counsel-M-x)
    :map ivy-minibuffer-map
-   ("M-l" . ivy-restrict-to-matches))
+   ("M-l" . ivy-restrict-to-matches)
+   ("C-w" . backward-kill-word)) ;; 在ivy中已经将backward-kill-word remap成了ivy-backward-kill-word
   :config
   (general-define-key
    :states 'emacs
