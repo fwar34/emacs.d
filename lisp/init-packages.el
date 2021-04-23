@@ -354,7 +354,9 @@
    :keymaps 'ivy-occur-grep-mode-map
    "q" 'quit-window
    "gs" 'evil-avy-goto-char
-   "gw" 'ivy-wgrep-change-to-wgrep-mode)
+   "gw" 'ivy-wgrep-change-to-wgrep-mode
+   "n" 'ivy-occur-next-error
+   )
 
   ;; 调整 counsel 搜索的方式: 忽略单词顺序
   (setq ivy-re-builders-alist
@@ -1507,8 +1509,6 @@
   :defer t
   :bind
   (("C-c s" . rg-menu)
-   ("C-c C-s" . rg-menu)
-   :map c-mode-base-map
    ("C-c C-s" . rg-menu)
    :map rg-mode-map
    ("w" . wgrep-change-to-wgrep-mode)
