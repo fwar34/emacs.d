@@ -102,7 +102,8 @@
 ;;   (evil-set-initial-state (car p) (cdr p)))
 (loop for (mode . state) in '((apropos-mode . normal)
                               (browse-kill-ring-mode . normal)
-                              (ivy-occur-grep-mode . emacs))
+                              (ivy-occur-grep-mode . emacs)
+                              (calc-mode . emacs))
       do (evil-set-initial-state mode state))
 
 ;; TAB and C-i is the same
@@ -306,8 +307,6 @@
                     "oc" 'occur-dwim
                     "oi" 'isearch-occur
                     "qq" 'quit-window
-                    "pa" 'evil-paste-after
-                    "pb" 'evil-paste-before
                     ;; "hv" 'describe-variable
                     "ge" 'goto-line
                     ;; "gg" 'counsel-gtags-dwim ; jump from reference to definition or vice versa

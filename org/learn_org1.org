@@ -297,3 +297,10 @@ Important actors in this film are:
 -----
 
 <2019-03-26 周二>
+
+* 获取天气
+https://emacs-china.org/t/org-journal/13153/3
+#+begin_src sh :results raw
+curl -H "Accept-Language: zh-cn" "wttr.in/xi'an?0Q"
+curl -H "Accept-Language: zh-cn" "wttr.in/xi'an?0T"
+#+end_src

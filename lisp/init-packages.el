@@ -1508,6 +1508,8 @@
   :bind
   (("C-c s" . rg-menu)
    ("C-c C-s" . rg-menu)
+   :map c-mode-base-map
+   ("C-c C-s" . rg-menu)
    :map rg-mode-map
    ("w" . wgrep-change-to-wgrep-mode)
    ("j" . compilation-next-error)
