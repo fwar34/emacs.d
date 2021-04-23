@@ -1,3 +1,3 @@
 ;; -*- coding: utf-8; lexical-binding: t; -*-
 
-(provide 'init-bc)
+(provide 'init-svn)
