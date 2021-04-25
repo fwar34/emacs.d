@@ -5,3 +5,4 @@ patch:
     - schema: luna_pinyin_simp     # 朙月拼音 简化字模式
     - schema: terra_pinyin         # 地球拼音 dì qiú pīn yīn
     - schema: cangjie5             # 倉頡五代
+  menu/page_size: 9
