@@ -238,7 +238,7 @@
 ;; pacman -S librime
 (use-package rime
   :ensure t
-  :if (equal window-system 'gnu/linux)
+  :if (equal system-type 'gnu/linux)
   :custom
   (rime-show-candidate 'posframe)
   :bind
