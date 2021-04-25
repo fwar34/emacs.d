@@ -150,13 +150,14 @@
   (use-package posframe :ensure t))
 
 (use-package pyim
+  :disabled
   :ensure t
-  :if (and (display-graphic-p) (string-equal "A12969" system-name) (not (equal system-type 'windows-nt)))
-  :demand t
+  :if (and (display-graphic-p) (equal system-type 'gnu/linux))
   :config
   ;; 激活 basedict 拼音词库，五笔用户请继续阅读 README
   (use-package pyim-basedict
-    :if window-system
+    :if (and (display-graphic-p) (equal system-type 'gnu/linux))
+    ;; :after pyim
     :ensure t
     :config (pyim-basedict-enable))
 
@@ -232,7 +233,23 @@
    ;; 使用C-i或者C-\来进行中英文输入法切换
    ;; "C-i" 'pyim-toggle-input-ascii
    )
-  ) 
+  )
+
+(use-package rime
+  :ensure t
+  :if (equal window-system 'gnu/linux)
+  :custom
+  (rime-show-candidate 'posframe)
+  :bind
+  (:map rime-mode-map
+        ("C-`" . 'rime-send-keybinding))
+  :config
+  ;; (setq default-input-method "rime")
+  (defun my-chinese-setup ()
+    "Set up my private Chinese environment."
+    (setq default-input-method "rime"))
+  (add-hook 'set-language-environment-hook 'my-chinese-setup)
+  )
 
 ;; https://github.com/emacs-evil/evil-collection
 ;; evil
@@ -1537,5 +1554,12 @@
   :ensure t
   :defer t
   )
+
+(use-package yaml-mode
+  :ensure t
+  :defer t
+  :config
+  (add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
+  (add-hook 'yaml-mode-hook '(lambda () (define-key yaml-mode-map "\C-m" 'newline-and-indent))))
 
 (provide 'init-packages)
