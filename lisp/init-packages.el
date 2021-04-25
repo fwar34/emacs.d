@@ -235,6 +235,7 @@
    )
   )
 
+;; pacman -S librime
 (use-package rime
   :ensure t
   :if (equal window-system 'gnu/linux)
