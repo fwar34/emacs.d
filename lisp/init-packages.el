@@ -250,6 +250,39 @@
     "Set up my private Chinese environment."
     (setq default-input-method "rime"))
   (add-hook 'set-language-environment-hook 'my-chinese-setup)
+
+  ;; support shift-l, shift-r, control-l, control-r
+  (setq rime-inline-ascii-trigger 'shift-l)
+
+  ;; {{{
+  ;; 当前没有输入内容的时候直接使用evil-escape的按键（；g）的直接返回到normal模式
+  (defun rime-evil-escape-advice (orig-fun key)
+    "advice for `rime-input-method' to make it work together with `evil-escape'.
+    Mainly modified from `evil-escape-pre-command-hook'"
+    (if rime--preedit-overlay
+        ;; if `rime--preedit-overlay' is non-nil, then we are editing something, do not abort
+        (apply orig-fun (list key))
+      (when (featurep 'evil-escape)
+        (let* (
+               (fkey (elt evil-escape-key-sequence 0))
+               (skey (elt evil-escape-key-sequence 1))
+               (evt (read-event nil nil evil-escape-delay))
+               )
+          (cond
+           ((and (characterp evt)
+                 (or (and (char-equal key fkey) (char-equal evt skey))
+                     (and evil-escape-unordered-key-sequence
+                          (char-equal key skey) (char-equal evt fkey))))
+            (evil-repeat-stop)
+            (evil-normal-state))
+           ((null evt) (apply orig-fun (list key)))
+           (t
+            (apply orig-fun (list key))
+            (if (numberp evt)
+                (apply orig-fun (list evt))
+              (setq unread-command-events (append unread-command-events (list evt))))))))))
+  (advice-add 'rime-input-method :around #'rime-evil-escape-advice)
+  ;; }}}
   )
 
 ;; https://github.com/emacs-evil/evil-collection

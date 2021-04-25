@@ -52,4 +52,4 @@ perspective.save
 emacs.pdmp
 amx-items
 rime/build/**
-rime/luna-pinyin.userdb/**
+rime/luna-pinyin.userdb/*.log
