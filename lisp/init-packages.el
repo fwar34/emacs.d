@@ -287,13 +287,13 @@
 
 (use-package sis
   :ensure t
+  :if (equal system-type 'windows-nt)
   ;; :hook
   ;; enable the /follow context/ and /inline region/ mode for specific buffers
   ;; (((text-mode prog-mode) . sis-context-mode)
   ;;  ((text-mode prog-mode) . sis-inline-mode))
 
   :config
-
   ;; ;; enable the /cursor color/ mode
   ;; (sis-global-cursor-color-mode t)
   ;; ;; enable the /respect/ mode
@@ -302,6 +302,7 @@
   ;; (sis-global-context-mode t)
   ;; ;; enable the /inline english/ mode for all buffers
   ;; (sis-global-inline-mode t)
+  (sis-ism-lazyman-config "1033" "2052" 'im-select)
   )
 
 ;; https://github.com/emacs-evil/evil-collection
@@ -361,7 +362,6 @@
     (evil-set-undo-system (if (>= emacs-major-version 28) 'undo-redo 'undo-tree))
     ;; (evil-set-undo-system (if (>= emacs-major-version 28) 'undo-redo 'undo-fu))
     )
-
   (use-package avy :ensure t)
 
   :custom
