@@ -195,8 +195,8 @@
       (setq pyim-page-tooltip 'posframe)
     (setq pyim-page-tooltip 'popup))
 
-  ;; 选词框显示5个候选词
-  (setq pyim-page-length 7)
+  ;; 选词框显示9个候选词
+  (setq pyim-page-length 9)
 
   (if (and (file-exists-p (expand-file-name "~/.emacs.d/pyim-bigdict.pyim"))
            (file-exists-p (expand-file-name "~/.emacs.d/pyim-mine.pyim")))
