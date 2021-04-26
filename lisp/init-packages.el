@@ -241,7 +241,10 @@
   :if (equal system-type 'gnu/linux)
   :custom
   (rime-show-candidate 'posframe)
-  (rime-disable-predicates '(rime-predicate-evil-mode-p rime-predicate-hydra-p))
+  (rime-disable-predicates '(rime-predicate-evil-mode-p
+                             rime-predicate-hydra-p
+                             rime-predicate-punctuation-line-begin-p
+                             rime-predicate-current-uppercase-letter-p))
   (rime-inline-predicates '(rime-predicate-space-after-cc-p))
   :bind
   (:map rime-mode-map
