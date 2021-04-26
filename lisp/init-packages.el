@@ -243,9 +243,7 @@
   (rime-show-candidate 'posframe)
   :bind
   (:map rime-mode-map
-        ("C-`" . 'rime-send-keybinding)
-        ("M-j" . 'rime-inline-ascii)
-        )
+        ("C-`" . 'rime-send-keybinding))
   :config
   ;; (setq default-input-method "rime")
   (defun my-chinese-setup ()
