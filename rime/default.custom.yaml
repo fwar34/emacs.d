@@ -6,4 +6,8 @@ patch:
     - schema: terra_pinyin         # 地球拼音 dì qiú pīn yīn
     - schema: cangjie5             # 倉頡五代
   menu/page_size: 9
-  "ascii_composer/switch_key/Shift_L": commit_code
+  switcher:
+    hotkeys:
+      - Control+grave
+  # ascii_composer:
+  #   switch_key: {Shift_L: commit_code}

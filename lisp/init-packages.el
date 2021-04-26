@@ -241,9 +241,13 @@
   :if (equal system-type 'gnu/linux)
   :custom
   (rime-show-candidate 'posframe)
+  (rime-disable-predicates '(rime-predicate-evil-mode-p rime-predicate-hydra-p))
+  (rime-inline-predicates '(rime-predicate-space-after-cc-p))
   :bind
   (:map rime-mode-map
         ("C-`" . 'rime-send-keybinding))
+  (:map rime-active-mode-map
+        ("M-j" . 'rime-inline-ascii))
   :config
   ;; (setq default-input-method "rime")
   (defun my-chinese-setup ()
@@ -331,11 +335,9 @@
         ("C-e" . evil-end-of-line))
   :config
   ;; 设置光标样式
-  (setq evil-motion-state-cursor 'box)  ; 
-  (setq evil-visual-state-cursor 'box)  ; 
-  (setq evil-normal-state-cursor 'box)  ; 
-  (setq evil-insert-state-cursor 'bar)  ; 
-  (setq evil-emacs-state-cursor  'hbar) ; _
+  (setq evil-motion-state-cursor '(box "red"))
+  (setq evil-visual-state-cursor '(box "orange"))
+  (setq evil-emacs-state-cursor  '(hbar "red"))
   (setq evil-insert-state-cursor '((hbar . 5) "yellow")
         evil-normal-state-cursor '(box "purple"))
 
