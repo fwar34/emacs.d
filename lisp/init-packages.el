@@ -150,24 +150,38 @@
   (use-package posframe :ensure t))
 
 (use-package pyim
-  :disabled
   :ensure t
-  :if (and (display-graphic-p) (equal system-type 'gnu/linux))
+  :unless (display-graphic-p)
   :config
   ;; 激活 basedict 拼音词库，五笔用户请继续阅读 README
   (use-package pyim-basedict
-    :if (and (display-graphic-p) (equal system-type 'gnu/linux))
+    :unless (display-graphic-p)
     ;; :after pyim
     :ensure t
     :config (pyim-basedict-enable))
 
-  (setq default-input-method "pyim")
+  ;; (setq default-input-method "pyim")
+  (defun my-chinese-setup ()
+    "Set up my private Chinese environment."
+    (setq default-input-method "pyim"))
+  (add-hook 'set-language-environment-hook 'my-chinese-setup)
 
   ;; 我使用全拼
   ;; (setq pyim-default-scheme 'quanpin)
   ;; (setq pyim-default-scheme 'pyim-shuangpin)
   (setq pyim-default-scheme 'xiaohe-shuangpin)
 
+  (defun my-evil-not-insert-p ()
+    "Detect whether the current buffer is in `evil' state.
+Include `evil-normal-state' ,`evil-visual-state' ,
+`evil-motion-state' , `evil-operator-state'.
+
+Can be used in `rime-disable-predicates' and `rime-inline-predicates'."
+    (and (fboundp 'evil-mode)
+         (or (evil-normal-state-p)
+             (evil-visual-state-p)
+             (evil-motion-state-p)
+             (evil-operator-state-p))))
   ;; 设置 pyim 探针设置，这是 pyim 高级功能设置，可以实现 *无痛* 中英文切换 :-)
   ;; 我自己使用的中英文动态切换规则是：
   ;; 1. 光标只有在注释里面时，才可以输入中文。
@@ -178,7 +192,8 @@
                   ;; pyim-probe-auto-english
                   pyim-probe-isearch-mode
                   pyim-probe-program-mode
-                  pyim-probe-org-structure-template))
+                  pyim-probe-org-structure-template
+                  my-evil-not-insert-p))
 
   ;;根据环境自动切换到半角标点输入模式
   (setq-default pyim-punctuation-half-width-functions
@@ -233,12 +248,24 @@
    ;; 使用C-i或者C-\来进行中英文输入法切换
    ;; "C-i" 'pyim-toggle-input-ascii
    )
+
+;;   (defun evil-toggle-input-method ()
+;;     "when toggle on input method, switch to evil-insert-state if possible.
+;; when toggle off input method, switch to evil-normal-state if current state is evil-insert-state"
+;;     (interactive)
+;;     (if (not current-input-method)
+;;         (if (not (string= evil-state "insert"))
+;;             (evil-insert-state))
+;;       (if (string= evil-state "insert")
+;;           (evil-normal-state)))
+;;     (toggle-input-method))
+;;   (global-set-key (kbd "C-\\") 'evil-toggle-input-method)
   )
 
 ;; pacman -S librime
 (use-package rime
   :ensure t
-  :if (equal system-type 'gnu/linux)
+  :if (and (equal system-type 'gnu/linux) (display-graphic-p))
   :custom
   (rime-show-candidate 'posframe)
   (rime-disable-predicates '(rime-predicate-evil-mode-p
