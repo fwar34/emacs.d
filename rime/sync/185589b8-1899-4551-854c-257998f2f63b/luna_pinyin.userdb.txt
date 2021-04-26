@@ -1,0 +1,27 @@
+# Rime user dictionary
+#@/db_name	luna_pinyin
+#@/db_type	userdb
+#@/rime_version	1.7.3
+#@/tick	30
+#@/user_id	185589b8-1899-4551-854c-257998f2f63b
+chou ma 	籌碼	c=0 d=0.1 t=2
+de 	的	c=1 d=1.09851 t=8
+ge 	個	c=1 d=1 t=27
+hao ma 	好嗎	c=1 d=1 t=28
+hen hao de 	很好的	c=0 d=0.1 t=4
+ma 	嗎	c=0 d=0.1 t=1
+mo shou shi jie 	魔獸世界	c=1 d=1 t=19
+ni 	你	c=1 d=1 t=24
+ni de 	你的	c=2 d=1.93707 t=20
+ni hao 	你好	c=1 d=1.27673 t=5
+ni hao chou ma 	你好籌碼	c=1 d=1 t=3
+ni hao de 	你好的	c=1 d=1 t=6
+ni hao ma 	你好嗎	c=11 d=10.2865 t=30
+ping guo 	蘋果	c=1 d=1 t=15
+shi 	是	c=1 d=1 t=22
+te se 	特色	c=1 d=1 t=23
+wo 	我	c=0 d=0.1 t=4
+wo hen 	喔很	c=1 d=1 t=18
+wo hen hao de 	我很好的	c=2 d=1.97045 t=11
+zhe ge 	這個	c=1 d=1 t=21
+zhong guo 	中國	c=2 d=1.99501 t=14
