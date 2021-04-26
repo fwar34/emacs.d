@@ -51,6 +51,7 @@ transient/*
 perspective.save
 emacs.pdmp
 amx-items
-rime/build/**
+rime/user.yaml
+rime/build/
 rime/luna_pinyin.userdb/
 rime/terra_pinyin.userdb/
