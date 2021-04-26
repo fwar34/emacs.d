@@ -52,4 +52,5 @@ perspective.save
 emacs.pdmp
 amx-items
 rime/build/**
-rime/luna-pinyin.userdb/*.log
+rime/luna_pinyin.userdb/
+rime/terra_pinyin.userdb/

@@ -3,4 +3,4 @@
 #@/db_type	userdb
 #@/rime_version	1.7.3
 #@/tick	0
-#@/user_id	185589b8-1899-4551-854c-257998f2f63b
+#@/user_id	fwar34_rime_sync
