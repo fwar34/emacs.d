@@ -455,7 +455,6 @@ Can be used in `rime-disable-predicates' and `rime-inline-predicates'."
   (general-define-key
    :states 'emacs
    :keymaps 'ivy-occur-grep-mode-map
-   (kbd ";TAB") 'other-window
    "q" 'quit-window
    "gs" 'evil-avy-goto-char
    "gw" 'ivy-wgrep-change-to-wgrep-mode
