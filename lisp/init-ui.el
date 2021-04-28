@@ -43,7 +43,7 @@
 ;; {{ 平滑滚动
 ;; Vertical Scroll
 (setq scroll-step 2)
-(setq scroll-margin 10)
+(setq scroll-margin 7)
 (setq scroll-conservatively 101)
 (setq scroll-up-aggressively 0.01)
 (setq scroll-down-aggressively 0.01)

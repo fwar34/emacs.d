@@ -2,26 +2,47 @@
 #@/db_name	luna_pinyin
 #@/db_type	userdb
 #@/rime_version	1.7.3
-#@/tick	30
+#@/tick	88
 #@/user_id	fwar34_rime_sync
-chou ma 	籌碼	c=0 d=0.0869358 t=30
-de 	的	c=1 d=0.984083 t=30
-ge 	個	c=1 d=0.985112 t=30
-hao ma 	好嗎	c=1 d=0.99005 t=30
-hen hao de 	很好的	c=0 d=0.0878095 t=30
-ma 	嗎	c=0 d=0.0865022 t=30
-mo shou shi jie 	魔獸世界	c=1 d=0.946485 t=30
-ni 	你	c=1 d=0.970446 t=30
-ni de 	你的	c=2 d=1.8426 t=30
-ni hao 	你好	c=1 d=1.12671 t=30
-ni hao chou ma 	你好籌碼	c=1 d=0.873716 t=30
-ni hao de 	你好的	c=1 d=0.88692 t=30
-ni hao ma 	你好嗎	c=11 d=10.2865 t=30
-ping guo 	蘋果	c=1 d=0.927743 t=30
-shi 	是	c=1 d=0.960789 t=30
-te se 	特色	c=1 d=0.965605 t=30
-wo 	我	c=0 d=0.0878095 t=30
-wo hen 	喔很	c=1 d=0.941765 t=30
-wo hen hao de 	我很好的	c=2 d=1.79187 t=30
-zhe ge 	這個	c=1 d=0.955997 t=30
-zhong guo 	中國	c=2 d=1.84163 t=30
+bu dui 	不對	c=1 d=1 t=80
+ce 	測	c=1 d=1 t=65
+ce shi 	測試	c=3 d=2.99284 t=87
+ce shi de 	測試的	c=1 d=1 t=78
+chi 	喫	c=1 d=1 t=59
+chou ma 	籌碼	c=0 d=0.0869358 t=88
+dai 	帶	c=1 d=1 t=86
+de 	的	c=1 d=0.984083 t=88
+fang fa 	方法	c=1 d=1 t=79
+ge 	個	c=5 d=4.02838 t=88
+gu 	股	c=1 d=1 t=40
+guai 	乖	c=1 d=1.09501 t=73
+guai kuai ji 	乖會計	c=1 d=1 t=74
+ha ha ha 	哈哈哈	c=1 d=1 t=55
+hao ma 	好嗎	c=1 d=0.99005 t=88
+hen hao de 	很好的	c=0 d=0.0878095 t=88
+jiu 	就	c=1 d=1 t=61
+kan 	看	c=1 d=1 t=75
+kuai ji 	會計	c=0 d=0.1 t=73
+lan 	藍	c=2 d=1.99005 t=35
+ma 	嗎	c=0 d=0.0865022 t=88
+men 	門	c=1 d=1 t=63
+mo shou shi jie 	魔獸世界	c=1 d=0.946485 t=88
+ni 	伲	c=1 d=1 t=84
+ni 	你	c=11 d=8.98958 t=88
+ni 	隬	c=1 d=1 t=82
+ni de 	你的	c=2 d=1.8426 t=88
+ni hao 	你好	c=4 d=3.40429 t=88
+ni hao chou ma 	你好籌碼	c=1 d=0.873716 t=88
+ni hao de 	你好的	c=2 d=1.57302 t=88
+ni hao ma 	你好嗎	c=28 d=22.2946 t=88
+ping guo 	蘋果	c=1 d=0.927743 t=88
+shi 	是	c=2 d=1.57963 t=88
+te se 	特色	c=1 d=0.965605 t=88
+wo 	我	c=0 d=0.0878095 t=88
+wo hen 	喔很	c=1 d=0.941765 t=88
+wo hen hao de 	我很好的	c=2 d=1.79187 t=88
+wo zhi dao 	我知道	c=0 d=0.1 t=50
+wo zhi dao de 	我知道的	c=1 d=1 t=51
+zhe ge 	這個	c=1 d=0.955997 t=88
+zhong guo 	中國	c=2 d=1.84163 t=88
+zhu chi ren 	主持人	c=1 d=1 t=88
