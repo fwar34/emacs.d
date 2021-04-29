@@ -372,15 +372,17 @@ URL `http://ergoemacs.org/emacs/elisp_run_current_file.html'"
     (if (string= end-char "{")
         ;; (display-message-or-buffer (buffer-substring begin end)) ;; 最后一个字符是{的话去除最后个{后输出
         (message (buffer-substring begin end)) ;; 最后一个字符是{的话去除最后个{后输出
-      (progn
-        (while (not (string= end-char ")"))
-          (evil-next-line)
-          (evil-end-of-line)
-          (setq end (point))
-          (setq end-char (buffer-substring-no-properties end (+ 1 end))))
-        ;; (message (buffer-substring-no-properties begin end)))
-        ;; (display-message-or-buffer (buffer-substring begin (+ 1 end)))
-        (message (buffer-substring begin (+ 1 end))))))
+      (if (string-equal (thing-at-point 'word) "const")
+          (message (buffer-substring begin (+ 1 end)))
+          (progn
+            (while (not (string= end-char ")"))
+              (evil-next-line)
+              (evil-end-of-line)
+              (setq end (point))
+              (setq end-char (buffer-substring-no-properties end (+ 1 end))))
+            ;; (message (buffer-substring-no-properties begin end)))
+            ;; (display-message-or-buffer (buffer-substring begin (+ 1 end)))
+            (message (buffer-substring begin (+ 1 end)))))))
   )
 
 (defun my-test-point ()
