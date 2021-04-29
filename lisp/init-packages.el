@@ -155,7 +155,7 @@
   :config
   ;; 激活 basedict 拼音词库，五笔用户请继续阅读 README
   (use-package pyim-basedict
-    :unless (display-graphic-p)
+    ;; :unless (display-graphic-p)
     ;; :after pyim
     :ensure t
     :config (pyim-basedict-enable))
@@ -249,17 +249,25 @@ Can be used in `rime-disable-predicates' and `rime-inline-predicates'."
    ;; "C-i" 'pyim-toggle-input-ascii
    )
 
-;;   (defun evil-toggle-input-method ()
-;;     "when toggle on input method, switch to evil-insert-state if possible.
-;; when toggle off input method, switch to evil-normal-state if current state is evil-insert-state"
-;;     (interactive)
-;;     (if (not current-input-method)
-;;         (if (not (string= evil-state "insert"))
-;;             (evil-insert-state))
-;;       (if (string= evil-state "insert")
-;;           (evil-normal-state)))
-;;     (toggle-input-method))
-;;   (global-set-key (kbd "C-\\") 'evil-toggle-input-method)
+  ;;   (defun evil-toggle-input-method ()
+  ;;     "when toggle on input method, switch to evil-insert-state if possible.
+  ;; when toggle off input method, switch to evil-normal-state if current state is evil-insert-state"
+  ;;     (interactive)
+  ;;     (if (not current-input-method)
+  ;;         (if (not (string= evil-state "insert"))
+  ;;             (evil-insert-state))
+  ;;       (if (string= evil-state "insert")
+  ;;           (evil-normal-state)))
+  ;;     (toggle-input-method))
+  ;;   (global-set-key (kbd "C-\\") 'evil-toggle-input-method)
+
+  (defun evil-exit-input-method ()
+    (interactive)
+    (if current-input-method
+        (if (string-equal evil-state "insert")
+            (evil-normal-state)
+          (toggle-input-method))))
+  (general-define-key :keymaps 'insert "C-\\" 'evil-exit-input-method)
   )
 
 ;; pacman -S librime
