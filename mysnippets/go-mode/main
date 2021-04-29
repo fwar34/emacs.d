@@ -1,0 +1,7 @@
+# name: main
+# key: main
+# contributor: 
+# --
+func main() {
+    $0
+}

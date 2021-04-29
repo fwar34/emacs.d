@@ -151,7 +151,7 @@
 
 (use-package pyim
   :ensure t
-  :unless (display-graphic-p)
+  ;; :unless (display-graphic-p)
   :config
   ;; 激活 basedict 拼音词库，五笔用户请继续阅读 README
   (use-package pyim-basedict
@@ -264,6 +264,7 @@ Can be used in `rime-disable-predicates' and `rime-inline-predicates'."
 
 ;; pacman -S librime
 (use-package rime
+  :disabled
   :ensure t
   :if (and (equal system-type 'gnu/linux) (display-graphic-p))
   :custom
