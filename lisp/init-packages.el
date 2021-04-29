@@ -185,7 +185,8 @@ Can be used in `rime-disable-predicates' and `rime-inline-predicates'."
          (or (evil-normal-state-p)
              (evil-visual-state-p)
              (evil-motion-state-p)
-             (evil-operator-state-p))))
+             (evil-operator-state-p)
+             (equal major-mode 'eshell-mode))))
   ;; 设置 pyim 探针设置，这是 pyim 高级功能设置，可以实现 *无痛* 中英文切换 :-)
   ;; 我自己使用的中英文动态切换规则是：
   ;; 1. 光标只有在注释里面时，才可以输入中文。
@@ -245,6 +246,7 @@ Can be used in `rime-disable-predicates' and `rime-inline-predicates'."
   ;;  ;; 使用C-i或者C-\来进行中英文输入法切换
   ;;  "C-i" 'pyim-toggle-input-ascii)
   (general-define-key
+   :jump t
    :keymaps 'insert
    :prefix "C-i"
    ;; 转换前面的英文字符为中文

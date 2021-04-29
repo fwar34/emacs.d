@@ -237,7 +237,9 @@
   (evil-add-command-properties con :jump t))
 
 ;; {{ Use `;` as one leader key
+;; }}
 (general-define-key :keymaps '(normal visual)
+                    :jump t
                     ;; :states '(normal motion insert emacs)
                     :prefix ";"
                     ;; :non-normal-prefix "M-;"
@@ -444,10 +446,10 @@
                     "sh" 'aweshell-toggle
                     "rr" 'fwar34/counsel-goto-recent-directory
                     "rc" 'fwar34/run-current-file)
-;; }}
 
  ;; {{ Use `SPC` as one leader key
 (general-define-key :keymaps '(normal visual)
+                    :jump t
                     ;; :states '(normal insert emacs)
                     :prefix "SPC"
                     ;; :non-normal-prefix "M-SPC"
