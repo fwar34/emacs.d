@@ -169,24 +169,16 @@
   ;; 按 "C-<return>" 将光标前的 regexp 转换为可以搜索中文的 regexp.
   ;; (define-key minibuffer-local-map (kbd "C-<return>") 'pyim-cregexp-convert-at-point)
   ;; (define-key ivy-minibuffer-map (kbd "C-<return>") 'pyim-cregexp-convert-at-point)
- 
+  
   ;; 我使用全拼
   ;; (setq pyim-default-scheme 'quanpin)
   ;; (setq pyim-default-scheme 'pyim-shuangpin)
   (setq pyim-default-scheme 'xiaohe-shuangpin)
 
-  (defun my-evil-not-insert-p ()
-    "Detect whether the current buffer is in `evil' state.
-Include `evil-normal-state' ,`evil-visual-state' ,
-`evil-motion-state' , `evil-operator-state'.
+  (defun my-englist-p ()
+    "disable pyim in modes"
+    (equal major-mode 'eshell-mode))
 
-Can be used in `rime-disable-predicates' and `rime-inline-predicates'."
-    (and (fboundp 'evil-mode)
-         (or (evil-normal-state-p)
-             (evil-visual-state-p)
-             (evil-motion-state-p)
-             (evil-operator-state-p)
-             (equal major-mode 'eshell-mode))))
   ;; 设置 pyim 探针设置，这是 pyim 高级功能设置，可以实现 *无痛* 中英文切换 :-)
   ;; 我自己使用的中英文动态切换规则是：
   ;; 1. 光标只有在注释里面时，才可以输入中文。
@@ -198,7 +190,8 @@ Can be used in `rime-disable-predicates' and `rime-inline-predicates'."
                   pyim-probe-isearch-mode
                   pyim-probe-program-mode
                   pyim-probe-org-structure-template
-                  my-evil-not-insert-p)) ;; pyim-probe-dynamic-english 和 pyim-probe-auto-english 二选一 
+                  my-englist-p
+                  pyim-probe-evil-normal-mode)) ;; pyim-probe-dynamic-english 和 pyim-probe-auto-english 二选一 
 
   ;;根据环境自动切换到半角标点输入模式
   (setq-default pyim-punctuation-half-width-functions
