@@ -55,8 +55,10 @@
     (kbd "<") 'org-meta-left)
   )
 
+;; 在 wslg 下面不停的弹出新的 emacs 进程
 ;; org-pomodoro setting
 (use-package org-pomodoro
+  :disabled
   :ensure t
   :after org
   )
