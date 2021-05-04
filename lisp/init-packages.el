@@ -1655,4 +1655,13 @@
   (add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
   (add-hook 'yaml-mode-hook '(lambda () (define-key yaml-mode-map "\C-m" 'newline-and-indent))))
 
+(use-package xclip
+  :ensure t
+  :config
+  (xclip-mode 1)
+  ;; (setq select-enable-clipboard t)
+  ;; (setq select-enable-primary t)
+  (xclip-set-selection 'primary )
+  )
+
 (provide 'init-packages)
