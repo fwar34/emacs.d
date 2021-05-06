@@ -1661,7 +1661,7 @@
   (xclip-mode 1)
   ;; (setq select-enable-clipboard t)
   ;; (setq select-enable-primary t)
-  (xclip-set-selection 'primary )
+  ;; (xclip-set-selection 'primary )
   )
 
 (provide 'init-packages)
