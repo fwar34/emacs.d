@@ -150,6 +150,7 @@
   (use-package posframe :ensure t))
 
 (use-package pyim
+  :if (equal system-type 'windows-nt)
   :ensure t
   ;; :unless (display-graphic-p)
   :config
@@ -248,51 +249,35 @@
    ;; "C-i" 'pyim-toggle-input-ascii
    )
 
-  (defun evil-toggle-input-method ()
-    "when toggle on input method, switch to evil-insert-state if possible.
-  when toggle off input method, switch to evil-normal-state if current state is evil-insert-state"
-    (interactive)
-    (if (not current-input-method)
-        (if (not (string= evil-state "insert"))
-            (evil-insert-state)
-          (toggle-input-method))
-      (if (string= evil-state "insert")
-          (evil-normal-state))))
-  (global-set-key (kbd "C-\\") 'evil-toggle-input-method)
-
-  ;; (defun evil-exit-input-method ()
-  ;;   (interactive)
-  ;;   (if current-input-method
-  ;;       (if (string-equal evil-state "insert")
-  ;;           (evil-normal-state)
-  ;;         (toggle-input-method))))
-  ;; (general-define-key :keymaps 'insert "C-\\" 'evil-exit-input-method)
-
   ;; {{{
   ;; 当前没有输入内容的时候直接使用evil-escape的按键（；g）的直接返回到normal模式
-  ;; (defun pyim-evil-escape-advice (orig-fun key)
-  ;;   "advice for `pyim-input-method' to make it work together with `evil-escape'.
-  ;;   Mainly modified from `evil-escape-pre-command-hook'"
-  ;;   (when (featurep 'evil-escape)
-  ;;     (let* (
-  ;;            (fkey (elt evil-escape-key-sequence 0))
-  ;;            (skey (elt evil-escape-key-sequence 1))
-  ;;            (evt (read-event nil nil evil-escape-delay))
-  ;;            )
-  ;;       (cond
-  ;;        ((and (characterp evt)
-  ;;              (or (and (char-equal key fkey) (char-equal evt skey))
-  ;;                  (and evil-escape-unordered-key-sequence
-  ;;                       (char-equal key skey) (char-equal evt fkey))))
-  ;;         (evil-repeat-stop)
-  ;;         (evil-normal-state))
-  ;;        ((null evt) (apply orig-fun (list key)))
-  ;;        (t
-  ;;         (apply orig-fun (list key))
-  ;;         (if (numberp evt)
-  ;;             (apply orig-fun (list evt))
-  ;;           (setq unread-command-events (append unread-command-events (list evt)))))))))
+  (defun pyim-evil-escape-advice (orig-fun key)
+    "advice for `pyim-input-method' to make it work together with `evil-escape'.
+    Mainly modified from `evil-escape-pre-command-hook'"
+    (if (pyim-probe-program-mode)
+        (apply orig-fun (list key))
+        (when (featurep 'evil-escape)
+          (let* (
+                 (fkey (elt evil-escape-key-sequence 0))
+                 (skey (elt evil-escape-key-sequence 1))
+                 ;; (evt (read-event nil nil evil-escape-delay))
+                 (evt (read-event nil nil 0.15))
+                 )
+            (cond
+             ((and (characterp evt)
+                   (or (and (char-equal key fkey) (char-equal evt skey))
+                       (and evil-escape-unordered-key-sequence
+                            (char-equal key skey) (char-equal evt fkey))))
+              (evil-repeat-stop)
+              (evil-normal-state))
+             ((null evt) (apply orig-fun (list key)))
+             (t
+              (apply orig-fun (list key))
+              (if (numberp evt)
+                  (apply orig-fun (list evt))
+                (setq unread-command-events (append unread-command-events (list evt))))))))))
   ;; (advice-add 'pyim-input-method :around #'pyim-evil-escape-advice)
+  ;; (advice-remove 'pyim-input-method #'pyim-evil-escape-advice) 
   ;; }}} 
 
   ;; {{{
@@ -323,18 +308,30 @@
         (set (make-local-variable 'last-event-time) (float-time))
         ))
     )
-  (advice-add 'pyim-self-insert-command :around #'my-pyim-self-insert-command)
-  ;; }}}
+  ;; (advice-add 'pyim-self-insert-command :around #'my-pyim-self-insert-command)
+  ;; }}} 
+
+  (defun evil-toggle-input-method ()
+    "when toggle on input method, switch to evil-insert-state if possible.
+  when toggle off input method, switch to evil-normal-state if current state is evil-insert-state"
+    (interactive)
+    (if (not current-input-method)
+        (if (not (string= evil-state "insert"))
+            (evil-insert-state)
+            (toggle-input-method))
+      (if (string= evil-state "insert")
+          (evil-normal-state))))
+  (global-set-key (kbd "C-\\") 'evil-toggle-input-method)
   )
 
 ;; pacman -S librime
 (use-package rime
-  :disabled
   :ensure t
-  :if (and (equal system-type 'gnu/linux) (display-graphic-p))
+  :if (equal system-type 'gnu/linux)
   :custom
   (rime-show-candidate 'posframe)
   (rime-disable-predicates '(rime-predicate-evil-mode-p
+                             rime-predicate-prog-in-code-p
                              rime-predicate-hydra-p
                              rime-predicate-punctuation-line-begin-p
                              rime-predicate-current-uppercase-letter-p))
@@ -359,20 +356,23 @@
   (defun rime-evil-escape-advice (orig-fun key)
     "advice for `rime-input-method' to make it work together with `evil-escape'.
     Mainly modified from `evil-escape-pre-command-hook'"
-    (if rime--preedit-overlay
+    (if (or rime--preedit-overlay (rime-predicate-prog-in-code-p))
         ;; if `rime--preedit-overlay' is non-nil, then we are editing something, do not abort
         (apply orig-fun (list key))
       (when (featurep 'evil-escape)
         (let* (
                (fkey (elt evil-escape-key-sequence 0))
                (skey (elt evil-escape-key-sequence 1))
-               (evt (read-event nil nil evil-escape-delay))
+               ;; (evt (read-event nil nil evil-escape-delay))
+               (evt (read-event nil nil 0.15))
+               ;; (evt (read-event))
                )
           (cond
            ((and (characterp evt)
                  (or (and (char-equal key fkey) (char-equal evt skey))
                      (and evil-escape-unordered-key-sequence
                           (char-equal key skey) (char-equal evt fkey))))
+            (company-abort)
             (evil-repeat-stop)
             (evil-normal-state))
            ((null evt) (apply orig-fun (list key)))
@@ -382,7 +382,16 @@
                 (apply orig-fun (list evt))
               (setq unread-command-events (append unread-command-events (list evt))))))))))
   (advice-add 'rime-input-method :around #'rime-evil-escape-advice)
+  ;; (advice-remove 'rime-input-method #'rime-evil-escape-advice)
   ;; }}}
+
+  (defun evil-exit-input-method ()
+    (interactive)
+    (if current-input-method
+        (if (string-equal evil-state "insert")
+            (evil-normal-state)
+          (toggle-input-method))))
+  (general-define-key :keymaps 'insert "C-\\" 'evil-exit-input-method)
   )
 
 (use-package sis
