@@ -270,36 +270,34 @@
 
   ;; {{{
   ;; 当前没有输入内容的时候直接使用evil-escape的按键（；g）的直接返回到normal模式
-  (defun pyim-evil-escape-advice (orig-fun key)
-    "advice for `pyim-input-method' to make it work together with `evil-escape'.
-    Mainly modified from `evil-escape-pre-command-hook'"
-    (if pyim-preview-overlay
-        (progn
-          (apply orig-fun (list key))
-          (message "XXXXXXXXX"))
-      (when (featurep 'evil-escape)
-        (let* (
-               (fkey (elt evil-escape-key-sequence 0))
-               (skey (elt evil-escape-key-sequence 1))
-               (evt (read-event nil nil evil-escape-delay))
-               )
-          (cond
-           ((and (characterp evt)
-                 (or (and (char-equal key fkey) (char-equal evt skey))
-                     (and evil-escape-unordered-key-sequence
-                          (char-equal key skey) (char-equal evt fkey))))
-            (evil-repeat-stop)
-            (evil-normal-state))
-           ((null evt) (apply orig-fun (list key)))
-           (t
-            (apply orig-fun (list key))
-            (if (numberp evt)
-                (apply orig-fun (list evt))
-              (setq unread-command-events (append unread-command-events (list evt))))))))))
+  ;; (defun pyim-evil-escape-advice (orig-fun key)
+  ;;   "advice for `pyim-input-method' to make it work together with `evil-escape'.
+  ;;   Mainly modified from `evil-escape-pre-command-hook'"
+  ;;   (when (featurep 'evil-escape)
+  ;;     (let* (
+  ;;            (fkey (elt evil-escape-key-sequence 0))
+  ;;            (skey (elt evil-escape-key-sequence 1))
+  ;;            (evt (read-event nil nil evil-escape-delay))
+  ;;            )
+  ;;       (cond
+  ;;        ((and (characterp evt)
+  ;;              (or (and (char-equal key fkey) (char-equal evt skey))
+  ;;                  (and evil-escape-unordered-key-sequence
+  ;;                       (char-equal key skey) (char-equal evt fkey))))
+  ;;         (evil-repeat-stop)
+  ;;         (evil-normal-state))
+  ;;        ((null evt) (apply orig-fun (list key)))
+  ;;        (t
+  ;;         (apply orig-fun (list key))
+  ;;         (if (numberp evt)
+  ;;             (apply orig-fun (list evt))
+  ;;           (setq unread-command-events (append unread-command-events (list evt)))))))))
   ;; (advice-add 'pyim-input-method :around #'pyim-evil-escape-advice)
   ;; }}} 
 
   ;; {{{
+  ;; 当前没有输入内容的时候直接使用 gg 直接返回到normal模式
+  ;; https://github.com/tumashu/pyim/issues/260#issuecomment-570921604
   (defun my-pyim-self-insert-command (orig-func)
     (interactive "*")
     (if (and (local-variable-p 'last-event-time)
@@ -308,24 +306,25 @@
         (set (make-local-variable 'temp-evil-escape-mode) t)
       (set (make-local-variable 'temp-evil-escape-mode) nil)
       )
-    (print temp-evil-escape-mode)
 
     (if (and temp-evil-escape-mode
          (equal (pyim-entered-get) "g")
          (equal last-command-event ?g))
         (progn
-          (message "XXXXXXXXXXXX")
-          (push last-command-event unread-command-events)
-          (pyim-outcome-handle 'pyim-entered)
-          (pyim-terminate-translation))
+          ;; (push last-command-event unread-command-events)
+          ;; (pyim-outcome-handle 'pyim-entered)
+          (company-abort)
+          (pyim-terminate-translation)
+          (evil-repeat-stop)
+          (evil-normal-state)
+          )
       (progn
-        (message "YYYYYYYYYYYYY")
         (call-interactively orig-func)
         (set (make-local-variable 'last-event-time) (float-time))
         ))
     )
-  ;; (advice-add 'pyim-self-insert-command :around #'my-pyim-self-insert-command)
-  ;; }}} 
+  (advice-add 'pyim-self-insert-command :around #'my-pyim-self-insert-command)
+  ;; }}}
   )
 
 ;; pacman -S librime
