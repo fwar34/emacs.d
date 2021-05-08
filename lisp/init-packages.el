@@ -274,7 +274,7 @@
         (set (make-local-variable 'last-event-time) (float-time))
         ))
     )
-  (advice-add 'pyim-self-insert-command :around #'my-pyim-self-insert-command)
+  ;; (advice-add 'pyim-self-insert-command :around #'my-pyim-self-insert-command)
   ;; (advice-remove 'pyim-self-insert-command #'my-pyim-self-insert-command)
   ;; }}}
 
@@ -288,24 +288,25 @@
         (set (make-local-variable 'temp-evil-escape-mode) t)
       (set (make-local-variable 'temp-evil-escape-mode) nil))
 
-    (let* ((fkey (elt evil-escape-key-sequence 0))
-           (skey (elt evil-escape-key-sequence 1))
-           (go-evil-normal (and (char-equal my-last-char fkey) (char-equal key skey))))
-      (set (make-local-variable 'my-last-char) key)
+    (let ((fkey (elt evil-escape-key-sequence 0))
+          (skey (elt evil-escape-key-sequence 1)))
       (if temp-evil-escape-mode
-          (if go-evil-normal
+          (if (and (char-equal my-last-char fkey) (char-equal key skey))
               (progn
+                (pyim-terminate-translation)
                 (company-abort)
                 (evil-repeat-stop)
                 (evil-normal-state))
+            (set (make-local-variable 'my-last-char) key)
             (apply orig-func (list key)))
 
+        (set (make-local-variable 'my-last-char) key)
         (set (make-local-variable 'last-event-time) (float-time))
-        (if (or (numberp key) (listp key))
+        (if (numberp key) 
             (apply orig-func (list key))
-          (setq unread-command-events (append unread-command-events (list evt))))))
+            (setq unread-command-events (append unread-command-events (list evt))))))
     )
-  ;; (advice-add 'pyim-input-method :around #'my-pyim-self-insert-command)
+  (advice-add 'pyim-input-method :around #'my-pyim-self-insert-command)
   ;; (advice-remove 'pyim-input-method #'my-pyim-self-insert-command)
   ;; }}} 
 
@@ -324,7 +325,6 @@
 
 ;; pacman -S librime
 (use-package rime
-  ;; :disabled
   :ensure t
   :init
   (defun my-rime-predicate-in-doc-string-p ()
@@ -370,29 +370,29 @@
         (set (make-local-variable 'temp-evil-escape-mode) t)
       (set (make-local-variable 'temp-evil-escape-mode) nil))
 
-    (let* ((fkey (elt evil-escape-key-sequence 0))
-           (skey (elt evil-escape-key-sequence 1))
-           (go-evil-normal (and (char-equal my-last-char fkey) (char-equal key skey))))
-      (set (make-local-variable 'my-last-char) key)
+    (let ((fkey (elt evil-escape-key-sequence 0))
+          (skey (elt evil-escape-key-sequence 1)))
       (if temp-evil-escape-mode
-          (if go-evil-normal
+          (if (and (char-equal my-last-char fkey) (char-equal key skey))
               (progn
                 (company-abort)
                 (evil-repeat-stop)
                 (evil-normal-state))
+            (set (make-local-variable 'my-last-char) key)
             (apply orig-func (list key)))
 
+        (set (make-local-variable 'my-last-char) key)
         (set (make-local-variable 'last-event-time) (float-time))
-        (if (or (numberp key) (listp key))
+        (if (numberp key) 
             (apply orig-func (list key))
           (setq unread-command-events (append unread-command-events (list evt))))))
     )
-  ;; (advice-add 'rime-input-method :around #'my-rime-self-insert-command)
+  (advice-add 'rime-input-method :around #'my-rime-self-insert-command)
   ;; (advice-remove 'rime-input-method #'my-rime-self-insert-command)
   ;; }}}
 
   ;; {{{
-  ;; 当前没有输入内容的时候直接使用evil-escape的按键（；g）的直接返回到normal模式，性能有问题
+  ;; 当前没有输入内容的时候直接使用evil-escape的按键（；g）的直接返回到normal模式，使用的是 read-event 性能有问题
   (defun rime-evil-escape-advice (orig-fun key)
     "advice for `rime-input-method' to make it work together with `evil-escape'.
     Mainly modified from `evil-escape-pre-command-hook'"
