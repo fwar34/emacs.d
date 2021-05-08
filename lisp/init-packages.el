@@ -666,6 +666,8 @@
    "c" 'ivy-occur
    "a" 'ivy-beginning-of-buffer
    "e" 'ivy-end-of-buffer
+   "n" 'ivy-next-line-and-call
+   "p" 'ivy-previous-line-and-call
    )
   
 
