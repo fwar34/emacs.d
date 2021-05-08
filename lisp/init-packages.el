@@ -149,6 +149,10 @@
 (when (and (display-graphic-p) (>= emacs-major-version 26))
   (use-package posframe :ensure t))
 
+(defun my-predicate-in-doc-string-p ()
+  "Whether point is in the doc string."
+  (eq (plist-get (text-properties-at (point)) 'face) 'font-lock-doc-face))
+
 (use-package pyim
   :ensure t
   ;; :unless (display-graphic-p)
@@ -196,7 +200,9 @@
   ;;根据环境自动切换到半角标点输入模式
   (setq-default pyim-punctuation-half-width-functions
                 '(pyim-probe-punctuation-line-beginning
-                  pyim-probe-punctuation-after-punctuation))
+                  pyim-probe-punctuation-after-punctuation
+                  my-predicate-in-doc-string-p
+                  ))
   
   ;; 开启拼音搜索功能
   ;; (pyim-isearch-mode 1)
@@ -279,32 +285,32 @@
   ;; }}}
 
   ;; {{{ 
-
   ;; 当前没有输入内容的时候直接使用evil-escape的按键（；g）的直接返回到normal模式
   (defun my-pyim-self-insert-command (orig-func key)
-    (if (and (local-variable-p 'last-event-time)
-             (floatp last-event-time)
-             (< (- (float-time) last-event-time) 0.2))
-        (set (make-local-variable 'temp-evil-escape-mode) t)
-      (set (make-local-variable 'temp-evil-escape-mode) nil))
-
     (let ((fkey (elt evil-escape-key-sequence 0))
           (skey (elt evil-escape-key-sequence 1)))
-      (if temp-evil-escape-mode
-          (if (and (char-equal my-last-char fkey) (char-equal key skey))
-              (progn
-                (pyim-terminate-translation)
-                (company-abort)
-                (evil-repeat-stop)
-                (evil-normal-state))
+      (if (char-equal key fkey)
+          (progn
             (set (make-local-variable 'my-last-char) key)
-            (apply orig-func (list key)))
-
-        (set (make-local-variable 'my-last-char) key)
-        (set (make-local-variable 'last-event-time) (float-time))
-        (if (numberp key) 
-            (apply orig-func (list key))
-            (setq unread-command-events (append unread-command-events (list evt))))))
+            (set (make-local-variable 'last-event-time) (float-time)))
+        (if (and (local-variable-p 'my-last-char) (numberp my-last-char) (char-equal key skey))
+            (if (and (local-variable-p 'last-event-time)
+                     (floatp last-event-time)
+                     (< (- (float-time) last-event-time) 0.3))
+                (progn
+                  (company-abort)
+                  (evil-repeat-stop)
+                  (evil-normal-state)
+                  (message "pyim exit..."))
+              (print my-last-char)
+              (apply orig-func my-last-char (list key))
+              )
+          (if (numberp key)
+              (if (and (local-variable-p 'my-last-char) (numberp my-last-char))
+                  (progn
+                    (apply orig-func my-last-char (list key)))
+                (apply orig-func (list key)))
+            (setq unread-command-events (append unread-command-events (list evt)))))))
     )
   (advice-add 'pyim-input-method :around #'my-pyim-self-insert-command)
   ;; (advice-remove 'pyim-input-method #'my-pyim-self-insert-command)
@@ -325,16 +331,12 @@
 
 ;; pacman -S librime
 (use-package rime
+  :disabled
   :ensure t
-  :init
-  (defun my-rime-predicate-in-doc-string-p ()
-    "Whether point is in the doc string."
-    (eq (plist-get (text-properties-at (point)) 'face) 'font-lock-doc-face))
-
   :if (equal system-type 'gnu/linux)
   :custom
   (rime-show-candidate 'posframe)
-  (rime-disable-predicates '(my-rime-predicate-in-doc-string-p
+  (rime-disable-predicates '(my-predicate-in-doc-string-p
                              rime-predicate-in-code-string-p
                              rime-predicate-in-code-string-after-ascii-p
                              rime-predicate-evil-mode-p
@@ -363,29 +365,32 @@
   (setq rime-inline-ascii-trigger 'shift-l)
 
   ;; {{{
-  (defun my-rime-self-insert-command (orig-func key)
-    (if (and (local-variable-p 'last-event-time)
-             (floatp last-event-time)
-             (< (- (float-time) last-event-time) 0.2))
-        (set (make-local-variable 'temp-evil-escape-mode) t)
-      (set (make-local-variable 'temp-evil-escape-mode) nil))
-
+  (defun my-pyim-self-insert-command (orig-func key)
     (let ((fkey (elt evil-escape-key-sequence 0))
           (skey (elt evil-escape-key-sequence 1)))
-      (if temp-evil-escape-mode
-          (if (and (char-equal my-last-char fkey) (char-equal key skey))
-              (progn
-                (company-abort)
-                (evil-repeat-stop)
-                (evil-normal-state))
+      (if (and (char-equal key fkey) (or (equal evil-state 'insert) (equal evil-state 'emacs)))
+          (progn
             (set (make-local-variable 'my-last-char) key)
-            (apply orig-func (list key)))
-
-        (set (make-local-variable 'my-last-char) key)
-        (set (make-local-variable 'last-event-time) (float-time))
-        (if (numberp key) 
-            (apply orig-func (list key))
-          (setq unread-command-events (append unread-command-events (list evt))))))
+            (set (make-local-variable 'last-event-time) (float-time)))
+        (if (and (local-variable-p 'my-last-char) (numberp my-last-char) (char-equal key skey))
+            (if (and (local-variable-p 'last-event-time)
+                     (floatp last-event-time)
+                     (< (- (float-time) last-event-time) 0.3))
+                (progn
+                  (pyim-terminate-translation)
+                  (company-abort)
+                  (evil-repeat-stop)
+                  (evil-normal-state))
+              (apply orig-func (list my-last-char))
+              (apply orig-func (list key))
+              )
+          (if (numberp key)
+              (if (and (local-variable-p 'my-last-char) (numberp my-last-char))
+                  (progn
+                    (apply orig-func (list my-last-char))
+                    (apply orig-func (list key)))
+                (apply orig-func (list key)))
+            (setq unread-command-events (append unread-command-events (list evt)))))))
     )
   (advice-add 'rime-input-method :around #'my-rime-self-insert-command)
   ;; (advice-remove 'rime-input-method #'my-rime-self-insert-command)
