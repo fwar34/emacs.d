@@ -333,8 +333,12 @@
                              rime-predicate-prog-in-code-p
                              rime-predicate-hydra-p
                              rime-predicate-punctuation-line-begin-p
+                             rime-predicate-after-alphabet-char-p
                              rime-predicate-current-uppercase-letter-p))
-  (rime-inline-predicates '(rime-predicate-space-after-cc-p))
+  (rime-inline-predicates '(rime-predicate-space-after-cc-p
+                            rime-predicate-in-code-string-after-ascii-p
+                            rime-predicate-in-code-string-p
+                            ))
   :bind
   (:map rime-mode-map
         ("C-`" . 'rime-send-keybinding))
@@ -474,7 +478,7 @@
   ;; 设置光标样式
   (setq evil-motion-state-cursor '(box "red"))
   (setq evil-visual-state-cursor '(box "orange"))
-  (setq evil-emacs-state-cursor  '(hbar "red"))
+  (setq evil-emacs-state-cursor  '((hbar . 5) "indianred"))
   (setq evil-insert-state-cursor '((hbar . 5) "yellow")
         evil-normal-state-cursor '(box "purple"))
 
@@ -557,7 +561,8 @@
    ("M-x" . counsel-M-x)
    :map ivy-minibuffer-map
    ("M-l" . ivy-restrict-to-matches)
-   ("C-w" . backward-kill-word)) ;; 在ivy中已经将backward-kill-word remap成了ivy-backward-kill-word
+   ;; ("C-w" . backward-kill-word) ;; 在ivy中已经将backward-kill-word remap成了ivy-backward-kill-word
+   ) 
   :config
   (general-define-key
    :states 'emacs
