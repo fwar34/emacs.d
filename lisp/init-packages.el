@@ -279,32 +279,32 @@
   ;; }}}
 
   ;; {{{ 
-  ;; 当前没有输入内容的时候直接使用evil-escape的按键（；g）的直接返回到normal模式
-  ;; (defun my-pyim-self-insert-command (orig-func key)
-  ;;   (if (and (local-variable-p 'last-event-time)
-  ;;            (floatp last-event-time)
-  ;;            (< (- (float-time) last-event-time) 0.2))
-  ;;       (set (make-local-variable 'temp-evil-escape-mode) t)
-  ;;     (set (make-local-variable 'temp-evil-escape-mode) nil))
 
-  ;;   (if temp-evil-escape-mode
-  ;;       (let ((fkey (elt evil-escape-key-sequence 0))
-  ;;             (skey (elt evil-escape-key-sequence 1)))
-  ;;         (if (and (char-equal my-last-char fkey) (char-equal key skey))
-  ;;             (progn
-  ;;               (company-abort)
-  ;;               (evil-repeat-stop)
-  ;;               (evil-normal-state)
-  ;;               (message "exit"))
-  ;;           (apply orig-func (list key))))
-  ;;     (progn
-  ;;       (if (numberp key)
-  ;;           (apply orig-func (list key))
-  ;;         (setq unread-command-events (append unread-command-events (list evt))))
-  ;;       (set (make-local-variable 'last-event-time) (float-time))))
-    
-  ;;   (set (make-local-variable 'my-last-char) key)
-  ;;   )
+  ;; 当前没有输入内容的时候直接使用evil-escape的按键（；g）的直接返回到normal模式
+  (defun my-pyim-self-insert-command (orig-func key)
+    (if (and (local-variable-p 'last-event-time)
+             (floatp last-event-time)
+             (< (- (float-time) last-event-time) 0.2))
+        (set (make-local-variable 'temp-evil-escape-mode) t)
+      (set (make-local-variable 'temp-evil-escape-mode) nil))
+
+    (let* ((fkey (elt evil-escape-key-sequence 0))
+           (skey (elt evil-escape-key-sequence 1))
+           (go-evil-normal (and (char-equal my-last-char fkey) (char-equal key skey))))
+      (set (make-local-variable 'my-last-char) key)
+      (if temp-evil-escape-mode
+          (if go-evil-normal
+              (progn
+                (company-abort)
+                (evil-repeat-stop)
+                (evil-normal-state))
+            (apply orig-func (list key)))
+
+        (set (make-local-variable 'last-event-time) (float-time))
+        (if (or (numberp key) (listp key))
+            (apply orig-func (list key))
+          (setq unread-command-events (append unread-command-events (list evt))))))
+    )
   ;; (advice-add 'pyim-input-method :around #'my-pyim-self-insert-command)
   ;; (advice-remove 'pyim-input-method #'my-pyim-self-insert-command)
   ;; }}} 
@@ -364,31 +364,28 @@
 
   ;; {{{
   (defun my-rime-self-insert-command (orig-func key)
-    (print key)
-    (message "------")
-    (progn
-      (if (and (local-variable-p 'last-event-time)
-               (floatp last-event-time)
-               (< (- (float-time) last-event-time) 0.2))
-          (set (make-local-variable 'temp-evil-escape-mode) t)
-        (set (make-local-variable 'temp-evil-escape-mode) nil))
+    (if (and (local-variable-p 'last-event-time)
+             (floatp last-event-time)
+             (< (- (float-time) last-event-time) 0.2))
+        (set (make-local-variable 'temp-evil-escape-mode) t)
+      (set (make-local-variable 'temp-evil-escape-mode) nil))
 
+    (let* ((fkey (elt evil-escape-key-sequence 0))
+           (skey (elt evil-escape-key-sequence 1))
+           (go-evil-normal (and (char-equal my-last-char fkey) (char-equal key skey))))
+      (set (make-local-variable 'my-last-char) key)
       (if temp-evil-escape-mode
-          (let ((fkey (elt evil-escape-key-sequence 0))
-                (skey (elt evil-escape-key-sequence 1)))
-            (if (and (char-equal my-last-char fkey) (char-equal key skey))
-                (progn
-                  (company-abort)
-                  (evil-repeat-stop)
-                  (evil-normal-state))
-              (apply orig-func (list key))))
-        (progn
-          (if (numberp key)
-              (apply orig-func (list key))
-            (setq unread-command-events (append unread-command-events (list evt))))
-          (set (make-local-variable 'last-event-time) (float-time))))
+          (if go-evil-normal
+              (progn
+                (company-abort)
+                (evil-repeat-stop)
+                (evil-normal-state))
+            (apply orig-func (list key)))
 
-      (set (make-local-variable 'my-last-char) key))
+        (set (make-local-variable 'last-event-time) (float-time))
+        (if (or (numberp key) (listp key))
+            (apply orig-func (list key))
+          (setq unread-command-events (append unread-command-events (list evt))))))
     )
   ;; (advice-add 'rime-input-method :around #'my-rime-self-insert-command)
   ;; (advice-remove 'rime-input-method #'my-rime-self-insert-command)
