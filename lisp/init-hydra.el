@@ -417,9 +417,14 @@
   ;; (evil-define-key 'normal 'global (kbd "M-u ft") #'hydra-font/body)
 
   (defhydra hydra-input-method (:color blue)
-    ("py" (setq default-input-method "pyim"))
-    ("ri" (setq default-input-method "rime")))
-  (global-set-key (kbd "M-u in") #'hydra-input-method/body)
-  )
+    ("py" (lambda ()
+            (interactive)
+            (setq default-input-method "pyim")
+            (set-input-method "pyim")))
+    ("ri" (lambda ()
+            (interactive)
+            (setq default-input-method "rime")
+            (set-input-method "rime"))))
+  (global-set-key (kbd "M-u in") #'hydra-input-method/body))
 
 (provide 'init-hydra)

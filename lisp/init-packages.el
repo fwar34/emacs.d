@@ -423,7 +423,7 @@
         (if (string-equal evil-state "insert")
             (evil-normal-state)
           (toggle-input-method))))
-  ;; (general-define-key :keymaps 'insert "C-\\" 'evil-exit-input-method) 
+  ;; (general-define-key :keymaps 'insert "C-\\" 'evil-exit-input-method)
   )
 
 (use-package sis
