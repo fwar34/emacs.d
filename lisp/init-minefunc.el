@@ -600,4 +600,8 @@ URL `http://ergoemacs.org/emacs/elisp_run_current_file.html'"
   (my-convert-radix input-radix output-radix (my-number-at-point t)))
 ;; }}}
 
+(defun my-test-face ()
+  (interactive)
+  (print (plist-get (text-properties-at (point)) 'face)))
+
 (provide 'init-minefunc)

@@ -326,19 +326,27 @@
 (use-package rime
   ;; :disabled
   :ensure t
+  :init
+  (defun my-rime-predicate-in-doc-string-p ()
+    "Whether point is in the doc string."
+    (eq (plist-get (text-properties-at (point)) 'face) 'font-lock-doc-face))
+
   :if (equal system-type 'gnu/linux)
   :custom
   (rime-show-candidate 'posframe)
-  (rime-disable-predicates '(rime-predicate-evil-mode-p
+  (rime-disable-predicates '(my-rime-predicate-in-doc-string-p
+                             rime-predicate-in-code-string-p
+                             rime-predicate-in-code-string-after-ascii-p
+                             rime-predicate-evil-mode-p
                              rime-predicate-prog-in-code-p
                              rime-predicate-hydra-p
+                             rime-predicate-space-after-cc-p
                              rime-predicate-punctuation-line-begin-p
+                             rime-predicate-current-input-punctuation-p
                              rime-predicate-after-alphabet-char-p
-                             rime-predicate-current-uppercase-letter-p))
-  (rime-inline-predicates '(rime-predicate-space-after-cc-p
-                            rime-predicate-in-code-string-after-ascii-p
-                            rime-predicate-in-code-string-p
-                            ))
+                             rime-predicate-current-uppercase-letter-p
+                             ))
+  ;; (rime-inline-predicates '(rime-predicate-space-after-cc-p))
   :bind
   (:map rime-mode-map
         ("C-`" . 'rime-send-keybinding))
@@ -387,12 +395,12 @@
   ;; }}}
 
   ;; {{{
-  ;; 当前没有输入内容的时候直接使用evil-escape的按键（；g）的直接返回到normal模式
+  ;; 当前没有输入内容的时候直接使用evil-escape的按键（；g）的直接返回到normal模式，性能有问题
   (defun rime-evil-escape-advice (orig-fun key)
     "advice for `rime-input-method' to make it work together with `evil-escape'.
     Mainly modified from `evil-escape-pre-command-hook'"
     ;; (if (or rime--preedit-overlay (rime-predicate-prog-in-code-p))
-    (if (rime-predicate-prog-in-code-p)
+    (if (or (rime-predicate-prog-in-code-p) (rime-predicate-in-code-string-p))
         ;; if `rime--preedit-overlay' is non-nil, then we are editing something, do not abort
         (apply orig-fun (list key))
       (when (featurep 'evil-escape)
@@ -417,7 +425,7 @@
             (if (numberp evt)
                 (apply orig-fun (list evt))
               (setq unread-command-events (append unread-command-events (list evt))))))))))
-  (advice-add 'rime-input-method :around #'rime-evil-escape-advice)
+  ;; (advice-add 'rime-input-method :around #'rime-evil-escape-advice)
   ;; (advice-remove 'rime-input-method #'rime-evil-escape-advice)
   ;; }}} 
 
