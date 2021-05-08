@@ -150,7 +150,6 @@
   (use-package posframe :ensure t))
 
 (use-package pyim
-  ;; :if (equal system-type 'windows-nt) 
   :ensure t
   ;; :unless (display-graphic-p)
   :config
@@ -320,12 +319,12 @@
           (toggle-input-method))
       (if (string= evil-state "insert")
           (evil-normal-state))))
-  (global-set-key (kbd "C-\\") 'evil-toggle-input-method)
+  ;; (global-set-key (kbd "C-\\") 'evil-toggle-input-method)
   )
 
 ;; pacman -S librime
 (use-package rime
-  :disabled
+  ;; :disabled
   :ensure t
   :if (equal system-type 'gnu/linux)
   :custom
@@ -348,7 +347,7 @@
     (setq default-input-method "rime"))
   (add-hook 'set-language-environment-hook 'my-chinese-setup)
 
-  ;; support shift-l, shift-r, control-l, control-r 
+  ;; support shift-l, shift-r, control-l, control-r
   (setq rime-inline-ascii-trigger 'shift-l)
 
   ;; {{{
@@ -379,7 +378,7 @@
 
       (set (make-local-variable 'my-last-char) key))
     )
-  (advice-add 'rime-input-method :around #'my-rime-self-insert-command)
+  ;; (advice-add 'rime-input-method :around #'my-rime-self-insert-command)
   ;; (advice-remove 'rime-input-method #'my-rime-self-insert-command)
   ;; }}}
 
@@ -397,7 +396,7 @@
                (fkey (elt evil-escape-key-sequence 0))
                (skey (elt evil-escape-key-sequence 1))
                ;; (evt (read-event nil nil evil-escape-delay))
-               (evt (read-event nil nil 0.18))
+               (evt (read-event nil nil 0.15))
                ;; (evt (read-event))
                )
           (cond
@@ -414,9 +413,9 @@
             (if (numberp evt)
                 (apply orig-fun (list evt))
               (setq unread-command-events (append unread-command-events (list evt))))))))))
-  ;; (advice-add 'rime-input-method :around #'rime-evil-escape-advice)
+  (advice-add 'rime-input-method :around #'rime-evil-escape-advice)
   ;; (advice-remove 'rime-input-method #'rime-evil-escape-advice)
-  ;; }}}
+  ;; }}} 
 
   (defun evil-exit-input-method ()
     (interactive)
@@ -424,7 +423,7 @@
         (if (string-equal evil-state "insert")
             (evil-normal-state)
           (toggle-input-method))))
-  (general-define-key :keymaps 'insert "C-\\" 'evil-exit-input-method)
+  (general-define-key :keymaps 'insert "C-\\" 'evil-exit-input-method) 
   )
 
 (use-package sis
