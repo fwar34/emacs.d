@@ -2,171 +2,186 @@
 #@/db_name	luna_pinyin
 #@/db_type	userdb
 #@/rime_version	1.7.3
-#@/tick	281
+#@/tick	388
 #@/user_id	fwar34_rime_sync
-ba 	吧	c=7 d=6.55854 t=269
-bao 	包	c=1 d=0.787289 t=172
-bei 	被	c=1 d=1 t=219
-bian hua 	變化	c=1 d=1.09005 t=194
-bian liang 	變量	c=1 d=1 t=110
-bing 	並	c=0 d=0.1 t=105
-bing chu shi hua 	並初始化	c=1 d=1 t=106
-bu dui 	不對	c=1 d=0.960789 t=281
-bu hui 	不會	c=2 d=0.99005 t=281
-bu ke yi 	不可以	c=1 d=1 t=141
-bu neng 	不能	c=4 d=3.7619 t=189
-bu yun xu 	不允許	c=1 d=1 t=111
-ce 	測	c=1 d=0.891366 t=281
-ce shi 	測試	c=3 d=2.97791 t=281
-ce shi de 	測試的	c=1 d=0.951229 t=281
-cha zhao 	查找	c=1 d=1 t=125
-cheng yuan 	成員	c=1 d=1.08025 t=181
-chi 	喫	c=1 d=0.865022 t=281
-chong zu 	充足	c=0 d=0.1 t=216
-chong zu le 	充足了	c=1 d=1 t=217
-chou ma 	籌碼	c=0 d=0.0869358 t=281
-chu shi hua 	初始化	c=0 d=0.1 t=105
-chuan di 	傳遞	c=1 d=1.06079 t=155
-da 	打	c=0 d=0.1 t=233
-da xie 	大寫	c=1 d=1 t=137
-da yin 	打印	c=2 d=1.81465 t=225
-dai 	帶	c=1 d=0.99005 t=281
-dang qian 	當前	c=1 d=1.17333 t=275
-dang qian mei you shu ru 	當前沒有輸入	c=2 d=1.98511 t=279
-dang qian mei you shu ru de 	當前沒有輸入的	c=1 d=1 t=272
-dao 	到	c=1 d=1 t=227
-dao chu 	導出	c=6 d=5.51662 t=190
-dao chu cheng yuan 	導出成員	c=1 d=1 t=138
-dao de 	道德	c=0 d=0.1 t=228
-dao ru 	導入	c=0 d=0.1 t=94
-dao ru qi ta di fang 	導入其他地方	c=1 d=1 t=95
-de 	的	c=17 d=11.6779 t=281
-deng 	等	c=0 d=0.1 t=205
-di 	第	c=1 d=1 t=228
-ding yi 	定義	c=0 d=0.1 t=112
-ding yi ji ben 	定義基本	c=1 d=1 t=113
-fa song dao 	發送到	c=1 d=1 t=226
-fang fa 	方法	c=6 d=3.17097 t=281
-fang zhi 	放值	c=1 d=1 t=119
-gai bian 	改變	c=1 d=1.09465 t=158
-ge 	個	c=6 d=4.02838 t=281
-gu 	股	c=1 d=0.786628 t=281
-guai 	乖	c=1 d=1.01589 t=281
-guai kuai ji 	乖會計	c=1 d=0.932394 t=281
-guan bi 	關閉	c=1 d=1 t=220
-ha ha ha 	哈哈哈	c=1 d=0.847894 t=281
-han shu 	函數	c=2 d=1.48149 t=175
-hao ma 	好嗎	c=1 d=0.99005 t=281
-hen hao de 	很好的	c=0 d=0.0878095 t=281
-hou 	後	c=0 d=0.1 t=214
-huan chong 	緩衝	c=0 d=0.1 t=215
-huan chong jiu 	緩衝就	c=1 d=1 t=216
-hui 	會	c=0 d=0.1 t=147
-hui gai bian 	會改變	c=1 d=1 t=148
-ji ben 	基本	c=0 d=0.19802 t=116
-ji ben yong bu dao 	基本用不到	c=1 d=1 t=117
-ji miao 	幾秒	c=0 d=0.1 t=205
-ji zhi 	機制	c=0 d=0.1 t=98
-ji zhi xun zhao 	機制尋找	c=1 d=1 t=99
-jia ru 	加入	c=1 d=0.995012 t=281
-jian zhi 	監製	c=1 d=1 t=123
-jian zhi 	鍵值	c=2 d=1.99005 t=126
-jie 	接	c=1 d=1 t=203
-jie gou ti 	結構體	c=10 d=8.96979 t=204
-jie gou ti zhi 	結構體值	c=1 d=1 t=191
-jie shou 	接收	c=2 d=2.05064 t=214
-jie shou hou 	接收後	c=1 d=1 t=215
-jiu 	就	c=2 d=1.38051 t=281
-kan 	看	c=1 d=0.937067 t=281
-kuai ji 	會計	c=0 d=0.0927743 t=281
-lan 	藍	c=3 d=1.52678 t=281
-le 	了	c=1 d=1.09704 t=222
-lei xing 	類型	c=2 d=1.70822 t=185
-li mian 	裏面	c=1 d=1 t=212
-ma 	嗎	c=0 d=0.0865022 t=281
-mei you 	沒有	c=1 d=1.17822 t=275
-men 	門	c=1 d=0.882497 t=281
-mo shou shi jie 	魔獸世界	c=1 d=0.946485 t=281
-ni 	伲	c=1 d=0.980199 t=281
-ni 	你	c=18 d=9.5372 t=281
-ni 	隬	c=1 d=0.970446 t=281
-ni de 	你的	c=2 d=1.8426 t=281
-ni hao 	你好	c=4 d=3.40429 t=281
-ni hao chou ma 	你好籌碼	c=1 d=0.873716 t=281
-ni hao de 	你好的	c=2 d=1.57302 t=281
-ni hao ma 	你好嗎	c=29 d=22.2946 t=281
-ni zhi 	你只	c=0 d=0.1 t=228
-ni zhi dao 	你知道	c=2 d=2.01889 t=258
-ni zhi dao de 	你只道德	c=1 d=1 t=229
-ni zhi dao de 	你知道的	c=9 d=8.28227 t=268
-ni zhuo dao de 	你捉到的	c=1 d=1 t=267
-ou 	偶	c=0 d=0.1956 t=242
-pan duan 	判斷	c=1 d=1 t=128
-ping guo 	蘋果	c=1 d=0.927743 t=281
-qi ta di fang 	其他地方	c=0 d=0.1 t=94
-qie pian 	切片	c=2 d=1.96481 t=133
-san ge 	三個	c=0 d=0.1 t=106
-san ge zhi 	三個值	c=1 d=1 t=107
-sheng ming 	聲明	c=2 d=1.96561 t=112
-shi 	是	c=3 d=1.59059 t=281
-shi hou 	時候	c=3 d=2.9459 t=281
-shi yong 	使用	c=1 d=1.17118 t=175
-shi yong han shu 	使用函數	c=1 d=1 t=176
-shu ju 	數據	c=1 d=1 t=115
-shu ru 	輸入	c=0 d=0.1 t=275
-shu ru de 	輸入的	c=0 d=0.1 t=271
-si 	死	c=0 d=0.1 t=129
-si xun huan 	死循環	c=1 d=1 t=130
-te se 	特色	c=1 d=0.965605 t=281
-tong guo 	通過	c=2 d=1 t=281
-tong yi 	同一	c=0 d=0.1 t=172
-tong yi bao 	同一包	c=1 d=1 t=173
-tui chu 	推出	c=1 d=1 t=223
-tui chu 	退出	c=1 d=1 t=224
-wei 	未	c=0 d=0.164726 t=194
-wei bian hua 	未變化	c=1 d=1 t=195
-wei shi yong 	未使用	c=1 d=1 t=108
-wo 	我	c=0 d=0.0878095 t=281
-wo hen 	喔很	c=1 d=0.941765 t=281
-wo hen hao de 	我很好的	c=2 d=1.79187 t=281
-wo zhi 	我只	c=0 d=0.1 t=233
-wo zhi da ou 	我只打偶	c=2 d=1.99005 t=236
-wo zhi dao 	我知道	c=0 d=0.0826959 t=281
-wo zhi dao de 	我知道的	c=2 d=1.13282 t=281
-wu xian 	無限	c=1 d=1 t=132
-xia 	下	c=1 d=1 t=174
-xian 	先	c=0 d=0.1 t=205
-xian deng ji miao 	先等幾秒	c=1 d=1 t=206
-xiao xi 	消息	c=2 d=1.97531 t=214
-xiao xie 	小寫	c=5 d=4.55247 t=187
-xiao xie 	消協	c=1 d=1 t=139
-xin dao 	信道	c=2 d=1.96561 t=218
-xin jian 	新建	c=3 d=2.85294 t=202
-xun huan 	循環	c=1 d=1.29456 t=135
-xun huan qie pian 	循環切片	c=1 d=1 t=134
-xun huan yu ju 	循環語句	c=1 d=1 t=133
-xun zhao 	尋找	c=0 d=0.1 t=98
-yin yong 	引用	c=3 d=2.78312 t=205
-yin yong jie gou ti 	引用結構體	c=1 d=1 t=143
-yong bu dao 	用不到	c=0 d=0.1 t=116
-yong hu 	用戶	c=1 d=0.980199 t=281
-you yu 	由於	c=1 d=0.97531 t=281
-yu ju 	語句	c=2 d=2.08012 t=132
-yuan you 	原有	c=2 d=1.95123 t=159
-zai 	再	c=1 d=1 t=207
-zai 	在	c=2 d=0.985112 t=281
-zeng jia 	增加	c=1 d=1 t=122
-zeng jia zhi 	增加值	c=1 d=1 t=121
-zhe ge 	這個	c=1 d=0.955997 t=281
-zhi 	值	c=7 d=6.34842 t=200
-zhi chuan di 	值傳遞	c=1 d=1 t=156
-zhi da 	直達	c=0 d=0.1 t=242
-zhi da ou 	直達偶	c=1 d=1 t=243
-zhi dao 	知道	c=1 d=1 t=260
-zhi dao de 	知道的	c=1 d=1 t=254
-zhi neng zai 	只能在	c=1 d=1 t=172
-zhi qian 	之前	c=1 d=1 t=103
-zhi xing 	執行	c=1 d=1 t=104
-zhong guo 	中國	c=2 d=1.84163 t=281
-zhu chi ren 	主持人	c=1 d=1 t=281
-zhuo dao 	捉到	c=0 d=0.1 t=266
+ba 	吧	c=27 d=18.8099 t=388
+bao 	包	c=1 d=0.456503 t=388
+bei 	被	c=1 d=0.733447 t=388
+bian hua 	變化	c=1 d=0.705551 t=388
+bian liang 	變量	c=1 d=0.425283 t=388
+bing 	並	c=0 d=0.0414783 t=388
+bing chu shi hua 	並初始化	c=1 d=0.416862 t=388
+bu dui 	不對	c=1 d=0.960789 t=388
+bu hui 	不會	c=2 d=0.99005 t=388
+bu ke yi 	不可以	c=1 d=0.496585 t=388
+bu neng 	不能	c=4 d=2.37483 t=388
+bu yun xu 	不允許	c=1 d=0.427415 t=388
+ce 	測	c=1 d=0.891366 t=388
+ce shi 	測試	c=3 d=2.97791 t=388
+ce shi de 	測試的	c=1 d=0.951229 t=388
+cha zhao 	查找	c=1 d=0.458406 t=388
+chang cao 	嘗草	c=0 d=0.1 t=336
+cheng yuan 	成員	c=1 d=0.655205 t=388
+chi 	喫	c=2 d=1.30115 t=388
+chi san 	喫三	c=1 d=1 t=336
+chong zu 	充足	c=0 d=0.0722527 t=388
+chong zu le 	充足了	c=1 d=0.726149 t=388
+chou ma 	籌碼	c=0 d=0.0869358 t=388
+chu shi hua 	初始化	c=1 d=0.612897 t=388
+chuan di 	傳遞	c=1 d=0.564968 t=388
+da 	打	c=0 d=0.0786628 t=388
+da xie 	大寫	c=1 d=0.486752 t=388
+da yin 	打印	c=2 d=1.37148 t=388
+dai 	帶	c=1 d=0.99005 t=388
+dang qian 	當前	c=1 d=1.13865 t=388
+dang qian mei you shu ru 	當前沒有輸入	c=2 d=1.96536 t=388
+dang qian mei you shu ru de 	當前沒有輸入的	c=1 d=0.955997 t=388
+dao 	到	c=1 d=0.763379 t=388
+dao chu 	導出	c=6 d=3.50001 t=388
+dao chu cheng yuan 	導出成員	c=1 d=0.489192 t=388
+dao de 	道德	c=0 d=0.106503 t=388
+dao ru 	導入	c=0 d=0.0392586 t=388
+dao ru qi ta di fang 	導入其他地方	c=1 d=0.394554 t=388
+de 	的	c=21 d=11.6779 t=388
+deng 	等	c=0 d=0.0683861 t=388
+di 	第	c=1 d=0.767206 t=388
+ding yi 	定義	c=0 d=0.0429557 t=388
+ding yi ji ben 	定義基本	c=1 d=0.431711 t=388
+en 	恩	c=3 d=2.76189 t=378
+fa song dao 	發送到	c=1 d=0.759572 t=388
+fang fa 	方法	c=6 d=3.17097 t=388
+fang zhi 	放值	c=1 d=0.444858 t=388
+gai bian 	改變	c=1 d=0.591813 t=388
+ge 	個	c=8 d=4.02838 t=388
+gu 	股	c=1 d=0.786628 t=388
+guai 	乖	c=1 d=1.01589 t=388
+guai kuai ji 	乖會計	c=1 d=0.932394 t=388
+guan bi 	關閉	c=1 d=0.737123 t=388
+ha ha ha 	哈哈哈	c=1 d=0.847894 t=388
+han shu 	函數	c=2 d=0.872012 t=388
+hao ma 	好嗎	c=1 d=0.99005 t=388
+hen hao de 	很好的	c=0 d=0.0878095 t=388
+hou 	後	c=0 d=0.0715338 t=388
+huan chong 	緩衝	c=0 d=0.0718924 t=388
+huan chong jiu 	緩衝就	c=1 d=0.722527 t=388
+hui 	會	c=0 d=0.0511709 t=388
+hui gai bian 	會改變	c=1 d=0.514274 t=388
+ji ben 	基本	c=0 d=0.0867793 t=388
+ji ben yong bu dao 	基本用不到	c=1 d=0.440432 t=388
+ji miao 	幾秒	c=0 d=0.0683861 t=388
+ji zhi 	機制	c=0 d=0.0400517 t=388
+ji zhi xun zhao 	機制尋找	c=1 d=0.402524 t=388
+jia ru 	加入	c=1 d=0.995012 t=388
+jian zhi 	監製	c=1 d=0.453845 t=388
+jian zhi 	鍵值	c=2 d=0.916824 t=388
+jie 	接	c=1 d=0.677057 t=388
+jie gou ti 	結構體	c=10 d=6.1035 t=388
+jie gou ti zhi 	結構體值	c=1 d=0.637628 t=388
+jie shou 	接收	c=2 d=1.4669 t=388
+jie shou hou 	接收後	c=1 d=0.718924 t=388
+jiu 	就	c=2 d=1.38051 t=388
+kan 	看	c=1 d=0.937067 t=388
+kuai ji 	會計	c=0 d=0.0927743 t=388
+kuai lai 	快來	c=1 d=1 t=338
+lan 	藍	c=3 d=1.52678 t=388
+le 	了	c=1 d=0.816781 t=388
+lei xing 	類型	c=2 d=1.05702 t=388
+li mian 	裏面	c=1 d=0.70822 t=388
+ma 	嗎	c=0 d=0.0865022 t=388
+ma an 	馬鞍	c=0 d=0.1 t=336
+mei you 	沒有	c=1 d=1.1434 t=388
+men 	門	c=1 d=0.882497 t=388
+mo shou shi jie 	魔獸世界	c=1 d=0.946485 t=388
+nao dai 	腦袋	c=1 d=1 t=335
+ni 	伲	c=1 d=0.980199 t=388
+ni 	你	c=37 d=20.6991 t=388
+ni 	隬	c=1 d=0.970446 t=388
+ni chang cao ma an 	你嘗草馬鞍	c=1 d=1 t=337
+ni de 	你的	c=2 d=1.8426 t=388
+ni hao 	你好	c=4 d=3.40429 t=388
+ni hao chou ma 	你好籌碼	c=1 d=0.873716 t=388
+ni hao de 	你好的	c=2 d=1.57302 t=388
+ni hao ma 	你好嗎	c=30 d=22.2946 t=388
+ni zhi 	你只	c=0 d=0.0767206 t=388
+ni zhi dao 	你知道	c=7 d=5.66521 t=388
+ni zhi dao dao de 	你知道道德	c=1 d=1 t=292
+ni zhi dao de 	你只道德	c=1 d=0.771052 t=388
+ni zhi dao de 	你知道的	c=41 d=29.4687 t=388
+ni zhi dao de ba 	你知道的吧	c=1 d=1 t=322
+ni zhi dao de en 	你知道的恩	c=2 d=1.98511 t=364
+ni zhuo dao de 	你捉到的	c=1 d=0.932394 t=388
+ou 	偶	c=0 d=0.160946 t=388
+pan duan 	判斷	c=1 d=0.465334 t=388
+ping guo 	蘋果	c=1 d=0.927743 t=388
+qi ta di fang 	其他地方	c=0 d=0.0392586 t=388
+qie pian 	切片	c=2 d=0.937438 t=388
+qu 	去	c=1 d=1 t=387
+san ge 	三個	c=0 d=0.0416862 t=388
+san ge zhi 	三個值	c=1 d=0.418952 t=388
+sheng ming 	聲明	c=2 d=0.844342 t=388
+shi 	是	c=3 d=1.59059 t=388
+shi hou 	時候	c=4 d=2.9459 t=388
+shi yong 	使用	c=1 d=0.689362 t=388
+shi yong han shu 	使用函數	c=1 d=0.591555 t=388
+shu ju 	數據	c=1 d=0.436049 t=388
+shu ru 	輸入	c=0 d=0.0970446 t=388
+shu ru de 	輸入的	c=0 d=0.0951229 t=388
+si 	死	c=1 d=0.79077 t=388
+si xun huan 	死循環	c=1 d=0.470011 t=388
+te se 	特色	c=1 d=0.965605 t=388
+tong guo 	通過	c=2 d=1 t=388
+tong yi 	同一	c=0 d=0.0579842 t=388
+tong yi bao 	同一包	c=1 d=0.582748 t=388
+tui chu 	推出	c=1 d=0.748264 t=388
+tui chu 	退出	c=1 d=0.752014 t=388
+wei 	未	c=0 d=0.106621 t=388
+wei bian hua 	未變化	c=1 d=0.650509 t=388
+wei shi yong 	未使用	c=1 d=0.421052 t=388
+wo 	我	c=0 d=0.11519 t=388
+wo bu zhi dao 	我不知道	c=1 d=1 t=314
+wo hen 	喔很	c=1 d=0.941765 t=388
+wo hen hao de 	我很好的	c=2 d=1.79187 t=388
+wo zhai chao de 	我摘抄的	c=1 d=1 t=299
+wo zhi 	我只	c=0 d=0.0786628 t=388
+wo zhi da ou 	我只打偶	c=2 d=1.58909 t=388
+wo zhi dao 	我知道	c=0 d=0.0826959 t=388
+wo zhi dao de 	我知道的	c=5 d=2.63845 t=388
+wu xian 	無限	c=1 d=0.474734 t=388
+xia 	下	c=1 d=0.585669 t=388
+xian 	先	c=0 d=0.0683861 t=388
+xian deng ji miao 	先等幾秒	c=1 d=0.687289 t=388
+xiao xi 	消息	c=2 d=1.41301 t=388
+xiao xie 	小寫	c=5 d=2.8453 t=388
+xiao xie 	消協	c=1 d=0.491644 t=388
+xin dao 	信道	c=2 d=1.43448 t=388
+xin jian 	新建	c=3 d=1.92197 t=388
+xun huan 	循環	c=1 d=0.62386 t=388
+xun huan qie pian 	循環切片	c=1 d=0.479505 t=388
+xun huan yu ju 	循環語句	c=1 d=0.477114 t=388
+xun zhao 	尋找	c=0 d=0.0400517 t=388
+yin yong 	引用	c=3 d=1.90327 t=388
+yin yong jie gou ti 	引用結構體	c=1 d=0.501576 t=388
+yong bu dao 	用不到	c=0 d=0.0438235 t=388
+yong hu 	用戶	c=1 d=0.980199 t=388
+you yu 	由於	c=1 d=0.97531 t=388
+yu ju 	語句	c=2 d=0.987504 t=388
+yuan you 	原有	c=2 d=1.0602 t=388
+zai 	再	c=1 d=0.690734 t=388
+zai 	在	c=2 d=0.985112 t=388
+zeng jia 	增加	c=1 d=0.451581 t=388
+zeng jia zhi 	增加值	c=1 d=0.449329 t=388
+zhai chao 	摘抄	c=0 d=0.1 t=298
+zhe ge 	這個	c=1 d=0.955997 t=388
+zhi 	值	c=7 d=4.23425 t=388
+zhi 	指	c=1 d=1 t=384
+zhi chuan di 	值傳遞	c=1 d=0.535261 t=388
+zhi da 	直達	c=0 d=0.0822835 t=388
+zhi da ou 	直達偶	c=2 d=1.41672 t=388
+zhi dao 	知道	c=2 d=1.12779 t=388
+zhi dao de 	知道的	c=1 d=0.873716 t=388
+zhi neng zai 	只能在	c=1 d=0.579842 t=388
+zhi qian 	之前	c=1 d=0.410656 t=388
+zhi xing 	執行	c=1 d=0.412714 t=388
+zhong guo 	中國	c=2 d=1.84163 t=388
+zhu chi ren 	主持人	c=1 d=1 t=388
+zhuo dao 	捉到	c=0 d=0.0927743 t=388
