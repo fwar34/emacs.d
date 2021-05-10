@@ -350,7 +350,8 @@
                              rime-predicate-hydra-p
                              rime-predicate-space-after-cc-p
                              rime-predicate-punctuation-line-begin-p
-                             rime-predicate-current-input-punctuation-p
+                             ;; rime-predicate-current-input-punctuation-p
+                             rime-predicate-punctuation-after-ascii-p
                              rime-predicate-after-alphabet-char-p
                              rime-predicate-current-uppercase-letter-p
                              ))
