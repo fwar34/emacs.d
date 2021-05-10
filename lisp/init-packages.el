@@ -156,7 +156,9 @@
   :init
   (defun my-pyim-predicate-in-doc-string-p ()
     "Whether point is in the doc string."
-    (eq (plist-get (text-properties-at (point)) 'face) 'font-lock-doc-face))
+    (or
+     (eq (plist-get (text-properties-at (point)) 'face) 'font-lock-doc-face)
+     (eq (plist-get (text-properties-at (point)) 'face) 'font-lock-string-face)))
   :config
   ;; 激活 basedict 拼音词库，五笔用户请继续阅读 README
   (use-package pyim-basedict
