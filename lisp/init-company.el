@@ -106,6 +106,16 @@ In that case, insert the number."
     ;; (define-key map (kbd "<return>") nil)
     )
   ;; }}}
+
+  ;; {{{
+  ;; https://emacs-china.org/t/company/17187/2
+  ;; company 候选项去重，将去重后的所有候选项 newseq 返回， company-transformers 就是来修改候选项的变量
+  (defun eye/company-remove-dups (candidates)
+    (let ((newseq))
+      (mapcar #'(lambda (c) (if (not (member c newseq)) (add-to-list 'newseq c))) candidates)
+      newseq))
+  (add-to-list 'company-transformers #'eye/company-remove-dups)
+  ;; }}}
   )
 
 (if (fboundp 'evil-declare-change-repeat)
