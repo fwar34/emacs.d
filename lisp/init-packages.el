@@ -435,7 +435,7 @@
               (setq unread-command-events (append unread-command-events (list evt))))))))))
   ;; (advice-add 'rime-input-method :around #'rime-evil-escape-advice)
   ;; (advice-remove 'rime-input-method #'rime-evil-escape-advice)
-  ;; }}} 
+  ;; }}}
 
   (defun evil-exit-input-method ()
     (interactive)
@@ -447,6 +447,7 @@
   )
 
 (use-package sis
+  :disabled
   :ensure t
   :if (equal system-type 'windows-nt)
   ;; :hook
