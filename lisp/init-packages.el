@@ -268,8 +268,8 @@
       )
 
     (if (and temp-evil-escape-mode
-         (equal (pyim-entered-get) "g")
-         (equal last-command-event ?g))
+             (equal (pyim-entered-get) "g")
+             (equal last-command-event ?g))
         (progn
           (company-abort)
           (pyim-terminate-translation)
@@ -285,40 +285,35 @@
   ;; (advice-remove 'pyim-self-insert-command #'my-pyim-self-insert-command)
   ;; }}}
 
-  (setq my-count 0)
   ;; {{{ 
   ;; 当前没有输入内容的时候直接使用evil-escape的按键（；g）的直接返回到normal模式
   (defun my-pyim-self-insert-command (orig-func key)
     (let ((fkey (elt evil-escape-key-sequence 0))
-          (skey (elt evil-escape-key-sequence 1)))
+          (skey (elt evil-escape-key-sequence 1))
+          (last-char (if (and (local-variable-p 'my-last-char) (numberp my-last-char))
+                         my-last-char
+                       nil)))
+      (set (make-local-variable 'my-last-char) key)
       (if (char-equal key fkey)
-          (if (and (local-variable-p 'my-last-char) (numberp my-last-char) (char-equal my-last-char fkey))
+          (progn
+            (set (make-local-variable 'last-event-time) (float-time))
+            (funcall orig-func key))
+        (progn
+          (if (and (numberp last-char)
+                   (char-equal last-char fkey)
+                   (char-equal key skey)
+                   (and (local-variable-p 'last-event-time)
+                        (floatp last-event-time)
+                        (< (- (float-time) last-event-time) evil-escape-delay)))
               (progn
-                (funcall orig-func my-last-char)
-                (funcall orig-func key))
-            (set (make-local-variable 'my-last-char) key)
-            (set (make-local-variable 'last-event-time) (float-time)))
-        (if (and (local-variable-p 'my-last-char) (numberp my-last-char) (char-equal key skey))
-            (if (and (local-variable-p 'last-event-time)
-                     (floatp last-event-time)
-                     (< (- (float-time) last-event-time) 0.3))
-                (progn
-                  (company-abort)
-                  (evil-repeat-stop)
-                  (evil-normal-state)
-                  (message "pyim exit..."))
-              (funcall orig-func my-last-char)
-              (funcall orig-func key)
-              )
-          (if (numberp key)
-              (if (and (local-variable-p 'my-last-char) (numberp my-last-char))
-                  (progn
-                    (funcall orig-func my-last-char)
-                    (funcall orig-func key))
-                (funcall orig-func key))
-            (setq unread-command-events (append unread-command-events (list key)))))))
+                (evil-escape--delete)
+                (evil-repeat-stop)
+                (evil-normal-state))
+            (if (numberp key)
+                (funcall orig-func key)
+              (setq unread-command-events (append unread-command-events (list key))))))))
     )
-  (advice-add 'pyim-input-method :around #'my-pyim-self-insert-command)
+  (advice-add 'pyim-input-method :around #'my-pyim-self-insert-command) 
   ;; (advice-remove 'pyim-input-method #'my-pyim-self-insert-command)
   ;; }}} 
 
@@ -337,7 +332,6 @@
 
 ;; pacman -S librime
 (use-package rime
-  :disabled
   :ensure t
   :if (equal system-type 'gnu/linux)
   :init
@@ -377,36 +371,36 @@
   ;; {{{
   (defun my-rime-self-insert-command (orig-func key)
     (let ((fkey (elt evil-escape-key-sequence 0))
-          (skey (elt evil-escape-key-sequence 1)))
+          (skey (elt evil-escape-key-sequence 1))
+          (last-char (if (and (local-variable-p 'my-last-char) (numberp my-last-char))
+                         my-last-char
+                       nil)))
+      (set (make-local-variable 'my-last-char) key)
       (if (char-equal key fkey)
           (progn
-            (set (make-local-variable 'my-last-char) key)
-            (set (make-local-variable 'last-event-time) (float-time)))
-        (if (and (local-variable-p 'my-last-char) (numberp my-last-char) (char-equal key skey))
-            (if (and (local-variable-p 'last-event-time)
-                     (floatp last-event-time)
-                     (< (- (float-time) last-event-time) 0.3))
-                (progn
-                  (company-abort)
-                  (evil-repeat-stop)
-                  (evil-normal-state))
-              (apply orig-func (list my-last-char))
-              (apply orig-func (list key))
-              )
-          (if (numberp key)
-              (if (and (local-variable-p 'my-last-char) (numberp my-last-char))
-                  (progn
-                    (apply orig-func (list my-last-char))
-                    (apply orig-func (list key)))
-                (apply orig-func (list key)))
-            (setq unread-command-events (append unread-command-events (list key)))))))
+            (set (make-local-variable 'last-event-time) (float-time))
+            (funcall orig-func key))
+        (progn
+          (if (and (numberp last-char)
+                   (char-equal last-char fkey)
+                   (char-equal key skey)
+                   (and (local-variable-p 'last-event-time)
+                        (floatp last-event-time)
+                        (< (- (float-time) last-event-time) evil-escape-delay)))
+              (progn
+                (evil-escape--delete)
+                (evil-repeat-stop)
+                (evil-normal-state))
+            (if (numberp key)
+                (funcall orig-func key)
+              (setq unread-command-events (append unread-command-events (list key))))))))
     )
   (advice-add 'rime-input-method :around #'my-rime-self-insert-command)
   ;; (advice-remove 'rime-input-method #'my-rime-self-insert-command)
   ;; }}}
 
   ;; {{{
-  ;; 当前没有输入内容的时候直接使用evil-escape的按键（；g）的直接返回到normal模式，使用的是 read-event 性能有问题
+  ;; 当前没有输入内容的时候直接使用evil-escape的按键（；g）的直接返回到normal模式，性能有问题
   (defun rime-evil-escape-advice (orig-fun key)
     "advice for `rime-input-method' to make it work together with `evil-escape'.
     Mainly modified from `evil-escape-pre-command-hook'"
@@ -1067,11 +1061,17 @@
 (use-package evil-escape
   :ensure t
   :after evil
+  :config
+  (evil-escape-mode 1)
+  (setq-default evil-escape-delay 0.3)
+  (setq-default evil-escape-key-sequence ";g")
   )
 
 (use-package evil-surround
   :ensure t
   :after evil
+  :config
+  (global-evil-surround-mode)
   )
 
 (use-package evil-nerd-commenter

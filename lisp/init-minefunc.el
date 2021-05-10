@@ -604,4 +604,13 @@ URL `http://ergoemacs.org/emacs/elisp_run_current_file.html'"
   (interactive)
   (print (plist-get (text-properties-at (point)) 'face)))
 
+(defun my-test-this-command ()
+  (interactive)
+  (let ((evt (read-event nil nil evil-escape-delay)))
+    (print this-command)
+    (print this-original-command)
+    (print (this-command-keys))))
+;; (add-hook 'pre-command-hook #'my-test-this-command)
+;; (remove-hook 'pre-command-hook #'my-test-this-command)
+
 (provide 'init-minefunc)

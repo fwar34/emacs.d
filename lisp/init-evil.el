@@ -122,13 +122,6 @@
 (define-key evil-insert-state-map (kbd "C-u") 'evil-delete-whole-line)
 (define-key evil-insert-state-map (kbd "C-d") 'evil-delete-line)
 
-;; evil-surround setting
-(global-evil-surround-mode)
-;; evil-escape
-(evil-escape-mode 1)
-(setq-default evil-escape-delay 0.3)
-(setq-default evil-escape-key-sequence ";g")
-
 ;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;copy from chenbin.emacs.d;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; As a general RULE, mode specific evil leader keys started
 ;; with uppercased character or 'g' or special character except "=" and "-"
