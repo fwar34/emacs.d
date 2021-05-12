@@ -600,6 +600,8 @@ URL `http://ergoemacs.org/emacs/elisp_run_current_file.html'"
   (my-convert-radix input-radix output-radix (my-number-at-point t)))
 ;; }}}
 
+;; {{{
+;; 测试工具函数
 (defun my-test-face ()
   (interactive)
   (print (plist-get (text-properties-at (point)) 'face)))
@@ -612,5 +614,20 @@ URL `http://ergoemacs.org/emacs/elisp_run_current_file.html'"
     (print (this-command-keys))))
 ;; (add-hook 'pre-command-hook #'my-test-this-command)
 ;; (remove-hook 'pre-command-hook #'my-test-this-command)
+
+(defun my-test-syntax-ppss ()
+  (interactive)
+  (let ((ppss (syntax-ppss)))
+    (message "begin-------------")
+    (print ppss)
+    (message "middle---------")
+    (print (nthcdr 3 ppss))
+    (message "end----------")
+
+    (or (car (setq ppss (nthcdr 3 ppss)))
+        (car (setq ppss (cdr ppss)))
+        (print ppss)))
+  )
+;; }}}
 
 (provide 'init-minefunc)

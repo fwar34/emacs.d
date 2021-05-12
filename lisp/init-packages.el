@@ -149,11 +149,15 @@
 (when (and (display-graphic-p) (>= emacs-major-version 26))
   (use-package posframe :ensure t))
 
-
 (use-package pyim
   :ensure t
   ;; :unless (display-graphic-p)
   :init
+  (defun my-pyim-predicate-org-in-src-block-p ()
+    "Whether point is in an org-mode's code source block."
+    (and (derived-mode-p 'org-mode)
+         (org-in-src-block-p)))
+
   (defun my-pyim-predicate-in-doc-string-p ()
     "Whether point is in the doc string."
     (or
@@ -199,6 +203,7 @@
                   pyim-probe-org-structure-template
                   my-englist-p
                   my-pyim-predicate-in-doc-string-p
+                  ;; my-pyim-predicate-org-in-src-block-p
                   pyim-probe-evil-normal-mode)) ;; pyim-probe-dynamic-english 和 pyim-probe-auto-english 二选一 
 
   ;;根据环境自动切换到半角标点输入模式
@@ -349,6 +354,7 @@
                              rime-predicate-prog-in-code-p
                              rime-predicate-hydra-p
                              rime-predicate-space-after-cc-p
+                             rime-predicate-org-in-src-block-p
                              rime-predicate-punctuation-line-begin-p
                              ;; rime-predicate-current-input-punctuation-p
                              rime-predicate-punctuation-after-ascii-p
@@ -794,20 +800,6 @@
    "gs" 'evil-avy-goto-char
    "," 'self-insert-command
    )
-  )
-
-
-
-;; smartparens setting
-(use-package smartparens
-  :disabled
-  :ensure t
-  :hook
-  (after-init . smartparens-mode)
-  :config
-  (sp-local-pair 'emacs-lisp-mode "'" nil :actions nil)
-  (sp-local-pair 'lisp-interaction-mode "'" nil :actions nil)
-
   )
 
 ;; js2-mode setting
@@ -1296,6 +1288,81 @@
   (smartparens-enabled . evil-smartparens-mode)
   ;; :config
   ;; (add-hook 'smartparens-enabled-hook #'evil-smartparens-mode)
+  )
+
+;; smartparens setting
+(use-package smartparens
+  :disabled
+  :ensure t
+  :hook
+  (after-init . smartparens-mode)
+  :config
+  (sp-local-pair 'emacs-lisp-mode "'" nil :actions nil)
+  (sp-local-pair 'lisp-interaction-mode "'" nil :actions nil)
+  )
+
+(use-package awesome-pair
+  :disabled
+  :ensure t
+  :straight
+  (:host github :repo "manateelazycat/awesome-pair")
+  :config
+  (dolist (hook (list
+                 'c-mode-common-hook
+                 'c-mode-hook
+                 'c++-mode-hook
+                 'java-mode-hook
+                 'haskell-mode-hook
+                 'emacs-lisp-mode-hook
+                 'lisp-interaction-mode-hook
+                 'lisp-mode-hook
+                 'maxima-mode-hook
+                 'ielm-mode-hook
+                 'sh-mode-hook
+                 'makefile-gmake-mode-hook
+                 'php-mode-hook
+                 'python-mode-hook
+                 'js-mode-hook
+                 'go-mode-hook
+                 'qml-mode-hook
+                 'jade-mode-hook
+                 'css-mode-hook
+                 'ruby-mode-hook
+                 'coffee-mode-hook
+                 'rust-mode-hook
+                 'qmake-mode-hook
+                 'lua-mode-hook
+                 'swift-mode-hook
+                 'minibuffer-inactive-mode-hook
+                 ))
+    (add-hook hook '(lambda () (awesome-pair-mode 1))))
+
+  (define-key awesome-pair-mode-map (kbd "(") 'awesome-pair-open-round)
+  (define-key awesome-pair-mode-map (kbd "[") 'awesome-pair-open-bracket)
+  (define-key awesome-pair-mode-map (kbd "{") 'awesome-pair-open-curly)
+  (define-key awesome-pair-mode-map (kbd ")") 'awesome-pair-close-round)
+  (define-key awesome-pair-mode-map (kbd "]") 'awesome-pair-close-bracket)
+  (define-key awesome-pair-mode-map (kbd "}") 'awesome-pair-close-curly)
+  (define-key awesome-pair-mode-map (kbd "=") 'awesome-pair-equal)
+
+  (define-key awesome-pair-mode-map (kbd "%") 'awesome-pair-match-paren)
+  (define-key awesome-pair-mode-map (kbd "\"") 'awesome-pair-double-quote)
+
+  (define-key awesome-pair-mode-map (kbd "SPC") 'awesome-pair-space)
+
+  (define-key awesome-pair-mode-map (kbd "M-o") 'awesome-pair-backward-delete)
+  (define-key awesome-pair-mode-map (kbd "C-d") 'awesome-pair-forward-delete)
+  (define-key awesome-pair-mode-map (kbd "C-k") 'awesome-pair-kill)
+
+  (define-key awesome-pair-mode-map (kbd "M-\"") 'awesome-pair-wrap-double-quote)
+  (define-key awesome-pair-mode-map (kbd "M-[") 'awesome-pair-wrap-bracket)
+  (define-key awesome-pair-mode-map (kbd "M-{") 'awesome-pair-wrap-curly)
+  (define-key awesome-pair-mode-map (kbd "M-(") 'awesome-pair-wrap-round)
+  (define-key awesome-pair-mode-map (kbd "M-)") 'awesome-pair-unwrap)
+
+  (define-key awesome-pair-mode-map (kbd "M-p") 'awesome-pair-jump-right)
+  (define-key awesome-pair-mode-map (kbd "M-n") 'awesome-pair-jump-left)
+  (define-key awesome-pair-mode-map (kbd "M-:") 'awesome-pair-jump-out-pair-and-newline)
   )
 
 ;; evil-visualstar
@@ -1792,6 +1859,34 @@
   ;; (setq select-enable-clipboard t)
   ;; (setq select-enable-primary t)
   ;; (xclip-set-selection 'primary )
+  )
+
+(use-package move-dup
+  :ensure t
+  :bind (("M-p"   . move-dup-move-lines-up)
+         ("C-M-p" . move-dup-duplicate-up)
+         ("M-n"   . move-dup-move-lines-down)
+         ("C-M-n" . move-dup-duplicate-down)))
+
+(use-package english-teacher
+  :ensure t
+  :straight
+  (:host github :repo "loyalpartner/english-teacher.el")
+  :hook ((Info-mode
+          elfeed-show-mode
+          eww-mode
+          Man-mode
+          help-mode
+          Woman-Mode) . english-teacher-follow-mode)
+  :config
+  ;;;###autoload
+  (defun english-teacher-eldoc-show-result-function (origin translation)
+    (eldoc-message (format "%s:%s\norigin:%s"
+                           (symbol-name english-teacher-backend)
+                           translation
+                           origin)))
+
+  (setq english-teacher-show-result-function 'english-teacher-eldoc-show-result-function)
   )
 
 (provide 'init-packages)

@@ -788,3 +788,69 @@ Use error or user-error to signal a error and exit.
            (read-string "Enter your age:")))
     (message "Name %s, age %s" x y))
 #+end_src
+* emacs 包管理
+https://liujiacai.net/blog/2021/05/05/emacs-package/
+** Autoload
+autoload 函数可以声明函数或者宏，在真正使用的时候再去加载其对应的文件。
+#+begin_src elisp
+(autoload filename docstring interactive type)
+#+end_src
+一般不直接使用 autoload 函数，而是使用 autoload 魔法注释，然后用一些函数来解析魔法注释自动生成 autoload 函数，比如在 my-mode 文件夹下有一文件 hello-world.el, 内容为：
+#+begin_src elisp
+  ;;;###autoload
+  (defun my-world ()
+    (interactive)
+    (message "hello world"))
+#+end_src
+使用下面的命令生成 autoloads 文件
+#+begin_src elisp
+  (package-generate-autoloads "hello-world" "~/my-mode")
+#+end_src
+在同一目录生成 hello-world-autoloads.el 文件，内容为：
+#+begin_src elisp
+  ;;; hello-world-autoloads.el --- automatically extracted autoloads
+  ;;
+  ;;; Code:
+
+  (add-to-list 'load-path (directory-file-name
+                           (or (file-name-directory #$) (car load-path))))
+
+
+  ;;;### (autoloads nil "hello-world" "hello-world.el" (0 0 0 0))
+  ;;; Generated autoloads from hello-world.el
+
+  (autoload 'my-hello "hello-world" nil t nil)
+
+  ;;;***
+
+  ;; Local Variables:
+  ;; version-control: never
+  ;; no-byte-compile: t
+  ;; no-update-autoloads: t
+  ;; coding: utf-8
+  ;; End:
+  ;;; hello-world-autoloads.el ends here
+#+end_src
+这意味着只在第一次 M-x my-hello 时，才会去加载 hello-world.el 文件。
+
+这里需要注意，为了让 Emacs 识别到 my-hello 函数的声明，需要去加载 hello-world-autoloads.el 文件，对于 package.el 管理的包， package.el 在下载该包时，会进行下面的操作：
+   1. 解析依赖，递归下载
+   2. 把包的目录追加到 load-path 中
+   3. 自动生成 autoloads 文件，并且加载它
+这样用户就能够直接使用该包提供的函数了。如果使用 submodule 管理，上述操作则需要自己实现，后文会介绍。
+** Feature
+feature 是 emacs 提供的另一种自动加载 elisp 文件机制，使用示例：
+#+begin_src elisp
+  (defun my-hello ()
+    (interactive)
+    (message "hello world"))
+
+  ;; feautre 名与文件名相同
+  (provide 'hello-world)
+#+end_src
+上述代码即生成了一个 feautre ，名为 hello-world ，由于与文件同名，只需在使用 my-hello 前 (require 'hello-world) 即可，这样就会去自动加载 hello-world.el
+** Load
+#+begin_src eslip
+(load filename)
+#+end_src
+

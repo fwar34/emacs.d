@@ -299,12 +299,20 @@
 ;; https://github.com/emacs-evil/evil
 (add-hook 'prog-mode-hook (lambda () (modify-syntax-entry ?_ "w")))
 (add-hook 'emacs-lisp-mode-hook (lambda () (modify-syntax-entry ?- "w")))
+(add-hook 'help-mode-hook (lambda () (modify-syntax-entry ?- "w")))
 
 ;; 花括号自动换行的问题
 ;; http://ergoemacs.org/emacs/emacs_insert_brackets_by_pair.html
 (when (fboundp 'electric-pair-mode)
   (electric-pair-mode t)
-  (setq electric-pair-inhibit-predicate 'electric-pair-conservative-inhibit))
+  ;; (setq electric-pair-inhibit-predicate 'electric-pair-conservative-inhibit)
+  
+  ;; (defun electric-pair ()
+  ;;   "If at end of line, insert character pair without surrounding spaces.
+  ;;   Otherwise, just insert the typed character."
+  ;;   (interactive)
+  ;;   (if (eolp) (let (parens-require-spaces) (insert-pair)) (self-insert-command 1)))
+  )
 
 ;; advice for find-file
 ;; (defun advice-find-file (filename &optional wildcards)
