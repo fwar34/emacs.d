@@ -851,6 +851,7 @@ feature 是 emacs 提供的另一种自动加载 elisp 文件机制，使用示�
 上述代码即生成了一个 feautre ，名为 hello-world ，由于与文件同名，只需在使用 my-hello 前 (require 'hello-world) 即可，这样就会去自动加载 hello-world.el
 ** Load
 #+begin_src elisp
-  (load filename)
+  (load filename &optional missing-ok nomessage nosuffix must-suffix)
 #+end_src
+上面的 autoload 与 feautre 都会调用 load 去加载文件， load 为相对低级的 api ，不推荐上层直接调用。
 
