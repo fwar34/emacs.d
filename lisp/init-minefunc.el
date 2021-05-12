@@ -618,15 +618,16 @@ URL `http://ergoemacs.org/emacs/elisp_run_current_file.html'"
 (defun my-test-syntax-ppss ()
   (interactive)
   (let ((ppss (syntax-ppss)))
-    (message "begin-------------")
+    ;; (message "begin-------------")
     (print ppss)
-    (message "middle---------")
-    (print (nthcdr 3 ppss))
-    (message "end----------")
+    ;; (message "middle---------")
+    ;; (print (nthcdr 3 ppss))
+    ;; (message "end----------")
 
-    (or (car (setq ppss (nthcdr 3 ppss)))
-        (car (setq ppss (cdr ppss)))
-        (print ppss)))
+    ;; (or (car (setq ppss (nthcdr 3 ppss)))
+    ;;     (car (setq ppss (cdr ppss)))
+    ;;     (print ppss))
+    )
   )
 ;; }}}
 

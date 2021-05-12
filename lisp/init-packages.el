@@ -203,7 +203,7 @@
                   pyim-probe-org-structure-template
                   my-englist-p
                   my-pyim-predicate-in-doc-string-p
-                  ;; my-pyim-predicate-org-in-src-block-p
+                  my-pyim-predicate-org-in-src-block-p
                   pyim-probe-evil-normal-mode)) ;; pyim-probe-dynamic-english 和 pyim-probe-auto-english 二选一 
 
   ;;根据环境自动切换到半角标点输入模式
