@@ -1707,6 +1707,7 @@
   (define-key god-local-mode-map (kbd ",") #'keyboard-quit)
   )
 
+;; 缩进显示竖线
 (use-package indent-guide
   :ensure t
   :hook
