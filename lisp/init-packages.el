@@ -1905,6 +1905,6 @@
 ;; ox-hugo is an Org exporter backend that exports Org to Hugo-compatible Markdown (Blackfriday) and also generates the front-matter (in TOML or YAML format).
 (use-package ox-hugo
   :ensure t
-  :defer t)
+  :after ox)
 
 (provide 'init-packages)
