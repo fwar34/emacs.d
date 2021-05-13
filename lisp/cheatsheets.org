@@ -12,16 +12,6 @@
 #+TITLE: 一些emacs和elisp的cheatsheet
 #+OPTIONS: toc:nil
 
-#+HUGO_BASE_DIR: ../../
-#+HUGO_SECTION: post
-#+TITLE: test elisp
-#+DATE: 2021-05-13
-#+HUGO_AUTO_SET_LASTMOD: t
-#+HUGO_TAGS: test
-#+HUGO_CATEGORIES: test
-#+HUGO_DRAFT: false
-
-
 #<<t1>> top
 
 *** *emacs相关*
@@ -44,7 +34,7 @@
 
 *** *elisp相关*
     1. with-eval-after-load和eval-after-load的区别
-       [[[[https://stackoverflow.com/questions/21880139/what-is-with-eval-after-load-in-emacs-lisp]]][stackoverflow]]
+       [[https://stackoverflow.com/questions/21880139/what-is-with-eval-after-load-in-emacs-lisp][stackoverflow]]
        #+BEGIN_QUOTE
        Lisp Changes in Emacs 24.4
        ...
