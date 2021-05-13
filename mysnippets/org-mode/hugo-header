@@ -1,13 +1,11 @@
-# key: hugo
+# -*- mode: snippet -*-
 # name: hugo
+# key: hugo
 # --
-#+HUGO_BASE_DIR: ../../
-#+HUGO_SECTION: post
 #+TITLE: $1
 #+DATE: `(format-time-string "%Y-%m-%d")`
-#+HUGO_AUTO_SET_LASTMOD: t
-#+HUGO_TAGS: $2
-#+HUGO_CATEGORIES: $3
-#+HUGO_DRAFT: false
+#+DRAFT: false
+#+TAGS[]: $2
+#+CATEGORIES[]: $3
 
 $0
