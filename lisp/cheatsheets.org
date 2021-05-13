@@ -12,6 +12,16 @@
 #+TITLE: 一些emacs和elisp的cheatsheet
 #+OPTIONS: toc:nil
 
+#+HUGO_BASE_DIR: ../../
+#+HUGO_SECTION: post
+#+TITLE: test elisp
+#+DATE: 2021-05-13
+#+HUGO_AUTO_SET_LASTMOD: t
+#+HUGO_TAGS: test
+#+HUGO_CATEGORIES: test
+#+HUGO_DRAFT: false
+
+
 #<<t1>> top
 
 *** *emacs相关*

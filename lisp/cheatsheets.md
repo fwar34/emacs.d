@@ -1,0 +1,73 @@
++++
+title = "test 一些emacs和elisp的cheatsheet test elisp"
+author = ["feng"]
+description = "test"
+date = 2020-03-20T14:59:00+08:00
+lastmod = 2021-05-13T18:10:58+08:00
+tags = ["test"]
+categories = ["test"]
+draft = false
++++
+
+\#<a id="orged75fd0"></a> top
+
+
+## **emacs相关** {#emacs相关}
+
+1.  M-t 交换两个相邻的word
+2.  在文档中用反引号和单引号括起来的symbol是可以跳转过去的，可以使用xref-find-definitions之类的函数(;xd)
+3.  在minibuffer中C-y粘帖剪贴板的内容
+4.  在minibuffer中M-j获取光标下的word
+5.  display-local-help(C-h .)显示光标底下的字符的附加信息
+6.  isearch-describe-bindings可以描述出isearch模式的所有绑定快捷键
+7.  在/或者?(evil-search-forward,evil-search-backward)后isearch-yank-word-or-char(C-w)可以将光标处的word自动填充到搜索栏
+8.  在/或者?(evil-search-forward,evil-search-backward)后isearch-yank-kill(C-y)可以将kill-ring的最后个word自动填充到搜索栏
+9.  (list-colors-display)可以显示颜色
+10. (read-color)可以显示颜色
+11. 可以M-x搜索color相关函数
+12. emacs卡顿的话可以使用M-x profiler-start来统计cpu或者内存，等卡顿过后使用profiler-report来看是什么导致的卡顿
+13. C-u C-x = (describe-char)可以看光标所在的字符的具体字符信息，包括了字符大小等，<br />
+    例如harfbuzz:-outline-Sarasa Fixed Slab SC-normal-normal-normal-mono-24-**-**-**-c-**-iso8859-1 (#x3F3F) 就是Sarasa Fixed Slab SC字体，大小是24
+14. 在 calc 中使用 d 加上数字(0 6 8等)来切换进制
+15. C-x = what-cursor-position 来看光标下面的字符信息，包括了字符编码 point 信息等
+
+
+## **elisp相关** {#elisp相关}
+
+1.  with-eval-after-load和eval-after-load的区别
+    [[<https://stackoverflow.com/questions/21880139/what-is-with-eval-after-load-in-emacs-lisp>][stackoverflow]]
+
+    > Lisp Changes in Emacs 24.4
+    > ...
+    > New macro \`with-eval-after-load'.
+    > This is like the old \`eval-after-load', but better behaved.
+
+    {{< highlight elisp "linenos=table, linenostart=1" >}}
+    (eval-after-load "foo"
+      '(progn
+         (setq foo 42)
+         (setq bar 17)))
+    {{< /highlight >}}
+
+    与下面的相等
+
+    ```elisp
+    (with-eval-after-load "foo"
+      (setq foo 42)
+      (setq bar 17))
+    ```
+
+2.  获取寄存器的值需要用字符码而不是符号
+
+    > 但是，通过 M-: 执行 (get-register 'a) 得到的值确实 nil， 为什么？
+    > 因为 get-register 的参数是 字符码 而不是符号。 你要这样用 (get-register 97) ;; => 0
+    > 忽然发现 ? 后面跟一个字符会返回字符的编码：
+    > ?只
+    > ;; => 21482
+    > ?a
+    > ;; =>97
+    > ?^@ ; 用 \`C-q C-@' 输入
+    > ;; => 0
+    > 所以用 (get-register ?a) 就能得到符合预期的结果了。
+
+    [top](#orged75fd0)
