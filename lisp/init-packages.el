@@ -1889,4 +1889,22 @@
   (setq english-teacher-show-result-function 'english-teacher-eldoc-show-result-function)
   )
 
+(use-package easy-hugo
+  :ensure t
+  :init
+  ;; (setq easy-hugo-postdir "content/posts")
+  (setq easy-hugo-basedir "~/mine/fwar34.github.io/")
+  (setq easy-hugo-url "https://fwar34.github.io")
+  (setq easy-hugo-root "~/mine/fwar34.github.io/")
+  (setq easy-hugo-previewtime "300")
+  (setq easy-hugo-default-ext ".org")
+  (setq easy-hugo-org-header t)
+  :bind ("C-c C-h" . easy-hugo)
+  )
+
+;; ox-hugo is an Org exporter backend that exports Org to Hugo-compatible Markdown (Blackfriday) and also generates the front-matter (in TOML or YAML format).
+(use-package ox-hugo
+  :ensure t
+  :defer t)
+
 (provide 'init-packages)
