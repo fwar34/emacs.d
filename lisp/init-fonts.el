@@ -95,6 +95,16 @@
     )
   )
 
+;; 单独设置 org-table 字体
+;; Org table font
+;; (custom-set-faces
+;;  '(org-table ((t (:family "Ubuntu Mono derivative Powerline")))))
+
+;; 单独设置 markdown-code-face
+(custom-set-faces
+ '(markdown-code-face ((t (:family "Iosevka Curly Slab")))))
+;; (markdown-pre-face markdown-code-face)
+
 ;; {{
 ;; (global-prettify-symbols-mode 1)
 ;; (defun add-pretty-lambda ()
