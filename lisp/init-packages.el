@@ -1908,4 +1908,26 @@
   :ensure t
   :after ox)
 
+
+;; markdown and org preview
+(use-package grip-mode
+  :disabled
+  :ensure t
+  :bind (:map markdown-mode-command-map
+              ("g" . grip-mode))
+  :config
+  ;; This package adds an Org mode export backend for GitHub Flavored Markdown.
+  (use-package ox-gfm
+    :ensure t
+    :after org)
+  )
+
+;; Markdown，Org，HTML预览也可以使用这个，依赖simple-httpd 和 websocket，不会生成其它外部文件
+(use-package maple-preview
+  :init
+  (use-package websocket :ensure t)
+  (use-package simple-httpd :ensure t)
+  :load-path "site-lisp/maple-preview"
+  :commands (maple-preview-mode))
+
 (provide 'init-packages)

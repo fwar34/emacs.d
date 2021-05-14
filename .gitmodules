@@ -1,0 +1,3 @@
+[submodule "site-lisp/maple-preview"]
+	path = site-lisp/maple-preview
+	url = https://github.com/honmaple/emacs-maple-preview
