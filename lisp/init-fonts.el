@@ -101,8 +101,11 @@
 ;;  '(org-table ((t (:family "Ubuntu Mono derivative Powerline")))))
 
 ;; 单独设置 markdown-code-face
-(custom-set-faces
- '(markdown-code-face ((t (:family "Iosevka Curly Slab")))))
+(when (equal system-type 'gnu/linux) (display-graphic-p)
+      (custom-set-faces
+       '(markdown-code-face ((t (:family "Iosevka Curly Slab")))))
+      (custom-set-faces
+       '(markdown-preview-face ((t (:family "Iosevka Curly Slab"))))))
 ;; (markdown-pre-face markdown-code-face)
 
 ;; {{
