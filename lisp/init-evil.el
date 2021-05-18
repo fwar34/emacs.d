@@ -264,6 +264,8 @@
                     "e" 'evil-end-of-line
                     "SPC" 'counsel-M-x
                     "TAB" 'other-window
+                    "qr" 'query-replace
+                    "qs" 'query-replace-regexp
                     ;; highlight-symbol
                     ;; "xx" 'highlight-symbol-remove-all ;; map to ";xx"
                     "hs" 'highlight-symbol
