@@ -47,4 +47,8 @@
   (setq hs-set-up-overlay 'hideshow-folded-overlay-fn)
   )
 
+;; proced 类似 top, 全平台支持
+(setq-default proced-auto-update-flag t ; 自动刷新
+			  proced-auto-update-interval 1) ; 默认为5秒一次
+
 (provide 'init-builtin)

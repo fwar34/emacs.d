@@ -102,7 +102,7 @@
 ;;   (evil-set-initial-state (car p) (cdr p)))
 (loop for (mode . state) in '((apropos-mode . normal)
                               (browse-kill-ring-mode . normal)
-                              (ivy-occur-grep-mode . emacs)
+                              ;; (ivy-occur-grep-mode . emacs)
                               (calc-mode . emacs)
                               (easy-hugo-mode . emacs)
                               (calculator-mode . emacs))

@@ -587,14 +587,14 @@
    ;; ("C-w" . backward-kill-word) ;; 在ivy中已经将backward-kill-word remap成了ivy-backward-kill-word
    ) 
   :config
-  (general-define-key
-   :states 'emacs
-   :keymaps 'ivy-occur-grep-mode-map
-   "q" 'quit-window
-   "gs" 'evil-avy-goto-char
-   "gw" 'ivy-wgrep-change-to-wgrep-mode
-   "n" 'ivy-occur-next-error
-   )
+  ;; (general-define-key
+  ;;  :states 'normal
+  ;;  :keymaps 'ivy-occur-grep-mode-map
+  ;;  "q" 'quit-window
+  ;;  "gs" 'evil-avy-goto-char
+  ;;  "gw" 'ivy-wgrep-change-to-wgrep-mode
+  ;;  "n" 'ivy-occur-next-error
+  ;;  )
 
   ;; 调整 counsel 搜索的方式: 忽略单词顺序
   (setq ivy-re-builders-alist
@@ -792,13 +792,13 @@
   :defer t
   :config
   (general-define-key
-   :states 'emacs
+   :states 'normal
    :keymaps 'wgrep-mode-map
    :prefix ","
    "qq" 'wgrep-abort-changes
    "zz" 'wgrep-finish-edit
-   "gs" 'evil-avy-goto-char
-   "," 'self-insert-command
+   ;; "gs" 'evil-avy-goto-char
+   ;; "," 'self-insert-command
    )
   )
 

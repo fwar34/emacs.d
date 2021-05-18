@@ -4,6 +4,22 @@
 ;; (use-package dired+
 ;;   :straight t)
 
+(use-package dired
+  :config
+  (general-define-key
+   :states 'normal
+   :keymaps 'dired-mode-map
+   "w" 'dired-toggle-read-only)
+
+  (general-define-key
+   :states 'normal
+   :keymaps 'wdired-mode-map
+   :prefix ","
+   "qq" 'wdired-abort-changes
+   "zz" 'wdired-finish-edit
+   )
+  )
+
 ;; https://emacs-china.org/t/emacs-builtin-mode/11937/20
 ;; 显示或隐藏隐藏文件，按键P
 (define-advice dired-do-print (:override (&optional _))
