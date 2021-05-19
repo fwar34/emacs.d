@@ -582,12 +582,16 @@ URL `http://ergoemacs.org/emacs/elisp_run_current_file.html'"
           (message
            (cond
             ((string-equal output-radix "2")
+             (evil-set-register ?\" (my-convert-use-calculator number))
              (format "convert %s to bin => %s" arg (my-convert-use-calculator number)))
             ((string-equal output-radix "8")
+             (evil-set-register ?\" (format "%#o" number))
              (format "convert decimal %s to octal => %#o" arg number))
             ((string-equal output-radix "10")
+             (evil-set-register ?\" (format "%#d" number))
              (format "convert %s to decimal => %#d" arg number))
             ((string-equal output-radix "16")
+             (evil-set-register ?\" (format "%X" number))
              (format "convert %s to hex => %X" arg number))
             (t
              "not convert")
