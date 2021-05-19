@@ -1,7 +1,6 @@
 
 ;; -*- coding: utf-8; lexical-binding: t; -*-
 ;; 快速打开配置文件
-(define-namespace fwar34-)
 (defun open-init-file()
   (interactive)
   (find-file "~/.emacs.d/lisp/init-packages.el"))
@@ -575,7 +574,9 @@ URL `http://ergoemacs.org/emacs/elisp_run_current_file.html'"
   "convert number radix and copy output"
   (interactive (list (read-string "input radix[2-16]:")
                      (read-string "output radix[2-16]:")
-                     (read-string "number to convert:")))
+                     (if (thing-at-point 'number)
+                         (read-string (format "number to convert[%s]:" (my-number-at-point t)) nil nil (my-number-at-point t) nil)
+                       (read-string "number to convert:"))))
     (if arg
         (let ((number (string-to-number arg (string-to-number input-radix))))
           (print number)
@@ -598,10 +599,10 @@ URL `http://ergoemacs.org/emacs/elisp_run_current_file.html'"
             )))
       (error "no number to convert")))
 
-(defun my-convert-radix-word (input-radix output-radix)
-  (interactive (list (read-string "input radix[2-16]:")
-                     (read-string "output radix[2-16]:")))
-  (my-convert-radix input-radix output-radix (my-number-at-point t)))
+;; (defun my-convert-radix-word (input-radix output-radix)
+;;   (interactive (list (read-string "input radix[2-16]:")
+;;                      (read-string "output radix[2-16]:")))
+;;   (my-convert-radix input-radix output-radix (my-number-at-point t)))
 ;; }}}
 
 ;; {{{
