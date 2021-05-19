@@ -167,21 +167,32 @@ DEFAULT-TEXT."
    'face 'font-lock-preprocessor-face)))
   )
 
-(defun mode-line-fill (face reserve)
+;; (defun mode-line-fill (face reserve)
+;;   "Return empty space using FACE and leaving RESERVE space on the right."
+;;   (unless reserve (setq reserve 20))
+;;   (when (and (display-graphic-p) (eq 'right (get-scroll-bar-mode)))
+;;     (setq reserve (- reserve 3)))
+;;   (if (and (equal system-type 'windows-nt) (string-equal (upcase system-name) "FL-NOTEBOOK"))
+;;       (propertize " " 'display `((space :align-to
+;;                                         (- (+ right right-fringe right-margin) ,reserve 1.4)))
+;;                   'face face)
+;;     (propertize " " 'display `((space :align-to
+;;                                       (- (+ right right-fringe right-margin) ,reserve)))
+;;                 'face face)
+;;     )
+;;   )
+
+(defun mode-line-fill (reserve)
   "Return empty space using FACE and leaving RESERVE space on the right."
   (unless reserve (setq reserve 20))
   (when (and (display-graphic-p) (eq 'right (get-scroll-bar-mode)))
     (setq reserve (- reserve 3)))
   (if (and (equal system-type 'windows-nt) (string-equal (upcase system-name) "FL-NOTEBOOK"))
       (propertize " " 'display `((space :align-to
-                                        (- (+ right right-fringe right-margin) ,reserve 1.4)))
-                  'face face)
+                                        (- (+ right right-fringe right-margin) ,reserve 1.4))))
     (propertize " " 'display `((space :align-to
-                                      (- (+ right right-fringe right-margin) ,reserve)))
-                'face face)
-    )
+                                      (- (+ right right-fringe right-margin) ,reserve)))))
   )
-
 
 ;; (setq projectile-mode-line
 ;;       (quote (:eval (when (and (bound-and-true-p projectile-mode) (projectile-project-p)) 
@@ -303,7 +314,7 @@ DEFAULT-TEXT."
        (fwar34/evil-state)
        '(:eval (when (featurep 'lispyville)
                  (lispyville-mode-line-string " @lispy-special@")))
-       (fwar34/wgrep-state)
+       ;; (fwar34/wgrep-state)
        (fwar34/lispy-state)
        " "
        ;; git info
@@ -338,7 +349,8 @@ DEFAULT-TEXT."
        my-selection-info
        " "
        (zilong/modeline--evil-substitute)
-       '(:eval (mode-line-fill 'mode-line (+ 7 (string-width (encoding-string)))))
+       ;; '(:eval (mode-line-fill 'mode-line (+ 7 (string-width (encoding-string)))))
+       '(:eval (mode-line-fill (+ 7 (string-width (encoding-string)))))
        encoding-mode-line
        " "
        ;; "["
@@ -362,5 +374,19 @@ DEFAULT-TEXT."
 
 ;; Here 's how I get a box around the active mode-line :
 ;; (custom-set-faces '(mode-line ((t (:box (:line-width 2 :color "red"))))))
+
+;; {{ change mode-line color by evil state
+(defun my-show-wgrep-or-wdired-state ()
+  "Change mode line color to notify user wgrep wdired state or god-mode."
+  (if (and (not buffer-read-only) (or (equal major-mode 'ivy-occur-grep-mode) (equal major-mode 'rg-mode) (equal major-mode 'wdired-mode)))
+      (progn
+        (set-face-background 'mode-line "orange")
+        ;; (set-face-background 'mode-line-inactive "gray26")
+        )
+    (unless (bound-and-true-p god-local-mode)
+      (set-face-background 'mode-line (if (display-graphic-p) "gray26" "black"))))
+  )
+(add-hook 'post-command-hook #'my-show-wgrep-or-wdired-state)
+;; }}
 
 (provide 'init-my-modeline)
