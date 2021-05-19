@@ -1087,6 +1087,7 @@
   ;; (evilem-default-keybindings (kbd "\\"))
   )
 
+;; Press “%” to jump between matched tags in Emacs. For example, in HTML “<div>” and “</div>” are a pair of tags
 (use-package evil-matchit
   :ensure t
   :after evil
@@ -1094,6 +1095,10 @@
   (global-evil-matchit-mode 1)
   )
 
+;; Easy text exchange operator for Evil. This is the port of vim-exchange by Tom McDonald.
+;; gx (and gX) can also be used from visual mode, which is sometimes easier than coming up with the right {motion}
+;; If you're using the same motion again (e.g. exchanging two words using gxiw), you can use . (evil-repeat) the second time.
+;; gxx works as you expect.
 (use-package evil-exchange
   :ensure t
   :after evil
