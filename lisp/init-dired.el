@@ -94,13 +94,12 @@
   ;; (define-key dired-mode-map (kbd "K") 'dired-k)
   ;; ;; You can use dired-k alternative to revert-buffer
   ;; (define-key dired-mode-map (kbd "g") 'dired-k)
-  (defun my-wdired-advice (orig-func)
-    (funcall orig-func)
+  (defun my-wdired-advice ()
     (when (or (equal major-mode 'wdired-mode) (equal major-mode 'dired-mode))
       (dired-k)))
-  (advice-add 'wdired-abort-changes :around #'my-wdired-advice)
+  (advice-add 'wdired-abort-changes :after #'my-wdired-advice)
   ;; (advice-remove 'wdired-abort-changes #'my-wdired-advice)
-  (advice-add 'wdired-finish-edit :around #'my-wdired-advice)
+  (advice-add 'wdired-finish-edit :after #'my-wdired-advice)
   ;; (advice-remove 'wdired-abort-changes #'my-wdired-advice)
   )
 
