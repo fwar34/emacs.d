@@ -572,7 +572,7 @@ URL `http://ergoemacs.org/emacs/elisp_run_current_file.html'"
     (calculator-number-to-string arg)))
 
 (defun my-convert-radix (input-radix output-radix arg)
-  ;; (interactive "p\nsnumber to convert:")
+  "convert number radix and copy output"
   (interactive (list (read-string "input radix[2-16]:")
                      (read-string "output radix[2-16]:")
                      (read-string "number to convert:")))
