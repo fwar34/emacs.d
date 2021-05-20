@@ -621,7 +621,7 @@
                            (if (window-live-p (get-buffer-window "*lispy-help*"))
                                (select-window (get-buffer-window "*lispy-help*"))))
                     "da" 'lispy-arglist-inline
-                    "ss" 'fa-show
+                    ;; "ss" 'fa-show
                     ;; "gg" 'ggtags-find-tag-dwim
                     ;; "gs" 'ggtags-find-other-symbol
                     ;; "gr" 'ggtags-find-reference
