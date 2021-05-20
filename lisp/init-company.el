@@ -197,6 +197,7 @@ In that case, insert the number."
   )
 
 (use-package company-jedi
+  :disabled
   :ensure t
   :after python
   :config

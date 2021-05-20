@@ -1647,10 +1647,14 @@
 
 (use-package lua-mode
   :ensure t
-  :defer t
+  :mode "\\.lua$"
+  :interpreter "lua"
   :config
-  (add-to-list 'auto-mode-alist '("\\.lua$" . lua-mode))
-  (add-to-list 'interpreter-mode-alist '("lua" . lua-mode))
+  ;; (add-to-list 'auto-mode-alist '("\\.lua$" . lua-mode))
+  ;; (add-to-list 'interpreter-mode-alist '("lua" . lua-mode))
+  (setq lua-indent-level 4)
+  (setq lua-indent-string-contents t)
+  (setq lua-prefix-key nil)
   )
 
 ;; (use-package modern-cpp-font-lock
