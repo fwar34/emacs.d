@@ -12,7 +12,7 @@
 ;; python: sudo pip install python-lsp-server
 ;; go: GO111MODULE=on go get golang.org/x/tools/gopls@latest
 ;; rust: rustup update && rustup component add rls rust-analysis rust-src
-;; lua: luarocks install --server=https://luarocks.org/dev lua-lsp --local
+;; lua: luarocks install --server=https://luarocks.org/dev lua-lsp --local 现在（2021/5/12）还不支持 lua5.4
 (use-package lsp-mode
   :ensure t
   :init
@@ -39,6 +39,11 @@
   ;; optionally if you want to use debugger
   ;; (use-package dap-mode)
   ;; (use-package dap-LANGUAGE) to load the dap adapter for your language
+
+  ;; 现在（2021/5/12）还不支持 lua5.4
+  (let ((lua-version (shell-command-to-string "lua -v | awk '{print $2}'")))
+    (unless (> (string-to-number lua-version) 5.3)
+      (add-hook 'lua-mode-hook 'lsp-deferred)))
   )
 
 (provide 'init-lsp)
