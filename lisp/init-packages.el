@@ -1415,7 +1415,7 @@
 ;; imenu-list
 (use-package imenu-list
   :ensure t
-  :after evil)
+  :commands imenu-list-smart-toggle)
 
 (use-package taglist
   :defer t
