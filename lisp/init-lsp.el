@@ -17,6 +17,7 @@
 ;; c++: yay -S ccls 或者 yay -S clang
 (use-package lsp-mode
   :ensure t
+  :if (equal system-type 'gnu/linux)
   :init
   ;; set prefix for lsp-command-keymap (few alternatives - "C-l", "C-c l")
   (setq lsp-keymap-prefix "C-c l")
