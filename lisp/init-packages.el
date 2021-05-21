@@ -1415,7 +1415,12 @@
 ;; imenu-list
 (use-package imenu-list
   :ensure t
-  :commands imenu-list-smart-toggle)
+  :commands imenu-list-smart-toggle
+  :bind
+  (:map imenu-list-major-mode-map
+        ("j" . next-line)
+        ("k" . previous-line)
+        ("q" . kill-buffer-and-window)))
 
 (use-package taglist
   :defer t

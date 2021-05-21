@@ -104,6 +104,7 @@
                               (browse-kill-ring-mode . normal)
                               ;; (ivy-occur-grep-mode . emacs)
                               ;; (proced-mode . emacs)
+                              (imenu-list-major-mode . emacs)
                               (calc-mode . emacs)
                               (easy-hugo-mode . emacs)
                               (calculator-mode . emacs))
