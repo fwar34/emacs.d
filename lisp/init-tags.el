@@ -58,6 +58,7 @@
     ;; counsel-etags-ignore-directories does NOT support wildcast
     (add-to-list 'counsel-etags-ignore-directories "build_clang")
     (add-to-list 'counsel-etags-ignore-directories "debian")
+    (add-to-list 'counsel-etags-ignore-directories ".ccls-cache")
     ;; counsel-etags-ignore-filenames supports wildcast
     (add-to-list 'counsel-etags-ignore-filenames "*.log")
     (add-to-list 'counsel-etags-ignore-filenames "*.html")

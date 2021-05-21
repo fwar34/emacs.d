@@ -51,4 +51,9 @@
 (setq-default proced-auto-update-flag t ; 自动刷新
 			  proced-auto-update-interval 1) ; 默认为5秒一次
 
+(use-package xref
+  :if (executable-find "rg")
+  :config
+  (setq xref-search-program 'ripgrep))
+
 (provide 'init-builtin)

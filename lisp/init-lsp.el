@@ -31,11 +31,17 @@
          (lsp-mode . lsp-enable-which-key-integration))
   :commands lsp-deferred
   :config
+  (setq ;;lsp-completion-provider :none
+        lsp-enable-indentation nil
+        lsp-enable-on-type-formatting nil
+        ;; lsp-completion-filter-on-incomplete nil
+        ;; lsp-completion-enable-additional-text-edit nil
+        ;; lsp-completion-sort-initial-results nil
+        )
+  
   (use-package lsp-diagnostics
     :config
     (add-to-list 'lsp-diagnostics-disabled-modes 'c++-mode))
-
-  (setq lsp-enable-indentation nil)
   (setq lsp-headerline-breadcrumb-enable-diagnostics nil)
   ;; (setq lsp-modeline-diagnostics-enable nil)
 
@@ -56,7 +62,7 @@
   ;; (use-package dap-mode)
   ;; (use-package dap-LANGUAGE) to load the dap adapter for your language
 
-  ;; 现在（2021/5/12）还不支持 lua5.4
+  ;; lua-lsp 现在（2021/5/12）还不支持 lua5.4
   (let ((lua-version (shell-command-to-string "lua -v | awk '{print $2}'")))
     (unless (> (string-to-number lua-version) 5.3)
       (add-hook 'lua-mode-hook 'lsp-deferred))))

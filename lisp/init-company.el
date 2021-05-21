@@ -114,7 +114,7 @@ In that case, insert the number."
     (let ((newseq))
       (mapcar #'(lambda (c) (if (not (member c newseq)) (add-to-list 'newseq c))) candidates)
       newseq))
-  (add-to-list 'company-transformers #'eye/company-remove-dups)
+  ;; (add-to-list 'company-transformers #'eye/company-remove-dups)
   ;; }}}
   )
 
