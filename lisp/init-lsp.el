@@ -14,7 +14,7 @@
 ;; rust: rustup update && rustup component add rls rust-analysis rust-src
 ;; lua: luarocks install --server=https://luarocks.org/dev lua-lsp --local 现在（2021/5/12）还不支持 lua5.4
 ;; clojure: This Server supports automatic install. Install this language server with M-x lsp-install-server RET clojure-lsp RET. 或者 yay -S clojure-lsp-bin
-;; c++: yay -S ccls
+;; c++: yay -S ccls 或者 yay -S clang
 (use-package lsp-mode
   :ensure t
   :init
