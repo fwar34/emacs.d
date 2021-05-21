@@ -35,6 +35,7 @@
     :config
     (add-to-list 'lsp-diagnostics-disabled-modes 'c++-mode))
 
+  (setq lsp-enable-indentation nil)
   (setq lsp-headerline-breadcrumb-enable-diagnostics nil)
   ;; (setq lsp-modeline-diagnostics-enable nil)
 
