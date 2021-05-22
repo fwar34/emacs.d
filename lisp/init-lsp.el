@@ -9,6 +9,29 @@
   (add-hook 'rust-mode-hook 'eglot-ensure)
   )
 
+(use-package nox
+  :disabled
+  :ensure t
+  :straight
+  (:host github :repo "manateelazycat/nox")
+  :config
+  (dolist (hook (list
+                 ;; 'js-mode-hook
+                 'rust-mode-hook
+                 'python-mode-hook
+                 ;; 'ruby-mode-hook
+                 ;; 'java-mode-hook
+                 ;; 'sh-mode-hook
+                 ;; 'php-mode-hook
+                 'c-mode-common-hook
+                 'c-mode-hook
+                 ;; 'csharp-mode-hook
+                 'c++-mode-hook
+                 ;; 'haskell-mode-hook
+                 ))
+    (add-hook hook '(lambda () (nox-ensure))))
+  )
+
 ;; python: sudo pip install python-lsp-server
 ;; go: GO111MODULE=on go get golang.org/x/tools/gopls@latest
 ;; rust: rustup update && rustup component add rls rust-analysis rust-src

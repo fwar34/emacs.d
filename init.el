@@ -95,6 +95,7 @@
 (add-hook 'after-init-hook (lambda () (require 'init-builtin)))
 (require 'init-transient)
 (require 'init-lsp)
+(require 'init-one-key)
 
 (require 'init-calendar)
 ;; (require 'unicad)
