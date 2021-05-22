@@ -465,6 +465,7 @@
                     ;; "ss" 'wg-create-workgroup ; save windows layout
                     "se" 'evil-iedit-state/iedit-mode ; start iedit in emacs
                     "sc" 'shell-command
+                    "ac" 'async-shell-command
                     "st" 'org-shifttab
                     "cp" 'caps-lock-mode
                     "TAB" 'outline-toggle-children
