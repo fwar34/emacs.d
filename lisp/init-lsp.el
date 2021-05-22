@@ -26,8 +26,8 @@
          (python-mode . lsp-deferred)
          (rust-mode . lsp-deferred)
          (clojure-mode . lsp-deferred)
-         (c-mode . lsp-deferred)
-         (c++-mode . lsp-deferred)
+         ;; (c-mode . lsp-deferred)
+         ;; (c++-mode . lsp-deferred)
          ;; if you want which-key integration
          (lsp-mode . lsp-enable-which-key-integration))
   :commands lsp-deferred

@@ -870,6 +870,7 @@
   :config
   ;; https://www.helplib.com/GitHub/article_131559
   ;; (evil-define-key evil-magit-state magit-mode-map "?"'evil-search-backward)
+  (setq magit-diff-refine-hunk t)
   )
 
 ;; yasnippet setting
