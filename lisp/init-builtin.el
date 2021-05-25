@@ -1,11 +1,10 @@
 ;; -*- coding: utf-8; lexical-binding: t; -*-
 ;; https://emacs-china.org/t/emacs-builtin-mode/11937/63
 
-(use-package winner-mode
+(use-package winner
   :ensure nil ;; emacs自带
-  :hook
-  (after-init . winner-mode)
   :config
+  (winner-mode)
   )
 
 (use-package ediff

@@ -482,7 +482,8 @@ URL `http://ergoemacs.org/emacs/elisp_run_current_file.html'"
 (defun transient-winner-undo ()
   "Transient version of `winner-undo'."
   (interactive)
-  (winner-mode)
+  (unless (featurep 'winner)
+    (winner-mode))
   (message "Winner: [u]ndo [r]edo")
   (set-transient-map
    (let ((map (make-sparse-keymap)))
