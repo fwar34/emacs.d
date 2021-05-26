@@ -140,8 +140,8 @@
   :straight
   (:host github :repo "mickeynp/ligature.el")
   :config
-  (ligature-set-ligatures 'go-mode
-                          '("->" "->>" "<=" ">=" "!=" "<-" ":="))
+  ;; (ligature-set-ligatures 'go-mode
+  ;;                         '("->" "->>" "<=" ">=" "!=" "<-" ":="))
   ;; Enable the "www" ligature in every possible major mode
   (ligature-set-ligatures 't '("www"))
   ;; Enable traditional ligature support in eww-mode, if the
@@ -162,7 +162,7 @@
   ;                                      "?=" "?." "??" ";;" "/*" "/=" "/>" "//" "__" "~~" "(*" "*)"
   ;                                      "\\\\" "://"))
   ;; (ligature-set-ligatures 'prog-mode '("<=" ">=" "!=" "|=" "||" ":=" "->" "->>" "&&" ">>>" "<<<" "?:"))
-  (ligature-set-ligatures 'prog-mode '("<=" ">=" "!=" ":=" "&&" "->"))
+  (ligature-set-ligatures 'prog-mode '("<=" ">=" "!=" ":=" "&&" "->" "::" "<-"))
   ;; Enables ligature checks globally in all buffers. You can also do it
   ;; per mode with `ligature-mode'.
   (global-ligature-mode t)
