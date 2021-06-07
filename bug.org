@@ -12,3 +12,7 @@
    #+begin_example
    3     | qslogs-10.70.13.90   | 10.70.13.90    | Beta阿里云容器tang/应用日志收集
    #+end_example
+
+** ack 是阿里云的服务名, eks 是aws的服务名
+
+** 电话挂断 reason: 1 通过 api 挂断 2 电话自己挂断
