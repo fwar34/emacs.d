@@ -367,7 +367,8 @@
                     ;; "bs" 'switch-to-buffer
                     ;; "bs" 'counsel-switch-buffer
                     ;; "bs" 'ivy-switch-buffer
-                    "bs" 'persp-ivy-switch-buffer
+                    ;; "bs" 'persp-ivy-switch-buffer
+                    "bs" 'persp-switch-to-buffer*
                     "bp" 'switch-to-prev-buffer
                     "bb" 'evil-buffer
                     "zz" 'save-buffer
