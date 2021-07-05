@@ -200,7 +200,7 @@ DEFAULT-TEXT."
 ;;                                   'face 'font-lock-variable-name-face)))))
 
 (setq buffer-name-mode-line
-      (quote (:eval (propertize "%b " 'face 'font-lock-string-face))))
+      (quote (:eval (propertize "%b " 'face 'font-lock-string-face 'help-echo (buffer-file-name)))))
 
 ;; (setq major-mode-mode-line
 ;;       (quote (:eval (propertize "%m " 'face 'font-lock-keyword-face))))
