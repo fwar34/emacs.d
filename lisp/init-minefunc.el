@@ -637,4 +637,9 @@ URL `http://ergoemacs.org/emacs/elisp_run_current_file.html'"
   )
 ;; }}}
 
+(defun my-kill-line ()
+  (interactive)
+  (evil-first-non-blank)
+  (kill-line))
+
 (provide 'init-minefunc)
