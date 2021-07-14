@@ -2,6 +2,10 @@
 ;;-------------------------------------------------------------
 ;; init-org
 ;;-------------------------------------------------------------
+;; https://emacs-china.org/t/org-org-indent-mode/16057
+;; turn on 'org-indent-mode' by default
+(setq org-startup-indented t)
+;; (setq org-hide-leading-stars t)
 (with-eval-after-load 'org
   ;; reference https://raw.githubusercontent.com/Cheukyin/.emacs.d/master/init-org-jekyll.el
   ;; http://cheukyin.github.io/jekyll/emacs/2014-08/org2jekyll.html
