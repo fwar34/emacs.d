@@ -777,7 +777,7 @@
                     "wn" 'persp-next ;; Switch to next perspective
                     "wp" 'persp-prev ;; Switch to previous perspective
                     "ws" 'persp-state-save ;; Save all perspectives in all frames to a file
-                    "wl" 'persp-state-load ;; Load all perspectives from a file
+                    "wl" '(lambda () (interactive) (persp-state-load "~/.emacs.d/perspective.save")) ;; Load all perspectives from a file
                     ;; "xx" 'er/expand-region
                     ;; "xf" 'ido-find-file
                     ;; "xb" 'ivy-switch-buffer-by-pinyin

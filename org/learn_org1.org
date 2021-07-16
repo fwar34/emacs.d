@@ -132,12 +132,6 @@ creator: 	是否生成 "creat by emacs…"
 LINKUP: 	UP: 链接
 LINKHOME: 	HEME: 链接
 
-
- 
-
-
-
-
 * 列表 
   + 选项1 
   + 选项2 
@@ -148,11 +142,14 @@ LINKHOME: 	HEME: 链接
 | T1   |   1.2 | 0.14 |
 | T2   |   2.3 | 0.11 |
 
-* STARTED [80%] 超链接 
-# ** 网址链接 [[www.baidu.com][baidu]]
-# ** 文件链接 [[file:c:/windows/desktop.ini][桌面配置文件]] 
-# ** 内部链接 [[目录][返回目录]] 
-** TODO 其他链接 
+* checkbox
+1. 使用 =org-toggle-checkbox= 来触发 =checkbox=
+2. 使用 =org-update-checkbox-count= 来更新任务进度
+** 测试 [50%]
++ [X] test1
++ [ ] test2
++ [X] test3
+  
 * 代码块                                                              :@待续: 
 #+BEGIN_SRC Emacs-lisp 
 (setq-default tab-width 4) ;设置TAB宽度为4字符 
