@@ -77,7 +77,7 @@
                       ;;
                       ;; go-mode
                       ;; rust-mode
-                      unicad
+                      ;; unicad
                       recentf
                       hideshow
                       isearch
