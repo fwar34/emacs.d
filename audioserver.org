@@ -1,0 +1,23 @@
+* 全体静音时候 close 和 mute 相关状态变化
+** 默认值
+=isPostMute_(true)=
+=isPostClose(true)=
+=isMute_(false)=
+=isClose_(true)=
+
+** 全体静音前
+*** 打开音频
+=isClose_:0= isPostClose:1 =isMute_:0= isPostMute_:1
+*** 未打开音频
+=isClose_:1= isPostClose:1 =isMute_:0= isPostMute_:1
+** 全体静音后
+*** 打开音频
+isClose_:0 =isPostClose:0= isMute_:0 =isPostMute_:1=
+*** 未打开音频
+isClose_:1 =isPostClose:1= isMute_:0 =isPostMute_:1=
+** 解除全体静音
+*** 打开音频
+=isClose_:0= isPostClose:0 =isMute_:0= isPostMute_:1
+*** 未打开音频
+=isClose_:0= isPostClose:1 =isMute_:0= isPostMute_:1
+
