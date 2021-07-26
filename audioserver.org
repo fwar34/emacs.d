@@ -16,8 +16,8 @@ isClose_:0 =isPostClose:0= isMute_:0 =isPostMute_:1=
 *** 未打开音频
 isClose_:1 =isPostClose:1= isMute_:0 =isPostMute_:1=
 ** 解除全体静音
-*** 打开音频
-=isClose_:0= isPostClose:0 =isMute_:0= isPostMute_:1
+*** 打开音频 (之前打开过音频即 micNum 大于0的用户，最多16路音频)
+=isClose_:0= isPostClose:0 =isMute_:0= isPostMute_:1 
 *** 未打开音频
-=isClose_:0= isPostClose:1 =isMute_:0= isPostMute_:1
+=isClose_:1= isPostClose:1 =isMute_:0= isPostMute_:1
 
