@@ -3,7 +3,7 @@
 *** 用户 voip 自我静音，切换为 pstn
 **** voip 解除自我静音，切换为 pstn，等待 pstn 切换完成，静音 pstn，关闭 voip
 *** 用户 voip 被别人静音，切换为 pstn
-**** voip 解除被别人静音，切换为 pstn, 等待 pstn 切换完成，静音 pstn, 关闭 voip
+**** 切换为 pstn, 等待 pstn 切换完成，关闭 voip （音频的状态服务器来同步）
 *** 用户 pstn 自我静音，切换为 voip
 **** 
 *** 用户 pstn 被别人静音，切换为 voip
@@ -41,3 +41,33 @@
 
 * 全体静音消息中可以明确指明哪些用户不需要静音
 * 解除全体静音的消息中可以明确指明哪些用户继续需要静音
+
+1 用户 voip 自我静音，切换为 pstn  
+  voip 解除自我静音，切换为 pstn，等待 pstn 切换完成，静音 pstn，关闭 voip  
+    
+2 用户 voip 被别人静音，切换为 pstn  
+  切换为 pstn, 等待 pstn 切换完成，关闭 voip  
+   
+3 用户 pstn 自我静音，切换为 voip   
+  挂断PSTN，切换VoIP，VoIP自我静音 
+ 
+4 用户 pstn 被别人静音，切换为 voip  
+  挂断PSTN，切换VoIP （服务器同步音频状态） 
+ 
+5 用户 pstn 按键自我静音，切换为 voip 
+  挂断PSTN，切换VoIP，VoIP自我静音 
+ 
+6 全体静音 voip 切换 pstn  
+  切换为 pstn, 等待 pstn 切换完成，关闭 voip （服务器已经把电话会议全体静音了）  
+ 
+7 全体静音 pstn 切换 voip  
+  挂断PSTN，切换VoIP （voip 已经被全体静音了）
+ 
+8 全体静音后 voip 解除静音后切换为 pstn （切换完成后 pstn 静音） 
+  切换为 pstn, 等待 pstn 切换完成，关闭 voip  
+ 
+9 全体静音后 pstn 解除静音后切换为 voip （切换完成后 voip 非静音） 
+  挂断PSTN，切换VoIP 
+ 
+10 全体静音后 pstn 按键解除静音后切换为 voip （切换完成后 voip 静音）
+  挂断PSTN，切换VoIP
