@@ -1635,7 +1635,7 @@
 ;; https://github.com/purcell/disable-mouse
 (use-package disable-mouse
   :ensure t
-  :if (and (display-graphic-p) (not (string-equal "A12969" system-name)))
+  :if (and (display-graphic-p) (string-equal "FL-NOTEBOOK" (upcase system-name)))
   :config
   (global-disable-mouse-mode)
   (with-eval-after-load 'evil
