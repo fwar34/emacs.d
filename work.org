@@ -1,18 +1,25 @@
 * 优化点，考虑新老客户端的兼容性
 ** 整理 voip 和 pstn 的同步逻辑，是否要区分主持人和参会人
-*** 用户 voip 自我静音，切换为 pstn
+*** 用户 voip 自我静音，切换为 pstn （pstn 静音）
 **** voip 解除自我静音，切换为 pstn，等待 pstn 切换完成，静音 pstn，关闭 voip
-*** 用户 voip 被别人静音，切换为 pstn
+*** 用户 voip 被别人静音，切换为 pstn （pstn 静音）
 **** 切换为 pstn, 等待 pstn 切换完成，关闭 voip （音频的状态服务器来同步）
-*** 用户 pstn 自我静音，切换为 voip
-**** 
-*** 用户 pstn 被别人静音，切换为 voip
-*** 用户 pstn 按键自我静音，切换为 voip，acm 的消息中需要标识出按键静音？
-*** 全体静音 voip 切换 pstn
-*** 全体静音 pstn 切换 voip
-*** 全体静音后 voip 解除静音后切换为 pstn
-*** 全体静音后 pstn 解除静音后切换为 voip
-*** 全体静音后 pstn 按键解除静音后切换为 voip
+*** 用户 pstn 自我静音，切换为 voip （voip 静音）
+**** 挂断 pstn，切换 voip，voip 自我静音 
+*** 用户 pstn 被别人静音，切换为 voip （voip 静音）
+**** 挂断 pstn，切换 voip （服务器同步音频状态） 
+*** 用户 pstn 按键自我静音，切换为 voip （voip 静音）
+**** 挂断 pstn，切换 voip，voip 自我静音 
+*** 全体静音 voip 切换 pstn （pstn 静音）
+**** 切换为 pstn, 等待 pstn 切换完成，关闭 voip （服务器已经把电话会议全体静音了）
+*** 全体静音 pstn 切换 voip （voip 静音）
+**** 挂断 pstn，切换 voip （voip 已经被全体静音了）
+*** 全体静音后 voip 解除静音后切换为 pstn （pstn 静音）
+**** 切换为 pstn, 等待 pstn 切换完成，关闭 voip 
+*** 全体静音后 pstn 解除静音后切换为 voip （voip 非静音）
+**** 挂断 pstn，切换 voip 
+*** 全体静音后 pstn 按键解除静音后切换为 voip （voip 静音，是 bug 吗？）
+**** 挂断 pstn，切换 voip
 ** 客户端改自我静音逻辑的影响
 *** voip 和 pstn 的同步逻辑是否都可以由客户端去控制，服务器只提供接口，这样的话同步逻辑比较灵活，客户端可以自由控制，不必依赖服务器，对各种需求都可以灵活控制，同时简化服务器逻辑
 
@@ -27,7 +34,7 @@
 **** 和对应的 voip 用户绑定的时候如果 voip 用户是主持人，pstn 用户静音状态的话会取消 pstn 静音（同时设置 pstn 的角色为主持人）
 **** 如果 voip 用户是静音状态
 ***** 如果电话用户是走廊模式，则设置 m_needSynVoipToPstn 为 true, 在电话用户上线的时候，如果 voip 的状态是静音的话同步静音到 pstn
-***** 如果电话用户不是走廊模式，则不同 voip 的静音状态到 pstn
+***** 如果电话用户不是走廊模式，则同步 voip 的静音状态到 pstn
 ** 会议的音频同步逻辑
 *** 当主持人上线的时候，如果会议的 voip 状态和 pstn 状态不一致，则将会议的 voip 状态同步到 pstn 会议
 *** 从 pstn 触发的会议音频状态和 voip 的会议音频状态不一致的时候，同步 pstn 的会议音频状态到 voip 会议
@@ -41,33 +48,3 @@
 
 * 全体静音消息中可以明确指明哪些用户不需要静音
 * 解除全体静音的消息中可以明确指明哪些用户继续需要静音
-
-1 用户 voip 自我静音，切换为 pstn  
-  voip 解除自我静音，切换为 pstn，等待 pstn 切换完成，静音 pstn，关闭 voip  
-    
-2 用户 voip 被别人静音，切换为 pstn  
-  切换为 pstn, 等待 pstn 切换完成，关闭 voip  
-   
-3 用户 pstn 自我静音，切换为 voip   
-  挂断PSTN，切换VoIP，VoIP自我静音 
- 
-4 用户 pstn 被别人静音，切换为 voip  
-  挂断PSTN，切换VoIP （服务器同步音频状态） 
- 
-5 用户 pstn 按键自我静音，切换为 voip 
-  挂断PSTN，切换VoIP，VoIP自我静音 
- 
-6 全体静音 voip 切换 pstn  
-  切换为 pstn, 等待 pstn 切换完成，关闭 voip （服务器已经把电话会议全体静音了）  
- 
-7 全体静音 pstn 切换 voip  
-  挂断PSTN，切换VoIP （voip 已经被全体静音了）
- 
-8 全体静音后 voip 解除静音后切换为 pstn （切换完成后 pstn 静音） 
-  切换为 pstn, 等待 pstn 切换完成，关闭 voip  
- 
-9 全体静音后 pstn 解除静音后切换为 voip （切换完成后 voip 非静音） 
-  挂断PSTN，切换VoIP 
- 
-10 全体静音后 pstn 按键解除静音后切换为 voip （切换完成后 voip 静音）
-  挂断PSTN，切换VoIP

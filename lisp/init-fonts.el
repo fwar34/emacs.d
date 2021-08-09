@@ -39,7 +39,7 @@
                              chinese-font-size 26)))))
       ;; -----------------------------------------------------------------------------
       ;; 公司电脑
-      ("A12969"
+      ("A120313"
        (pcase system-type
          ;; Windows
          ('windows-nt (when (member "Sarasa Fixed Slab SC" font-list)
@@ -105,7 +105,10 @@
       (custom-set-faces
        '(markdown-code-face ((t (:family "Iosevka Curly Slab")))))
       (custom-set-faces
-       '(markdown-preview-face ((t (:family "Iosevka Curly Slab"))))))
+       '(markdown-preview-face ((t (:family "Iosevka Curly Slab")))))
+      (custom-set-faces
+       '(org-table ((t (:family "Iosevka Curly Slab")))))
+      )
 ;; (markdown-pre-face markdown-code-face)
 
 ;; {{
