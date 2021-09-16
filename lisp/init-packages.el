@@ -1667,6 +1667,7 @@
 ;;   :ensure t)
 
 (use-package cider
+  :disabled
   :ensure t
   :defer t
   :hook
@@ -1729,6 +1730,7 @@
   (after-init . indent-guide-global-mode))
 
 (use-package caps-lock
+  :disabled
   :commands caps-lock-mode
   :ensure t)
 
