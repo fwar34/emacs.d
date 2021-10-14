@@ -77,6 +77,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Theme
 (use-package monokai-theme
+  :disabled
   :unless (display-graphic-p)
   :custom-face
   ;; 可以使用counsel-describe-face来查找face
@@ -113,7 +114,7 @@
 ;;   )
 
 (use-package zenburn-theme
-  :if (display-graphic-p)
+  ;; :if (display-graphic-p)
   :ensure t
   :config
   (load-theme 'zenburn t)
