@@ -365,7 +365,8 @@
   ;; (rime-inline-predicates '(rime-predicate-space-after-cc-p))
   :bind
   (:map rime-mode-map
-        ("C-`" . 'rime-send-keybinding))
+        ("C-`" . 'rime-send-keybinding)
+        ("M-j" . 'rime-force-enable))
   (:map rime-active-mode-map
         ("M-j" . 'rime-inline-ascii))
   :config
@@ -1895,7 +1896,7 @@
           elfeed-show-mode
           eww-mode
           Man-mode
-          help-mode
+          ;; help-mode
           Woman-Mode) . english-teacher-follow-mode)
   :config
   ;;;###autoload

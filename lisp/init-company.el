@@ -19,9 +19,16 @@
                      (if (equal major-mode 'eshell-mode)
                          (eshell-send-input)
                        (newline-and-indent))))) ;; RET判断当前是否有选中的补全，如果有则直接补全，如果没有就换行(排除eshell-mode)
-        ("C-l" . yas-expand))
+        ("C-l" . yas-expand)) ;; C-l 在终端下与 tmux 的 prefix 键冲突，所以又用 general-define-key 设置了下面的 mapping
   :config
   (global-company-mode)
+
+  (general-define-key
+   :keymaps 'company-active-map
+   :prefix "`"
+   "`" 'self-insert-command
+   "l" 'yas-expand
+   )
 
   ;; (setq company-auto-commit t)
   ;; 32 空格, 41 右圆括号, 46 是 dot 字符
