@@ -253,15 +253,16 @@
   ;;  "M-j" 'pyim-convert-string-at-point
   ;;  ;; 使用C-i或者C-\来进行中英文输入法切换
   ;;  "C-i" 'pyim-toggle-input-ascii)
-  (general-define-key
-   :jump t
-   :keymaps 'insert
-   :prefix "C-i"
-   ;; 转换前面的英文字符为中文
-   "C-i" 'pyim-convert-string-at-point
-   ;; 使用C-i或者C-\来进行中英文输入法切换
-   ;; "C-i" 'pyim-toggle-input-ascii
-   )
+  ;; (general-define-key
+  ;;  :jump t
+  ;;  :keymaps 'insert
+  ;;  :predicate '(not (equal major-mode term-mode))
+  ;;  :prefix "C-i"
+  ;;  ;; 转换前面的英文字符为中文
+  ;;  "C-i" 'pyim-convert-string-at-point
+  ;;  ;; 使用C-i或者C-\来进行中英文输入法切换
+  ;;  ;; "C-i" 'pyim-toggle-input-ascii
+  ;;  )
 
   ;; {{{
   ;; 当前没有输入内容的时候直接使用 gg 直接返回到normal模式
@@ -685,6 +686,7 @@
    "e" 'ivy-end-of-buffer
    "n" 'ivy-next-line-and-call
    "p" 'ivy-previous-line-and-call
+   "j" 'ivy-immediate-done
    )
   
 
