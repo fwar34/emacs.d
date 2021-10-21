@@ -1532,7 +1532,8 @@
   )
 
 (use-package exec-path-from-shell
-  :if (memq window-system '(mac ns))
+  ;; :if (memq window-system '(mac ns))
+  :if (memq system-type '(gnu/linux darwin))
   :after evil
   :ensure t
   :config
