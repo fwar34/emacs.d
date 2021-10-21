@@ -17,6 +17,14 @@
     ;;   (set-frame-position (selected-frame) 0 0)
     ;;   (add-to-list 'default-frame-alist '(fullscreen . maximized)))
     )
+
+  (if (equal system-type 'gnu/linux)
+      (progn
+        (set-frame-position (selected-frame) 350 80)
+        (set-frame-width (selected-frame) 138)
+        (set-frame-height (selected-frame) 44)
+        )
+      )
   )
 
 ;; 高亮当前行

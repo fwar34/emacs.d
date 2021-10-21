@@ -642,4 +642,16 @@ URL `http://ergoemacs.org/emacs/elisp_run_current_file.html'"
   (evil-first-non-blank)
   (kill-line))
 
+(defun my-set-frame ()
+  "set emacs window position and size"
+  (interactive)
+  (if (equal system-type 'gnu/linux)
+      (progn
+        (set-frame-position (selected-frame) 350 80)
+        (set-frame-width (selected-frame) 138)
+        (set-frame-height (selected-frame) 44)
+        )
+    )
+  )
+
 (provide 'init-minefunc)
