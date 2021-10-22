@@ -647,8 +647,11 @@ URL `http://ergoemacs.org/emacs/elisp_run_current_file.html'"
   (interactive)
   (if (equal system-type 'gnu/linux)
       (progn
-        (set-frame-position (selected-frame) 350 80)
-        (set-frame-width (selected-frame) 138)
+        ;; (set-frame-position (selected-frame) 350 80)
+        ;; (set-frame-width (selected-frame) 138)
+        ;; (set-frame-height (selected-frame) 44)
+        (set-frame-position (selected-frame) 500 80)
+        (set-frame-width (selected-frame) 120)
         (set-frame-height (selected-frame) 44)
         )
     )
