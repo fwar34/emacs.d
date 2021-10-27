@@ -18,7 +18,9 @@
   (let ((font-list (font-family-list))
         (english-font "nil")
         (english-font-size 24)
-        (chinese-font "Sarasa Fixed Slab SC")
+        ;; (chinese-font "Sarasa Fixed Slab SC")
+        (chinese-font "Noto Sans CJK SC")
+        ;; (chinese-font "Source Han Sans CN")
         (chinese-font-size 24))
     
     ;; pcase的用法https://emacs-china.org/t/pcase-pattern/15111
@@ -69,7 +71,8 @@
        (frame-parameter nil 'font)
        charset
        (font-spec :name chinese-font
-                  :weight 'normal
+                  ;; :weight 'normal
+                  :weight 'semi-light
                   :slant 'normal
                   :size chinese-font-size))))
   )
