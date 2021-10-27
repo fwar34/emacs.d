@@ -16,7 +16,7 @@
   "My change fonts"
   (interactive)
   (let ((font-list (font-family-list))
-        (english-font "nil")
+        (english-font "Ubuntu Mono")
         (english-font-size 24)
         ;; (chinese-font "Sarasa Fixed Slab SC")
         (chinese-font "Noto Sans CJK SC")
