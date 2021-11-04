@@ -1470,7 +1470,7 @@
   (custom-set-variables '(git-gutter:hide-gutter t))
   ;; If you set git-gutter :update-interval seconds larger than 0,
   ;; git-gutter updates diff information in real-time by idle timer.
-  (custom-set-variables '(git-gutter:update-interval 0))
+  (custom-set-variables '(git-gutter:update-interval 0.5))
   (custom-set-variables '(git-gutter:visual-line t))
 
   ;; console not display, because git-gutter has bug in emacs26 no window
@@ -1728,11 +1728,11 @@
   (define-key god-local-mode-map (kbd ",") #'keyboard-quit)
   )
 
-;; 缩进显示竖线
+;; 缩进显示竖线, 在 cpp 大文件中性能有问题，现在只在需要的地方开启
 (use-package indent-guide
   :ensure t
   :hook
-  (after-init . indent-guide-global-mode))
+  (emacs-lisp-mode . indent-guide-mode))
 
 (use-package caps-lock
   :disabled
