@@ -1447,7 +1447,7 @@
 ;;   )
 
 (use-package git-gutter
-  ;; :disabled        
+  :disabled        
   ;; :bind
   ;; (("SPC c n" . git-gutter:next-hunk)
   ;;  ("SPC c p" . git-gutter:previous-hunk)) 
@@ -1465,12 +1465,12 @@
   ;; (custom-set-variables '(git-gutter:handled-backends '(git hg bzr svn)))
   (custom-set-variables '(git-gutter:handled-backends '(git svn)))
   ;; inactivate git-gutter-mode in asm-mode and image-mode
-  (custom-set-variables '(git-gutter:disabled-modes '(asm-mode image-mode)))
+  (custom-set-variables '(git-gutter:disabled-modes '(asm-mode image-mode c++-mode)))
   ;; Hide gutter when there are no changes if git-gutter:hide-gutter is non-nil. (Default is nil)
   (custom-set-variables '(git-gutter:hide-gutter t))
   ;; If you set git-gutter :update-interval seconds larger than 0,
   ;; git-gutter updates diff information in real-time by idle timer.
-  (custom-set-variables '(git-gutter:update-interval 0.5))
+  (custom-set-variables '(git-gutter:update-interval 0))
   (custom-set-variables '(git-gutter:visual-line t))
 
   ;; console not display, because git-gutter has bug in emacs26 no window
@@ -1501,6 +1501,7 @@
   )
 
 (use-package git-gutter-fringe
+  :disabled
   :ensure t
   :after git-gutter
   :if (display-graphic-p)
@@ -1510,19 +1511,20 @@
   (set-face-foreground 'git-gutter-fr:deleted  "red")
   )
 
-;; (use-package diff-hl
-;;   :disabled
-;;   :ensure t
-;;   :after evil
-;;   ;; :if (not (display-graphic-p))
-;;   :config
-;;   (global-diff-hl-mode)
-;;   (diff-hl-margin-mode) 
-;;   (advice-add 'svn-status-update-modeline :after #'diff-hl-update)
-;;   (add-hook 'magit-pre-refresh-hook 'diff-hl-magit-pre-refresh)
-;;   (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh)
-;;   (evil-define-key 'normal 'magit-mode-map "q" #'kill-buffer-and-window)
-;;   )
+(use-package diff-hl
+  :ensure t
+  :after evil
+  ;; :if (not (display-graphic-p))
+  ;; :hook
+  ;; (c++-mode . diff-hl-mode)
+  :config
+  (global-diff-hl-mode)
+  (diff-hl-margin-mode) 
+  (advice-add 'svn-status-update-modeline :after #'diff-hl-update)
+  (add-hook 'magit-pre-refresh-hook 'diff-hl-magit-pre-refresh)
+  (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh)
+  (evil-define-key 'normal 'magit-mode-map "q" #'kill-buffer-and-window)
+  )
 
 (use-package ace-popup-menu
   :ensure t

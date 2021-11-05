@@ -573,20 +573,48 @@
                     ;;            (git-gutter:next-hunk (line-number-at-pos)) 
                     ;;          (diff-hl-next-hunk)))
                     "ds" 'git-gutter:statistic
+                    ;; "du" '(lambda ()
+                    ;;        (interactive)
+                    ;;        (define-advice git-gutter:popup-hunk (:around (orig-fun &rest args) my-git-gutter:popup-hunk)
+                    ;;          (let ((res (apply orig-fun args)))
+                    ;;            (when res
+                    ;;              (switch-to-buffer-other-window res)
+                    ;;              (evil-local-set-key 'normal (kbd "q") #'kill-buffer-and-window))))
+                    ;;        (git-gutter:popup-hunk))
                     "du" '(lambda ()
-                           (interactive)
-                           (define-advice git-gutter:popup-hunk (:around (orig-fun &rest args) my-git-gutter:popup-hunk)
-                             (let ((res (apply orig-fun args)))
-                               (when res
-                                 (switch-to-buffer-other-window res)
-                                 (evil-local-set-key 'normal (kbd "q") #'kill-buffer-and-window))))
-                           (git-gutter:popup-hunk))
+                            (interactive)
+                            (if (featurep 'diff-hl)
+                                (diff-hl-diff-goto-hunk)
+                              (progn
+                                (define-advice git-gutter:popup-hunk (:around (orig-fun &rest args) my-git-gutter:popup-hunk)
+                                  (let ((res (apply orig-fun args)))
+                                    (when res
+                                      (switch-to-buffer-other-window res)
+                                      (evil-local-set-key 'normal (kbd "q") #'kill-buffer-and-window))))
+                                (git-gutter:popup-hunk))))
+                    ;; "dr" '(lambda ()
+                    ;;         (interactive)
+                    ;;         (advice-remove 'git-gutter:popup-hunk #'git-gutter:popup-hunk@my-git-gutter:popup-hunk)
+                    ;;         (git-gutter:revert-hunk))
                     "dr" '(lambda ()
                             (interactive)
-                            (advice-remove 'git-gutter:popup-hunk #'git-gutter:popup-hunk@my-git-gutter:popup-hunk)
-                            (git-gutter:revert-hunk))
-                    "dn" 'git-gutter:next-hunk
-                    "dp" 'git-gutter:previous-hunk
+                            (if (featurep 'diff-hl)
+                                (diff-hl-revert-hunk)
+                              (progn
+                                (advice-remove 'git-gutter:popup-hunk #'git-gutter:popup-hunk@my-git-gutter:popup-hunk)
+                                (git-gutter:revert-hunk))))
+                    ;; "dn" 'git-gutter:next-hunk
+                    ;; "dp" 'git-gutter:previous-hunk
+                    "dn" '(lambda ()
+                            (interactive)
+                            (if (featurep 'diff-hl)
+                                (diff-hl-next-hunk)
+                              (git-gutter:next-hunk (line-number-at-pos))))
+                    "dp" '(lambda ()
+                            (interactive)
+                            (if (featurep 'diff-hl)
+                                (diff-hl-previous-hunk)
+                              (git-gutter:previous-hunk (line-number-at-pos))))
                     ;; "cp" (lambda ()
                     ;;        (interactive)
                     ;;        (if (display-graphic-p)
@@ -777,7 +805,8 @@
                     "wn" 'persp-next ;; Switch to next perspective
                     "wp" 'persp-prev ;; Switch to previous perspective
                     "ws" 'persp-state-save ;; Save all perspectives in all frames to a file
-                    "wl" '(lambda () (interactive) (persp-state-load "~/.emacs.d/perspective.save")) ;; Load all perspectives from a file
+                    ;; "wl" '(lambda () (interactive) (persp-state-load "~/.emacs.d/perspective.save")) ;; Load all perspectives from a file
+                    "wl" 'persp-state-load ;; Load all perspectives from a file
                     ;; "xx" 'er/expand-region
                     ;; "xf" 'ido-find-file
                     ;; "xb" 'ivy-switch-buffer-by-pinyin
