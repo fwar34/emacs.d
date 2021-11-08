@@ -58,3 +58,5 @@ rime/terra_pinyin.userdb/
 eln-cache/
 projects
 session.*
+/perspective.save.mine
+/rime/luna_pinyin.userdb.old/
