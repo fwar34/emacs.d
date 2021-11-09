@@ -152,6 +152,19 @@
 
   ;;-------------------------------------------------------------
   ;; M-um
+
+  ;; https://github.com/leoliu/ack-el/blob/master/ack.el#L378
+  (defun ack-yank-symbol-at-point ()
+    "Yank the symbol from the window before entering the minibuffer."
+    (interactive)
+    (let ((symbol (and (minibuffer-selected-window)
+                       (with-current-buffer
+                           (window-buffer (minibuffer-selected-window))
+                         (thing-at-point 'symbol)))))
+      (cond (symbol (insert symbol)
+                    (set (make-local-variable 'ack--yanked-symbol) symbol))
+                      (t (minibuffer-message "No symbol found")))))
+
   (defhydra hydra-M-um (:color blue)
     "
     ^kill-ring^                      ^iedit-mode^             ^fix-word^
