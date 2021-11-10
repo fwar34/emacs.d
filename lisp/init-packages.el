@@ -1833,7 +1833,28 @@
 (use-package quickrun
   :commands quickrun
   :unless (string-equal "windows-nt" system-type)
-  :ensure t)
+  :ensure t
+  :config
+  ;; Use this parameter as C++ default
+  (quickrun-add-command "c++/c1z"
+    '((:command . "g++")
+      (:exec    . ("%c -std=c++1z %o -o %e %s -lpthread"
+                   "%e %a"))
+      (:remove  . ("%e")))
+    :default "c++")
+
+  ;; Use this parameter in pod-mode
+  (quickrun-add-command "pod"
+    '((:command . "perldoc")
+      (:exec    . "%c -T -F %s"))
+    :mode 'pod-mode)
+
+  ;; You can override existing command
+  (quickrun-add-command "c/gcc"
+    '((:exec . ("%c -std=c++1z %o -o %e %s -lpthread"
+                "%e %a")))
+    :override t)
+  )
 
 (use-package rg
   :ensure t
