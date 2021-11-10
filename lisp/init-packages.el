@@ -1519,7 +1519,8 @@
   ;; (c++-mode . diff-hl-mode)
   :config
   (global-diff-hl-mode)
-  (diff-hl-margin-mode) 
+  (unless (display-graphic-p)
+    (diff-hl-margin-mode)) 
   (advice-add 'svn-status-update-modeline :after #'diff-hl-update)
   (add-hook 'magit-pre-refresh-hook 'diff-hl-magit-pre-refresh)
   (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh)
