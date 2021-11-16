@@ -71,6 +71,11 @@
           t t)))
 
 (add-to-list 'load-path "~/.emacs.d/lisp")
+;; {{{
+;; https://emacs-china.org/t/counsel-rg-bash-shell/12244?u=fwar34
+;; counsel-rg 的 --iglob 选项在 zsh bash 中不起作用，还不清楚具体原因
+(setq shell-file-name "/bin/sh")
+;; }}}
 (require 'init-packages)
 (require 'init-ui)
 (require 'init-fonts)
