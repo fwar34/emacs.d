@@ -1976,4 +1976,13 @@
   :load-path "site-lisp/maple-preview"
   :commands (maple-preview-mode))
 
+;; window manager base emacs
+(use-package exwm
+  :disabled
+  :ensure t
+  :config
+  (require 'exwm-config)
+  (exwm-config-example)
+  )
+
 (provide 'init-packages)
