@@ -125,6 +125,7 @@
 ;; (define-key evil-insert-state-map (kbd "C-u") 'evil-delete-whole-line)
 (define-key evil-insert-state-map (kbd "C-u") 'my-kill-line)
 (define-key evil-insert-state-map (kbd "C-d") 'evil-delete-line)
+(define-key evil-insert-state-map (kbd "C-l") 'hungry-delete-forward)
 
 ;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;copy from chenbin.emacs.d;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; As a general RULE, mode specific evil leader keys started
