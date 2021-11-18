@@ -18,11 +18,11 @@
   (let ((font-list (font-family-list))
         ;; (english-font "Ubuntu Mono")
         (english-font "JetBrains Mono")
-        (english-font-size 22)
+        (english-font-size 24)
         ;; (chinese-font "Sarasa Fixed Slab SC")
         (chinese-font "Noto Sans CJK SC")
         ;; (chinese-font "Source Han Sans CN")
-        (chinese-font-size 22))
+        (chinese-font-size 24))
     
     ;; pcase的用法https://emacs-china.org/t/pcase-pattern/15111
     (pcase (upcase system-name)
