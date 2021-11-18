@@ -641,6 +641,7 @@
                                   "--iglob" "!makefile"
                                   "--iglob" "!makefile.*"
                                   "--iglob" "!*.lo"
+                                  "--iglob" "!*.html"
                                   "."))
   ;; (setq counsel-rg-base-command '("rg"
   ;;                                 "-M" "240"
