@@ -840,6 +840,12 @@
 ;;    (css-mode . emmet-mode))
 ;;   )
 
+(use-package vimrc-mode
+  :ensure t
+  :config
+  (add-to-list 'auto-mode-alist '("\\.vim\\(rc\\)?\\'" . vimrc-mode))
+  )
+
 ;; popwin setting
 (use-package popwin
   :ensure t
