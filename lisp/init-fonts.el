@@ -67,6 +67,23 @@
     (message "english-font-size %s" english-font-size)
     (message "chinese-font %s" chinese-font)
     (message "chinese-font-size %s" chinese-font-size)
+
+    ;; 单独设置 org-table 字体
+    ;; Org table font
+    ;; (custom-set-faces
+    ;;  '(org-table ((t (:family "Ubuntu Mono derivative Powerline")))))
+
+    ;; 单独设置 markdown-code-face
+    (when (equal system-type 'gnu/linux) (display-graphic-p)
+          (custom-set-faces
+           '(markdown-code-face ((t (:family english-font)))))
+          (custom-set-faces
+           '(markdown-preview-face ((t (:family english-font)))))
+          (custom-set-faces
+           '(org-table ((t (:family english-font)))))
+          )
+    ;; (markdown-pre-face markdown-code-face)
+
     ;; 设置英文字体
     (set-face-attribute
      'default nil
@@ -108,21 +125,6 @@
     )
   )
 
-;; 单独设置 org-table 字体
-;; Org table font
-;; (custom-set-faces
-;;  '(org-table ((t (:family "Ubuntu Mono derivative Powerline")))))
-
-;; 单独设置 markdown-code-face
-(when (equal system-type 'gnu/linux) (display-graphic-p)
-      (custom-set-faces
-       '(markdown-code-face ((t (:family "Iosevka Curly Slab")))))
-      (custom-set-faces
-       '(markdown-preview-face ((t (:family "Iosevka Curly Slab")))))
-      (custom-set-faces
-       '(org-table ((t (:family "Iosevka Curly Slab")))))
-      )
-;; (markdown-pre-face markdown-code-face)
 
 ;; {{
 ;; (global-prettify-symbols-mode 1)
