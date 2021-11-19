@@ -30,15 +30,20 @@
 13. C-u C-x = (describe-char)可以看光标所在的字符的具体字符信息，包括了字符大小等，\\
     例如harfbuzz:-outline-Sarasa Fixed Slab SC-normal-normal-normal-mono-24-*-*-*-c-*-iso8859-1 (#x3F3F) 就是Sarasa Fixed Slab SC字体，大小是24
 14. 在 calc 中使用 d 加上数字(0 6 8等)来切换进制
-15. C-x = what-cursor-position 来看光标下面的字符信息，包括了字符编码 point 信息等
+15. C-x = （what-cursor-position）来看光标下面的字符信息，包括了字符编码 point 信息等
 16. global-display-line-number-mode 显示和隐藏行号
+17. keep-lines 和 flush-lines 可以保留匹配行删除其他行，保留非匹配行删除其他行，
+    vim 的参考
+    #+begin_quote
+    https://zhuanlan.zhihu.com/p/19632777
+    #+end_quote
 
 *** 系统相关
 1. fc-list 列出当前系统上面的字体
 2. xdg 标准规定应用程序启动 desktop 文件放在 /usr/share/applications 中，可以使用 dex 来从命令行启动，dex 需要安装
 3. 使用 select-editor 可以选择一些程序的默认编辑器，比如 ranger 的
 
-*** *elisp相关*
+*** elisp相关
 1. with-eval-after-load和eval-after-load的区别
    [[https://stackoverflow.com/questions/21880139/what-is-with-eval-after-load-in-emacs-lisp][stackoverflow]]
    #+BEGIN_QUOTE
