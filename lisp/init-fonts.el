@@ -53,8 +53,16 @@
          ('gnu/linux (when (member "Iosevka Curly Slab" font-list)
                        (setq english-font "Iosevka Curly Slab"
                              english-font-size 24
-                             chinese-font-size 24))))))
-    ;; -----------------------------------------------------------------------------
+                             chinese-font-size 24)))))
+      ;; -----------------------------------------------------------------------------
+      ;; 公司虚拟机 lxd
+      ("UBUNTU-OPENBOX"
+       (when (member "JetBrains Mono" font-list)
+                       (setq english-font "JetBrains Mono"
+                             english-font-size 22
+                             chinese-font-size 22)))
+      )
+      ;; -----------------------------------------------------------------------------
     (message "english-font %s" english-font)
     (message "english-font-size %s" english-font-size)
     (message "chinese-font %s" chinese-font)
