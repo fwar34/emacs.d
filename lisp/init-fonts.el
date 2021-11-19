@@ -59,8 +59,8 @@
       ("UBUNTU-OPENBOX"
        (when (member "JetBrains Mono" font-list)
                        (setq english-font "JetBrains Mono"
-                             english-font-size 22
-                             chinese-font-size 22)))
+                             english-font-size 24
+                             chinese-font-size 24)))
       )
       ;; -----------------------------------------------------------------------------
     (message "english-font %s" english-font)
