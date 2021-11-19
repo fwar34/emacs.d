@@ -71,7 +71,8 @@
     (set-face-attribute
      'default nil
      :font (font-spec :name english-font
-                      :weight 'normal
+                      ;; :weight 'normal
+                      :weight 'semi-light
                       :slant 'normal
                       :size english-font-size))
     ;; 设置中文字体
