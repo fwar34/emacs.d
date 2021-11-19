@@ -36,6 +36,7 @@
 *** 系统相关
 1. fc-list 列出当前系统上面的字体
 2. xdg 标准规定应用程序启动 desktop 文件放在 /usr/share/applications 中，可以使用 dex 来从命令行启动，dex 需要安装
+3. 使用 select-editor 可以选择一些程序的默认编辑器，比如 ranger 的
 
 *** *elisp相关*
 1. with-eval-after-load和eval-after-load的区别
