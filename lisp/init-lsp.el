@@ -36,6 +36,7 @@
 ;; go: GO111MODULE=on go get golang.org/x/tools/gopls@latest
 ;; rust: rustup update && rustup component add rls rust-analysis rust-src
 ;; lua: luarocks install --server=https://luarocks.org/dev lua-lsp --local 现在（2021/5/12）还不支持 lua5.4
+;; lua: lua-language-server 直接使用 M-x lsp 就会自动安装
 ;; clojure: This Server supports automatic install. Install this language server with M-x lsp-install-server RET clojure-lsp RET. 或者 yay -S clojure-lsp-bin
 ;; c++: yay -S ccls 或者 yay -S clang
 (use-package lsp-mode
@@ -49,6 +50,7 @@
          (python-mode . lsp-deferred)
          (rust-mode . lsp-deferred)
          (clojure-mode . lsp-deferred)
+         (lua-mode . lsp-deferred)
          ;; (c-mode . lsp-deferred)
          ;; (c++-mode . lsp-deferred)
          ;; if you want which-key integration
