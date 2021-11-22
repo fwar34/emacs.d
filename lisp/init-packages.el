@@ -1991,4 +1991,17 @@
   (exwm-config-example)
   )
 
+(defun my-async-task ()
+  "async exec my tasks"
+  (interactive)
+  (let ((awesome-cheatsheet "~/.emacs.d/awesome-cheatsheets/README.md")
+        (out-buffer (get-buffer-create "*my-async-task*"))
+        (print out-buffer)
+        )
+    (unless (file-exists-p awesome-cheatsheet)
+      ;; (async-shell-command "git clone https://github.com/skywind3000/awesome-cheatsheets.git ~/.emacs.d/awesome-cheatsheets" out-buffer out-buffer)
+      (async-shell-command "git clone https://github.com/skywind3000/awesome-cheatsheets.git ~/.emacs.d/awesome-cheatsheets")
+      ))
+  )
+
 (provide 'init-packages)
