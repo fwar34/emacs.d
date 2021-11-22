@@ -78,7 +78,7 @@
 ;; Theme
 (use-package monokai-theme
   ;; :disabled
-  :if (display-graphic-p)
+  :if (and (display-graphic-p) (not (equal system-name "ubuntu-openbox")))
   :custom-face
   ;; 可以使用counsel-describe-face来查找face
   (org-block ((t (:extend t))))
@@ -115,7 +115,7 @@
 
 (use-package zenburn-theme
   :ensure t
-  :unless (display-graphic-p)
+  :if (or (not (display-graphic-p)) (and (display-graphic-p) (equal system-name "ubuntu-openbox")))
   :config
   (load-theme 'zenburn t)
   )
