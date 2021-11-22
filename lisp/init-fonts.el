@@ -58,7 +58,7 @@
       ;; 公司虚拟机 lxd
       ("UBUNTU-OPENBOX"
        (when (member "JetBrains Mono" font-list)
-                       (setq english-font "JetBrains Mono"
+                       (setq english-font "JetBrainsMono Nerd Font"
                              english-font-size 24
                              chinese-font-size 24)))
       )
