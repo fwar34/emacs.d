@@ -57,10 +57,15 @@
       ;; -----------------------------------------------------------------------------
       ;; 公司虚拟机 lxd
       ("UBUNTU-OPENBOX"
-       (when (member "JetBrains Mono" font-list)
-                       (setq english-font "JetBrainsMono Nerd Font"
+       ;; (when (member "JetBrains Mono" font-list)
+       ;;                 (setq english-font "JetBrainsMono Nerd Font"
+       ;;                       english-font-size 24
+       ;;                       chinese-font-size 24))
+       (when (member "Iosevka Curly Slab" font-list)
+                       (setq english-font "Iosevka Curly Slab" ;; Sarasa Mono SC Nerd
                              english-font-size 24
-                             chinese-font-size 24)))
+                             chinese-font-size 24))
+       )
       )
       ;; -----------------------------------------------------------------------------
     (message "english-font %s" english-font)
