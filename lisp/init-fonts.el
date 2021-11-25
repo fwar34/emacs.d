@@ -61,8 +61,12 @@
        ;;                 (setq english-font "JetBrainsMono Nerd Font"
        ;;                       english-font-size 24
        ;;                       chinese-font-size 24))
-       (when (member "Iosevka Curly Slab" font-list)
-                       (setq english-font "Iosevka Curly Slab" ;; Sarasa Mono SC Nerd
+       ;; (when (member "Iosevka Curly Slab" font-list)
+       ;;                 (setq english-font "Iosevka Curly Slab" ;; Sarasa Mono SC Nerd
+       ;;                       english-font-size 24
+       ;;                       chinese-font-size 24))
+       (when (member "Sarasa Mono SC Nerd" font-list)
+                       (setq english-font "Sarasa Mono SC Nerd" ;; Sarasa Mono SC Nerd
                              english-font-size 24
                              chinese-font-size 24))
        )
