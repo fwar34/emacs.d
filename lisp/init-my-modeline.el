@@ -67,19 +67,20 @@ DEFAULT-TEXT."
   '(:eval
     (when (bound-and-true-p evil-local-mode)
       (cond
-       ;; ((equal 'normal evil-state) (propertize evil-mode-line-tag 'face 'font-lock-evil-normal-face))
-       ;; ((equal 'insert evil-state) (propertize evil-mode-line-tag 'face 'font-lock-evil-insert-face))
-       ;; ((equal 'replace evil-state) (propertize evil-mode-line-tag 'face 'font-lock-evil-insert-face))
-       ;; ((equal 'visual evil-state) (propertize evil-mode-line-tag 'face 'font-lock-evil-visual-face))
-       ;; ((equal 'operator evil-state) (propertize evil-mode-line-tag 'face 'font-lock-evil-visual-face))
-       ;; ((equal 'emacs evil-state) (propertize evil-mode-line-tag 'face 'font-lock-evil-emacs-face))
-       ((equal 'normal evil-state) (propertize evil-mode-line-tag 'face 'spaceline-evil-normal))
-       ((equal 'insert evil-state) (propertize evil-mode-line-tag 'face 'spaceline-evil-insert))
-       ((equal 'emacs evil-state) (propertize evil-mode-line-tag 'face 'spaceline-evil-emacs))
-       ((equal 'replace evil-state) (propertize evil-mode-line-tag 'face 'spaceline-evil-replace))
-       ((equal 'visual evil-state) (propertize evil-mode-line-tag 'face 'spaceline-evil-visual))
-       ((equal 'motion evil-state) (propertize evil-mode-line-tag 'face 'spaceline-evil-motion))
-       ((equal 'operator evil-state) (propertize evil-mode-line-tag 'face 'spaceline-modified))
+       ;; ((equal 'normal evil-state) (propertize evil-mode-line-tag 'face 'spaceline-evil-normal))
+       ;; ((equal 'insert evil-state) (propertize evil-mode-line-tag 'face 'spaceline-evil-insert))
+       ;; ((equal 'emacs evil-state) (propertize evil-mode-line-tag 'face 'spaceline-evil-emacs))
+       ;; ((equal 'replace evil-state) (propertize evil-mode-line-tag 'face 'spaceline-evil-replace))
+       ;; ((equal 'visual evil-state) (propertize evil-mode-line-tag 'face 'spaceline-evil-visual))
+       ;; ((equal 'motion evil-state) (propertize evil-mode-line-tag 'face 'spaceline-evil-motion))
+       ;; ((equal 'operator evil-state) (propertize evil-mode-line-tag 'face 'spaceline-modified))
+       ((equal 'normal evil-state) (propertize evil-mode-line-tag 'face 'fwar34/spaceline-evil-normal))
+       ((equal 'insert evil-state) (propertize evil-mode-line-tag 'face 'fwar34/spaceline-evil-insert))
+       ((equal 'emacs evil-state) (propertize evil-mode-line-tag 'face 'fwar34/spaceline-evil-emacs))
+       ((equal 'replace evil-state) (propertize evil-mode-line-tag 'face 'fwar34/spaceline-evil-replace))
+       ((equal 'visual evil-state) (propertize evil-mode-line-tag 'face 'fwar34/spaceline-evil-visual))
+       ((equal 'motion evil-state) (propertize evil-mode-line-tag 'face 'fwar34/spaceline-evil-motion))
+       ((equal 'operator evil-state) (propertize evil-mode-line-tag 'face 'fwar34/spaceline-modified))
        (t nil)))))
 
 (defun fwar34/lispy-state ()
@@ -365,12 +366,15 @@ DEFAULT-TEXT."
 ;; (set-face-background 'modeline "#4466aa")
 ;; (set-face-background 'modeline-inactive "#99aaff")
 ;; (set-face-background 'fringe "#809088")
-(if (display-graphic-p)
-    (progn
+;; (if (display-graphic-p)
+;;     (progn
+;;       (set-face-background 'mode-line "gray26")
+;;       (set-face-background 'mode-line-inactive "gray26"))
+;;   (set-face-background 'mode-line "black")
+;;   (set-face-background 'mode-line-inactive "black"))
+(progn
       (set-face-background 'mode-line "gray26")
       (set-face-background 'mode-line-inactive "gray26"))
-  (set-face-background 'mode-line "black")
-  (set-face-background 'mode-line-inactive "black"))
 
 ;; Here 's how I get a box around the active mode-line :
 ;; (custom-set-faces '(mode-line ((t (:box (:line-width 2 :color "red"))))))

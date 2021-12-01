@@ -157,5 +157,20 @@
            ,(nth 2 s)
            :group 'spaceline)))
 
+(dolist (s '((fwar34/spaceline-evil-normal "DarkGoldenrod2" "Evil normal state face.")
+             (fwar34/spaceline-evil-insert "chartreuse3" "Evil insert state face.")
+             (fwar34/spaceline-evil-emacs "SkyBlue2" "Evil emacs state face.")
+             (fwar34/spaceline-evil-replace "chocolate" "Evil replace state face.")
+             (fwar34/spaceline-evil-visual "gray" "Evil visual state face.")
+             (fwar34/spaceline-evil-motion "plum3" "Evil motion state face.")
+             (fwar34/spaceline-unmodified "DarkGoldenrod2" "Unmodified buffer face.")
+             (fwar34/spaceline-modified "SkyBlue2" "Modified buffer face.")
+             (fwar34/spaceline-read-only "plum3" "Read-only buffer face.")))
+  (eval `(defface ,(nth 0 s)
+           `((t (:foreground  ,(nth 1 s)
+                 ;; :background "#424242424242"
+                 :inherit 'mode-line)))
+           ,(nth 2 s)
+           :group 'spaceline)))
 
 (provide 'modeline-face)
