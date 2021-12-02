@@ -157,6 +157,8 @@
 ;; (define-key evil-normal-state-map "Y" (kbd "y$"))
 ;; (define-key evil-normal-state-map (kbd "RET") 'ivy-switch-buffer-by-pinyin) ; RET key is preserved for occur buffer
 (define-key evil-normal-state-map "go" 'goto-char)
+(define-key evil-normal-state-map "g1" 'evil-avy-goto-word-or-subword-1)
+(define-key evil-normal-state-map "g2" 'evil-avy-goto-char-2)
 ;; (define-key evil-normal-state-map (kbd "M-y") 'counsel-browse-kill-ring)
 ;; (define-key evil-normal-state-map (kbd "C-]") 'counsel-etags-find-tag-at-point)
 ;; (define-key evil-insert-state-map (kbd "C-x C-n") 'evil-complete-next-line)
