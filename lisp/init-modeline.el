@@ -19,7 +19,43 @@
 ;;   ;; :unless window-system
 ;;   )
 
-(add-hook 'after-init-hook (lambda () (require 'init-my-modeline)))
+;; (add-hook 'after-init-hook (lambda () (require 'init-my-modeline)))
+(use-package nano-modeline
+  :disabled
+  :ensure t
+  :config
+  (nano-modeline-mode)
+  )
+
+(use-package simple-modeline
+  :disabled
+  :ensure t
+  :hook (after-init . simple-modeline-mode)
+  )
+
+;; (use-package mood-line
+;;   :ensure t
+;;   :config
+;;   (mood-line-mode)
+;;   )
+(use-package mood-line
+  :ensure t
+  :straight (mood-line :type git
+                       :host gitlab
+                       :repo "fwar34/mood-line")
+  :config
+  (mood-line-mode)
+  )
+
+(use-package vs-modeline
+  :disabled
+  :ensure t
+  :straight (vs-modeline :type git
+                         :host github
+                         :repo "VojtechStep/vs-modeline.el")
+  :demand t
+  :config
+  (vs-modeline-mode))
 
 ;; spaceline
 (use-package spaceline
