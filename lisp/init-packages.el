@@ -1665,6 +1665,8 @@
   :defer t
   )
 
+;; The mode breaks with newer emacs: Unknown rx form ‘symbol’
+;; https://github.com/immerrr/lua-mode/issues/155#issuecomment-723492284
 (use-package lua-mode
   :ensure t
   :mode "\\.lua$"

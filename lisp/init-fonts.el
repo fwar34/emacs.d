@@ -56,7 +56,7 @@
                              chinese-font-size 24)))))
       ;; -----------------------------------------------------------------------------
       ;; 公司虚拟机 lxd
-      ((or "UBUNTU-OPENBOX" "FENG-ARCHLINUX")
+      ((or "UBUNTU-OPENBOX" "FENG-ARCHLINUX" "UBUNTU-AWESOME")
        ;; (when (member "JetBrains Mono" font-list)
        ;;                 (setq english-font "JetBrainsMono Nerd Font"
        ;;                       english-font-size 24
