@@ -21,6 +21,8 @@
         (english-font-size 24)
         ;; (chinese-font "Sarasa Fixed Slab SC")
         (chinese-font "Noto Sans CJK SC")
+        ;; (chinese-font "Noto Serif CJK SC")
+        ;; (chinese-font "Noto Sans SC")
         ;; (chinese-font "Source Han Sans CN")
         (chinese-font-size 24))
     
@@ -101,16 +103,27 @@
                       :weight 'semi-light
                       :slant 'normal
                       :size english-font-size))
+
+    ;; (setq chinese-font "Noto Sans SC")
+    ;; (setq chinese-font "Noto Sans CJK SC")
+    ;; (setq chinese-font-size 24)
     ;; 设置中文字体
     (dolist (charset '(kana han symbol cjk-misc bopomofo))
       (set-fontset-font
-       (frame-parameter nil 'font)
+       ;; (frame-parameter nil 'font)
+       t
        charset
        (font-spec :name chinese-font
                   ;; :weight 'normal
                   :weight 'semi-light
                   :slant 'normal
-                  :size chinese-font-size))))
+                  :size chinese-font-size)))
+
+    ;; (dolist (charset '(kana han symbol cjk-misc bopomofo))
+    ;;   (set-fontset-font t charset chinese-font))
+    ;; (setq face-font-rescale-alist
+    ;;       (mapcar (lambda (item) (cons item 1.2)) chinese-font))
+    )
   )
 
 (use-package faces
