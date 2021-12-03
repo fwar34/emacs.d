@@ -467,6 +467,8 @@
                     "cc" 'convert-file-to-utf8-unix
                     ;; "cn" 'my-convert-radix-word
                     "cv" 'my-convert-radix
+                    "ch" 'my-convert-radix-hex
+                    "cd" 'my-convert-radix-deci
                     ;; "ss" 'wg-create-workgroup ; save windows layout
                     "se" 'evil-iedit-state/iedit-mode ; start iedit in emacs
                     "sc" 'shell-command

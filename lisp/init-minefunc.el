@@ -600,23 +600,40 @@ URL `http://ergoemacs.org/emacs/elisp_run_current_file.html'"
             )))
       (error "no number to convert")))
 
-(defun my-convert-radix2 (arg &optional output-radix)
+
+
+(defun convert-radix2 (arg &optional output-radix)
   "Convert number radix and copy output"
+  (message
+   (if output-radix
+       ;; output to hex
+       (let ((number (string-to-number arg)))
+         (evil-set-register ?\" (format "%X" number))
+         (format "convert %s to hex => 0x%X" arg number)
+         )
+     ;; output to deci
+     (let ((number (string-to-number arg 16)))
+       (evil-set-register ?\" (format "%#d" number))
+       (format "convert 0x%s to decimal => %#d" arg number))))
+  )
+
+(defun my-convert-radix-hex (arg)
+  "Convert number to hex radix and copy output"
   (interactive (list (if (thing-at-point 'number)
                          (read-string (format "number to convert[%s]:" (my-number-at-point t)) nil nil (my-number-at-point t) nil)
                        (read-string "number to convert:"))))
   (if arg
-      (message
-       (if output-radix
-           ;; output to hex
-           (let ((number (string-to-number arg)))
-             (evil-set-register ?\" (format "%X" number))
-             (format "convert %s to hex => 0x%X" arg number)
-             )
-         ;; output to deci
-         (let ((number (string-to-number arg 16)))
-           (evil-set-register ?\" (format "%#d" number))
-           (format "convert 0x%s to decimal => %#d" arg number))))
+      (message (convert-radix2 arg 'hex))
+    (error "no number to convert"))
+  )
+
+(defun my-convert-radix-deci (arg)
+  "Convert number to decimal radix and copy output"
+  (interactive (list (if (thing-at-point 'number)
+                         (read-string (format "number to convert[%s]:" (my-number-at-point t)) nil nil (my-number-at-point t) nil)
+                       (read-string "number to convert:"))))
+  (if arg
+      (message (convert-radix2 arg))
     (error "no number to convert"))
   )
 
