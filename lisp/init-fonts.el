@@ -74,6 +74,7 @@
        (when (member "Iosevka" font-list)
                        (setq english-font "Iosevka" ;; Sarasa Mono SC Nerd
                              english-font-size 24
+                             chinese-font "Noto Sans SC"
                              chinese-font-size 24))
        )
       )
