@@ -75,7 +75,9 @@
 ;; https://emacs-china.org/t/counsel-rg-bash-shell/12244?u=fwar34
 ;; counsel-rg 的 --iglob 选项在 zsh bash 中不起作用，还不清楚具体原因
 (setq shell-file-name "/bin/sh")
+;; (add-hook 'after-init-hook (lambda () (require 'init-custom)))
 ;; }}}
+(require 'init-custom)
 (require 'init-packages)
 (require 'init-ui)
 (require 'init-fonts)
@@ -96,7 +98,6 @@
                              (require 'init-minefunc)
                              (require 'init-c)))
 (add-hook 'after-init-hook (lambda () (require 'init-misc)))
-(add-hook 'after-init-hook (lambda () (require 'init-custom)))
 (add-hook 'after-init-hook (lambda () (require 'init-builtin)))
 (require 'init-transient)
 (require 'init-lsp)
