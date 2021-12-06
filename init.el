@@ -71,13 +71,15 @@
           t t)))
 
 (add-to-list 'load-path "~/.emacs.d/lisp")
+
 ;; {{{
 ;; https://emacs-china.org/t/counsel-rg-bash-shell/12244?u=fwar34
-;; counsel-rg 的 --iglob 选项在 zsh bash 中不起作用，还不清楚具体原因
-(setq shell-file-name "/bin/sh")
-;; (add-hook 'after-init-hook (lambda () (require 'init-custom)))
-;; }}}
+;; counsel-rg 的 --iglob 选项在 zsh bash 中不起作用，还不清楚具体原因（现在知道原因了，在 zsh 中 ! 需要加反斜杠转义，bash 中还没有试怎么才能成功）
+;; 现在去除 shell-file-name 设置，否则在 gui 启动中还需要单独给 /bin/sh 在 init-custom.el 中设置 $PATH, 
+;; (setq shell-file-name "/bin/sh")
 (require 'init-custom)
+;; }}}
+
 (require 'init-packages)
 (require 'init-ui)
 (require 'init-fonts)
