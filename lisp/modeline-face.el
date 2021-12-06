@@ -169,7 +169,7 @@
   (eval `(defface ,(nth 0 s)
            `((t (:foreground  ,(nth 1 s)
                  ;; :background "#424242424242"
-                 :inherit 'mode-line)))
+                 :inherit 'mode-line-buffer-id)))
            ,(nth 2 s)
            :group 'spaceline)))
 
