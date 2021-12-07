@@ -26,6 +26,7 @@
         ;; (chinese-font "Source Han Sans CN")
         (chinese-font-size 24))
     
+    ;; (print font-list)
     ;; pcase的用法https://emacs-china.org/t/pcase-pattern/15111
     (pcase (upcase system-name)
       ;; -----------------------------------------------------------------------------
@@ -71,11 +72,16 @@
        ;;                 (setq english-font "Sarasa Mono SC Nerd" ;; Sarasa Mono SC Nerd
        ;;                       english-font-size 24
        ;;                       chinese-font-size 24))
-       (when (member "Iosevka" font-list)
+       (when (and (member "Iosevka" font-list) (member "Noto Sans SC" font-list))
                        (setq english-font "Iosevka" ;; Sarasa Mono SC Nerd
                              english-font-size 24
                              chinese-font "Noto Sans SC"
                              chinese-font-size 24))
+       (when (and (member "Iosevka" font-list) (member "Noto Sans CJK SC" font-list))
+         (setq english-font "Iosevka" ;; Sarasa Mono SC Nerd
+               english-font-size 24
+               chinese-font "Noto Sans CJK SC"
+               chinese-font-size 24))
        )
       )
       ;; -----------------------------------------------------------------------------
