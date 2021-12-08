@@ -1541,12 +1541,11 @@
   )
 
 (use-package exec-path-from-shell
-  ;; :if (memq window-system '(mac ns))
-  :if (memq system-type '(gnu/linux darwin))
-  :after evil
+  :if (memq window-system '(mac ns x))
   :ensure t
   :config
   (exec-path-from-shell-initialize)
+  ;; (setq exec-path-from-shell-arguments '("-l"))
   )
 
 (use-package volatile-highlights
