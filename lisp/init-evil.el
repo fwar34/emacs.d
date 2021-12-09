@@ -553,10 +553,11 @@
                     ;; "em" 'erase-message-buffer
                     "fn" 'my-display-function
                     "fa" 'ack
-                    "ff" 'fzf
+                    "ff" '(lambda () (interactive) (fzf-find-file-in-dir "~"))
+                    "fz" 'fzf
                     "ft" 'fzf-git
-                    "fz" 'fzf-git-files
-                    "fg" 'fzf-git-grep
+                    "fl" 'fzf-git-files
+                    ;; "fg" 'fzf-git-grep
                     "fd" 'fzf-directory
                     ;; liang.feng
                     ;; "eb" 'eval-buffer
