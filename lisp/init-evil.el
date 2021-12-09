@@ -553,9 +553,9 @@
                     ;; "em" 'erase-message-buffer
                     "fn" 'my-display-function
                     "fa" 'ack
-                    "fz" 'fzf
+                    "ff" 'fzf
                     "ft" 'fzf-git
-                    "ff" 'fzf-git-files
+                    "fz" 'fzf-git-files
                     "fg" 'fzf-git-grep
                     "fd" 'fzf-directory
                     ;; liang.feng
