@@ -1,0 +1,7 @@
+# name: if-err
+# key: ife
+# contributor: 
+# --
+if err != nil {
+   $0
+}
