@@ -45,18 +45,22 @@
                              chinese-font-size 26)))))
       ;; -----------------------------------------------------------------------------
       ;; 公司电脑
-      ("A120313"
+      ("DESKTOP-ARCHLINUX"
        (pcase system-type
          ;; Windows
-         ('windows-nt (when (member "Sarasa Fixed Slab SC" font-list)
-                        (setq english-font "Sarasa Fixed Slab SC"
-                              english-font-size 24
-                              chinese-font-size 24)))
+         ('gnu/linux (when (member "JetBrainsMono Nerd Font" font-list)
+                       (setq ;;english-font "JetBrainsMono Nerd Font"
+                        english-font "Iosevka"
+                        english-font-size 32
+                        ;; chinese-font "Noto Sans CJK SC"
+                        chinese-font "Sarasa Mono SC Nerd"
+                        chinese-font-size 32)))
          ;; WSL
-         ('gnu/linux (when (member "Iosevka Curly Slab" font-list)
-                       (setq english-font "Iosevka Curly Slab"
-                             english-font-size 24
-                             chinese-font-size 24)))))
+         ;; ('gnu/linux (when (member "Iosevka Curly Slab" font-list)
+         ;;               (setq english-font "Iosevka Curly Slab"
+         ;;                     english-font-size 24
+         ;;                     chinese-font-size 24)))
+         ))
       ;; -----------------------------------------------------------------------------
       ;; 公司虚拟机 lxd
       ((or "UBUNTU-OPENBOX" "FENG-ARCHLINUX" "UBUNTU-AWESOME")
