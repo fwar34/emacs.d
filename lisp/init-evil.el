@@ -269,7 +269,8 @@
                     "e" 'evil-end-of-line
                     "SPC" 'counsel-M-x
                     "TAB" 'other-window
-                    "qr" 'query-replace
+                    ;; "qr" 'query-replace
+                    "qr" 'quickrun
                     "qs" 'query-replace-regexp
                     ;; highlight-symbol
                     ;; "xx" 'highlight-symbol-remove-all ;; map to ";xx"
