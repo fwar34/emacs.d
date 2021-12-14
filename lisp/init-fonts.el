@@ -1,5 +1,7 @@
 ;; -*- coding: utf-8; lexical-binding: t; -*-
 
+;; 
+
 ;; {{{ font settings
 ;; http://zhuoqiang.me/torture-emacs.html同样在YoudaoNote中保存
 ;; (x-list-fonts "*")
@@ -130,7 +132,7 @@
        charset
        (font-spec :name chinese-font
                   ;; :weight 'normal
-                  :weight 'semi-light
+                  ;; :weight 'semi-light ;; 字体没有安装 weight 相关的字体的时候设置会失败
                   :slant 'normal
                   :size chinese-font-size)))
 
