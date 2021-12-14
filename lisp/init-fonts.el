@@ -1,6 +1,6 @@
 ;; -*- coding: utf-8; lexical-binding: t; -*-
 
-;; 
+;; 字体设置参考 https://www.gnu.org/software/emacs/manual/html_node/emacs/Fonts.html 和 (describe-function set-face-attribute 或者 font-spec)
 
 ;; {{{ font settings
 ;; http://zhuoqiang.me/torture-emacs.html同样在YoudaoNote中保存
