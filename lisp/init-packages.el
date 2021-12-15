@@ -831,14 +831,14 @@
   (define-key web-mode-map (kbd "C-n") 'web-mode-tag-match)
   )
 
-;; (use-package emmet-mode
-;;   :ensure t
-;;   :hook
-;;   ((sgml-mdoe . emmet-mode)    ;; Auto-start on any markup modes
-;;    (html-mode . emmet-mode)    ;; enable Emmet's css abbreviation.
-;;    (web-mode . emmet-mode)
-;;    (css-mode . emmet-mode))
-;;   )
+(use-package emmet-mode
+  :ensure t
+  :hook
+  ((sgml-mdoe . emmet-mode)    ;; Auto-start on any markup modes
+   (html-mode . emmet-mode)    ;; enable Emmet's css abbreviation.
+   (web-mode . emmet-mode)
+   (css-mode . emmet-mode))
+  )
 
 (use-package vimrc-mode
   :ensure t
