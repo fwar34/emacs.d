@@ -1844,6 +1844,7 @@
   :unless (string-equal "windows-nt" system-type)
   :ensure t
   :config
+  (setq quickrun-timeout-seconds nil)
   ;; Use this parameter as C++ default
   (quickrun-add-command "c++/c1z"
     '((:command . "g++")
