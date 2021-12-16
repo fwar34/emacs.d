@@ -51,12 +51,12 @@
       ("DESKTOP-ARCHLINUX"
        (pcase system-type
          ;; Windows
-         ('gnu/linux (when (member "JetBrainsMono Nerd Font" font-list)
+         ('gnu/linux (when (member "Noto Sans CJK SC" font-list)
                        (setq ;;english-font "JetBrainsMono Nerd Font"
                         english-font "Iosevka"
                         english-font-size 32
-                        ;; chinese-font "Noto Sans CJK SC"
-                        chinese-font "Sarasa Mono SC Nerd"
+                        chinese-font "Noto Sans CJK SC"
+                        ;; chinese-font "Sarasa Mono SC Nerd"
                         chinese-font-size 32)))
          ;; WSL
          ;; ('gnu/linux (when (member "Iosevka Curly Slab" font-list)
@@ -133,7 +133,7 @@
        charset
        (font-spec :name chinese-font
                   ;; :weight 'normal
-                  ;; :weight 'semi-light ;; 字体没有安装 weight 相关的字体的时候设置会失败
+                  :weight 'semi-light ;; 字体没有安装 weight 相关的字体的时候设置会失败
                   :slant 'normal
                   :size chinese-font-size)))
 
