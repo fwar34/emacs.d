@@ -28,7 +28,7 @@
         ;; (chinese-font "Noto Sans SC")
         ;; (chinese-font "Source Han Sans CN")
         (chinese-font-size 24)
-        (setlight "semi-light"))
+        (setlight 'semi-light))
     
     ;; (print font-list)
     ;; pcase的用法https://emacs-china.org/t/pcase-pattern/15111
