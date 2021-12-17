@@ -98,6 +98,7 @@
     (message "english-font-size %s" english-font-size)
     (message "chinese-font %s" chinese-font)
     (message "chinese-font-size %s" chinese-font-size)
+    (message "setlight %s" setlight)
 
     ;; 单独设置 org-table 字体
     ;; Org table font
