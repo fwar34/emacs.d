@@ -27,7 +27,8 @@
         ;; (chinese-font "Noto Serif CJK SC")
         ;; (chinese-font "Noto Sans SC")
         ;; (chinese-font "Source Han Sans CN")
-        (chinese-font-size 24))
+        (chinese-font-size 24)
+        (setlight "semi-light"))
     
     ;; (print font-list)
     ;; pcase的用法https://emacs-china.org/t/pcase-pattern/15111
@@ -66,7 +67,7 @@
          ))
       ;; -----------------------------------------------------------------------------
       ;; 公司虚拟机 lxd
-      ((or "UBUNTU-OPENBOX" "FENG-ARCHLINUX" "UBUNTU-AWESOME")
+      ((or "FENG-ARCHLINUX" "UBUNTU-AWESOME")
        ;; (when (member "JetBrains Mono" font-list)
        ;;                 (setq english-font "JetBrainsMono Nerd Font"
        ;;                       english-font-size 24
@@ -88,7 +89,8 @@
          (setq english-font "Iosevka" ;; Sarasa Mono SC Nerd
                english-font-size 24
                chinese-font "Noto Sans CJK SC"
-               chinese-font-size 24))
+               chinese-font-size 24
+               setlight nil))
        )
       )
       ;; -----------------------------------------------------------------------------
@@ -133,7 +135,8 @@
        charset
        (font-spec :name chinese-font
                   ;; :weight 'normal
-                  :weight 'semi-light ;; 字体没有安装 weight 相关的字体的时候设置会失败
+                  ;; :weight 'semi-light ;; 字体没有安装 weight 相关的字体的时候设置会失败
+                  :weight setlight
                   :slant 'normal
                   :size chinese-font-size)))
 
