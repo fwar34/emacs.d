@@ -1128,6 +1128,9 @@
 ;;  - "gg" the first occurence, "G" the last occurence
 ;;  - Please note ";;" or `avy-goto-char-timer' is also useful
 (use-package evil-iedit-state
+  ;; 2021-12-23 报错，等修复了再打开
+  ;; https://github.com/syl20bnr/evil-iedit-state/issues/36
+  :disabled
   :ensure t
   :after evil
   )
