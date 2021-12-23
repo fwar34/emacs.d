@@ -60,6 +60,7 @@
   (setq ;;lsp-completion-provider :none
         lsp-enable-indentation nil
         lsp-enable-on-type-formatting nil
+        lsp-rust-server 'rls
         ;; lsp-completion-filter-on-incomplete nil
         ;; lsp-completion-enable-additional-text-edit nil
         ;; lsp-completion-sort-initial-results nil
