@@ -114,18 +114,61 @@
 ;;   )
 
 (use-package zenburn-theme
+  :disabled
   :ensure t
   :if (or (not (display-graphic-p)) (and (display-graphic-p) (equal system-name "ubuntu-openbox")))
   :config
-  (load-theme 'zenburn t)
+  ;; (load-theme 'zenburn t)
   )
 
-;; (use-package doom-themes
-;;   :disabled
-;;   :ensure t
-;;   :config
-;;   ;; (load-theme 'doom-theme t)
-;;   )
+(use-package atom-one-dark-theme
+  :ensure t
+  :config
+  ;; (load-theme 'atom-one-dark t)
+  )
+
+(use-package doom-themes
+  :ensure t
+  :config
+  ;; Global settings (defaults)
+  (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
+        doom-themes-enable-italic t) ; if nil, italics is universally disabled
+  ;; (load-theme 'doom-one t)
+  ;; (load-theme 'doom-vibrant t)
+  ;; (load-theme 'doom-dracula t)
+  ;; (load-theme 'doom-gruvbox t)
+  ;; (load-theme 'doom-meltbus t)
+  ;; (load-theme 'doom-miramare t)
+  ;; (load-theme 'doom-monokai-pro t)
+
+  ;; Enable flashing mode-line on errors
+  (doom-themes-visual-bell-config)
+  ;; Enable custom neotree theme (all-the-icons must be installed!)
+  (doom-themes-neotree-config)
+  ;; or for treemacs users
+  (setq doom-themes-treemacs-theme "doom-atom") ; use "doom-colors" for less minimal icon theme
+  (doom-themes-treemacs-config)
+  ;; Corrects (and improves) org-mode's native fontification.
+    (doom-themes-org-config))
+
+(use-package gruvbox-theme
+  :ensure t
+  :config
+  ;; (enable-theme 'gruvbox)
+  )
+
+(use-package material-theme
+  :ensure t
+  :config
+  ;; (enable-theme 'material)
+  )
+
+(use-package zerodark-theme
+  :ensure t
+  :config
+  (enable-theme 'zerodark)
+  ;; (zerodark-setup-modeline-format)
+  )
 
 ;; (use-package monokai-alt-theme
 ;;   :disabled
