@@ -166,8 +166,16 @@
 (use-package zerodark-theme
   :ensure t
   :config
-  (enable-theme 'zerodark)
+  ;; (enable-theme 'zerodark)
   ;; (zerodark-setup-modeline-format)
+  )
+
+(use-package color-theme-sanityinc-tomorrow
+  :ensure t
+  :config
+  ;; (color-theme-sanityinc-tomorrow-bright)
+  ;; (color-theme-sanityinc-tomorrow-eighties)
+  (load-theme 'sanityinc-tomorrow-eighties t)
   )
 
 ;; (use-package monokai-alt-theme
@@ -1100,6 +1108,60 @@
   (prog-mode . rainbow-delimiters-mode)
   )
 
+;; rainbow-mode
+(use-package rainbow-mode
+  :ensure t
+  :after evil
+  :config
+  (rainbow-mode 1)
+  )
+
+(use-package rainbow-identifiers
+  :ensure t
+  :after evil
+  :hook
+  (prog-mode . rainbow-identifiers-mode)
+  )
+
+;; highlight-numbers
+(use-package highlight-numbers
+  :ensure t
+  :unless window-system
+  :after evil
+  :hook
+  (prog-mode . highlight-numbers-mode)
+  )
+
+;; highlight-quoted
+(use-package highlight-quoted
+  :ensure t
+  :hook
+  (emacs-lisp-mode . highlight-quoted-mode)
+  )
+
+;; highlight-defined
+(use-package highlight-defined
+  :ensure t
+  :hook
+  (emacs-lisp-mode . highlight-defined-mode)
+  )
+
+(use-package highlight-symbol
+  :ensure t
+  :defer t
+  )
+
+(use-package highlight-parentheses
+  :ensure t
+  :after evil
+  :config
+  ;; (add-hook 'prog-mode-hook 'highlight-parentheses-mode)
+  (define-globalized-minor-mode global-highlight-parentheses-mode
+    highlight-parentheses-mode
+    (lambda () (highlight-parentheses-mode t)))
+  (global-highlight-parentheses-mode t)
+  )
+
 ;; beacon
 (use-package beacon
   :ensure t
@@ -1186,10 +1248,6 @@
   )
 
 
-(use-package highlight-symbol
-  :ensure t
-  :defer t
-  )
 
 (use-package transient
   :ensure t)
@@ -1227,13 +1285,6 @@
     (setq symbol-overlay-map map))
   )
 
-;; rainbow-mode
-(use-package rainbow-mode
-  :ensure t
-  :after evil
-  :config
-  (rainbow-mode 1)
-  )
 
 (use-package fix-word
   :ensure t
@@ -1277,35 +1328,7 @@
   :init (setq markdown-command "multimarkdown")
   )
 
-(use-package rainbow-identifiers
-  :ensure t
-  :after evil
-  :hook
-  (prog-mode . rainbow-identifiers-mode)
-  )
 
-;; highlight-numbers
-(use-package highlight-numbers
-  :ensure t
-  :unless window-system
-  :after evil
-  :hook
-  (prog-mode . highlight-numbers-mode)
-  )
-
-;; highlight-quoted
-(use-package highlight-quoted
-  :ensure t
-  :hook
-  (emacs-lisp-mode . highlight-quoted-mode)
-  )
-
-;; highlight-defined
-(use-package highlight-defined
-  :ensure t
-  :hook
-  (emacs-lisp-mode . highlight-defined-mode)
-  )
 
 (use-package evil-snipe
   :disabled
@@ -1459,16 +1482,6 @@
   (define-key evil-outer-text-objects-map "J" 'evil-indent-plus-a-indent-up-down)
   )
 
-(use-package highlight-parentheses
-  :ensure t
-  :after evil
-  :config
-  ;; (add-hook 'prog-mode-hook 'highlight-parentheses-mode)
-  (define-globalized-minor-mode global-highlight-parentheses-mode
-    highlight-parentheses-mode
-    (lambda () (highlight-parentheses-mode t)))
-  (global-highlight-parentheses-mode t)
-  )
 
 ;; imenu-list
 (use-package imenu-list
