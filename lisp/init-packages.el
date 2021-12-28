@@ -1102,7 +1102,9 @@
 ;;   ;; (linum-relative-toggle)
 ;;   )
 
+;; {{{ highlight -----------------------------------------------------------------------------
 (use-package rainbow-delimiters
+  :disabled
   :ensure t
   :hook
   (prog-mode . rainbow-delimiters-mode)
@@ -1110,6 +1112,7 @@
 
 ;; rainbow-mode
 (use-package rainbow-mode
+  :disabled
   :ensure t
   :after evil
   :config
@@ -1141,12 +1144,14 @@
 
 ;; highlight-defined
 (use-package highlight-defined
+  :disabled
   :ensure t
   :hook
   (emacs-lisp-mode . highlight-defined-mode)
   )
 
 (use-package highlight-symbol
+  :disabled
   :ensure t
   :defer t
   )
@@ -1161,6 +1166,16 @@
     (lambda () (highlight-parentheses-mode t)))
   (global-highlight-parentheses-mode t)
   )
+;; }}} -----------------------------------------------------------------------------
+
+(use-package tree-sitter
+  :ensure t
+  :config
+  (global-tree-sitter-mode)
+  (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode)
+  )
+(use-package tree-sitter-langs
+  :ensure t)
 
 ;; beacon
 (use-package beacon
