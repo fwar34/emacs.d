@@ -1105,8 +1105,8 @@
 ;;   )
 
 ;; {{{ highlight -----------------------------------------------------------------------------
+;; 上色括号之类的符号
 (use-package rainbow-delimiters
-  :disabled
   :ensure t
   :hook
   (prog-mode . rainbow-delimiters-mode)
@@ -1121,6 +1121,7 @@
   (rainbow-mode 1)
   )
 
+;; 上色变量
 (use-package rainbow-identifiers
   :ensure t
   :after evil
