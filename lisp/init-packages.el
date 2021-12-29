@@ -175,8 +175,10 @@
   :config
   ;; (color-theme-sanityinc-tomorrow-bright)
   ;; (color-theme-sanityinc-tomorrow-eighties)
-  (load-theme 'sanityinc-tomorrow-eighties t)
+  ;; (load-theme 'sanityinc-tomorrow-eighties t)
   )
+
+(load-theme 'sanityinc-tomorrow-eighties-mine t)
 
 ;; (use-package monokai-alt-theme
 ;;   :disabled
@@ -1150,12 +1152,6 @@
   (emacs-lisp-mode . highlight-defined-mode)
   )
 
-(use-package highlight-symbol
-  :disabled
-  :ensure t
-  :defer t
-  )
-
 (use-package highlight-parentheses
   :ensure t
   :after evil
@@ -1266,6 +1262,13 @@
 
 (use-package transient
   :ensure t)
+
+;; 高亮符号
+(use-package highlight-symbol
+  :disabled
+  :ensure t
+  :defer t
+  )
 
 ;; https://github.com/wolray/symbol-overlay/
 ;; https://github.com/wolray/symbol-overlay/issues/59
