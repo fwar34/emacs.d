@@ -45,6 +45,7 @@
   ;; Some languages use camel case naming convention,
   ;; so company should be case sensitive.
   ;; (setq company-dabbrev-ignore-case nil)
+  (setq company-dabbrev-ignore-case t)
   ;; Trigger completion immediately.
   (setq company-idle-delay 0)
   ;; I don't like the downcase word in company-dabbrev!
@@ -189,7 +190,11 @@ In that case, insert the number."
 
   ;; Use rusty-tags to generate tags file for Rust programming language.
   ;; Add below code into ~/.emacs,
-  (setq company-ctags-tags-file-name "rusty-tags.emacs"))
+  (setq company-ctags-tags-file-name "rusty-tags.emacs")
+
+  ;; company-ctags-ignore-case
+  (setq company-ctags-ignore-case t)
+  )
 
 ;; @see https://github.com/company-mode/company-mode/issues/348
 (use-package company-statistics
