@@ -22,7 +22,9 @@
         ("C-l" . yas-expand)) ;; C-l 在终端下与 tmux 的 prefix 键冲突，所以又用 general-define-key 设置了下面的 mapping
   :config
   (global-company-mode)
-
+  (setq company-text-face-extra-attributes
+              '(:weight bold :slant italic))
+  
   (general-define-key
    :keymaps 'company-active-map
    :prefix "`"
@@ -42,7 +44,7 @@
   (setq company-selection-wrap-around t) 
   ;; Some languages use camel case naming convention,
   ;; so company should be case sensitive.
-  (setq company-dabbrev-ignore-case nil)
+  ;; (setq company-dabbrev-ignore-case nil)
   ;; Trigger completion immediately.
   (setq company-idle-delay 0)
   ;; I don't like the downcase word in company-dabbrev!
