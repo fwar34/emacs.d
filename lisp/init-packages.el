@@ -1852,7 +1852,7 @@
   :custom
   (persp-interactive-completion-function 'ivy-completing-read)
   (persp-sort 'created)
-  (persp-mode-prefix-key (kbd "C-x C-i"))
+  ;; (persp-mode-prefix-key (kbd "C-x C-i"))
   (persp-state-default-file "~/.emacs.d/perspective.save")
   ;; (persp-show-modestring 'header)
   (persp-modestring-short t)
