@@ -77,7 +77,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Theme
 (use-package monokai-theme
-  ;; :disabled
+  :disabled
   :if (and (display-graphic-p) (not (equal system-name "ubuntu-openbox")))
   :custom-face
   ;; 可以使用counsel-describe-face来查找face
@@ -122,17 +122,19 @@
   )
 
 (use-package atom-one-dark-theme
+  :disabled
   :ensure t
   :config
   ;; (load-theme 'atom-one-dark t)
   )
 
 (use-package doom-themes
+  :disabled
   :ensure t
   :config
   ;; Global settings (defaults)
-  (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
-        doom-themes-enable-italic t) ; if nil, italics is universally disabled
+  (setq doom-themes-enable-bold nil    ; if nil, bold is universally disabled
+        doom-themes-enable-italic nil) ; if nil, italics is universally disabled
   ;; (load-theme 'doom-one t)
   ;; (load-theme 'doom-vibrant t)
   ;; (load-theme 'doom-dracula t)
@@ -152,18 +154,21 @@
     (doom-themes-org-config))
 
 (use-package gruvbox-theme
+  :disabled
   :ensure t
   :config
   ;; (enable-theme 'gruvbox)
   )
 
 (use-package material-theme
+  :disabled
   :ensure t
   :config
   ;; (enable-theme 'material)
   )
 
 (use-package zerodark-theme
+  :disabled
   :ensure t
   :config
   ;; (enable-theme 'zerodark)
