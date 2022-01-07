@@ -2097,18 +2097,17 @@
 
 (use-package vterm-toggle
   :ensure t
-  :after evil
   :config
-  ;; (global-set-key [f2] 'vterm-toggle)
+  (global-set-key [f2] 'vterm-toggle)
+  (define-key vterm-mode-map [f2] #'vterm-toggle)
   ;; (global-set-key [C-f2] 'vterm-toggle-cd)
-  ;; (global-set-key [f3] 'vterm-toggle-cd)
+  (global-set-key [f3] 'vterm-toggle-cd)
+  (define-key vterm-mode-map [f3] #'vterm-toggle-cd)
 
   ;; you can cd to the directory where your previous buffer file exists
   ;; after you have toggle to the vterm buffer with `vterm-toggle'.
   (define-key vterm-mode-map [(control return)] #'vterm-toggle-insert-cd)
 
-  (define-key vterm-mode-map [f2] #'vterm-toggle)
-  (define-key vterm-mode-map [f3] #'vterm-toggle-cd)
   ;; Switch to next vterm buffer
   (define-key vterm-mode-map (kbd "s-n") 'vterm-toggle-forward)
   ;; Switch to previous vterm buffer
