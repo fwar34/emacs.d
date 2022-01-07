@@ -176,6 +176,7 @@
   )
 
 (use-package color-theme-sanityinc-tomorrow
+  :disabled
   :ensure t
   :config
   ;; (color-theme-sanityinc-tomorrow-bright)
