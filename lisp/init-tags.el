@@ -59,6 +59,7 @@
     (add-to-list 'counsel-etags-ignore-directories "build_clang")
     (add-to-list 'counsel-etags-ignore-directories "debian")
     (add-to-list 'counsel-etags-ignore-directories ".ccls-cache")
+    (add-to-list 'counsel-etags-ignore-directories "doxygen-doc")
     ;; counsel-etags-ignore-filenames supports wildcast
     (add-to-list 'counsel-etags-ignore-filenames "*.log")
     (add-to-list 'counsel-etags-ignore-filenames "*.html")
