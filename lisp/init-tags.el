@@ -103,4 +103,7 @@
    citre-use-project-root-when-creating-tags t
    citre-prompt-language-for-ctags-command t))
 
+(use-package imenu-anywhere
+  :ensure t)
+
 (provide 'init-tags)

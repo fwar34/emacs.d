@@ -356,6 +356,7 @@
                     "hg" 'counsel-etags-grep
                     "hl" 'counsel-etags-list-tag
                     "hc" 'counsel-etags-list-tag-in-current-file
+                    "hh" 'ivy-imenu-anywhere
                     ;; "bm" 'counsel-bookmark-goto
                     ;; "br" 'counsel-browse-kill-ring
                     "kr" 'browse-kill-ring
