@@ -464,8 +464,8 @@
                                  (select-window (get-buffer-window "*Python*")))))))
 
 ;; enable mouse in terminal
-(when (not (display-graphic-p))
-  (xterm-mouse-mode)
-  )
+;; (when (not (display-graphic-p))
+;;   (xterm-mouse-mode)
+;;   )
 
 (provide 'init-better-default)
