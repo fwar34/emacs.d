@@ -631,6 +631,16 @@
   :defer t
   )
 
+;; {{{
+;; C-n下一个选项
+;; C-p上一行选项
+;; M-<第一个选项
+;; M->最后一个选项
+;; C-v向下翻页，页数由ivy-height确定
+;; M-v向上翻页，同样页数由ivy-height确定
+;; M-p上一条历史记录
+;; M-n下一条历史记录
+;; }}}
 (use-package counsel
   ;; counsel repository contains:
   ;; Ivy, a generic completion mechanism for Emacs.
