@@ -1097,9 +1097,9 @@
   ;; (lispy-mode . lispyville-mode)
 
   ;; Lispyville can also be used without lispy:
-  :hook
-  (emacs-lisp-mode . lispyville-mode)
-  (lisp-mode . lispyville-mode)
+  ;; :hook
+  ;; (emacs-lisp-mode . lispyville-mode)
+  ;; (lisp-mode . lispyville-mode)
   :config
   (lispyville-set-key-theme
    ;; his is probably the simplest method of improving things. By default,
@@ -1676,6 +1676,7 @@
 ;; )
 
 (use-package multi-term
+  :disabled
   :ensure t
   :after evil
   :config
@@ -2108,10 +2109,28 @@
 
 (use-package vterm-toggle
   :ensure t
+  :after evil
+  :bind*
+  ([f5] . vterm-toggle)
+  (:map vterm-mode-map
+        ([f5] . vterm-toggle))
   :config
-  (global-set-key [f2] 'vterm-toggle)
-  (define-key vterm-mode-map [f2] #'vterm-toggle)
-  ;; (global-set-key [C-f2] 'vterm-toggle-cd)
+  ;; (evil-define-key 'insert vterm-mode-map [f2] #'vterm-toggle)
+
+  ;; (general-define-key
+  ;;  :states '(insert normal)
+  ;;  ;; :keymaps 'vterm-mode-map
+  ;;  [f5] 'vterm-toggle)
+
+  ;; (general-define-key
+  ;;  :states '(insert normal)
+  ;;  :keymaps 'vterm-mode-map
+  ;;  [f5] 'vterm-toggle)
+
+  ;; (general-define-key
+  ;;  :states 'insert
+  ;;  [f5] 'vterm-toggle)
+  
   (global-set-key [f3] 'vterm-toggle-cd)
   (define-key vterm-mode-map [f3] #'vterm-toggle-cd)
 
