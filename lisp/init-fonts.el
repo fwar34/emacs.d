@@ -1,5 +1,9 @@
 ;; -*- coding: utf-8; lexical-binding: t; -*-
 
+;; http://xahlee.info/emacs/emacs/emacs_list_and_set_font.html
+;; https://idiocy.org/emacs-fonts-and-fontsets.html
+;; https://archive.casouri.cat/note/2019/emacs-%e5%ad%97%e4%bd%93%e4%b8%8e%e5%ad%97%e4%bd%93%e9%9b%86/
+
 ;; 字体设置参考 https://www.gnu.org/software/emacs/manual/html_node/emacs/Fonts.html 和 (describe-function set-face-attribute 或者 font-spec)
 ;; 可以使用 fc-list : family 来显示所有的字体 family
 
