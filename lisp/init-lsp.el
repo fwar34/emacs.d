@@ -61,6 +61,10 @@
         lsp-enable-indentation nil
         lsp-enable-on-type-formatting nil
         lsp-rust-server 'rls
+        lsp-pyls-plugins-flake8-max-line-length 1000
+        lsp-pylsp-plugins-flake8-max-line-length 1000
+        lsp-pylsp-plugins-pycodestyle-max-line-length 1000
+        lsp-pyls-plugins-pycodestyle-max-line-length 1000
         ;; lsp-completion-filter-on-incomplete nil
         ;; lsp-completion-enable-additional-text-edit nil
         ;; lsp-completion-sort-initial-results nil
