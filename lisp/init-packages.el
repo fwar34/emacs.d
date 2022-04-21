@@ -1867,6 +1867,10 @@
    ([remap kill-buffer] . persp-kill-buffer*)
    )
   :custom
+  ;; https://emacs.stackexchange.com/questions/14802/never-keep-current-list-of-tags-tables-also
+  ;; Don't ask user whether add tags to list, default add.
+  (tags-add-tables t)
+
   (persp-interactive-completion-function 'ivy-completing-read)
   (persp-sort 'created)
   ;; (persp-mode-prefix-key (kbd "C-x C-i"))
