@@ -201,7 +201,7 @@
 
 (when (display-graphic-p)
   (use-package ligature
-    ;; :disabled
+    :disabled
     :ensure t
     :straight
     (:host github :repo "mickeynp/ligature.el")

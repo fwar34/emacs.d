@@ -63,3 +63,4 @@ session.*
 /rime/luna_pinyin.userdb.old/
 awesome-cheatsheet
 tags
+**/*.~undo-tree~
