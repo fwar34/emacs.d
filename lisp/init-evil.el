@@ -10,7 +10,7 @@
   (interactive)
   (hi-lock-mode -1)
   (hi-lock-mode 1)
-  (highlight-symbol-remove-all)
+  ;; (highlight-symbol-remove-all)
   (symbol-overlay-remove-all)
   (lazy-highlight-cleanup t)
   )
