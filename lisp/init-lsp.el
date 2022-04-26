@@ -32,6 +32,7 @@
     (add-hook hook '(lambda () (nox-ensure))))
   )
 
+;; lsp 的安装可以去 nvim 中使用 :LspInstall 安装
 ;; python: sudo pip install python-lsp-server
 ;; go: GO111MODULE=on go get golang.org/x/tools/gopls@latest
 ;; rust: rustup update && rustup component add rls rust-analysis rust-src
