@@ -1860,13 +1860,16 @@
   :hook
   (after-init . persp-mode)
   :bind
-  (("C-x C-b" . persp-ivy-switch-buffer) ; or use a nicer switcher, see below
+  (
+   ("C-x C-b" . persp-ivy-switch-buffer) ; or use a nicer switcher, see below
+   ("C-c C-b" . persp-list-buffers)         ; or use a nicer switcher, see below
    ("C-x b" . persp-switch-to-buffer*)
    ("C-x k" . persp-kill-buffer*)
    ([remap switch-to-buffer] . persp-switch-to-buffer*)
    ([remap kill-buffer] . persp-kill-buffer*)
    )
   :custom
+  (persp-mode-prefix-key (kbd "C-c M-p"))  ; pick your own prefix key here
   ;; https://emacs.stackexchange.com/questions/14802/never-keep-current-list-of-tags-tables-also
   ;; Don't ask user whether add tags to list, default add.
   (tags-add-tables t)
