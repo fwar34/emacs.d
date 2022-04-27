@@ -41,8 +41,8 @@
   (highlight-remove-all)
   (search-highlight-persist)
   (evil-scroll-line-to-center nil))
-(advice-add 'evil-search-next :after #'my-center-line)
-(advice-add 'evil-search-previous :after #'my-center-line)
+(advice-add 'evil-search-next :after 'my-center-line)
+(advice-add 'evil-search-previous :after 'my-center-line)
 
 ;;-------------------------------------------------------------
 ;; highlight yank region
@@ -65,12 +65,12 @@
                    ;; (remove-overlays beg end 'face 'fwar34-hi-yellow)))
                    (delete-overlay overlay)))
     ))
-;; (advice-add #'evil-yank :after #'fwar34/highlight-yank) ;; evil-delete also use evil-yank
-(advice-add #'evil-yank-rectangle :after #'fwar34/highlight-yank)
-(advice-add #'evil-yank-lines :after #'fwar34/highlight-yank)
-(advice-add #'evil-yank-characters :after #'fwar34/highlight-yank)
+;; (advice-add 'evil-yank :after 'fwar34/highlight-yank) ;; evil-delete also use evil-yank
+(advice-add 'evil-yank-rectangle :after 'fwar34/highlight-yank)
+(advice-add 'evil-yank-lines :after 'fwar34/highlight-yank)
+(advice-add 'evil-yank-characters :after 'fwar34/highlight-yank)
 
-(advice-add #'lispyville-yank :after #'fwar34/highlight-yank)
+(advice-add 'lispyville-yank :after 'fwar34/highlight-yank)
 
 ;; https://www.gnu.org/software/emacs/manual/html_node/elisp/Finding-Overlays.html#Finding-Overlays
 ;; https://www.gnu.org/software/emacs/manual/html_node/elisp/Managing-Overlays.html#Managing-Overlays
@@ -82,8 +82,8 @@
         (when (overlay-get overlay 'fwar34-flag)
           (delete-overlay overlay)))
       (setq overlays (cdr overlays)))))
-(advice-add #'evil-paste-before :after #'fwar34/remove-fwar34-overlay-before-paste)
-(advice-add #'evil-paste-after :after #'fwar34/remove-fwar34-overlay-before-paste)
+(advice-add 'evil-paste-before :after 'fwar34/remove-fwar34-overlay-before-paste)
+(advice-add 'evil-paste-after :after 'fwar34/remove-fwar34-overlay-before-paste)
 
 ;; esc quit
 ;; http://wikemacs.org/index.php/Evil
@@ -116,7 +116,7 @@
 (define-key evil-normal-state-map (kbd "ge") 'evil-goto-line)
 (define-key evil-visual-state-map (kbd "gg") 'evil-change-to-previous-state)
 ;; (define-key evil-insert-state-map "///" 'eval-last-sexp)
-(evil-define-key 'normal package-menu-mode-map "f" #'swiper)
+(evil-define-key 'normal package-menu-mode-map "f" 'swiper)
 
 ;; (define-key evil-normal-state-map (kbd "M-j") 'pyim-toggle-input-ascii)
 (define-key evil-normal-state-map (kbd "C-]") 'counsel-etags-find-tag-at-point)
@@ -587,7 +587,7 @@
                     ;;          (let ((res (apply orig-fun args)))
                     ;;            (when res
                     ;;              (switch-to-buffer-other-window res)
-                    ;;              (evil-local-set-key 'normal (kbd "q") #'kill-buffer-and-window))))
+                    ;;              (evil-local-set-key 'normal (kbd "q") 'kill-buffer-and-window))))
                     ;;        (git-gutter:popup-hunk))
                     "du" '(lambda ()
                             (interactive)
@@ -598,18 +598,18 @@
                                   (let ((res (apply orig-fun args)))
                                     (when res
                                       (switch-to-buffer-other-window res)
-                                      (evil-local-set-key 'normal (kbd "q") #'kill-buffer-and-window))))
+                                      (evil-local-set-key 'normal (kbd "q") 'kill-buffer-and-window))))
                                 (git-gutter:popup-hunk))))
                     ;; "dr" '(lambda ()
                     ;;         (interactive)
-                    ;;         (advice-remove 'git-gutter:popup-hunk #'git-gutter:popup-hunk@my-git-gutter:popup-hunk)
+                    ;;         (advice-remove 'git-gutter:popup-hunk 'git-gutter:popup-hunk@my-git-gutter:popup-hunk)
                     ;;         (git-gutter:revert-hunk))
                     "dr" '(lambda ()
                             (interactive)
                             (if (featurep 'diff-hl)
                                 (diff-hl-revert-hunk)
                               (progn
-                                (advice-remove 'git-gutter:popup-hunk #'git-gutter:popup-hunk@my-git-gutter:popup-hunk)
+                                (advice-remove 'git-gutter:popup-hunk 'git-gutter:popup-hunk@my-git-gutter:popup-hunk)
                                 (git-gutter:revert-hunk))))
                     ;; "dn" 'git-gutter:next-hunk
                     ;; "dp" 'git-gutter:previous-hunk

@@ -292,7 +292,7 @@ URL `http://ergoemacs.org/emacs/elisp_run_current_file.html'"
   (highlight-regexp (substring-no-properties (get-register ?0)) (facep 'hl-yellow))
   )
 
-;; (advice-add #'evil-set-register :after #'test-evil-set-register)
+;; (advice-add 'evil-set-register :after 'test-evil-set-register)
 
 ;; http://ergoemacs.org/emacs/elisp_text_properties.html
 (defun fwar34/color (beg end &optional color)
@@ -397,9 +397,9 @@ URL `http://ergoemacs.org/emacs/elisp_run_current_file.html'"
   (switch-to-buffer (get-buffer-create "*command-output*"))
   (erase-buffer)
   (with-current-buffer "*command-output*"
-    (evil-local-set-key 'normal (kbd "q") #'evil-buffer))
+    (evil-local-set-key 'normal (kbd "q") 'evil-buffer))
       ;; (start-process "my-make" "*make-output*" "make")
-      (apply #'start-process "mycommands" "*command-output*" program program-args)
+      (apply 'start-process "mycommands" "*command-output*" program program-args)
   (goto-char (point-max)))
 
 (defun my-commands-shell (command)
@@ -407,7 +407,7 @@ URL `http://ergoemacs.org/emacs/elisp_run_current_file.html'"
   (switch-to-buffer (get-buffer-create "*command-output*"))
   (erase-buffer)
   (with-current-buffer "*command-output*"
-    (evil-local-set-key 'normal (kbd "q") #'evil-buffer))
+    (evil-local-set-key 'normal (kbd "q") 'evil-buffer))
       ;; (start-process "my-make" "*make-output*" "make")
       (start-process-shell-command "mycommands" "*command-output*" command)
   (goto-char (point-max)))
@@ -418,7 +418,7 @@ URL `http://ergoemacs.org/emacs/elisp_run_current_file.html'"
     (switch-to-buffer (get-buffer-create "*command-output*"))
     (erase-buffer)
     (with-current-buffer "*command-output*"
-      (evil-local-set-key 'normal (kbd "q") #'evil-buffer))
+      (evil-local-set-key 'normal (kbd "q") 'evil-buffer))
     ;; (start-process "my-make" "*make-output*" "make")
     (goto-char (point-max))))
 
@@ -487,8 +487,8 @@ URL `http://ergoemacs.org/emacs/elisp_run_current_file.html'"
   (message "Winner: [u]ndo [r]edo")
   (set-transient-map
    (let ((map (make-sparse-keymap)))
-     (define-key map [?u] #'winner-undo)
-     (define-key map [?r] #'winner-redo)
+     (define-key map [?u] 'winner-undo)
+     (define-key map [?r] 'winner-redo)
      map)
    t))
 ;; }}}
@@ -499,8 +499,8 @@ URL `http://ergoemacs.org/emacs/elisp_run_current_file.html'"
   (message "Yank: [t]ing at point [r]egister")
   (set-transient-map
    (let ((map (make-sparse-keymap)))
-     (define-key map [?t] #'isearch-yank-kill)
-     (define-key map [?r] #'ivy-yank-word)
+     (define-key map [?t] 'isearch-yank-kill)
+     (define-key map [?r] 'ivy-yank-word)
      map)
    t))
 ;; }}}
@@ -655,8 +655,8 @@ URL `http://ergoemacs.org/emacs/elisp_run_current_file.html'"
     (print this-command)
     (print this-original-command)
     (print (this-command-keys))))
-;; (add-hook 'pre-command-hook #'my-test-this-command)
-;; (remove-hook 'pre-command-hook #'my-test-this-command)
+;; (add-hook 'pre-command-hook 'my-test-this-command)
+;; (remove-hook 'pre-command-hook 'my-test-this-command)
 
 (defun my-test-syntax-ppss ()
   (interactive)

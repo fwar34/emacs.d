@@ -349,8 +349,8 @@
         (set (make-local-variable 'last-event-time) (float-time))
         ))
     )
-  ;; (advice-add 'pyim-self-insert-command :around #'my-pyim-self-insert-command)
-  ;; (advice-remove 'pyim-self-insert-command #'my-pyim-self-insert-command)
+  ;; (advice-add 'pyim-self-insert-command :around 'my-pyim-self-insert-command)
+  ;; (advice-remove 'pyim-self-insert-command 'my-pyim-self-insert-command)
   ;; }}}
 
   ;; {{{ 
@@ -381,8 +381,8 @@
                 (funcall orig-func key)
               (setq unread-command-events (append unread-command-events (list key))))))))
     )
-  (advice-add 'pyim-input-method :around #'my-pyim-self-insert-command) 
-  ;; (advice-remove 'pyim-input-method #'my-pyim-self-insert-command)
+  (advice-add 'pyim-input-method :around 'my-pyim-self-insert-command) 
+  ;; (advice-remove 'pyim-input-method 'my-pyim-self-insert-command)
   ;; }}} 
 
   (defun evil-toggle-input-method ()
@@ -466,8 +466,8 @@
                 (funcall orig-func key)
               (setq unread-command-events (append unread-command-events (list key))))))))
     )
-  (advice-add 'rime-input-method :around #'my-rime-self-insert-command)
-  ;; (advice-remove 'rime-input-method #'my-rime-self-insert-command)
+  (advice-add 'rime-input-method :around 'my-rime-self-insert-command)
+  ;; (advice-remove 'rime-input-method 'my-rime-self-insert-command)
   ;; }}}
 
   ;; {{{
@@ -501,8 +501,8 @@
             (if (numberp evt)
                 (apply orig-fun (list evt))
               (setq unread-command-events (append unread-command-events (list evt))))))))))
-  ;; (advice-add 'rime-input-method :around #'rime-evil-escape-advice)
-  ;; (advice-remove 'rime-input-method #'rime-evil-escape-advice)
+  ;; (advice-add 'rime-input-method :around 'rime-evil-escape-advice)
+  ;; (advice-remove 'rime-input-method 'rime-evil-escape-advice)
   ;; }}}
 
   (defun evil-exit-input-method ()
@@ -567,16 +567,16 @@
   (setq evil-insert-state-cursor '((hbar . 5) "yellow")
         evil-normal-state-cursor '(box "purple"))
 
-  (define-key evil-ex-search-keymap (kbd ";g") #'keyboard-quit)
+  (define-key evil-ex-search-keymap (kbd ";g") 'keyboard-quit)
   ;; for quit shell-command output buffer
   ;; (defun my-quit-window (&rest _)
   ;;   (with-current-buffer "*Shell Command Output*"
-  ;;     (evil-local-set-key 'normal (kbd "q") #'quit-window)))
-  ;; (advice-add 'shell-command :after #'my-quit-window)
+  ;;     (evil-local-set-key 'normal (kbd "q") 'quit-window)))
+  ;; (advice-add 'shell-command :after 'my-quit-window)
   ;; (defadvice shell-command (after advice-find-file activate)
   ;;   (with-current-buffer "*Shell Command Output*"
-  ;;     ;; (evil-local-set-key 'normal (kbd "q") #'quit-window)))
-  ;;     (evil-local-set-key 'normal (kbd "q") #'kill-this-buffer)))
+  ;;     ;; (evil-local-set-key 'normal (kbd "q") 'quit-window)))
+  ;;     (evil-local-set-key 'normal (kbd "q") 'kill-this-buffer)))
   (evil-ex-define-cmd "q[uit]" 'kill-this-buffer)
 
   ;; https://emacs.stackexchange.com/questions/31334/history-of-search-terms-for-evil-mode
@@ -679,7 +679,7 @@
         ivy-wrap t
         ivy-height 15
         ivy-fixed-height-minibuffer t
-        ivy-format-function #'ivy-format-function-line
+        ivy-format-function 'ivy-format-function-line
         ivy-use-virtual-buffers t
         ivy-count-format "%d/%d ")
   (ivy-mode 1) ;; M-j ivy-yank-word，将光标的word读入minibuffer，很像vim中的功能
@@ -693,8 +693,8 @@
   ;; (define-key isearch-mode-map (kbd "C-n") 'ivy-next-line)
   ;; (define-key isearch-mode-map (kbd "C-p") 'ivy-previous-line)
   ;; (define-key ivy-minibuffer-map (kbd "C-r") 'counsel-minibuffer-history)
-  ;; (global-set-key (kbd "C-h f") #'counsel-describe-function)
-  ;; (global-set-key (kbd "C-h v") #'counsel-describe-variable)
+  ;; (global-set-key (kbd "C-h f") 'counsel-describe-function)
+  ;; (global-set-key (kbd "C-h v") 'counsel-describe-variable)
 
   ;; (setq counsel-fzf-cmd "fd -I --exclude={site-lisp,etc/snippets,themes,/eln-cache,/var,/elpa,quelpa/,/url,/auto-save-list,.cache,doc/} --type f | fzf -f \"%s\" --algo=v1")
 
@@ -799,11 +799,11 @@
     ;; xref initialization is different in Emacs 27 - there are two different
     ;; variables which can be set rather than just one
     (when (>= emacs-major-version 27)
-      (setq xref-show-definitions-function #'ivy-xref-show-defs))
+      (setq xref-show-definitions-function 'ivy-xref-show-defs))
     ;; Necessary in Emacs <27. In Emacs 27 it will affect all xref-based
     ;; commands other than xref-find-definitions (e.g. project-find-regexp)
     ;; as well
-    (setq xref-show-xrefs-function #'ivy-xref-show-xrefs))
+    (setq xref-show-xrefs-function 'ivy-xref-show-xrefs))
 
   ;; {{{
   ;; https://emacs-china.org/t/ivy-occur/12083
@@ -843,8 +843,8 @@
         (user-error "Filter stack is empty"))))
 
   (defun ivy|occur-mode-setup ()
-    (local-set-key "/" #'ivy-occur/filter-lines)
-    (local-set-key (kbd "M-/") #'ivy-occur/undo))
+    (local-set-key "/" 'ivy-occur/filter-lines)
+    (local-set-key (kbd "M-/") 'ivy-occur/undo))
 
   (add-hook 'ivy-occur-mode-hook 'ivy|occur-mode-setup)
   (add-hook 'ivy-occur-grep-mode-hook 'ivy|occur-mode-setup)
@@ -856,7 +856,7 @@
   :after ivy
   :config
   (ivy-rich-mode 1)
-  (setq ivy-format-function #'ivy-format-function-line)
+  (setq ivy-format-function 'ivy-format-function-line)
   ;; To abbreviate paths using abbreviate-file-name (e.g. replace “/home/username” with “~”)
   (setq ivy-rich-path-style 'abbrev)
   )
@@ -957,7 +957,7 @@
 (use-package yasnippet
   :ensure t
   :config
-  (run-with-idle-timer 0.5 nil #'yas-global-mode)
+  (run-with-idle-timer 0.5 nil 'yas-global-mode)
   (setq yas-snippet-dirs '("~/.emacs.d/mysnippets"))
 
   (use-package ivy-yasnippet
@@ -987,12 +987,12 @@
   ;; press 'q' to quit youdao output buffer
   ;; (defun my-quit-window (&rest _)
   ;;   (with-current-buffer "*Youdao Dictionary*"
-  ;;     (evil-local-set-key 'normal (kbd "q") #'quit-window)))
-  ;; (advice-add 'youdao-dictionary-search-at-point :after #'my-quit-window)
+  ;;     (evil-local-set-key 'normal (kbd "q") 'quit-window)))
+  ;; (advice-add 'youdao-dictionary-search-at-point :after 'my-quit-window)
   ;; (defadvice youdao-dictionary-search-at-point (after advice-youdao-point activate)
   ;;   (with-current-buffer "*Youdao Dictionary*"
-  ;;     (evil-local-set-key 'normal (kbd "q") #'quit-window)))
-  (evil-define-key 'normal youdao-dictionary-mode-map "q" #'kill-this-buffer)
+  ;;     (evil-local-set-key 'normal (kbd "q") 'quit-window)))
+  (evil-define-key 'normal youdao-dictionary-mode-map "q" 'kill-this-buffer)
   ;; (add-hook 'youdao-dictionary-mode-hook
   ;;           (lambda ()
   ;;             (define-key evil-normal-state-local-map (kbd "q") 'quit-window)))
@@ -1081,11 +1081,11 @@
 ;;   :hook
 ;;   (emacs-lisp-mode . lispy-mode)
 ;;   :config
-;;   ;; (define-key lispy-mode-map (kbd “<delete>”) #'lispy-delete)
-;;   ;; (define-key lispy-mode-map (kbd “C-d”) #'lispy-delete-backward)
-;;   ;; (define-key lispy-mode-map (kbd “C-k”) #'lispy-kill)
-;;   ;; (define-key lispy-mode-map (kbd “C-y”) #'lispy-yank)
-;;   ;; (define-key lispy-mode-map (kbd “C-e”) #'lispy-move-end-of-line) 
+;;   ;; (define-key lispy-mode-map (kbd “<delete>”) 'lispy-delete)
+;;   ;; (define-key lispy-mode-map (kbd “C-d”) 'lispy-delete-backward)
+;;   ;; (define-key lispy-mode-map (kbd “C-k”) 'lispy-kill)
+;;   ;; (define-key lispy-mode-map (kbd “C-y”) 'lispy-yank)
+;;   ;; (define-key lispy-mode-map (kbd “C-e”) 'lispy-move-end-of-line) 
 ;;   )
 
 ;; https://github.com/noctuid/lispyville
@@ -1185,7 +1185,7 @@
   :ensure t
   :config
   (global-tree-sitter-mode)
-  (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode)
+  (add-hook 'tree-sitter-after-on-hook 'tree-sitter-hl-mode)
   )
 (use-package tree-sitter-langs
   :ensure t)
@@ -1331,7 +1331,7 @@
   :defer t
   :config
   (evil-define-key 'normal browse-kill-ring-mode-map "q"
-    #'browse-kill-ring-quit)
+    'browse-kill-ring-quit)
   )
 
 (use-package function-args
@@ -1408,7 +1408,7 @@
   :hook
   (smartparens-enabled . evil-smartparens-mode)
   ;; :config
-  ;; (add-hook 'smartparens-enabled-hook #'evil-smartparens-mode)
+  ;; (add-hook 'smartparens-enabled-hook 'evil-smartparens-mode)
   )
 
 ;; smartparens setting
@@ -1533,10 +1533,10 @@
   :straight
   (:host github :repo "liugang/taglist")
   :config
-  (evil-define-key 'normal taglist-mode-map "q" #'kill-this-buffer)
-  (evil-define-key 'normal taglist-mode-map "s" #'swiper)
-  (evil-define-key 'normal taglist-mode-map (kbd "RET") #'taglist-jump-to-tag)
-  ;; (add-hook 'taglist-mode-hook #'read-only-mode)
+  (evil-define-key 'normal taglist-mode-map "q" 'kill-this-buffer)
+  (evil-define-key 'normal taglist-mode-map "s" 'swiper)
+  (evil-define-key 'normal taglist-mode-map (kbd "RET") 'taglist-jump-to-tag)
+  ;; (add-hook 'taglist-mode-hook 'read-only-mode)
   )
 
 ;; (use-package fringe-helper
@@ -1597,8 +1597,8 @@
 
   ;; https://github.com/noctuid/evil-guide
   ;; you could use this to have git-gutter’s commands for navigating hunks save the current location before jumping:
-  (evil-add-command-properties #'git-gutter:next-hunk :jump t)
-  (evil-add-command-properties #'git-gutter:previous-hunk :jump t)
+  (evil-add-command-properties 'git-gutter:next-hunk :jump t)
+  (evil-add-command-properties 'git-gutter:previous-hunk :jump t)
   )
 
 (use-package git-gutter-fringe
@@ -1622,7 +1622,7 @@
   (global-diff-hl-mode)
   (unless (display-graphic-p)
     (diff-hl-margin-mode)) 
-  (advice-add 'svn-status-update-modeline :after #'diff-hl-update)
+  (advice-add 'svn-status-update-modeline :after 'diff-hl-update)
   (add-hook 'magit-pre-refresh-hook 'diff-hl-magit-pre-refresh)
   (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh)
   )
@@ -1747,7 +1747,7 @@
   :config
   (global-disable-mouse-mode)
   (with-eval-after-load 'evil
-    (mapc #'disable-mouse-in-keymap
+    (mapc 'disable-mouse-in-keymap
           (list evil-motion-state-map
                 evil-normal-state-map
                 evil-visual-state-map
@@ -1783,7 +1783,7 @@
   :hook
   (clojure-mode . cider-mode)
   ;; :config
-  ;; (add-hook 'clojure-mode-hook #'cider-mode)
+  ;; (add-hook 'clojure-mode-hook 'cider-mode)
   )
 
 ;; (use-package inf-clojure
@@ -1791,7 +1791,7 @@
 ;;   :ensure t
 ;;   ;; :defer t
 ;;   :config
-;;   (add-hook 'clojure-mode-hook #'inf-clojure-minor-mode)
+;;   (add-hook 'clojure-mode-hook 'inf-clojure-minor-mode)
 ;;   )
 
 (use-package god-mode
@@ -1820,17 +1820,17 @@
                  ;; (set-face-background 'mode-line-inactive (if limited-colors-p "black" "gray26"))
                  )))))
 
-  (add-hook 'god-mode-enabled-hook #'my-god-mode-update-modeline)
-  (add-hook 'god-mode-disabled-hook #'my-god-mode-update-modeline)
+  (add-hook 'god-mode-enabled-hook 'my-god-mode-update-modeline)
+  (add-hook 'god-mode-disabled-hook 'my-god-mode-update-modeline)
 
   ;; For running occasional and single commands in God mode
   ;; (evil-define-key 'normal global-map "gm" (lambda (&optional called-interactively) (interactive "d")
   ;;                                            (if god-local-mode
   ;;                                                (keyboard-quit)
   ;;                                              (god-execute-with-current-bindings called-interactively))))
-  ;; (evil-define-key 'normal global-map "gm" #'god-execute-with-current-bindings)
-  (define-key god-local-mode-map (kbd ".") #'repeat)
-  (define-key god-local-mode-map (kbd ",") #'keyboard-quit)
+  ;; (evil-define-key 'normal global-map "gm" 'god-execute-with-current-bindings)
+  (define-key god-local-mode-map (kbd ".") 'repeat)
+  (define-key god-local-mode-map (kbd ",") 'keyboard-quit)
   )
 
 ;; 缩进显示竖线, 在 cpp 大文件中性能有问题，现在只在需要的地方开启
@@ -1881,7 +1881,7 @@
   ;; (persp-show-modestring 'header)
   (persp-modestring-short t)
   :config
-  (add-hook 'kill-emacs-hook #'persp-state-save)
+  (add-hook 'kill-emacs-hook 'persp-state-save)
   )
 
 (use-package workgroups2
@@ -2124,7 +2124,7 @@
         ([f5] . vterm-toggle)
         ([f12] . vterm-toggle-cd))
   :config
-  ;; (evil-define-key 'insert vterm-mode-map [f12] #'vterm-toggle-insert-cd)
+  ;; (evil-define-key 'insert vterm-mode-map [f12] 'vterm-toggle-insert-cd)
   (evil-define-key 'insert vterm-mode-map (kbd "C-j") 'vterm-toggle-insert-cd)
 
   ;; (general-define-key
@@ -2142,11 +2142,11 @@
   ;;  [f5] 'vterm-toggle)
   
   ;; (global-set-key [f3] 'vterm-toggle-cd)
-  ;; (define-key vterm-mode-map [f3] #'vterm-toggle-cd)
+  ;; (define-key vterm-mode-map [f3] 'vterm-toggle-cd)
 
   ;; you can cd to the directory where your previous buffer file exists
   ;; after you have toggle to the vterm buffer with `vterm-toggle'.
-  ;; (define-key vterm-mode-map [(control return)] #'vterm-toggle-insert-cd)
+  ;; (define-key vterm-mode-map [(control return)] 'vterm-toggle-insert-cd)
 
   ;; Switch to next vterm buffer
   (define-key vterm-mode-map (kbd "s-n") 'vterm-toggle-forward)

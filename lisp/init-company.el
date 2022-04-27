@@ -104,7 +104,7 @@ In that case, insert the number."
   (defun ora--company-good-prefix-p (orig-fn prefix)
     (unless (and (stringp prefix) (string-match-p "\\`[0-9]+\\'" prefix))
       (funcall orig-fn prefix)))
-  (advice-add 'company--good-prefix-p :around #'ora--company-good-prefix-p)
+  (advice-add 'company--good-prefix-p :around 'ora--company-good-prefix-p)
 
   (let ((map company-active-map))
     (mapc (lambda (x) (define-key map (format "%d" x) 'ora-company-number))
@@ -124,12 +124,12 @@ In that case, insert the number."
     (let ((newseq))
       (mapcar #'(lambda (c) (if (not (member c newseq)) (add-to-list 'newseq c))) candidates)
       newseq))
-  ;; (add-to-list 'company-transformers #'eye/company-remove-dups)
+  ;; (add-to-list 'company-transformers 'eye/company-remove-dups)
   ;; }}}
   )
 
 (if (fboundp 'evil-declare-change-repeat)
-    (mapc #'evil-declare-change-repeat
+    (mapc 'evil-declare-change-repeat
           '(company-complete-common
             company-select-next
             company-select-previous
@@ -141,9 +141,9 @@ In that case, insert the number."
   ;; 使用 c-n/c-p 来选择 company 的候选补全项
   (define-key company-active-map (kbd "M-n") nil)
   (define-key company-active-map (kbd "M-p") nil)
-  (define-key company-active-map (kbd "TAB") #'company-select-next-if-tooltip-visible-or-complete-selection)
-  (define-key company-active-map (kbd "C-n") #'company-select-next)
-  (define-key company-active-map (kbd "C-p") #'company-select-previous)
+  (define-key company-active-map (kbd "TAB") 'company-select-next-if-tooltip-visible-or-complete-selection)
+  (define-key company-active-map (kbd "C-n") 'company-select-next)
+  (define-key company-active-map (kbd "C-p") 'company-select-previous)
   ;; (add-to-list 'company-backends 'company-cmake)
   ;; (add-to-list 'company-backends 'company-c-headers)
   ;; can't work with TRAMP
@@ -178,7 +178,7 @@ In that case, insert the number."
   :disabled
   :ensure t
   :config
-  (add-to-list 'company-backends #'company-tabnine))
+  (add-to-list 'company-backends 'company-tabnine))
 
 ;; https://github.com/redguardtoo/company-ctags
 (use-package company-ctags

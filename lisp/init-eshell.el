@@ -15,7 +15,7 @@
                                  (when (> (ring-size eshell-history-ring) 0)
                                    (ring-elements eshell-history-ring)))
                                 :preselect input
-                                :action #'ivy-completion-in-region-action))
+                                :action 'ivy-completion-in-region-action))
              (cursor-move (length command)))
         (kill-region (+ start-pos cursor-move) (+ end-pos cursor-move))
         )))
@@ -40,15 +40,15 @@
   )
 
 (defun my/eshell-init-keymap ()
-  (evil-define-key 'insert eshell-mode-map (kbd "C-r") #'fwar34/ivy-eshell-history)
-  (evil-define-key 'insert eshell-mode-map (kbd "M-j") #'pyim-convert-string-at-point)
-  (evil-define-key 'insert eshell-mode-map ";tm" #'aweshell-toggle)
-  (evil-define-key 'insert eshell-mode-map ";sh" #'aweshell-toggle)
-  (evil-define-key 'insert eshell-mode-map ";g" #'evil-normal-state)
-  (evil-define-key 'insert eshell-mode-map ";;" #'self-insert-command)
-  (evil-define-key 'insert eshell-mode-map (kbd "TAB") #'completion-at-point)
+  (evil-define-key 'insert eshell-mode-map (kbd "C-r") 'fwar34/ivy-eshell-history)
+  (evil-define-key 'insert eshell-mode-map (kbd "M-j") 'pyim-convert-string-at-point)
+  (evil-define-key 'insert eshell-mode-map ";tm" 'aweshell-toggle)
+  (evil-define-key 'insert eshell-mode-map ";sh" 'aweshell-toggle)
+  (evil-define-key 'insert eshell-mode-map ";g" 'evil-normal-state)
+  (evil-define-key 'insert eshell-mode-map ";;" 'self-insert-command)
+  (evil-define-key 'insert eshell-mode-map (kbd "TAB") 'completion-at-point)
   )
-(add-hook 'eshell-first-time-mode-hook #'my/eshell-init-keymap)
+(add-hook 'eshell-first-time-mode-hook 'my/eshell-init-keymap)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; https://github.com/samrayleung/emacs.d/blob/master/lisp/init-eshell.el
@@ -98,7 +98,7 @@
                                 (delete-dups all-shell-history)
                                 :initial-input input
                                 :require-match t
-                                :action #'ivy-completion-in-region-action))
+                                :action 'ivy-completion-in-region-action))
              )
         (eshell-kill-input)
         (insert command)
@@ -162,7 +162,7 @@
 ;;     ;;                   ivy-display-functions-alist))
 ;;     )
 
-;;   (add-hook 'eshell-first-time-mode-hook #'setup-eshell-ivy-completion)
+;;   (add-hook 'eshell-first-time-mode-hook 'setup-eshell-ivy-completion)
 ;;   )
 
 (use-package eshell-prompt-extras
@@ -279,7 +279,7 @@
   (let ((path (cdr (assoc arg eshell-path-alist))))
     (eshell/cd path)))
 (defun pcomplete/d ()
-  (pcomplete-here (mapcar #'car eshell-path-alist)))
+  (pcomplete-here (mapcar 'car eshell-path-alist)))
 
 
 ;;-------------------------------------------------------------
@@ -297,9 +297,9 @@
 ;;     (if (listp other)
 ;;         (setq command (concat first " " (mapconcat 'identity other " "))))
 ;;     (shell-command (concat "foxy.sh " command))))
-;; (defalias 'foxy #'fwar34/foxy-command)
+;; (defalias 'foxy 'fwar34/foxy-command)
 
-(defalias 'q #'aweshell-toggle)
+(defalias 'q 'aweshell-toggle)
 
 ;;-------------------------------------------------------------
 ;; impliment
@@ -332,7 +332,7 @@
       (if (eq (process-status process) 'run)
           (delete-process process))))
   )
-(defalias 'licmd #'fwar34/proxy-command-use-lisp)
+(defalias 'licmd 'fwar34/proxy-command-use-lisp)
 
 ;; https://emacs-china.org/t/emacs-builtin-mode/11937/83?u=fwar34
 (use-package em-term

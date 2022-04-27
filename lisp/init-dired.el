@@ -87,7 +87,7 @@
   :config
   ;; always execute dired-k when dired buffer is opened
   (add-hook 'dired-initial-position-hook 'dired-k)
-  (add-hook 'dired-after-readin-hook #'dired-k-no-revert)
+  (add-hook 'dired-after-readin-hook 'dired-k-no-revert)
   ;; (setq dired-k-style 'git)
   (setq dired-k-style 'k.zsh)
   (setq dired-k-padding 1)
@@ -97,10 +97,10 @@
   (defun my-wdired-advice ()
     (when (or (equal major-mode 'wdired-mode) (equal major-mode 'dired-mode))
       (dired-k)))
-  (advice-add 'wdired-abort-changes :after #'my-wdired-advice)
-  ;; (advice-remove 'wdired-abort-changes #'my-wdired-advice)
-  (advice-add 'wdired-finish-edit :after #'my-wdired-advice)
-  ;; (advice-remove 'wdired-abort-changes #'my-wdired-advice)
+  (advice-add 'wdired-abort-changes :after 'my-wdired-advice)
+  ;; (advice-remove 'wdired-abort-changes 'my-wdired-advice)
+  (advice-add 'wdired-finish-edit :after 'my-wdired-advice)
+  ;; (advice-remove 'wdired-abort-changes 'my-wdired-advice)
   )
 
 (use-package dired-single
@@ -120,12 +120,12 @@
         (define-key dired-mode-map [remap dired-find-file] 'dired-single-buffer)
         (define-key dired-mode-map [remap dired-mouse-find-file-other-window] 'dired-single-buffer-mouse)
         (define-key dired-mode-map [remap dired-up-directory] 'dired-single-up-directory)
-        (evil-define-key 'normal dired-mode-map "q" #'kill-this-buffer)
-        (evil-define-key 'emacs dired-mode-map "q" #'kill-this-buffer)
-        (evil-define-key 'normal dired-mode-map "f" #'swiper)
-        (evil-define-key 'normal dired-mode-map "h" #'dired-single-up-directory)
+        (evil-define-key 'normal dired-mode-map "q" 'kill-this-buffer)
+        (evil-define-key 'emacs dired-mode-map "q" 'kill-this-buffer)
+        (evil-define-key 'normal dired-mode-map "f" 'swiper)
+        (evil-define-key 'normal dired-mode-map "h" 'dired-single-up-directory)
         (evil-define-key 'normal dired-mode-map "l" 'dired-single-buffer)
-        (evil-define-key 'normal dired-mode-map "^" #'dired-single-up-directory)
+        (evil-define-key 'normal dired-mode-map "^" 'dired-single-up-directory)
         (if (display-graphic-p)
             (progn
               (evil-define-key 'normal dired-mode-map [return] 'dired-single-buffer)
@@ -152,7 +152,7 @@
           (funcall fn DEFAULT-DIRNAME)
           (if need-del
               (kill-buffer "*dired-buffer*")))))
-    ;; (advice-add #'dired-single-buffer :around #'advice-dired-single-buffer)
+    ;; (advice-add 'dired-single-buffer :around 'advice-dired-single-buffer)
     ;;-------------------------------------------------------------
     ;; define-advice
     ;;-------------------------------------------------------------

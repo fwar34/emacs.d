@@ -4,7 +4,7 @@
   (interactive)
   (switch-to-buffer (get-buffer-create "*svn-diff*"))
   (erase-buffer)
-  (evil-local-set-key 'normal (kbd "q") #'evil-buffer)
+  (evil-local-set-key 'normal (kbd "q") 'evil-buffer)
   (start-process "my-make" "*svn-diff*" "svn" "diff")
   (goto-char (point-min)))
 

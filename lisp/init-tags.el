@@ -32,7 +32,7 @@
   ;;             (when (derived-mode-p 'python-mode)
   ;;               (ggtags-mode 1))))
   ;; (ggtags-mode 1)
-  (setq-local imenu-create-index-function #'ggtags-build-imenu-index)
+  (setq-local imenu-create-index-function 'ggtags-build-imenu-index)
   )
 
 (use-package counsel-gtags
@@ -97,7 +97,7 @@
    ;; citre-ctags-program "/path/to/ctags"
    ;; Set this if you use project management plugin like projectile.  It's
    ;; used for things like displaying paths relatively, see its docstring.
-   citre-project-root-function #'projectile-project-root
+   citre-project-root-function 'projectile-project-root
    ;; Set this if you want to always use one location to create a tags file.
    ;; citre-default-create-tags-file-location 'global-cache
    ;; See the "Create tags file" section above to know these options

@@ -162,7 +162,7 @@
   ;;    :background nil
   ;;    :inverse-video nil
   ;;    :weight weight-value))
-  ;; (run-with-idle-timer 2 nil #'custom-face)
+  ;; (run-with-idle-timer 2 nil 'custom-face)
   ;;-------------------------------------------------------------
   ;; custom-set-faces
   ;;-------------------------------------------------------------
@@ -195,7 +195,7 @@
   ;;         (t (save-excursion
   ;;              (ignore-errors (backward-up-list))
   ;;              (funcall fn)))))
-  ;; (advice-add #'show-paren-function :around #'advice-show-paren-function)
+  ;; (advice-add 'show-paren-function :around 'advice-show-paren-function)
   ;;-------------------------------------------------------------
   (defadvice show-paren-function (around advice-show-paren-function activate)
     (cond ((looking-at-p "\\s(") ad-do-it)
@@ -215,7 +215,7 @@
 
   (defun test-remove-advice ()
     (interactive)
-    (advice-remove #'show-paren-function #'advice-show-paren-function))
+    (advice-remove 'show-paren-function 'advice-show-paren-function))
 
 
   (set-cursor-color "red")
@@ -320,7 +320,7 @@
 ;;   (if (file-exists-p filename)
 ;;       t
 ;;     (y-or-n-p (message "%s not exist! create it?" filename))))
-;; (advice-add #'find-file :before-while #'advice-find-file)
+;; (advice-add 'find-file :before-while 'advice-find-file)
 
 ;; (defadvice find-file (around advice-find-file activate)
 ;;   (if (file-exists-p filename)
@@ -356,9 +356,9 @@
   :ensure t
   :after evil
   :config
-  (evil-define-key 'normal diff-mode-map "q" #'kill-this-buffer)
-  (evil-define-key 'normal help-mode-map "q" #'kill-buffer-and-window)
-  (evil-define-key 'motion apropos-mode-map "q" #'kill-buffer-and-window)
+  (evil-define-key 'normal diff-mode-map "q" 'kill-this-buffer)
+  (evil-define-key 'normal help-mode-map "q" 'kill-buffer-and-window)
+  (evil-define-key 'motion apropos-mode-map "q" 'kill-buffer-and-window)
   ;; create a thread to auto focus on *apropos* window
   (if (fboundp 'make-thread)
       (add-hook 'apropos-mode-hook (lambda ()
@@ -423,7 +423,7 @@
                             (if fn
                                 (format "Function (default %s): " fn)
                               "Function: ")
-                            #'help--symbol-completion-table
+                            'help--symbol-completion-table
                             (lambda (f) (or (fboundp f) (get f 'function-documentation)))
                             t nil nil
                             (and fn (symbol-name fn)))))

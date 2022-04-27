@@ -247,11 +247,11 @@ DEFAULT-TEXT."
 
 (setq my-persp-mode-line
       ;; https://www.gnu.org/software/emacs/manual/html_node/elisp/Face-Attributes.html
-      ;; '(:eval (propertize (mapconcat #'substring-no-properties (persp-mode-line) "") 'face '(:family "Monaco" font-lock-preprocessor-face))))
-      ;; '(:eval (propertize (mapconcat #'substring-no-properties (persp-mode-line) "") 'face '(:box (:color "orange" :style pressed-button) font-lock-preprocessor-face))))
+      ;; '(:eval (propertize (mapconcat 'substring-no-properties (persp-mode-line) "") 'face '(:family "Monaco" font-lock-preprocessor-face))))
+      ;; '(:eval (propertize (mapconcat 'substring-no-properties (persp-mode-line) "") 'face '(:box (:color "orange" :style pressed-button) font-lock-preprocessor-face))))
       (if (display-graphic-p)
-          '(:eval (propertize (format "%s<%d/%d>" (mapconcat #'substring-no-properties (persp-mode-line) "") (my-persp-mode-line-string) (length (persp-names))) 'face '(:box (:color "orange") font-lock-preprocessor-face)))
-        '(:eval (propertize (format "%s<%d/%d>" (mapconcat #'substring-no-properties (persp-mode-line) "") (my-persp-mode-line-string) (length (persp-names))) 'face 'font-lock-preprocessor-face)))
+          '(:eval (propertize (format "%s<%d/%d>" (mapconcat 'substring-no-properties (persp-mode-line) "") (my-persp-mode-line-string) (length (persp-names))) 'face '(:box (:color "orange") font-lock-preprocessor-face)))
+        '(:eval (propertize (format "%s<%d/%d>" (mapconcat 'substring-no-properties (persp-mode-line) "") (my-persp-mode-line-string) (length (persp-names))) 'face 'font-lock-preprocessor-face)))
       )
 
 (setq line-column-mode-line
@@ -390,7 +390,7 @@ DEFAULT-TEXT."
     (unless (bound-and-true-p god-local-mode)
       (set-face-background 'mode-line (if (display-graphic-p) "gray26" "black"))))
   )
-(add-hook 'post-command-hook #'my-show-wgrep-or-wdired-state)
+(add-hook 'post-command-hook 'my-show-wgrep-or-wdired-state)
 ;; }}
 
 (provide 'init-my-modeline)

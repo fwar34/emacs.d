@@ -31,8 +31,8 @@
     ;; Symbols, including b/w emoji
     (set-fontset-font t 'symbol "Apple Color Emoji" frame 'prepend))
   ;; For initial frame
-  (add-hook 'after-init-hook #'colawithsauce/set-unicode-fonts)
-  (add-hook 'after-make-frame-functions #'colawithsauce/set-unicode-fonts)
+  (add-hook 'after-init-hook 'colawithsauce/set-unicode-fonts)
+  (add-hook 'after-make-frame-functions 'colawithsauce/set-unicode-fonts)
 
   ;; Rescale to restrict font into same height.
   (add-to-list 'face-font-rescale-alist '("Apple Color Emoji" . 0.9))
@@ -45,7 +45,7 @@
         (setq-local face-font-rescale-alist nil)
       (setq-local face-font-rescale-alist '(("Sarasa Mono Slab SC" . 0.88) ("Apple Color Emoji" . 0.9) ("-cdac$" . 1.3)))))
   (add-hook
-   'buffer-face-mode-hook #'colawithsauce/disable-rescale-maybe)
+   'buffer-face-mode-hook 'colawithsauce/disable-rescale-maybe)
   )
 
 (provide 'init-font)

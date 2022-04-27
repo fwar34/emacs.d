@@ -101,9 +101,9 @@
     ("K" hydra-move-splitter-up "resize up" :color red)
     ("L" hydra-move-splitter-right "resize right" :color red)
     ("q" nil "quit menu" :color blue :column nil))
-  (global-set-key (kbd "M-u wi") #'hydra-window/body)
-  (global-set-key (kbd "M-u C-w C-i") #'hydra-window/body)
-  ;; (evil-define-key '(normal insert) 'global (kbd "M-u wi") #'hydra-window/body)
+  (global-set-key (kbd "M-u wi") 'hydra-window/body)
+  (global-set-key (kbd "M-u C-w C-i") 'hydra-window/body)
+  ;; (evil-define-key '(normal insert) 'global (kbd "M-u wi") 'hydra-window/body)
 
   ;;-------------------------------------------------------------
   ;; org
@@ -131,7 +131,7 @@
     (define-key org-mode-map (kbd "M-u or") 'hydra-org/body)
     (evil-define-key 'normal org-mode-map (kbd "M-u C-o C-r") 'hydra-org/body)
     )
-  ;; (evil-define-key '(normal insert) 'global (kbd "M-u og") #'hydra-org/body)
+  ;; (evil-define-key '(normal insert) 'global (kbd "M-u og") 'hydra-org/body)
   ;; (with-eval-after-load 'org
   ;;   (define-key org-mode-map (kbd "M-u og") 'hydra-org/body))
 
@@ -145,10 +145,10 @@
     ("py" fwar34/insert-python "python commit")
     ("rc" fwar34/run-current-file "run current file")
     ("q" nil "cancale" :color blue))
-  ;; (define-key evil-normal-state-map (kbd "M-u f") #'hydra-fwar34/body)
-  ;; (evil-define-key '(normal insert) 'global (kbd "M-u fw") #'hydra-fwar34/body)
-  (global-set-key (kbd "M-u fw") #'hydra-fwar34/body)
-  (global-set-key (kbd "M-u C-f C-w") #'hydra-fwar34/body)
+  ;; (define-key evil-normal-state-map (kbd "M-u f") 'hydra-fwar34/body)
+  ;; (evil-define-key '(normal insert) 'global (kbd "M-u fw") 'hydra-fwar34/body)
+  (global-set-key (kbd "M-u fw") 'hydra-fwar34/body)
+  (global-set-key (kbd "M-u C-f C-w") 'hydra-fwar34/body)
 
   ;;-------------------------------------------------------------
   ;; M-um
@@ -184,11 +184,11 @@
     ("cp" caps-lock-mode)
     ("cl" ivy-yasnippet)
     ("q" nil "cancale"))
-  (global-set-key (kbd "M-u mm") #'hydra-M-um/body)
-  (global-set-key (kbd "M-u C-m C-m") #'hydra-M-um/body)
-  ;; (evil-define-key '(normal insert) 'global (kbd "M-u mm") #'hydra-M-um/body)
-  ;; (define-key evil-ex-completion-map (kbd "M-u m") #'hydra-M-um/body)
-  ;; (define-key evil-ex-search-keymap (kbd "M-u m") #'hydra-M-um/body)
+  (global-set-key (kbd "M-u mm") 'hydra-M-um/body)
+  (global-set-key (kbd "M-u C-m C-m") 'hydra-M-um/body)
+  ;; (evil-define-key '(normal insert) 'global (kbd "M-u mm") 'hydra-M-um/body)
+  ;; (define-key evil-ex-completion-map (kbd "M-u m") 'hydra-M-um/body)
+  ;; (define-key evil-ex-search-keymap (kbd "M-u m") 'hydra-M-um/body)
 
   ;;-------------------------------------------------------------
   ;; apropos
@@ -227,8 +227,8 @@
     ("cm" counsel-minibuffer-history "counsel-minibuffer-history")
     ("ch" counsel-command-history "counsel-command-history")
     ("q" nil "cancel" :exit t :column nil))
-  (global-set-key (kbd "M-u iv") #'hydra-ivy-swiper/body)
-  (global-set-key (kbd "M-u C-i C-v") #'hydra-ivy-swiper/body)
+  (global-set-key (kbd "M-u iv") 'hydra-ivy-swiper/body)
+  (global-set-key (kbd "M-u C-i C-v") 'hydra-ivy-swiper/body)
 
   ;;-------------------------------------------------------------
   ;; counsel-etags
@@ -249,8 +249,8 @@
     ("s" counsel-etags-virtual-update-tags "Scan code and create tags file again.")
     ("q" nil "cancel" :exit t :column nil))
   ;; (global-set-key (kbd "M-u ap") 'hydra-apropos/body)
-  (global-set-key (kbd "M-u tt") #'hydra-counsel-etags/body)
-  (global-set-key (kbd "M-u C-t C-t") #'hydra-counsel-etags/body)
+  (global-set-key (kbd "M-u tt") 'hydra-counsel-etags/body)
+  (global-set-key (kbd "M-u C-t C-t") 'hydra-counsel-etags/body)
 
   ;;-------------------------------------------------------------
   ;; agenda
@@ -303,18 +303,18 @@
     ("co" pyim-convert-string-at-point)
     ("to" pyim-toggle-input-ascii)
     ("q" nil "cancale" :color blue))
-  (global-set-key (kbd "M-u py") #'hydra-pyim/body)
-  (global-set-key (kbd "M-u C-p C-y") #'hydra-pyim/body)
+  (global-set-key (kbd "M-u py") 'hydra-pyim/body)
+  (global-set-key (kbd "M-u C-p C-y") 'hydra-pyim/body)
   (with-eval-after-load 'isearch 
       ;;这里是给像vim的/和?(evil-search-forward和evil-search-backward)搜索切换输入法添加快捷键
       ;; 上面两个搜索内部使用的是isearch相关的函数
     (define-key isearch-mode-map (kbd "M-u py") 'hydra-pyim/body)
     (evil-define-key 'normal isearch-mode-map (kbd "M-u C-p C-y") 'hydra-pyim/body)
     )
-  ;; (add-hook 'isearch-mode-hook #'(lambda ()
-  ;;                                  (local-set-key (kbd "M-u py") #'hydra-pyim/body)))
-  ;; (define-key evil-motion-state-map (kbd "M-u py") #'hydra-pyim/body)
-  ;; (evil-define-key 'normal motion  (kbd "M-u py") #'hydra-pyim/body)
+  ;; (add-hook 'isearch-mode-hook '(lambda ()
+  ;;                                  (local-set-key (kbd "M-u py") 'hydra-pyim/body)))
+  ;; (define-key evil-motion-state-map (kbd "M-u py") 'hydra-pyim/body)
+  ;; (evil-define-key 'normal motion  (kbd "M-u py") 'hydra-pyim/body)
 
   ;;-------------------------------------------------------------
   ;; isearch
@@ -340,8 +340,8 @@
     ("k" previous-error "prev")
     ("v" recenter-top-bottom "recenter")
     ("q" nil "quit"))
-  (global-set-key (kbd "M-u er") #'hydra-error/body)
-  (global-set-key (kbd "M-u C-e C-r") #'hydra-error/body)
+  (global-set-key (kbd "M-u er") 'hydra-error/body)
+  (global-set-key (kbd "M-u C-e C-r") 'hydra-error/body)
 
   ;;-------------------------------------------------------------
   ;; lispyville
@@ -351,7 +351,7 @@
       ("[" lispyville-wrap-brackets "wrap round with [")
       ("{" lispyville-wrap-braces "wrap round with {")
       ("q" nil "cancel" :exit t :column nil))
-    ;; (global-set-key (kbd "M-u li") #'hydra-lispyville/body)
+    ;; (global-set-key (kbd "M-u li") 'hydra-lispyville/body)
     (define-key lispyville-mode-map (kbd "M-u li") 'hydra-lispyville/body)
     (evil-define-key 'normal lispyville-mode-map (kbd "M-u C-l C-i") 'hydra-lispyville/body)
     )
@@ -401,9 +401,9 @@
       ("p" Info-prev-reference "Move cursor to the previous cross-reference or menu item in the node." :color red)
       ("l" Info-final-node "Go to the final node in this file.")
       ("q" nil "cancel" :exit t :column nil))
-    ;; (global-set-key (kbd "M-u if") #'hydra-info/body)
-    (define-key Info-mode-map (kbd "M-u if") #'hydra-info/body)
-    (evil-define-key 'normal Info-mode-map (kbd "M-u C-i C-f") #'hydra-info/body)
+    ;; (global-set-key (kbd "M-u if") 'hydra-info/body)
+    (define-key Info-mode-map (kbd "M-u if") 'hydra-info/body)
+    (evil-define-key 'normal Info-mode-map (kbd "M-u C-i C-f") 'hydra-info/body)
     )
 
   ;;-------------------------------------------------------------
@@ -424,10 +424,10 @@
        "decrease font 10" :column "fonts commands")
       ("q" nil "cancel" :exit t :column nil))
     ;; (define-key magit-mode-map (kbd "M-u ft") 'hydra-font/body)
-    (global-set-key (kbd "M-u ft") #'hydra-font/body)
-    (global-set-key (kbd "M-u C-f C-t") #'hydra-font/body)
+    (global-set-key (kbd "M-u ft") 'hydra-font/body)
+    (global-set-key (kbd "M-u C-f C-t") 'hydra-font/body)
     )
-  ;; (evil-define-key 'normal 'global (kbd "M-u ft") #'hydra-font/body)
+  ;; (evil-define-key 'normal 'global (kbd "M-u ft") 'hydra-font/body)
 
   (defhydra hydra-input-method (:color blue)
     ("py" (lambda ()
@@ -438,6 +438,6 @@
             (interactive)
             (setq default-input-method "rime")
             (set-input-method "rime"))))
-  (global-set-key (kbd "M-u in") #'hydra-input-method/body))
+  (global-set-key (kbd "M-u in") 'hydra-input-method/body))
 
 (provide 'init-hydra)
