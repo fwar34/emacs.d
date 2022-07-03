@@ -219,11 +219,15 @@
 
 
   (set-cursor-color "red")
-  (fset 'yes-or-no-p 'y-or-n-p)
+  ;; (fset 'yes-or-no-p 'y-or-n-p)
+  (setq use-short-answers t)
   (delete-selection-mode 1)
 
   (add-to-list 'auto-mode-alist '("\\.zsh\\'" . sh-mode))
   (add-to-list 'auto-mode-alist '("\\.ice\\'" . c++-mode))
+
+  ;; 针对 CJK 字符，提高 word-wrap 的效果
+  (setq word-wrap-by-category t)
   )
 
 ;; https://emacs-china.org/t/emacs-builtin-mode/11937

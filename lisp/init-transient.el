@@ -123,7 +123,9 @@
              ("l" pmx-set-lisp-variable)
              ("w" pmx-show-lisp-variable)]
             ["Drilldown"
-             ("d" "drilldown" pmx-nested-transient)]])
+             ("d" "drilldown" pmx-nested-transient)]
+            ["Quit"
+             ("q" "quit" keyboard-quit)]])
 
 
   (use-package transient-posframe
