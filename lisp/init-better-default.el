@@ -220,7 +220,7 @@
 
   (set-cursor-color "red")
   (fset 'yes-or-no-p 'y-or-n-p)
-  ;; (setq use-short-answers t)
+  (setq use-short-answers t)
   (delete-selection-mode 1)
 
   (add-to-list 'auto-mode-alist '("\\.zsh\\'" . sh-mode))
