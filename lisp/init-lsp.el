@@ -93,7 +93,29 @@
   (use-package lsp-ui
     :ensure t
     :after lsp-mode
-    :commands lsp-ui-mode)
+    :commands lsp-ui-mode
+    :config
+
+    (general-define-key
+     :states 'normal
+     ;; :keymaps 'lsp-mode-map
+     :prefix ";"
+     "kk" 'lsp-ui-doc-show
+     "J" 'lsp-ui-doc-focus-frame)
+
+    ;; (general-define-key
+    ;;  :states 'normal
+    ;;  :prefix ";"
+    ;;  :keymaps 'lsp-ui-doc-frame-mode-map
+    ;;  ;; "q" 'lsp-ui-doc-unfocus-frame
+    ;;  "q" 'quit-window)
+
+    (evil-define-key 'normal lsp-ui-doc-frame-mode-map "H" 'lsp-ui-doc-unfocus-frame)
+    (evil-define-key 'normal lsp-ui-doc-frame-mode-map "q" 'lsp-ui-doc-hide)
+    )
+
+  
+
   ;; if you are ivy user
   (use-package lsp-ivy
     :ensure t
