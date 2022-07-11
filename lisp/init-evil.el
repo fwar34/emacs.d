@@ -440,7 +440,8 @@
                     ;; "mws" 'mpc-which-song
                     ;; "ms" 'mpc-next-prev-song
                     ;; "tm" 'eshell
-                    "tm" 'my-multi-term
+                    ;; "tm" 'my-multi-term
+                    "tm" 'vterm-toggle
                     ;; "sh" (lambda ()
                     ;;        (interactive)
                     ;;        (if (equal system-type 'windows-nt)
