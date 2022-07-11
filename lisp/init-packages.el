@@ -2127,7 +2127,8 @@
   (:map vterm-mode-map
         ([f5] . vterm-toggle)
         ([f12] . vterm-toggle-cd)
-        (";tm" . vterm-toggle))
+        (";tm" . vterm-toggle)
+        (";g" . evil-normal-state))
   :config
   ;; (evil-define-key 'insert vterm-mode-map [f12] 'vterm-toggle-insert-cd)
   (evil-define-key 'insert vterm-mode-map (kbd "C-j") 'vterm-toggle-insert-cd)
