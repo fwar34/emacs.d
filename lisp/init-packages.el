@@ -2061,8 +2061,10 @@
   :bind ("C-c C-h" . easy-hugo)
   )
 
+;; ox-hugo and org2jekyll recursion require XXXXX
 ;; ox-hugo is an Org exporter backend that exports Org to Hugo-compatible Markdown (Blackfriday) and also generates the front-matter (in TOML or YAML format).
 (use-package ox-hugo
+  :disabled
   :ensure t
   :after ox)
 

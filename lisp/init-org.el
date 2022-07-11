@@ -73,7 +73,9 @@
   (org-mode . (lambda () (org-bullets-mode 1)))
   )
 
+;; ox-hugo and org2jekyll recursion require XXXXX
 (use-package org2jekyll
+  :disabled
   :ensure t
   :after org
   :config
