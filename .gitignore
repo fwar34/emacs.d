@@ -64,3 +64,4 @@ session.*
 awesome-cheatsheet
 tags
 **/*.~undo-tree~
+undo/

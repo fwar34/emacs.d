@@ -603,7 +603,9 @@
 (use-package undo-tree
   :ensure t
   :hook
-  (after-init . global-undo-tree-mode))
+  (after-init . global-undo-tree-mode)
+  :custom
+  (undo-tree-history-directory-alist '(("." .  "~/.emacs/undo"))))
 
 (use-package goto-chg
   ;; Goto Last Change
