@@ -605,7 +605,7 @@
   :hook
   (after-init . global-undo-tree-mode)
   :custom
-  (undo-tree-history-directory-alist '(("." .  "~/.emacs/undo"))))
+  (undo-tree-history-directory-alist '(("." .  "~/.emacs.d/undo"))))
 
 (use-package goto-chg
   ;; Goto Last Change
