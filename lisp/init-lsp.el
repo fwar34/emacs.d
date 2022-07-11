@@ -45,7 +45,8 @@
   :if (equal system-type 'gnu/linux)
   :init
   ;; set prefix for lsp-command-keymap (few alternatives - "C-l", "C-c l")
-  (setq lsp-keymap-prefix "C-c l")
+  ;; (setq lsp-keymap-prefix "C-c l")
+  (setq lsp-keymap-prefix "C-l")
   :hook (;; replace XXX-mode with concrete major-mode(e. g. python-mode)
          (go-mode . lsp-deferred)
          (python-mode . lsp-deferred)
