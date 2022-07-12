@@ -96,6 +96,8 @@
     :commands lsp-ui-mode
     :custom
     (lsp-ui-sideline-show-hover t)
+    (lsp-ui-doc-position 'at-point)
+    (lsp-ui-doc-show-with-cursor t)
     :config
 
     (general-define-key
