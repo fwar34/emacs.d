@@ -586,10 +586,11 @@
   ;;   (use-package undo-fu :ensure t))
 
   ;; https://emacs-china.org/t/customize-evil-undo-system-for-redo-functionality/14969/3
-  (when (fboundp 'evil-set-undo-system)
-    (evil-set-undo-system (if (>= emacs-major-version 28) 'undo-redo 'undo-tree))
-    ;; (evil-set-undo-system (if (>= emacs-major-version 28) 'undo-redo 'undo-fu))
-    )
+  ;; (when (fboundp 'evil-set-undo-system)
+  ;;   (evil-set-undo-system (if (>= emacs-major-version 28) 'undo-redo 'undo-tree))
+  ;;   ;; (evil-set-undo-system (if (>= emacs-major-version 28) 'undo-redo 'undo-fu))
+  ;;   )
+  (evil-set-undo-system 'undo-tree)
   (use-package avy :ensure t)
 
   :custom
