@@ -97,14 +97,14 @@
     :custom
     (lsp-ui-sideline-show-hover t)
     (lsp-ui-doc-position 'at-point)
-    (lsp-ui-doc-show-with-cursor t)
+    ;; (lsp-ui-doc-show-with-cursor t)
     :config
 
     (general-define-key
      :states 'normal
      ;; :keymaps 'lsp-mode-map
      :prefix ";"
-     "K" 'lsp-ui-doc-show
+     "K" 'lsp-ui-doc-glance
      "J" 'lsp-ui-doc-focus-frame)
 
     ;; (general-define-key
@@ -114,7 +114,8 @@
     ;;  ;; "q" 'lsp-ui-doc-unfocus-frame
     ;;  "q" 'quit-window)
 
-    (evil-define-key 'normal go-mode-map "K" 'lsp-ui-doc-glance)
+    ;; (evil-define-key 'normal go-mode-map "K" 'lsp-ui-doc-glance)
+    (evil-define-key 'normal go-mode-map "K" 'lsp-ui-doc-show)
     (evil-define-key 'normal lsp-ui-doc-frame-mode-map "H" 'lsp-ui-doc-unfocus-frame)
     (evil-define-key 'normal lsp-ui-doc-frame-mode-map "q" 'lsp-ui-doc-hide)
     )
