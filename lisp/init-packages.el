@@ -2181,6 +2181,8 @@
   :config
   (global-hl-todo-mode))
 
+;; https://emacstalk.github.io/post/002/
+;; 在 Emacs 28 中新增了 shortdoc-display-group 命令 ，对常用函数进行了归类展示
 (use-package elisp-demos
   :ensure t
   :config

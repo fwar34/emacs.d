@@ -11,9 +11,8 @@
   (define-prefix-command 'M-i-map)
   (global-set-key (kbd "M-i") 'M-i-map)
   :config
-  (global-set-key (kbd "M-i mm") 'pmx-transient-toy)
+  (global-set-key (kbd "M-i mt") 'pmx-transient-toy)
   (global-set-key (kbd "M-i tt") 'my-transient-yank)
-  
 
   (transient-define-suffix pmx-show-prefix ()
     "Show the prefix that invoked this suffix"
@@ -138,6 +137,7 @@
 
 ;; {{{
 ;;----------------------------------------------------------------
+;; https://magit.vc/manual/transient.html
 ;; https://gist.github.com/abrochard/dd610fc4673593b7cbce7a0176d897de
 ;; ‘define-transient-command’ is an obsolete alias (as of Transient 0.3.0); use ‘transient-define-prefix’ instead.
 ;;----------------------------------------------------------------
@@ -207,7 +207,29 @@
   ["Actions"
    ("d" "Action d" test-function-4)])
 ;; (test-transient-4)
+;; }}}
 
+;; {{{ my transient commands
+(global-set-key (kbd "M-u ll") 'my-misc-transinet)
+
+(transient-define-prefix my-hl-todo ()
+  "my hl-todo commands"
+  [["Commands"
+    ("p" "hl-todo-previous" hl-todo-previous)
+    ("n" "hl-todo-next" hl-todo-next)
+    ("o" "hl-todo-occur" hl-todo-occur)
+    ("i" "hl-todo-insert" hl-todo-insert)]
+   ["Quit"
+    ("q" "quit" keyboard-quit)]])
+
+(transient-define-prefix my-misc-transinet ()
+  "my misc commands"
+  [["Commands"
+    ("h" "hl-todo" my-hl-todo)
+    ("p" "clipboard-yank" clipboard-yank)]
+   ["Quit"
+    ("q" "quit" keyboard-quit)]
+   ])
 ;; }}}
 
 (provide 'init-transient)
