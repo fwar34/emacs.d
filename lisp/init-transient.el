@@ -7,12 +7,16 @@
 
 (use-package transient
   :ensure t
+  :straight
+  (:host github :repo "magit/transient")
   :init
   (define-prefix-command 'M-i-map)
   (global-set-key (kbd "M-i") 'M-i-map)
   :config
+  (transient-bind-q-to-quit)
   (global-set-key (kbd "M-i mt") 'pmx-transient-toy)
   (global-set-key (kbd "M-i tt") 'my-transient-yank)
+  ;; (setq transient-display-buffer-action '(display-buffer-below-selected))
 
   (transient-define-suffix pmx-show-prefix ()
     "Show the prefix that invoked this suffix"
@@ -219,16 +223,14 @@
     ("n" "hl-todo-next" hl-todo-next)
     ("o" "hl-todo-occur" hl-todo-occur)
     ("i" "hl-todo-insert" hl-todo-insert)]
-   ["Quit"
-    ("q" "quit" keyboard-quit)]])
+   ])
 
 (transient-define-prefix my-misc-transinet ()
   "my misc commands"
   [["Commands"
     ("h" "hl-todo" my-hl-todo)
-    ("p" "clipboard-yank" clipboard-yank)]
-   ["Quit"
-    ("q" "quit" keyboard-quit)]
+    ("p" "clipboard-yank" clipboard-yank)
+    ("s" "shortdoc-display-group" shortdoc-display-group)]
    ])
 ;; }}}
 

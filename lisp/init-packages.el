@@ -555,7 +555,9 @@
   :bind
   (:map isearch-mode-map
         ("<up>" . 'isearch-ring-retreat)
-        ("<down>" . isearch-ring-advance))
+        ("<down>" . isearch-ring-advance)
+        ("," . 'my-evil-search-transient)
+        )
   (:map evil-normal-state-map
         ("C-a" . evil-first-non-blank)
         ("C-e" . evil-end-of-line))
@@ -578,6 +580,18 @@
   ;;     ;; (evil-local-set-key 'normal (kbd "q") 'quit-window)))
   ;;     (evil-local-set-key 'normal (kbd "q") 'kill-this-buffer)))
   (evil-ex-define-cmd "q[uit]" 'kill-this-buffer)
+
+  (with-eval-after-load 'transient
+    (transient-define-prefix my-evil-search-transient ()
+      "my evil search commands"
+      [:calss transient-row
+       ["Commands"
+        ("," "self insert \",\"" evil-insert)
+        ("p" "paste last from kill ring" isearch-yank-pop-only)
+        ("y" "paste from kill ring" isearch-yank-pop)]]
+       [[:hide (lambda () t)
+              ("q" "quit" keyboard-quit)]])
+    )
 
   ;; https://emacs.stackexchange.com/questions/31334/history-of-search-terms-for-evil-mode
   ;; (custom-set-variables '(evil-search-module 'evil-search))
@@ -758,112 +772,135 @@
   ;; win10如果默认改成了utf8编码则不需要底下这个配置
   ;;   (modify-coding-system-alist 'process "ag" '(utf-8 . chinese-gbk-dos))
   ;;   (modify-coding-system-alist 'process "rg" '(utf-8 . chinese-gbk-dos)))
-
+  (with-eval-after-load 'transient
+    (transient-define-prefix my-ivy-minibuffer-transient ()
+      "my ivy minibuffer commands"
+      [["Commands"
+        ("," "self insert \",\"" self-insert-command)
+        ("s" "ivy-restrict-to-matches" ivy-restrict-to-matches)
+        ("d" "swiper-avy" swiper-avy)
+        ("c" "ivy-occur" ivy-occur)
+        ("a" "ivy-beginning-of-buffer" ivy-beginning-of-buffer)
+        ("e" "ivy-end-of-buffer" ivy-end-of-buffer)
+        ("n" "ivy-next-line-and-call" ivy-next-line-and-call)
+        ("r" "ivy-previous-line-and-call" ivy-previous-line-and-call)
+        ("j" "ivy-immediate-done" ivy-immediate-done)
+        ("p" "clipboard-yank" clipboard-yank)]
+       ["Quit"
+        ("q" "quit" keyboard-quit)]
+       ])
+    )
+  ;; (general-define-key
+  ;;  :keymaps 'ivy-minibuffer-map
+  ;;  :prefix ","
+  ;;  "," 'my-ivy-minibuffer-transient
+  ;;  "i" 'self-insert-command
+  ;;  "s" 'ivy-restrict-to-matches
+  ;;  "d" 'swiper-avy
+  ;;  "c" 'ivy-occur
+  ;;  "a" 'ivy-beginning-of-buffer
+  ;;  "e" 'ivy-end-of-buffer
+  ;;  "n" 'ivy-next-line-and-call
+  ;;  "p" 'ivy-previous-line-and-call
+  ;;  "j" 'ivy-immediate-done
+  ;;  "m" 'my-misc-transinet
+  ;;  )
   (general-define-key
    :keymaps 'ivy-minibuffer-map
    :prefix ","
-   "," 'self-insert-command
-   "s" 'ivy-restrict-to-matches
-   "d" 'swiper-avy
-   "c" 'ivy-occur
-   "a" 'ivy-beginning-of-buffer
-   "e" 'ivy-end-of-buffer
-   "n" 'ivy-next-line-and-call
-   "p" 'ivy-previous-line-and-call
-   "j" 'ivy-immediate-done
+   "," 'my-ivy-minibuffer-transient
    )
-  
 
-  (use-package ivy-posframe
-    :disabled
-    :ensure t
-    :if (display-graphic-p)
-    :config
-    ;; The following example displays swiper on 20 lines by default for ivy,
-    ;; and displays other functions in posframe at the location specified on 40 lines.
-    ;; (setq ivy-posframe-height-alist '((swiper . 20)
-    ;;                                   (t      . 40)))
+    (use-package ivy-posframe
+      :disabled
+      :ensure t
+      :if (display-graphic-p)
+      :config
+      ;; The following example displays swiper on 20 lines by default for ivy,
+      ;; and displays other functions in posframe at the location specified on 40 lines.
+      ;; (setq ivy-posframe-height-alist '((swiper . 20)
+      ;;                                   (t      . 40)))
 
-    ;; How to show fringe to ivy-posframe
-    (setq ivy-posframe-parameters
-          '((left-fringe . 8)
-            (right-fringe . 8)))
+      ;; How to show fringe to ivy-posframe
+      (setq ivy-posframe-parameters
+            '((left-fringe . 8)
+              (right-fringe . 8)))
 
-    ;; Per-command mode.
-    ;; Different command can use different display function.
-    (setq ivy-posframe-display-functions-alist
-          '((swiper          . ivy-display-function-fallback)
-            (complete-symbol . ivy-posframe-display)
-            (counsel-M-x     . ivy-posframe-display-at-window-center)
-            (t               . ivy-posframe-display)))
-    (ivy-posframe-mode 1)
-    )
+      ;; Per-command mode.
+      ;; Different command can use different display function.
+      (setq ivy-posframe-display-functions-alist
+            '((swiper          . ivy-display-function-fallback)
+              (complete-symbol . ivy-posframe-display)
+              (counsel-M-x     . ivy-posframe-display-at-window-center)
+              (t               . ivy-posframe-display)))
+      (ivy-posframe-mode 1)
+      )
 
-  (use-package amx
-    :ensure t
-    :defer t
-    :config
-    (amx-mode)
-    )
+    (use-package amx
+      :ensure t
+      :defer t
+      :config
+      (amx-mode)
+      )
 
-  (use-package ivy-xref
-    :ensure t
-    :defer t
-    :init
-    ;; xref initialization is different in Emacs 27 - there are two different
-    ;; variables which can be set rather than just one
-    (when (>= emacs-major-version 27)
-      (setq xref-show-definitions-function 'ivy-xref-show-defs))
-    ;; Necessary in Emacs <27. In Emacs 27 it will affect all xref-based
-    ;; commands other than xref-find-definitions (e.g. project-find-regexp)
-    ;; as well
-    (setq xref-show-xrefs-function 'ivy-xref-show-xrefs))
+    (use-package ivy-xref
+      :ensure t
+      :defer t
+      :init
+      ;; xref initialization is different in Emacs 27 - there are two different
+      ;; variables which can be set rather than just one
+      (when (>= emacs-major-version 27)
+        (setq xref-show-definitions-function 'ivy-xref-show-defs))
+      ;; Necessary in Emacs <27. In Emacs 27 it will affect all xref-based
+      ;; commands other than xref-find-definitions (e.g. project-find-regexp)
+      ;; as well
+      (setq xref-show-xrefs-function 'ivy-xref-show-xrefs))
 
-  ;; {{{
-  ;; https://emacs-china.org/t/ivy-occur/12083
-  (defvar ivy-occur-filter-prefix ">>> ")
-
-;;;###autoload
-  (defun ivy-occur/filter-lines ()
-    (interactive)
-    (unless (string-prefix-p "ivy-occur" (symbol-name major-mode))
-      (user-error "Current buffer is not in ivy-occur mode"))
-
-    (let ((inhibit-read-only t)
-          (regexp (read-regexp "Regexp(! for flush)"))
-          (start (save-excursion
-                   (goto-char (point-min))
-                   (re-search-forward "[0-9]+ candidates:"))))
-      (if (string-prefix-p "!" regexp)
-          (flush-lines (substring regexp 1) start (point-max))
-        (keep-lines regexp start (point-max)))
-      (save-excursion
-        (goto-char (point-min))
-        (let ((item (propertize (format "[%s]" regexp) 'face 'ivy-current-match)))
-          (if (looking-at ivy-occur-filter-prefix)
-              (progn
-                (goto-char (line-end-position))
-                (insert item))
-            (insert ivy-occur-filter-prefix item "\n"))))))
+    ;; {{{
+    ;; https://emacs-china.org/t/ivy-occur/12083
+    (defvar ivy-occur-filter-prefix ">>> ")
 
 ;;;###autoload
-  (defun ivy-occur/undo ()
-    (interactive)
-    (let ((inhibit-read-only t))
-      (if (save-excursion
-            (goto-char (point-min))
-            (looking-at ivy-occur-filter-prefix))
-          (undo)
-        (user-error "Filter stack is empty"))))
+    (defun ivy-occur/filter-lines ()
+      (interactive)
+      (unless (string-prefix-p "ivy-occur" (symbol-name major-mode))
+        (user-error "Current buffer is not in ivy-occur mode"))
 
-  (defun ivy|occur-mode-setup ()
-    (local-set-key "/" 'ivy-occur/filter-lines)
-    (local-set-key (kbd "M-/") 'ivy-occur/undo))
+      (let ((inhibit-read-only t)
+            (regexp (read-regexp "Regexp(! for flush)"))
+            (start (save-excursion
+                     (goto-char (point-min))
+                     (re-search-forward "[0-9]+ candidates:"))))
+        (if (string-prefix-p "!" regexp)
+            (flush-lines (substring regexp 1) start (point-max))
+          (keep-lines regexp start (point-max)))
+        (save-excursion
+          (goto-char (point-min))
+          (let ((item (propertize (format "[%s]" regexp) 'face 'ivy-current-match)))
+            (if (looking-at ivy-occur-filter-prefix)
+                (progn
+                  (goto-char (line-end-position))
+                  (insert item))
+              (insert ivy-occur-filter-prefix item "\n"))))))
 
-  (add-hook 'ivy-occur-mode-hook 'ivy|occur-mode-setup)
-  (add-hook 'ivy-occur-grep-mode-hook 'ivy|occur-mode-setup)
-  ;; }}}
-  )
+;;;###autoload
+    (defun ivy-occur/undo ()
+      (interactive)
+      (let ((inhibit-read-only t))
+        (if (save-excursion
+              (goto-char (point-min))
+              (looking-at ivy-occur-filter-prefix))
+            (undo)
+          (user-error "Filter stack is empty"))))
+
+    (defun ivy|occur-mode-setup ()
+      (local-set-key "/" 'ivy-occur/filter-lines)
+      (local-set-key (kbd "M-/") 'ivy-occur/undo))
+
+    (add-hook 'ivy-occur-mode-hook 'ivy|occur-mode-setup)
+    (add-hook 'ivy-occur-grep-mode-hook 'ivy|occur-mode-setup)
+    ;; }}}
+    )
 
 (use-package ivy-rich
   :ensure t
@@ -2196,27 +2233,42 @@
   ;; Note that the built-in `describe-function' includes both functions
   ;; and macros. `helpful-function' is functions only, so we provide
   ;; `helpful-callable' as a drop-in replacement.
-  (global-set-key (kbd "C-h f") #'helpful-callable)
+  ;; (global-set-key (kbd "C-h f") #'helpful-callable)
 
-  (global-set-key (kbd "C-h v") #'helpful-variable)
-  (global-set-key (kbd "C-h k") #'helpful-key)
+  ;; (global-set-key (kbd "C-h v") #'helpful-variable)
+  ;; (global-set-key (kbd "C-h k") #'helpful-key)
 
   ;; Lookup the current symbol at point. C-c C-d is a common keybinding
   ;; for this in lisp modes.
-  (global-set-key (kbd "C-c C-d") #'helpful-at-point)
+  ;; (global-set-key (kbd "C-c C-d") #'helpful-at-point)
 
   ;; Look up *F*unctions (excludes macros).
   ;;
   ;; By default, C-h F is bound to `Info-goto-emacs-command-node'. Helpful
   ;; already links to the manual, if a function is referenced there.
-  (global-set-key (kbd "C-h F") #'helpful-function)
+  ;; (global-set-key (kbd "C-h F") #'helpful-function)
 
   ;; Look up *C*ommands.
   ;;
   ;; By default, C-h C is bound to describe `describe-coding-system'. I
   ;; don't find this very useful, but it's frequently useful to only
   ;; look at interactive functions.
-  (global-set-key (kbd "C-h C") #'helpful-command)
+  ;; (global-set-key (kbd "C-h C") #'helpful-command)
+
+  (with-eval-after-load 'transient
+    (transient-define-prefix my-helpful-transient ()
+      "my helpful commands"
+      [["Commands"
+        ("c" "helpful callable" helpful-callable)
+        ("f" "helpful function" helpful-function)
+        ("v" "helpful variable" helpful-variable)
+        ("k" "helpful key" helpful-key)
+        ("d" "helpful at point" helpful-key)
+        ("C" "helpful command" helpful-command)
+        ]]
+      [:hide (lambda () t)
+       ("q" "quit" keyboard-quit)])
+    )
   )
 
 (provide 'init-packages)

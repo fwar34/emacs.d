@@ -515,6 +515,7 @@
                     ;; "ms" 'mc/skip-to-next-like-this
                     ;; "xc" 'save-buffers-kill-terminal
                     "ic" 'interrupt-my-commands
+                    "hp" 'my-helpful-transient
                     ;; "ma" (lambda () (interactive) (my-commands "make"))
                     ;; ;; "mr" (lambda () (interactive) (my-commands "make" "rebuild"))
                     ;; "mr" (lambda () (interactive) (my-commands "make" "clean" (my-commands "make")))
@@ -816,6 +817,7 @@
                     "ws" 'persp-state-save ;; Save all perspectives in all frames to a file
                     ;; "wl" '(lambda () (interactive) (persp-state-load "~/.emacs.d/perspective.save")) ;; Load all perspectives from a file
                     "wl" 'persp-state-load ;; Load all perspectives from a file
+                    "ll" 'my-misc-transinet
                     ;; "xx" 'er/expand-region
                     ;; "xf" 'ido-find-file
                     ;; "xb" 'ivy-switch-buffer-by-pinyin
