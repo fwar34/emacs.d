@@ -589,8 +589,7 @@
         ("," "self insert \",\"" evil-insert)
         ("p" "paste last from kill ring" isearch-yank-pop-only)
         ("y" "paste from kill ring" isearch-yank-pop)]]
-       [[:hide (lambda () t)
-              ("q" "quit" keyboard-quit)]])
+       )
     )
 
   ;; https://emacs.stackexchange.com/questions/31334/history-of-search-terms-for-evil-mode
@@ -785,10 +784,7 @@
         ("n" "ivy-next-line-and-call" ivy-next-line-and-call)
         ("r" "ivy-previous-line-and-call" ivy-previous-line-and-call)
         ("j" "ivy-immediate-done" ivy-immediate-done)
-        ("p" "clipboard-yank" clipboard-yank)]
-       ["Quit"
-        ("q" "quit" keyboard-quit)]
-       ])
+        ("p" "clipboard-yank" clipboard-yank)]])
     )
   ;; (general-define-key
   ;;  :keymaps 'ivy-minibuffer-map
@@ -2266,8 +2262,9 @@
         ("d" "helpful at point" helpful-key)
         ("C" "helpful command" helpful-command)
         ]]
-      [:hide (lambda () t)
-       ("q" "quit" keyboard-quit)])
+      ;; [:hide (lambda () t)
+      ;;        ("q" "quit" keyboard-quit)]
+      )
     )
   )
 
