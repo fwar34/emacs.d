@@ -151,7 +151,7 @@
   (setq doom-themes-treemacs-theme "doom-atom") ; use "doom-colors" for less minimal icon theme
   (doom-themes-treemacs-config)
   ;; Corrects (and improves) org-mode's native fontification.
-    (doom-themes-org-config))
+  (doom-themes-org-config))
 
 (use-package gruvbox-theme
   :disabled
@@ -584,12 +584,12 @@
   (with-eval-after-load 'transient
     (transient-define-prefix my-evil-search-transient ()
       "my evil search commands"
-      [:calss transient-row
+      [;; :calss transient-row
        ["Commands"
         ("," "self insert \",\"" evil-insert)
         ("p" "paste last from kill ring" isearch-yank-pop-only)
         ("y" "paste from kill ring" isearch-yank-pop)]]
-       )
+      )
     )
 
   ;; https://emacs.stackexchange.com/questions/31334/history-of-search-terms-for-evil-mode
@@ -646,8 +646,8 @@
 (use-package smart-hungry-delete
   :ensure t
   :bind (([remap backward-delete-char-untabify] . smart-hungry-delete-backward-char)
-	       ([remap delete-backward-char] . smart-hungry-delete-backward-char)
-	       ([remap delete-char] . smart-hungry-delete-forward-char))
+         ([remap delete-backward-char] . smart-hungry-delete-backward-char)
+         ([remap delete-char] . smart-hungry-delete-forward-char))
   :init (smart-hungry-delete-add-default-hooks))
 
 (use-package expand-region
@@ -774,7 +774,7 @@
   (with-eval-after-load 'transient
     (transient-define-prefix my-ivy-minibuffer-transient ()
       "my ivy minibuffer commands"
-      [["Commands"
+      [[" <ivy commands>"
         ("," "self insert \",\"" self-insert-command)
         ("s" "ivy-restrict-to-matches" ivy-restrict-to-matches)
         ("d" "swiper-avy" swiper-avy)
@@ -807,96 +807,96 @@
    "," 'my-ivy-minibuffer-transient
    )
 
-    (use-package ivy-posframe
-      :disabled
-      :ensure t
-      :if (display-graphic-p)
-      :config
-      ;; The following example displays swiper on 20 lines by default for ivy,
-      ;; and displays other functions in posframe at the location specified on 40 lines.
-      ;; (setq ivy-posframe-height-alist '((swiper . 20)
-      ;;                                   (t      . 40)))
+  (use-package ivy-posframe
+    :disabled
+    :ensure t
+    :if (display-graphic-p)
+    :config
+    ;; The following example displays swiper on 20 lines by default for ivy,
+    ;; and displays other functions in posframe at the location specified on 40 lines.
+    ;; (setq ivy-posframe-height-alist '((swiper . 20)
+    ;;                                   (t      . 40)))
 
-      ;; How to show fringe to ivy-posframe
-      (setq ivy-posframe-parameters
-            '((left-fringe . 8)
-              (right-fringe . 8)))
+    ;; How to show fringe to ivy-posframe
+    (setq ivy-posframe-parameters
+          '((left-fringe . 8)
+            (right-fringe . 8)))
 
-      ;; Per-command mode.
-      ;; Different command can use different display function.
-      (setq ivy-posframe-display-functions-alist
-            '((swiper          . ivy-display-function-fallback)
-              (complete-symbol . ivy-posframe-display)
-              (counsel-M-x     . ivy-posframe-display-at-window-center)
-              (t               . ivy-posframe-display)))
-      (ivy-posframe-mode 1)
-      )
-
-    (use-package amx
-      :ensure t
-      :defer t
-      :config
-      (amx-mode)
-      )
-
-    (use-package ivy-xref
-      :ensure t
-      :defer t
-      :init
-      ;; xref initialization is different in Emacs 27 - there are two different
-      ;; variables which can be set rather than just one
-      (when (>= emacs-major-version 27)
-        (setq xref-show-definitions-function 'ivy-xref-show-defs))
-      ;; Necessary in Emacs <27. In Emacs 27 it will affect all xref-based
-      ;; commands other than xref-find-definitions (e.g. project-find-regexp)
-      ;; as well
-      (setq xref-show-xrefs-function 'ivy-xref-show-xrefs))
-
-    ;; {{{
-    ;; https://emacs-china.org/t/ivy-occur/12083
-    (defvar ivy-occur-filter-prefix ">>> ")
-
-;;;###autoload
-    (defun ivy-occur/filter-lines ()
-      (interactive)
-      (unless (string-prefix-p "ivy-occur" (symbol-name major-mode))
-        (user-error "Current buffer is not in ivy-occur mode"))
-
-      (let ((inhibit-read-only t)
-            (regexp (read-regexp "Regexp(! for flush)"))
-            (start (save-excursion
-                     (goto-char (point-min))
-                     (re-search-forward "[0-9]+ candidates:"))))
-        (if (string-prefix-p "!" regexp)
-            (flush-lines (substring regexp 1) start (point-max))
-          (keep-lines regexp start (point-max)))
-        (save-excursion
-          (goto-char (point-min))
-          (let ((item (propertize (format "[%s]" regexp) 'face 'ivy-current-match)))
-            (if (looking-at ivy-occur-filter-prefix)
-                (progn
-                  (goto-char (line-end-position))
-                  (insert item))
-              (insert ivy-occur-filter-prefix item "\n"))))))
-
-;;;###autoload
-    (defun ivy-occur/undo ()
-      (interactive)
-      (let ((inhibit-read-only t))
-        (if (save-excursion
-              (goto-char (point-min))
-              (looking-at ivy-occur-filter-prefix))
-            (undo)
-          (user-error "Filter stack is empty"))))
-
-    (defun ivy|occur-mode-setup ()
-      (local-set-key "/" 'ivy-occur/filter-lines)
-      (local-set-key (kbd "M-/") 'ivy-occur/undo))
-
-    (add-hook 'ivy-occur-mode-hook 'ivy|occur-mode-setup)
-    (add-hook 'ivy-occur-grep-mode-hook 'ivy|occur-mode-setup)
-    ;; }}}
+    ;; Per-command mode.
+    ;; Different command can use different display function.
+    (setq ivy-posframe-display-functions-alist
+          '((swiper          . ivy-display-function-fallback)
+            (complete-symbol . ivy-posframe-display)
+            (counsel-M-x     . ivy-posframe-display-at-window-center)
+            (t               . ivy-posframe-display)))
+    (ivy-posframe-mode 1)
     )
+
+  (use-package amx
+    :ensure t
+    :defer t
+    :config
+    (amx-mode)
+    )
+
+  (use-package ivy-xref
+    :ensure t
+    :defer t
+    :init
+    ;; xref initialization is different in Emacs 27 - there are two different
+    ;; variables which can be set rather than just one
+    (when (>= emacs-major-version 27)
+      (setq xref-show-definitions-function 'ivy-xref-show-defs))
+    ;; Necessary in Emacs <27. In Emacs 27 it will affect all xref-based
+    ;; commands other than xref-find-definitions (e.g. project-find-regexp)
+    ;; as well
+    (setq xref-show-xrefs-function 'ivy-xref-show-xrefs))
+
+  ;; {{{
+  ;; https://emacs-china.org/t/ivy-occur/12083
+  (defvar ivy-occur-filter-prefix ">>> ")
+
+;;;###autoload
+  (defun ivy-occur/filter-lines ()
+    (interactive)
+    (unless (string-prefix-p "ivy-occur" (symbol-name major-mode))
+      (user-error "Current buffer is not in ivy-occur mode"))
+
+    (let ((inhibit-read-only t)
+          (regexp (read-regexp "Regexp(! for flush)"))
+          (start (save-excursion
+                   (goto-char (point-min))
+                   (re-search-forward "[0-9]+ candidates:"))))
+      (if (string-prefix-p "!" regexp)
+          (flush-lines (substring regexp 1) start (point-max))
+        (keep-lines regexp start (point-max)))
+      (save-excursion
+        (goto-char (point-min))
+        (let ((item (propertize (format "[%s]" regexp) 'face 'ivy-current-match)))
+          (if (looking-at ivy-occur-filter-prefix)
+              (progn
+                (goto-char (line-end-position))
+                (insert item))
+            (insert ivy-occur-filter-prefix item "\n"))))))
+
+;;;###autoload
+  (defun ivy-occur/undo ()
+    (interactive)
+    (let ((inhibit-read-only t))
+      (if (save-excursion
+            (goto-char (point-min))
+            (looking-at ivy-occur-filter-prefix))
+          (undo)
+        (user-error "Filter stack is empty"))))
+
+  (defun ivy|occur-mode-setup ()
+    (local-set-key "/" 'ivy-occur/filter-lines)
+    (local-set-key (kbd "M-/") 'ivy-occur/undo))
+
+  (add-hook 'ivy-occur-mode-hook 'ivy|occur-mode-setup)
+  (add-hook 'ivy-occur-grep-mode-hook 'ivy|occur-mode-setup)
+  ;; }}}
+  )
 
 (use-package ivy-rich
   :ensure t
@@ -2025,7 +2025,7 @@
    ("j" . compilation-next-error)
    ("k" . compilation-previous-error))
   :bind*
-   ("C-c C-s" . rg-menu)
+  ("C-c C-s" . rg-menu)
   :config
   (rg-enable-menu)
   (add-hook 'rg-mode-hook (lambda () (evil-set-initial-state 'rg-mode 'emacs)))
@@ -2254,7 +2254,7 @@
   (with-eval-after-load 'transient
     (transient-define-prefix my-helpful-transient ()
       "my helpful commands"
-      [["Commands"
+      [[" <helpful commands>"
         ("c" "helpful callable" helpful-callable)
         ("f" "helpful function" helpful-function)
         ("v" "helpful variable" helpful-variable)
