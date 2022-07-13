@@ -132,7 +132,7 @@
       ("sb" org-shifttab)
       ("oa" org-agenda :exit t)
       ("oc" org-capture :exit t)
-      ("q" nil "cancel" :color bule))
+      ("q" nil))
     (define-key org-mode-map (kbd "M-u or") 'hydra-org/body)
     (evil-define-key 'normal org-mode-map (kbd "M-u C-o C-r") 'hydra-org/body)
     )
@@ -211,7 +211,7 @@
       ("l" apropos-library "library")
       ("u" apropos-user-option "user-option")
       ("e" apropos-value "value")
-      ("q" nil "cancel" :exit t :column nil))
+      ("q" nil))
     ;; (global-set-key (kbd "M-u ap") 'hydra-apropos/body)
     (define-key apropos-mode-map (kbd "M-u ap") 'hydra-apropos/body)
     (evil-define-key 'normal apropos-mode-map "M-u C-a C-p" 'hydra-apropos/body)
@@ -252,7 +252,7 @@
     ("u" counsel-etags-update-tags-force "Update current tags file using default implementation.")
     ("F" counsel-etags-grep-current-directory "Grep current directory or LEVEL up parent directory.")
     ("s" counsel-etags-virtual-update-tags "Scan code and create tags file again.")
-    ("q" nil "cancel" :exit t :column nil))
+    ("q" nil))
   ;; (global-set-key (kbd "M-u ap") 'hydra-apropos/body)
   (global-set-key (kbd "M-u tt") 'hydra-counsel-etags/body)
   (global-set-key (kbd "M-u C-t C-t") 'hydra-counsel-etags/body)
@@ -307,7 +307,7 @@
     ("si" (lambda () (set-input-method "pyim")))
     ("co" pyim-convert-string-at-point)
     ("to" pyim-toggle-input-ascii)
-    ("q" nil "cancale" :color blue))
+    ("q" nil))
   (global-set-key (kbd "M-u py") 'hydra-pyim/body)
   (global-set-key (kbd "M-u C-p C-y") 'hydra-pyim/body)
   (with-eval-after-load 'isearch 
@@ -444,5 +444,47 @@
             (setq default-input-method "rime")
             (set-input-method "rime"))))
   (global-set-key (kbd "M-u in") 'hydra-input-method/body))
+
+(define-key ivy-minibuffer-map "\C-o"
+  (defhydra soo-ivy (:hint nil :color pink)
+    "
+ Move     ^^^^^^^^^^ | Call         ^^^^ | Cancel^^ | Options^^ | Action _w_/_s_/_a_: %s(ivy-action-name)
+----------^^^^^^^^^^-+--------------^^^^-+-------^^-+--------^^-+---------------------------------
+ _g_ ^ ^ _k_ ^ ^ _u_ | _f_orward _o_ccur | _i_nsert | _c_alling: %-7s(if ivy-calling \"on\" \"off\") _C_ase-fold: %-10`ivy-case-fold-search
+ ^↨^ _h_ ^+^ _l_ ^↕^ | _RET_ done     ^^ | _q_uit   | _t_runcate: %-11`truncate-lines
+ _G_ ^ ^ _j_ ^ ^ _d_ | _TAB_ alt-done ^^ | ^ ^      | _<_/_>_: shrink/grow
+"
+    ;; arrows
+    ("j" ivy-next-line)
+    ("k" ivy-previous-line)
+    ("l" ivy-alt-done)
+    ("h" ivy-backward-delete-char)
+    ("g" ivy-beginning-of-buffer)
+    ("G" ivy-end-of-buffer)
+    ("d" ivy-scroll-up-command)
+    ("u" ivy-scroll-down-command)
+    ("e" ivy-scroll-down-command)
+    ;; actions
+    ("q" keyboard-escape-quit :exit t)
+    ("C-g" keyboard-escape-quit :exit t)
+    ("<escape>" keyboard-escape-quit :exit t)
+    ("C-o" nil)
+    ("i" nil)
+    ("TAB" ivy-alt-done :exit nil)
+    ("C-j" ivy-alt-done :exit nil)
+    ;; ("d" ivy-done :exit t)
+    ("RET" ivy-done :exit t)
+    ("C-m" ivy-done :exit t)
+    ("f" ivy-call)
+    ("c" ivy-toggle-calling)
+    ;; ("m" ivy-toggle-fuzzy)
+    (">" ivy-minibuffer-grow)
+    ("<" ivy-minibuffer-shrink)
+    ("w" ivy-prev-action)
+    ("s" ivy-next-action)
+    ("a" ivy-read-action)
+    ("t" (setq truncate-lines (not truncate-lines)))
+    ("C" ivy-toggle-case-fold)
+    ("o" ivy-occur :exit t)))
 
 (provide 'init-hydra)
