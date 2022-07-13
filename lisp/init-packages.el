@@ -1322,11 +1322,6 @@
   (general-evil-setup t)
   )
 
-
-
-(use-package transient
-  :ensure t)
-
 ;; 高亮符号
 (use-package highlight-symbol
   :disabled
@@ -1359,12 +1354,12 @@
      ]
     )
   ;; Or you may prefer to overwrite the keymap
-  (let ((map (make-sparse-keymap)))
-    (define-key map (kbd "r") 'symbol-overlay-query-replace)
-    (define-key map (kbd "x") 'symbol-overlay-remove-all)
-    (define-key map (kbd "n") 'symbol-overlay-jump-next)
-    (define-key map (kbd "p") 'symbol-overlay-jump-prev)
-    (setq symbol-overlay-map map))
+  ;; (let ((map (make-sparse-keymap)))
+  ;;   (define-key map (kbd "r") 'symbol-overlay-query-replace)
+  ;;   (define-key map (kbd "x") 'symbol-overlay-remove-all)
+  ;;   (define-key map (kbd "n") 'symbol-overlay-jump-next)
+  ;;   (define-key map (kbd "p") 'symbol-overlay-jump-prev)
+  ;;   (setq symbol-overlay-map map))
   )
 
 
