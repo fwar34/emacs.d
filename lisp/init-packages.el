@@ -2176,4 +2176,9 @@
   (define-key vterm-mode-map (kbd "s-p") 'vterm-toggle-backward)
   )
 
+(use-package hl-todo
+  :ensure t
+  :config
+  (global-hl-todo-mode))
+
 (provide 'init-packages)
