@@ -624,10 +624,18 @@
   )
 
 (use-package hungry-delete
+  :disabled
   :ensure t
   :hook
   (evil-mode . global-hungry-delete-mode)
   )
+
+(use-package smart-hungry-delete
+  :ensure t
+  :bind (([remap backward-delete-char-untabify] . smart-hungry-delete-backward-char)
+	       ([remap delete-backward-char] . smart-hungry-delete-backward-char)
+	       ([remap delete-char] . smart-hungry-delete-forward-char))
+  :init (smart-hungry-delete-add-default-hooks))
 
 (use-package expand-region
   :ensure t
@@ -656,10 +664,12 @@
    ([remap describe-function] . counsel-describe-function)
    ([remap describe-variable] . counsel-describe-variable)
    ([remap describe-symbol] . counsel-describe-symbol)
+   ([remap hungry-delete-backward] . ivy-backward-delete-char)
    ("M-x" . counsel-M-x)
    :map ivy-minibuffer-map
    ("M-l" . ivy-restrict-to-matches)
    ;; ("C-w" . backward-kill-word) ;; 在ivy中已经将backward-kill-word remap成了ivy-backward-kill-word
+   ("C-w" . ivy-backward-kill-word)
    ) 
   :config
   ;; (general-define-key
@@ -691,6 +701,7 @@
   ;; (setq ivy-display-style 'fancy)
   ;; (define-key read-expression-map (kbd "C-r") 'counsel-expression-history)
   (setq enable-recursive-minibuffers t)
+  (setq ivy-use-selectable-prompt t)
   ;; (define-key ivy-minibuffer-map (kbd "C-i") 'counsel-evil-registers)
   ;; (define-key isearch-mode-map (kbd "C-i") 'counsel-evil-registers)
   ;; (define-key isearch-mode-map (kbd "C-n") 'ivy-next-line)
