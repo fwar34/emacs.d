@@ -6,7 +6,8 @@
   (general-define-key
    :states 'normal
    :keymaps 'dired-mode-map
-   "w" 'dired-toggle-read-only)
+   "w" 'dired-toggle-read-only
+   "," 'hydra-dired/body)
 
   (general-define-key
    :states 'normal

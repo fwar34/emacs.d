@@ -516,6 +516,7 @@
                     ;; "xc" 'save-buffers-kill-terminal
                     "ic" 'interrupt-my-commands
                     "hp" 'my-helpful-transient
+                    "hh" 'my-hydra-helpfu/body
                     ;; "ma" (lambda () (interactive) (my-commands "make"))
                     ;; ;; "mr" (lambda () (interactive) (my-commands "make" "rebuild"))
                     ;; "mr" (lambda () (interactive) (my-commands "make" "clean" (my-commands "make")))

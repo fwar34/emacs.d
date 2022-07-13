@@ -3,7 +3,7 @@
   (require 'package)
   ;; (setq package-archives '(("gnu"   . "https://elpa.emacs-china.org/gnu/")
   ;;                         ("melpa" . "https://elpa.emacs-china.org/melpa/"))))
-  (setq package-archives '(("gnu"   . "http://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/")
+  (setq package-archives '((;; "gnu"   . "http://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/")
                            ("melpa" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/")))
   ;; (setq package-archives '(("gnu"   . "http://mirrors.cloud.tencent.com/elpa/gnu/")
   ;;                        ("melpa" . "http://mirrors.cloud.tencent.com/elpa/melpa/")))
@@ -1322,6 +1322,9 @@
   (general-evil-setup t)
   )
 
+
+
+
 ;; 高亮符号
 (use-package highlight-symbol
   :disabled
@@ -2259,7 +2262,18 @@
         ]]
       ;; [:hide (lambda () t)
       ;;        ("q" "quit" keyboard-quit)]
-      )
+      ))
+
+  (with-eval-after-load 'hydra
+    (defhydra my-hydra-helpfu
+      (:color teal :hint nil)
+      ("c" helpful-callable "helpful callable" :column "<helpful commands>")
+      ("f" helpful-function "helpful function")
+      ("v" helpful-variable "helpful variable")
+      ("k" helpful-key "helpful key")
+      ("d" helpful-key "helpful at point")
+      ("C" helpful-command "helpful command")
+      ("q" nil "quit menu" :color blue :column nil))
     )
   )
 

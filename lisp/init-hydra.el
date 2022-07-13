@@ -18,6 +18,11 @@
   (global-set-key (kbd "M-u") 'M-u-map)
   :config
 
+  (defhydra hydra-zoom (global-map "C-M-s")
+    "zoom"
+    ("g" text-scale-increase "in")
+    ("l" text-scale-decrease "out"))
+
   ;;-------------------------------------------------------------
   ;; vi
   (defun hydra-vi/pre ()
