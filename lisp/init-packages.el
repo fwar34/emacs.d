@@ -2201,7 +2201,9 @@ Git gutter:
         ([f5] . vterm-toggle)
         ([f12] . vterm-toggle-cd)
         (";tm" . vterm-toggle)
-        (";g" . evil-normal-state))
+        (";g" . evil-normal-state)
+        (";vv" . my-vterm-mode-transient)
+        )
   :config
   ;; (evil-define-key 'insert vterm-mode-map [f12] 'vterm-toggle-insert-cd)
   (evil-define-key 'insert vterm-mode-map (kbd "C-j") 'vterm-toggle-insert-cd)
@@ -2209,6 +2211,29 @@ Git gutter:
   ;; https://github.com/akermu/emacs-libvterm#keybindings
   ;; 使用 C-q 在 vtem 中发送下个字符到 terminal, 比如 ";"
   (evil-define-key 'insert vterm-mode-map (kbd "C-q") 'vterm-send-next-key)
+
+  (with-eval-after-load 'transient
+    (transient-define-prefix my-vterm-transient ()
+      " <vterm mode commans>"
+      [" <vterm commands>\n---------------------------------------"
+       [" <Toggle>"
+        ("f" "vterm-toggle-forward" vterm-toggle-forward)
+        ("b" "vterm-toggle-backward" vterm-toggle-backward)]])
+
+    (transient-define-prefix my-vterm-mode-transient ()
+      " <vterm misc commands>"
+      [" <vterm commands>\n--------------------------------------------------------------"
+       [" <Yank>"
+        ("p" "vterm-yank" vterm-yank) ;;
+        ("P" "vterm-yank-pop" vterm-yank-pop)] ;; M-y
+       [" <Misc>"
+        ("q" "vterm-send-next-key" vterm-send-next-key)
+        ;; ("a" "vterm-toggle--new" vterm-toggle--new)
+        ]
+       [" <Toggle>"
+        ("f" "vterm-toggle-forward" vterm-toggle-forward)
+        ("b" "vterm-toggle-backward" vterm-toggle-backward)]])
+    )
 
   ;; (general-define-key
   ;;  :states '(insert normal)
@@ -2360,5 +2385,24 @@ _R_ebuild package |_P_ull package  |_V_ersions thaw  |_W_atcher quit    |prun_e_
       ("W" "straight-watcher-stop" straight-watcher-stop)
       ("g" "straight-get-recipe" straight-get-recipe)
       ("e" "straight-prune-build" straight-prune-build)]]))
+
+(use-package centaur-tabs
+  :ensure t
+  :demand
+  :hook
+  ((dired-mode . centaur-tabs-local-mode)
+   (vterm-mode . centaur-tabs-local-mode))
+  :bind
+  (:map evil-normal-state-map
+        ("H" . centaur-tabs-backward)
+        ("L" . centaur-tabs-forward))
+  :config
+  (centaur-tabs-mode t)
+  (setq centaur-tabs-plain-icons t)
+  (setq centaur-tabs-set-close-button nil)
+  (setq centaur-tabs-set-modified-marker t)
+  (setq centaur-tabs-cycle-scope 'tabs)
+  (setq centaur-tabs-show-count t)
+  )
 
 (provide 'init-packages)

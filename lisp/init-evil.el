@@ -451,7 +451,9 @@
                     ;; "sh" 'multi-term
                     "sh" 'aweshell-toggle
                     "rr" 'fwar34/counsel-goto-recent-directory
-                    "rc" 'fwar34/run-current-file)
+                    "rc" 'fwar34/run-current-file
+                    "vv" 'my-vterm-transient
+                    )
 
  ;; {{ Use `SPC` as one leader key
 (general-define-key :keymaps '(normal visual)
