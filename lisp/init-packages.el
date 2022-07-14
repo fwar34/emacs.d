@@ -784,7 +784,9 @@
         ("n" "ivy-next-line-and-call" ivy-next-line-and-call)
         ("r" "ivy-previous-line-and-call" ivy-previous-line-and-call)
         ("j" "ivy-immediate-done" ivy-immediate-done)
-        ("p" "clipboard-yank" clipboard-yank)]])
+        ("p" "clipboard-yank" clipboard-yank)
+        ("P" "yank-from-kill-ring" yank-from-kill-ring)
+        ]])
     )
   ;; (general-define-key
   ;;  :keymaps 'ivy-minibuffer-map
@@ -1644,6 +1646,34 @@
   ;; you could use this to have git-gutter’s commands for navigating hunks save the current location before jumping:
   (evil-add-command-properties 'git-gutter:next-hunk :jump t)
   (evil-add-command-properties 'git-gutter:previous-hunk :jump t)
+
+  (defhydra hydra-git-gutter (:body-pre (git-gutter-mode 1)
+                                        :hint nil)
+    "
+Git gutter:
+  _j_: next hunk        _s_tage hunk     _q_uit
+  _k_: previous hunk    _r_evert hunk    _Q_uit and deactivate git-gutter
+  ^ ^                   _p_opup hunk
+  _h_: first hunk
+  _l_: last hunk        set start _R_evision
+"
+    ("j" git-gutter:next-hunk)
+    ("k" git-gutter:previous-hunk)
+    ("h" (progn (goto-char (point-min))
+                (git-gutter:next-hunk 1)))
+    ("l" (progn (goto-char (point-min))
+                (git-gutter:previous-hunk 1)))
+    ("s" git-gutter:stage-hunk)
+    ("r" git-gutter:revert-hunk)
+    ("p" git-gutter:popup-hunk)
+    ("R" git-gutter:set-start-revision)
+    ("q" nil :color blue)
+    ("Q" (progn (git-gutter-mode -1)
+                ;; git-gutter-fringe doesn't seem to
+                ;; clear the markup right away
+                (sit-for 0.1)
+                (git-gutter:clear))
+     :color blue))
   )
 
 (use-package git-gutter-fringe
@@ -2309,7 +2339,7 @@ _R_ebuild package |_P_ull package  |_V_ersions thaw  |_W_atcher quit    |prun_e_
 (with-eval-after-load 'transient
   (transient-define-prefix my-straight-transient ()
     " <straight commands>"
-    ["                                          <straight commands>"
+    ["                                                          <straight commands>"
      [("c" "check all" straight-check-all)
       ("C" "straight-check-package" straight-check-package)
       ("r" "straight-rebuild-all" straight-rebuild-all)

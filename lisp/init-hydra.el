@@ -458,6 +458,8 @@
             (set-input-method "rime"))))
   (global-set-key (kbd "M-u in") 'hydra-input-method/body))
 
+
+;; {{{ test for hydra
 (define-key ivy-minibuffer-map "\C-o"
   (defhydra soo-ivy (:hint nil :color pink)
     "
@@ -517,30 +519,29 @@
    (hydra-set-property 'hydra-toggle :verbosity 0)
    (hydra-toggle/body)))
 
+(defhydra hydra-vi-test (:hint nil)
+  "vi"
+  ("j" next-line)
+  ("k" previous-line)
+  ("n" next-line)
+  ("p" previous-line))
 
-;; (defhydra hydra-vi (:hint nil)
-;;   "vi"
-;;   ("j" next-line)
-;;   ("k" previous-line)
-;;   ("n" next-line)
-;;   ("p" previous-line))
-
-;; (setq hydra-vi/hint
-;;       '(if (evenp (line-number-at-pos))
-;;         (prog1 (eval
-;;                 (hydra--format nil '(nil nil :hint nil)
-;;                                "\neven: _j_ _k_\n" hydra-vi/heads))
-;;           (define-key hydra-vi/keymap "n" nil)
-;;           (define-key hydra-vi/keymap "p" nil)
-;;           (define-key hydra-vi/keymap "j" 'hydra-vi/next-line)
-;;           (define-key hydra-vi/keymap "k" 'hydra-vi/previous-line))
-;;         (prog1 (eval
-;;                 (hydra--format nil '(nil nil :hint nil)
-;;                                "\nodd: _n_ _p_\n" hydra-vi/heads))
-;;           (define-key hydra-vi/keymap "j" nil)
-;;           (define-key hydra-vi/keymap "k" nil)
-;;           (define-key hydra-vi/keymap "n" 'hydra-vi/next-line)
-;;           (define-key hydra-vi/keymap "p" 'hydra-vi/previous-line))))
+(setq hydra-vi-test/hint
+      '(if (evenp (line-number-at-pos))
+        (prog1 (eval
+                (hydra--format nil '(nil nil :hint nil)
+                               "\neven: _j_ _k_\n" hydra-vi-test/heads))
+          (define-key hydra-vi-test/keymap "n" nil)
+          (define-key hydra-vi-test/keymap "p" nil)
+          (define-key hydra-vi-test/keymap "j" 'hydra-vi-test/next-line)
+          (define-key hydra-vi-test/keymap "k" 'hydra-vi-test/previous-line))
+        (prog1 (eval
+                (hydra--format nil '(nil nil :hint nil)
+                               "\nodd: _n_ _p_\n" hydra-vi-test/heads))
+          (define-key hydra-vi-test/keymap "j" nil)
+          (define-key hydra-vi-test/keymap "k" nil)
+          (define-key hydra-vi-test/keymap "n" 'hydra-vi-test/next-line)
+          (define-key hydra-vi-test/keymap "p" 'hydra-vi-test/previous-line))))
 
 ;; https://github.com/abo-abo/hydra/wiki/Hydra-Colors#custom-face-colors
 (defhydra hydra-test (:hint nil)
@@ -548,5 +549,7 @@
 _a_: forward"
     6 13 (face warning))
   ("a" forward-char))
+
+;; }}}
 
 (provide 'init-hydra)
