@@ -9,6 +9,19 @@
 ;; | amaranth | :foreign-keys warn         |
 ;; | teal     | :foreign-keys warn :exit t |
 ;; | pink     | :foreign-keys run          |
+
+;; https://github.com/abo-abo/hydra/wiki/Hydra-Colors
+;; |----------+-----------+-----------------------+-----------------|
+;; | Body     | Head      | Executing NON-HEADS   | Executing HEADS |
+;; | Color    | Inherited |                       |                 |
+;; |          | Color     |                       |                 |
+;; |----------+-----------+-----------------------+-----------------|
+;; | amaranth | red       | Disallow and Continue | Continue        |
+;; | teal     | blue      | Disallow and Continue | Quit            |
+;; | pink     | red       | Allow and Continue    | Continue        |
+;; | red      | red       | Allow and Quit        | Continue        |
+;; | blue     | blue      | Allow and Quit        | Quit            |
+;; |----------+-----------+-----------------------+-----------------|
 ;;-------------------------------------------------------------
 (use-package hydra
   :after evil
@@ -486,5 +499,54 @@
     ("t" (setq truncate-lines (not truncate-lines)))
     ("C" ivy-toggle-case-fold)
     ("o" ivy-occur :exit t)))
+
+;; https://github.com/abo-abo/hydra/wiki
+(defhydra hydra-toggle (:columns 2 :exit t)
+  "toggle:"
+  ("a" abbrev-mode "abbrev")
+  ("d" toggle-debug-on-error "debug")
+  ("f" auto-fill-mode "fill")
+  ("t" toggle-truncate-lines "truncate")
+  ("w" whitespace-mode "whitespace")
+  ("q" nil "quit")
+  ("h" (hydra-set-property 'hydra-toggle :verbosity 1) :exit nil))
+(global-set-key
+ (kbd "C-c C-v")
+ (lambda ()
+   (interactive)
+   (hydra-set-property 'hydra-toggle :verbosity 0)
+   (hydra-toggle/body)))
+
+
+;; (defhydra hydra-vi (:hint nil)
+;;   "vi"
+;;   ("j" next-line)
+;;   ("k" previous-line)
+;;   ("n" next-line)
+;;   ("p" previous-line))
+
+;; (setq hydra-vi/hint
+;;       '(if (evenp (line-number-at-pos))
+;;         (prog1 (eval
+;;                 (hydra--format nil '(nil nil :hint nil)
+;;                                "\neven: _j_ _k_\n" hydra-vi/heads))
+;;           (define-key hydra-vi/keymap "n" nil)
+;;           (define-key hydra-vi/keymap "p" nil)
+;;           (define-key hydra-vi/keymap "j" 'hydra-vi/next-line)
+;;           (define-key hydra-vi/keymap "k" 'hydra-vi/previous-line))
+;;         (prog1 (eval
+;;                 (hydra--format nil '(nil nil :hint nil)
+;;                                "\nodd: _n_ _p_\n" hydra-vi/heads))
+;;           (define-key hydra-vi/keymap "j" nil)
+;;           (define-key hydra-vi/keymap "k" nil)
+;;           (define-key hydra-vi/keymap "n" 'hydra-vi/next-line)
+;;           (define-key hydra-vi/keymap "p" 'hydra-vi/previous-line))))
+
+;; https://github.com/abo-abo/hydra/wiki/Hydra-Colors#custom-face-colors
+(defhydra hydra-test (:hint nil)
+  #("
+_a_: forward"
+    6 13 (face warning))
+  ("a" forward-char))
 
 (provide 'init-hydra)
