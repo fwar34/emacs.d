@@ -2227,7 +2227,7 @@ Git gutter:
         ("p" "vterm-yank" vterm-yank) ;;
         ("P" "vterm-yank-pop" vterm-yank-pop)] ;; M-y
        [" <Misc>"
-        ("q" "vterm-send-next-key" vterm-send-next-key)
+        (";" "vterm-send-next-key" vterm-send-next-key)
         ;; ("a" "vterm-toggle--new" vterm-toggle--new)
         ]
        [" <Toggle>"
