@@ -2220,6 +2220,9 @@ Git gutter:
         ("f" "vterm-toggle-forward" vterm-toggle-forward)
         ("b" "vterm-toggle-backward" vterm-toggle-backward)]])
 
+    (defun my-vterm-insert ()
+      (interactive)
+      (vterm-send-string ";"))
     (transient-define-prefix my-vterm-mode-transient ()
       " <vterm misc commands>"
       [" <vterm commands>\n--------------------------------------------------------------"
@@ -2227,9 +2230,8 @@ Git gutter:
         ("p" "vterm-yank" vterm-yank) ;;
         ("P" "vterm-yank-pop" vterm-yank-pop)] ;; M-y
        [" <Misc>"
-        (";" "vterm-send-next-key" vterm-send-next-key)
-        ;; ("a" "vterm-toggle--new" vterm-toggle--new)
-        ]
+        ("n" "vterm-send-next-key" vterm-send-next-key)
+        (";" "insert ;" my-vterm-insert)]
        [" <Toggle>"
         ("f" "vterm-toggle-forward" vterm-toggle-forward)
         ("b" "vterm-toggle-backward" vterm-toggle-backward)]])

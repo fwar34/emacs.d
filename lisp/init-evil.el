@@ -439,7 +439,6 @@
                     ;; "gq" 'w3m-stackoverflow-search
                     ;; "mws" 'mpc-which-song
                     ;; "ms" 'mpc-next-prev-song
-                    "ms" 'my-misc-transinet
                     ;; "tm" 'eshell
                     ;; "tm" 'my-multi-term
                     "tm" 'vterm-toggle
@@ -766,6 +765,7 @@
                     ;; "x2" 'my-split-window-vertically
                     ;; "x3" 'my-split-window-horizontally
                     ;; "s2" 'ffip-split-window-vertically
+                    "mm" 'my-misc-transinet
                     ;; "s3" 'ffip-split-window-horizontally
                     ;; "rw" 'rotate-windows
                     "ru" 'undo-tree-save-state-to-register ; C-x r u
