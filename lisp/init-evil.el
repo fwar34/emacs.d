@@ -291,7 +291,7 @@
                     "ff" 'counsel-find-file
                     "fd" 'my-display-full-path-of-current-buffer
                     "fb" 'beginning-of-defun
-                    "fz" 'counsel-fzf
+                    "fz" '(lambda () (interactive) (counsel-fzf "" "~"))
                     ;; "wf" 'popup-which-function
                     ;; "ww" 'narrow-or-widen-dwim
                     "cd" 'my-change-default-directory
