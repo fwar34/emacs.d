@@ -2403,6 +2403,13 @@ _R_ebuild package |_P_ull package  |_V_ersions thaw  |_W_atcher quit    |prun_e_
   (setq centaur-tabs-set-modified-marker t)
   (setq centaur-tabs-cycle-scope 'tabs)
   (setq centaur-tabs-show-count t)
+  (setq centaur-tabs-style "bar")
+  ;; (setq centaur-tabs-style "slant")
+  (setq centaur-tabs-set-bar 'left)
+  ;; (setq centaur-tabs-set-bar 'under)
+  ;; Note: If you're not using Spacmeacs, in order for the underline to display
+  ;; correctly you must add the following line:
+  (setq x-underline-at-descent-line t)
   )
 
 (provide 'init-packages)
