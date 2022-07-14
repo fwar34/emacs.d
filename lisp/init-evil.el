@@ -439,6 +439,7 @@
                     ;; "gq" 'w3m-stackoverflow-search
                     ;; "mws" 'mpc-which-song
                     ;; "ms" 'mpc-next-prev-song
+                    "ms" 'my-misc-transinet
                     ;; "tm" 'eshell
                     ;; "tm" 'my-multi-term
                     "tm" 'vterm-toggle
@@ -820,7 +821,6 @@
                     "ws" 'persp-state-save ;; Save all perspectives in all frames to a file
                     ;; "wl" '(lambda () (interactive) (persp-state-load "~/.emacs.d/perspective.save")) ;; Load all perspectives from a file
                     "wl" 'persp-state-load ;; Load all perspectives from a file
-                    "ll" 'my-misc-transinet
                     ;; "xx" 'er/expand-region
                     ;; "xf" 'ido-find-file
                     ;; "xb" 'ivy-switch-buffer-by-pinyin

@@ -227,11 +227,12 @@
 
 (transient-define-prefix my-misc-transinet ()
   "my misc commands"
-  [["Commands"
+  [[" <my misc commands>"
     ("h" "hl-todo" my-hl-todo)
     ("p" "clipboard-yank" clipboard-yank)
-    ("s" "shortdoc-display-group" shortdoc-display-group)]
-   ])
+    ("s" "shortdoc-display-group" shortdoc-display-group)
+    ("e" "hydra etags hydra" hydra-counsel-etags/body)
+    ]])
 ;; }}}
 
 (provide 'init-transient)
