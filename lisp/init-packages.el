@@ -586,7 +586,7 @@
       "my evil search commands"
       [;; :calss transient-row
        ["Commands"
-        ("," "self insert \",\"" evil-insert)
+        ("," "isearch quote insert" isearch-quote-char) ;; C-q
         ("p" "paste last from kill ring" isearch-yank-pop-only)
         ("y" "paste from kill ring" isearch-yank-pop)]]
       )
