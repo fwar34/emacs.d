@@ -805,7 +805,7 @@
   ;;  )
   (general-define-key
    :keymaps 'ivy-minibuffer-map
-   :prefix ","
+   ;; :prefix ","
    "," 'my-ivy-minibuffer-transient
    )
 
