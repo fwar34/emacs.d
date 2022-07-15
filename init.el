@@ -106,6 +106,7 @@
 (require 'init-one-key)
 
 (require 'init-calendar)
+(require 'init-flycheck)
 ;; (require 'unicad)
 (add-hook 'after-init-hook
           (lambda ()
