@@ -1145,7 +1145,7 @@ current state is evil-insert-state"
   ;; installed the all-the-icons package and its fonts.
   ;; (setq neo-theme (if (display-graphic-p) 'icons 'arrow))
   ;; (setq neo-theme (when (display-graphic-p) 'icons))
-  (setq neo-theme 'arrow)
+  ;; (setq neo-theme 'arrow)
   ;; Every time when the neotree window is opened, let it find current file and jump to node.
   (setq neo-smart-open t)
   )
