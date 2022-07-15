@@ -232,7 +232,8 @@
     ("p" "clipboard-yank" clipboard-yank)
     ("s" "shortdoc-display-group" shortdoc-display-group)
     ("e" "hydra etags hydra" hydra-counsel-etags/body)
-    ("t" "straight commands" my-straight-transient)]])
+    ("t" "straight commands" my-straight-transient)
+    ("c" "cargo commands" cargo-transient)]])
 ;; }}}
 
 (provide 'init-transient)

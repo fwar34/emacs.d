@@ -694,6 +694,10 @@
   ;;  "n" 'ivy-occur-next-error
   ;;  )
 
+  ;; https://melpa.org/#/ivy-hydra
+  (use-package ivy-hydra
+    :ensure t)
+
   ;; 调整 counsel 搜索的方式: 忽略单词顺序
   (setq ivy-re-builders-alist
         '((counsel-rg . ivy--regex-plus)
@@ -2413,5 +2417,16 @@ _R_ebuild package |_P_ull package  |_V_ersions thaw  |_W_atcher quit    |prun_e_
   ;; correctly you must add the following line:
   (setq x-underline-at-descent-line t)
   )
+
+(use-package cargo-transient
+  :ensure t
+  :custom
+  (cargo-transient-buffer-name-function 'project-prefixed-buffer-name))
+
+(use-package transient-dwim
+  :ensure t
+  :custom
+  (transient-detect-key-conflicts  t)
+  :bind ("M-=" . transient-dwim-dispatch))
 
 (provide 'init-packages)
