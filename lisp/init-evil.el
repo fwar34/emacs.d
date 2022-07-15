@@ -100,7 +100,7 @@
 ;; (dolist (p '((apropos-mode . normal)
 ;;              (browse-kill-ring-mode . normal)))
 ;;   (evil-set-initial-state (car p) (cdr p)))
-(loop for (mode . state) in '((apropos-mode . normal)
+(cl-loop for (mode . state) in '((apropos-mode . normal)
                               (browse-kill-ring-mode . normal)
                               ;; (ivy-occur-grep-mode . emacs)
                               ;; (proced-mode . emacs)

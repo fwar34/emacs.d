@@ -1,4 +1,7 @@
-;; -*- coding: utf-8; lexical-binding: t; -*-
+;;; init-package.el --- Useful preset transient commands  -*- coding:utf-8; lexical-binding: t; -*-
+;;; Commentary:
+
+;;; Code:
 (when (>= emacs-major-version 24)
   (require 'package)
   ;; (setq package-archives '(("gnu"   . "https://elpa.emacs-china.org/gnu/")
@@ -16,8 +19,6 @@
 ;; 使用本地的备份直接打开这个注释
 ;; myelpa is the ONLY repository now, dont forget trailing slash in the directory
 ;; (setq package-archives '(("myelpa" . "~/.myelpa/")))
-
-(require 'cl)
 
 ;; (defun require-package (package)
 ;;   "refresh package archives, check package presence and install if it's not installed"
@@ -212,6 +213,18 @@
 (use-package pyim
   :ensure t
   ;; :unless (display-graphic-p)
+  :defines
+  (list evil-escape-key-sequence
+        evil-state
+        evil-escape-delay)
+  :functions
+  (list derived-mode-p
+        org-in-src-block-p
+        company-abort
+        evil-escape--delete
+        evil-insert-state
+        make-local-variable
+        evil-repeat-stop)
   :init
   (defun my-pyim-predicate-org-in-src-block-p ()
     "Whether point is in an org-mode's code source block."
@@ -264,7 +277,7 @@
                   my-englist-p
                   my-pyim-predicate-in-doc-string-p
                   my-pyim-predicate-org-in-src-block-p
-                  pyim-probe-evil-normal-mode)) ;; pyim-probe-dynamic-english 和 pyim-probe-auto-english 二选一 
+                  pyim-probe-evil-normal-mode)) ;; pyim-probe-dynamic-english 和 pyim-probe-auto-english 二选一
 
   ;;根据环境自动切换到半角标点输入模式
   (setq-default pyim-punctuation-half-width-functions
@@ -326,34 +339,34 @@
   ;; {{{
   ;; 当前没有输入内容的时候直接使用 gg 直接返回到normal模式
   ;; https://github.com/tumashu/pyim/issues/260#issuecomment-570921604
-  (defun my-pyim-self-insert-command (orig-func)
-    (interactive "*")
-    (if (and (local-variable-p 'last-event-time)
-             (floatp last-event-time)
-             (< (- (float-time) last-event-time) 0.2))
-        (set (make-local-variable 'temp-evil-escape-mode) t)
-      (set (make-local-variable 'temp-evil-escape-mode) nil)
-      )
+  ;; (defun my-pyim-self-insert-command (orig-func)
+  ;;   (interactive "*")
+  ;;   (if (and (local-variable-p 'last-event-time)
+  ;;            (floatp last-event-time)
+  ;;            (< (- (float-time) last-event-time) 0.2))
+  ;;       (set (make-local-variable 'temp-evil-escape-mode) t)
+  ;;     (set (make-local-variable 'temp-evil-escape-mode) nil)
+  ;;     )
 
-    (if (and temp-evil-escape-mode
-             (equal (pyim-entered-get) "g")
-             (equal last-command-event ?g))
-        (progn
-          (company-abort)
-          (pyim-terminate-translation)
-          (evil-repeat-stop)
-          (evil-normal-state)
-          )
-      (progn
-        (call-interactively orig-func)
-        (set (make-local-variable 'last-event-time) (float-time))
-        ))
-    )
+  ;;   (if (and temp-evil-escape-mode
+  ;;            (equal (pyim-entered-get) "g")
+  ;;            (equal last-command-event ?g))
+  ;;       (progn
+  ;;         (company-abort)
+  ;;         (pyim-terminate-translation)
+  ;;         (evil-repeat-stop)
+  ;;         (evil-normal-state)
+  ;;         )
+  ;;     (progn
+  ;;       (call-interactively orig-func)
+  ;;       (set (make-local-variable 'last-event-time) (float-time))
+  ;;       ))
+  ;;   )
   ;; (advice-add 'pyim-self-insert-command :around 'my-pyim-self-insert-command)
   ;; (advice-remove 'pyim-self-insert-command 'my-pyim-self-insert-command)
   ;; }}}
 
-  ;; {{{ 
+  ;; {{{
   ;; 当前没有输入内容的时候直接使用evil-escape的按键（；g）的直接返回到normal模式
   (defun my-pyim-self-insert-command (orig-func key)
     (let ((fkey (elt evil-escape-key-sequence 0))
@@ -381,13 +394,14 @@
                 (funcall orig-func key)
               (setq unread-command-events (append unread-command-events (list key))))))))
     )
-  (advice-add 'pyim-input-method :around 'my-pyim-self-insert-command) 
+  (advice-add 'pyim-input-method :around 'my-pyim-self-insert-command)
   ;; (advice-remove 'pyim-input-method 'my-pyim-self-insert-command)
-  ;; }}} 
+  ;; }}}
 
   (defun evil-toggle-input-method ()
-    "when toggle on input method, switch to evil-insert-state if possible.
-  when toggle off input method, switch to evil-normal-state if current state is evil-insert-state"
+    "When toggle on input method, switch to evil-insert-state if possible.
+When toggle off input method, switch to evil-normal-state if
+current state is evil-insert-state"
     (interactive)
     (if (not current-input-method)
         (if (not (string= evil-state "insert"))
@@ -401,6 +415,9 @@
 ;; pacman -S librime
 (use-package rime
   :ensure t
+  :defines
+  (list evil-escape-unordered-key-sequence
+        evil-escape-delay)
   :if (equal system-type 'gnu/linux)
   :init
   (defun my-rime-predicate-in-doc-string-p ()
@@ -472,35 +489,35 @@
 
   ;; {{{
   ;; 当前没有输入内容的时候直接使用evil-escape的按键（；g）的直接返回到normal模式，性能有问题
-  (defun rime-evil-escape-advice (orig-fun key)
-    "advice for `rime-input-method' to make it work together with `evil-escape'.
-    Mainly modified from `evil-escape-pre-command-hook'"
-    ;; (if (or rime--preedit-overlay (rime-predicate-prog-in-code-p))
-    (if (or (rime-predicate-prog-in-code-p) (rime-predicate-in-code-string-p))
-        ;; if `rime--preedit-overlay' is non-nil, then we are editing something, do not abort
-        (apply orig-fun (list key))
-      (when (featurep 'evil-escape)
-        (let* (
-               (fkey (elt evil-escape-key-sequence 0))
-               (skey (elt evil-escape-key-sequence 1))
-               ;; (evt (read-event nil nil evil-escape-delay))
-               (evt (read-event nil nil 0.15))
-               ;; (evt (read-event))
-               )
-          (cond
-           ((and (characterp evt)
-                 (or (and (char-equal key fkey) (char-equal evt skey))
-                     (and evil-escape-unordered-key-sequence
-                          (char-equal key skey) (char-equal evt fkey))))
-            (company-abort)
-            (evil-repeat-stop)
-            (evil-normal-state))
-           ((null evt) (apply orig-fun (list key)))
-           (t
-            (apply orig-fun (list key))
-            (if (numberp evt)
-                (apply orig-fun (list evt))
-              (setq unread-command-events (append unread-command-events (list evt))))))))))
+  ;; (defun rime-evil-escape-advice (orig-fun key)
+  ;;   "advice for `rime-input-method' to make it work together with `evil-escape'.
+  ;;   Mainly modified from `evil-escape-pre-command-hook'"
+  ;;   ;; (if (or rime--preedit-overlay (rime-predicate-prog-in-code-p))
+  ;;   (if (or (rime-predicate-prog-in-code-p) (rime-predicate-in-code-string-p))
+  ;;       ;; if `rime--preedit-overlay' is non-nil, then we are editing something, do not abort
+  ;;       (apply orig-fun (list key))
+  ;;     (when (featurep 'evil-escape)
+  ;;       (let* (
+  ;;              (fkey (elt evil-escape-key-sequence 0))
+  ;;              (skey (elt evil-escape-key-sequence 1))
+  ;;              ;; (evt (read-event nil nil evil-escape-delay))
+  ;;              (evt (read-event nil nil 0.15))
+  ;;              ;; (evt (read-event))
+  ;;              )
+  ;;         (cond
+  ;;          ((and (characterp evt)
+  ;;                (or (and (char-equal key fkey) (char-equal evt skey))
+  ;;                    (and evil-escape-unordered-key-sequence
+  ;;                         (char-equal key skey) (char-equal evt fkey))))
+  ;;           (company-abort)
+  ;;           (evil-repeat-stop)
+  ;;           (evil-normal-state))
+  ;;          ((null evt) (apply orig-fun (list key)))
+  ;;          (t
+  ;;           (apply orig-fun (list key))
+  ;;           (if (numberp evt)
+  ;;               (apply orig-fun (list evt))
+  ;;             (setq unread-command-events (append unread-command-events (list evt))))))))))
   ;; (advice-add 'rime-input-method :around 'rime-evil-escape-advice)
   ;; (advice-remove 'rime-input-method 'rime-evil-escape-advice)
   ;; }}}
@@ -539,6 +556,10 @@
 ;; evil
 (use-package evil
   :ensure t
+  :functions
+  (list my-evil-search-transient
+        isearch-ring-retreat
+        evil-set-undo-system)
   :hook
   (after-init . evil-mode)
   :init
@@ -671,6 +692,10 @@
   ;; Counsel, a collection of Ivy-enhanced versions of common Emacs commands.
   ;; Swiper, an Ivy-enhanced alternative to isearch.
   :ensure t
+  :defines
+  ivy-format-function
+  :functions
+  transient-define-prefix
   :bind
   (([remap switch-to-buffer] . ivy-switch-buffer)
    ([remap isearch-forward] . swiper)
@@ -683,7 +708,7 @@
    ("M-l" . ivy-restrict-to-matches)
    ;; ("C-w" . backward-kill-word) ;; 在ivy中已经将backward-kill-word remap成了ivy-backward-kill-word
    ("C-w" . ivy-backward-kill-word)
-   ) 
+   )
   :config
   ;; (general-define-key
   ;;  :states 'normal
@@ -906,6 +931,8 @@
 
 (use-package ivy-rich
   :ensure t
+  :defines
+  ivy-format-function
   :after ivy
   :config
   (ivy-rich-mode 1)
@@ -955,6 +982,8 @@
 
 (use-package emmet-mode
   :ensure t
+  :straight
+  (:host github :repo "smihica/emmet-mode")
   :hook
   ((sgml-mdoe . emmet-mode)    ;; Auto-start on any markup modes
    (html-mode . emmet-mode)    ;; enable Emmet's css abbreviation.
@@ -1138,7 +1167,7 @@
 ;;   ;; (define-key lispy-mode-map (kbd “C-d”) 'lispy-delete-backward)
 ;;   ;; (define-key lispy-mode-map (kbd “C-k”) 'lispy-kill)
 ;;   ;; (define-key lispy-mode-map (kbd “C-y”) 'lispy-yank)
-;;   ;; (define-key lispy-mode-map (kbd “C-e”) 'lispy-move-end-of-line) 
+;;   ;; (define-key lispy-mode-map (kbd “C-e”) 'lispy-move-end-of-line)
 ;;   )
 
 ;; https://github.com/noctuid/lispyville
@@ -1160,9 +1189,9 @@
    ;; enter normal state but won’t cancel the region. Lispyville provides lispyville-normal-state
    ;; to deactivate the region and enter normal state in one step. You can map it manually or
    ;; use the escape key theme (e.g. (lispyville-set-key-theme '(... (escape insert emacs)))).
-   ;; '((escape insert emacs) 
+   ;; '((escape insert emacs)
    ;;   additional-movement prettify atom-motions slurp/barf-cp additional additional-wrap))
-   '((escape insert emacs) 
+   '((escape insert emacs)
      additional-movement slurp/barf-cp additional commentary text-objects wrap)))
 
 ;; linum-relative
@@ -1343,24 +1372,20 @@
 (use-package symbol-overlay
   ;;默认n,p,i,q在高亮的地方点击为下一个，上一个，取消所有的高亮，替换
   :ensure t
-  :after transient
   :commands symbol-overlay
   :config
-  (transient-define-prefix symbol-overlay-transient ()
-    "Symbol Overlay transient"
-    ["Symbol Overlay"
-     ["Overlays"
-      ("." "Add/Remove at point" symbol-overlay-put)
-      ("k" "Remove All" symbol-overlay-remove-all)
-      ]
-     ["Move to Symbol"
-      ("n" "Next" symbol-overlay-switch-forward)
-      ("p" "Previous" symbol-overlay-switch-backward)
-      ]
-     ["Other"
-      ("m" "Hightlight symbol-at-point" symbol-overlay-mode)
-      ]
-     ]
+  (with-eval-after-load 'transient
+    (transient-define-prefix symbol-overlay-transient ()
+      "Symbol Overlay transient"
+      ["Symbol Overlay"
+       ["Overlays"
+        ("." "Add/Remove at point" symbol-overlay-put)
+        ("k" "Remove All" symbol-overlay-remove-all)]
+       ["Move to Symbol"
+        ("n" "Next" symbol-overlay-switch-forward)
+        ("p" "Previous" symbol-overlay-switch-backward)]
+       ["Other"
+        ("m" "Hightlight symbol-at-point" symbol-overlay-mode)]])
     )
   ;; Or you may prefer to overwrite the keymap
   ;; (let ((map (make-sparse-keymap)))
@@ -1397,7 +1422,7 @@
   )
 
 (use-package symon
-  ;; tiny graphical system monitor 
+  ;; tiny graphical system monitor
   ;; https://github.com/zk-phi/symon
   :disabled
   :ensure t
@@ -1599,7 +1624,7 @@
 ;;   )
 
 (use-package git-gutter
-  :disabled        
+  :disabled
   ;; :bind
   ;; (("SPC c n" . git-gutter:next-hunk)
   ;;  ("SPC c p" . git-gutter:previous-hunk)) 
@@ -1726,15 +1751,15 @@ Git gutter:
   :after evil
   :config
   (volatile-highlights-mode t)
-  ;;-----------------------------------------------------------------------------
+  ;;-----------------------------------------------------------------
   ;; Supporting evil-mode.
-  ;;-----------------------------------------------------------------------------
+  ;;-----------------------------------------------------------------
   (vhl/define-extension 'evil 'evil-paste-after 'evil-paste-before
                         'evil-paste-pop 'evil-move)
   (vhl/install-extension 'evil)
-  ;;-----------------------------------------------------------------------------
+  ;;-----------------------------------------------------------------
   ;; Supporting undo-tree.
-  ;;-----------------------------------------------------------------------------
+  ;;-----------------------------------------------------------------
   (vhl/define-extension 'undo-tree 'undo-tree-yank 'undo-tree-move)
   (vhl/install-extension 'undo-tree)
   )
@@ -1822,7 +1847,9 @@ Git gutter:
 ;; https://github.com/purcell/disable-mouse
 (use-package disable-mouse
   :ensure t
-  :if (and (display-graphic-p) (string-equal "FL-NOTEBOOK" (upcase system-name)))
+  :functions
+  global-disable-mouse-mode
+  :if (and (display-graphic-p) (string-equal "FL-NOTEBOOK" (upcase (system-name))))
   :config
   (global-disable-mouse-mode)
   (with-eval-after-load 'evil
@@ -1875,6 +1902,8 @@ Git gutter:
 
 (use-package god-mode
   :ensure t
+  :functions 
+  which-key-enable-god-mode-support
   :init
   (general-define-key
    :states 'normal
@@ -2085,7 +2114,7 @@ Git gutter:
   :defer t
   :config
   (add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
-  (add-hook 'yaml-mode-hook '(lambda () (define-key yaml-mode-map "\C-m" 'newline-and-indent))))
+  (add-hook 'yaml-mode-hook (lambda () (define-key yaml-mode-map "\C-m" 'newline-and-indent))))
 
 (use-package xclip
   :disabled
@@ -2177,11 +2206,10 @@ Git gutter:
   )
 
 (defun my-async-task ()
-  "async exec my tasks"
+  "Async exec my tasks."
   (interactive)
   (let ((awesome-cheatsheet "~/.emacs.d/awesome-cheatsheets/README.md")
-        (out-buffer (get-buffer-create "*my-async-task*"))
-        (print out-buffer)
+        ;; (out-buffer (get-buffer-create "*my-async-task*"))
         )
     (unless (file-exists-p awesome-cheatsheet)
       ;; (async-shell-command "git clone https://github.com/skywind3000/awesome-cheatsheets.git ~/.emacs.d/awesome-cheatsheets" out-buffer out-buffer)
@@ -2395,6 +2423,8 @@ _R_ebuild package |_P_ull package  |_V_ersions thaw  |_W_atcher quit    |prun_e_
 (use-package centaur-tabs
   :ensure t
   :demand
+  :defines
+  x-underline-at-dewscent-line
   :hook
   ((dired-mode . centaur-tabs-local-mode)
    (vterm-mode . centaur-tabs-local-mode))
@@ -2415,7 +2445,7 @@ _R_ebuild package |_P_ull package  |_V_ersions thaw  |_W_atcher quit    |prun_e_
   ;; (setq centaur-tabs-set-bar 'under)
   ;; Note: If you're not using Spacmeacs, in order for the underline to display
   ;; correctly you must add the following line:
-  (setq x-underline-at-descent-line t)
+  (setq x-underline-at-dewscent-line t)
   )
 
 (use-package cargo-transient
@@ -2430,3 +2460,4 @@ _R_ebuild package |_P_ull package  |_V_ersions thaw  |_W_atcher quit    |prun_e_
   :bind ("M-=" . transient-dwim-dispatch))
 
 (provide 'init-packages)
+;;; init-packages end here
