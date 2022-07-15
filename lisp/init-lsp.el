@@ -98,6 +98,7 @@
     (lsp-ui-sideline-show-hover t)
     (lsp-ui-doc-position 'at-point)
     ;; (lsp-ui-doc-show-with-cursor t)
+    (lsp-ui-sideline-show-diagnostics t)
     :config
 
     (general-define-key
