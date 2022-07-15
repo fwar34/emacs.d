@@ -45,7 +45,7 @@
   (package-refresh-contents)
   (package-install 'use-package))
 
-(require 'use-package)
+(eval-when-compile (require 'use-package))
 ;; (setq use-package-always-ensure t)
 
 ;; install manually
@@ -69,6 +69,10 @@
       (goto-char (point-max))
       (eval-print-last-sexp)))
   (load bootstrap-file nil 'nomessage))
+
+(use-package straight
+  :load-path "straight/repos/straight.el"
+  )
 
 ;; chords
 (use-package use-package-chords
@@ -213,6 +217,8 @@
 (use-package pyim
   :ensure t
   ;; :unless (display-graphic-p)
+  :preface
+  (declare-function pyim-restart-1 "pyim")
   :defines
   (list evil-escape-key-sequence
         evil-state
@@ -415,6 +421,10 @@ current state is evil-insert-state"
 ;; pacman -S librime
 (use-package rime
   :ensure t
+  :preface
+  (declare-function rime-send-keybinding "rime")
+  (declare-function rime-force-enable "rime")
+  (declare-function rime-inline-ascii "rime")
   :defines
   (list evil-escape-unordered-key-sequence
         evil-escape-delay)
@@ -556,10 +566,16 @@ current state is evil-insert-state"
 ;; evil
 (use-package evil
   :ensure t
-  :functions
-  (list my-evil-search-transient
-        isearch-ring-retreat
-        evil-set-undo-system)
+  :preface
+  (declare-function evil-ex-define-cmd "evil-ex")
+  (declare-function evil-set-undo-system "evil-vars")
+  (require 'transient)
+    (transient-define-prefix my-evil-search-transient ()
+      "my evil search commands"
+      [["Commands"
+        ("," "isearch quote insert" isearch-quote-char) ;; C-q
+        ("p" "paste last from kill ring" isearch-yank-pop-only)
+        ("y" "paste from kill ring" isearch-yank-pop)]])
   :hook
   (after-init . evil-mode)
   :init
@@ -602,16 +618,7 @@ current state is evil-insert-state"
   ;;     (evil-local-set-key 'normal (kbd "q") 'kill-this-buffer)))
   (evil-ex-define-cmd "q[uit]" 'kill-this-buffer)
 
-  (with-eval-after-load 'transient
-    (transient-define-prefix my-evil-search-transient ()
-      "my evil search commands"
-      [;; :calss transient-row
-       ["Commands"
-        ("," "isearch quote insert" isearch-quote-char) ;; C-q
-        ("p" "paste last from kill ring" isearch-yank-pop-only)
-        ("y" "paste from kill ring" isearch-yank-pop)]]
-      )
-    )
+  
 
   ;; https://emacs.stackexchange.com/questions/31334/history-of-search-terms-for-evil-mode
   ;; (custom-set-variables '(evil-search-module 'evil-search))
@@ -1052,6 +1059,8 @@ current state is evil-insert-state"
 
 (use-package youdao-dictionary
   :ensure t
+  :preface
+  (declare-function evil-delay "evil-common")
   :commands
   (youdao-dictionary-search-at-point
    youdao-dictionary-search-at-point+
@@ -1256,9 +1265,9 @@ current state is evil-insert-state"
   :after evil
   :config
   ;; (add-hook 'prog-mode-hook 'highlight-parentheses-mode)
-  (define-globalized-minor-mode global-highlight-parentheses-mode
-    highlight-parentheses-mode
-    (lambda () (highlight-parentheses-mode t)))
+  ;; (define-globalized-minor-mode global-highlight-parentheses-mode
+  ;;   highlight-parentheses-mode
+  ;;   (lambda () (highlight-parentheses-mode t)))
   (global-highlight-parentheses-mode t)
   )
 ;; }}} -----------------------------------------------------------------------------
@@ -1627,7 +1636,7 @@ current state is evil-insert-state"
   :disabled
   ;; :bind
   ;; (("SPC c n" . git-gutter:next-hunk)
-  ;;  ("SPC c p" . git-gutter:previous-hunk)) 
+  ;;  ("SPC c p" . git-gutter:previous-hunk))
   ;; :if (not (display-graphic-p))
   :ensure t
   :after evil
@@ -1725,7 +1734,7 @@ Git gutter:
   :config
   (global-diff-hl-mode)
   (unless (display-graphic-p)
-    (diff-hl-margin-mode)) 
+    (diff-hl-margin-mode))
   (advice-add 'svn-status-update-modeline :after 'diff-hl-update)
   (add-hook 'magit-pre-refresh-hook 'diff-hl-magit-pre-refresh)
   (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh)
@@ -1748,20 +1757,23 @@ Git gutter:
 
 (use-package volatile-highlights
   :ensure t
-  :after evil
+  :defer t
+  :preface
+  (declare-function vhl/install-extension "volatile-highlights")
+  (declare-function vhl/disable-advice-if-defined "volatile-highlights")
   :config
   (volatile-highlights-mode t)
   ;;-----------------------------------------------------------------
   ;; Supporting evil-mode.
-  ;;-----------------------------------------------------------------
   (vhl/define-extension 'evil 'evil-paste-after 'evil-paste-before
                         'evil-paste-pop 'evil-move)
   (vhl/install-extension 'evil)
   ;;-----------------------------------------------------------------
-  ;; Supporting undo-tree.
   ;;-----------------------------------------------------------------
+  ;; Supporting undo-tree.
   (vhl/define-extension 'undo-tree 'undo-tree-yank 'undo-tree-move)
   (vhl/install-extension 'undo-tree)
+  ;;-----------------------------------------------------------------
   )
 
 ;; (use-package vterm
@@ -1847,8 +1859,8 @@ Git gutter:
 ;; https://github.com/purcell/disable-mouse
 (use-package disable-mouse
   :ensure t
-  :functions
-  global-disable-mouse-mode
+  :preface
+  (declare-function global-disable-mouse-mode "disable-mouse-autoloads")
   :if (and (display-graphic-p) (string-equal "FL-NOTEBOOK" (upcase (system-name))))
   :config
   (global-disable-mouse-mode)
@@ -1902,7 +1914,7 @@ Git gutter:
 
 (use-package god-mode
   :ensure t
-  :functions 
+  :functions
   which-key-enable-god-mode-support
   :init
   (general-define-key
@@ -2078,7 +2090,8 @@ Git gutter:
 
 (use-package rg
   :ensure t
-  :defer t
+  :preface
+  (declare-function evil-set-initial-state "evil-core")
   :bind
   (("C-c s" . rg-menu)
    :map rg-mode-map
@@ -2225,7 +2238,8 @@ Git gutter:
 
 (use-package vterm-toggle
   :ensure t
-  :after evil
+  :preface
+  (declare-function vterm-send-string "vterm")
   :bind*
   ([f5] . vterm-toggle)
   ([f12] . vterm-toggle-cd)
@@ -2312,6 +2326,13 @@ Git gutter:
 
 (use-package helpful
   :ensure t
+  :defer t
+  :preface
+  (declare-function hydra-keyboard-quit "hydra")
+  (declare-function hydra-default-pre "hydra")
+  (declare-function hydra--call-interactively-remap-maybe "hydra")
+  (declare-function hydra-set-transient-map "hydra")
+  (declare-function hydra-show-hint "hydra")
   :config
   ;; Note that the built-in `describe-function' includes both functions
   ;; and macros. `helpful-function' is functions only, so we provide
@@ -2366,6 +2387,26 @@ Git gutter:
   )
 
 (with-eval-after-load 'hydra
+  (declare-function straight-check-all "straight")
+  (declare-function straight-check-package "straight")
+  (declare-function straight-rebuild-all "straight")
+  (declare-function straight-rebuild-package "straight")
+  (declare-function straight-fetch-all "straight")
+  (declare-function straight-fetch-package "straight")
+  (declare-function straight-pull-all "straight")
+  (declare-function straight-pull-package "straight")
+  (declare-function straight-merge-all "straight")
+  (declare-function straight-merge-package "straight")
+  (declare-function straight-normalize-all "straight")
+  (declare-function straight-normalize-package "straight")
+  (declare-function straight-push-all "straight")
+  (declare-function straight-push-package "straight")
+  (declare-function straight-freeze-versions "straight")
+  (declare-function straight-thaw-versions "straight")
+  (declare-function straight-watcher-start "straight")
+  (declare-function straight-watcher-quit "straight")
+  (declare-function straight-get-recipe "straight")
+  (declare-function straight-prune-build "straight")
   (defhydra hydra-straight-helper (:hint nil)
     "
 _c_heck all       |_f_etch all     |_m_erge all      |_n_ormalize all   |p_u_sh all
@@ -2460,4 +2501,4 @@ _R_ebuild package |_P_ull package  |_V_ersions thaw  |_W_atcher quit    |prun_e_
   :bind ("M-=" . transient-dwim-dispatch))
 
 (provide 'init-packages)
-;;; init-packages end here
+;;; init-packages.el ends here

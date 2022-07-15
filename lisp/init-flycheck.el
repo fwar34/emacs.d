@@ -6,9 +6,11 @@
 
 (use-package flycheck
   :ensure t
-  ;; https://stackoverflow.com/questions/53697743/use-package-with-config-function-might-not-be-available-at-runtime
   ;; https://github.com/jwiegley/use-package/issues/838#issuecomment-629865020
-  :functions flycheck-add-mode
+  ;; :functions flycheck-add-mode
+  :preface
+  ;; https://stackoverflow.com/questions/53697743/use-package-with-config-function-might-not-be-available-at-runtime
+  (declare-function flycheck-add-mode "flycheck")
   :init
   (global-flycheck-mode)
   (setq-default flycheck-disabled-checkers '(emacs-lisp-checkdoc))
