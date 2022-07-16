@@ -72,6 +72,18 @@
 
 (use-package straight
   :load-path "straight/repos/straight.el")
+(require 'straight)
+
+(use-package transient
+  :straight
+  (:host github :repo "magit/transient")
+  )
+(require 'transient)
+
+(use-package hydra
+  :ensure t
+  )
+(require 'hydra)
 
 ;; evil
 (use-package evil
@@ -79,13 +91,12 @@
   :preface
   (declare-function evil-ex-define-cmd "evil-ex")
   (declare-function evil-set-undo-system "evil-vars")
-  (require 'transient)
-    (transient-define-prefix my-evil-search-transient ()
-      "my evil search commands"
-      [["Commands"
-        ("," "isearch quote insert" isearch-quote-char) ;; C-q
-        ("p" "paste last from kill ring" isearch-yank-pop-only)
-        ("y" "paste from kill ring" isearch-yank-pop)]])
+  (transient-define-prefix my-evil-search-transient ()
+    "my evil search commands"
+    [["Commands"
+      ("," "isearch quote insert" isearch-quote-char) ;; C-q
+      ("p" "paste last from kill ring" isearch-yank-pop-only)
+      ("y" "paste from kill ring" isearch-yank-pop)]])
   :hook
   (after-init . evil-mode)
   :init
@@ -152,10 +163,10 @@
 
 (use-package general
   :ensure t
-  :after evil
   :config
   (general-evil-setup t)
   )
+
 
 ;; chords
 (use-package use-package-chords
@@ -814,23 +825,21 @@ current state is evil-insert-state"
   ;; win10如果默认改成了utf8编码则不需要底下这个配置
   ;;   (modify-coding-system-alist 'process "ag" '(utf-8 . chinese-gbk-dos))
   ;;   (modify-coding-system-alist 'process "rg" '(utf-8 . chinese-gbk-dos)))
-  (with-eval-after-load 'transient
-    (transient-define-prefix my-ivy-minibuffer-transient ()
-      "my ivy minibuffer commands"
-      [[" <ivy commands>"
-        ("," "self insert \",\"" self-insert-command)
-        ("s" "ivy-restrict-to-matches" ivy-restrict-to-matches)
-        ("d" "swiper-avy" swiper-avy)
-        ("c" "ivy-occur" ivy-occur)
-        ("a" "ivy-beginning-of-buffer" ivy-beginning-of-buffer)
-        ("e" "ivy-end-of-buffer" ivy-end-of-buffer)
-        ("n" "ivy-next-line-and-call" ivy-next-line-and-call)
-        ("r" "ivy-previous-line-and-call" ivy-previous-line-and-call)
-        ("j" "ivy-immediate-done" ivy-immediate-done)
-        ("p" "clipboard-yank" clipboard-yank)
-        ("P" "yank-from-kill-ring" yank-from-kill-ring)
-        ]])
-    )
+  (transient-define-prefix my-ivy-minibuffer-transient ()
+    "my ivy minibuffer commands"
+    [[" <ivy commands>"
+      ("," "self insert \",\"" self-insert-command)
+      ("s" "ivy-restrict-to-matches" ivy-restrict-to-matches)
+      ("d" "swiper-avy" swiper-avy)
+      ("c" "ivy-occur" ivy-occur)
+      ("a" "ivy-beginning-of-buffer" ivy-beginning-of-buffer)
+      ("e" "ivy-end-of-buffer" ivy-end-of-buffer)
+      ("n" "ivy-next-line-and-call" ivy-next-line-and-call)
+      ("r" "ivy-previous-line-and-call" ivy-previous-line-and-call)
+      ("j" "ivy-immediate-done" ivy-immediate-done)
+      ("p" "clipboard-yank" clipboard-yank)
+      ("P" "yank-from-kill-ring" yank-from-kill-ring)
+      ]])
   ;; (general-define-key
   ;;  :keymaps 'ivy-minibuffer-map
   ;;  :prefix ","
@@ -1384,19 +1393,17 @@ current state is evil-insert-state"
   :ensure t
   :commands symbol-overlay
   :config
-  (with-eval-after-load 'transient
-    (transient-define-prefix symbol-overlay-transient ()
-      "Symbol Overlay transient"
-      ["Symbol Overlay"
-       ["Overlays"
-        ("." "Add/Remove at point" symbol-overlay-put)
-        ("k" "Remove All" symbol-overlay-remove-all)]
-       ["Move to Symbol"
-        ("n" "Next" symbol-overlay-switch-forward)
-        ("p" "Previous" symbol-overlay-switch-backward)]
-       ["Other"
-        ("m" "Hightlight symbol-at-point" symbol-overlay-mode)]])
-    )
+  (transient-define-prefix symbol-overlay-transient ()
+    "Symbol Overlay transient"
+    ["Symbol Overlay"
+     ["Overlays"
+      ("." "Add/Remove at point" symbol-overlay-put)
+      ("k" "Remove All" symbol-overlay-remove-all)]
+     ["Move to Symbol"
+      ("n" "Next" symbol-overlay-switch-forward)
+      ("p" "Previous" symbol-overlay-switch-backward)]
+     ["Other"
+      ("m" "Hightlight symbol-at-point" symbol-overlay-mode)]])
   ;; Or you may prefer to overwrite the keymap
   ;; (let ((map (make-sparse-keymap)))
   ;;   (define-key map (kbd "r") 'symbol-overlay-query-replace)
@@ -1826,12 +1833,11 @@ Git gutter:
   :if (and (display-graphic-p) (string-equal "FL-NOTEBOOK" (upcase (system-name))))
   :config
   (global-disable-mouse-mode)
-  (with-eval-after-load 'evil
     (mapc 'disable-mouse-in-keymap
           (list evil-motion-state-map
                 evil-normal-state-map
                 evil-visual-state-map
-                evil-insert-state-map)))
+                evil-insert-state-map))
   )
 
 (use-package thrift
@@ -2220,30 +2226,28 @@ Git gutter:
   ;; 使用 C-q 在 vtem 中发送下个字符到 terminal, 比如 ";"
   (evil-define-key 'insert vterm-mode-map (kbd "C-q") 'vterm-send-next-key)
 
-  (with-eval-after-load 'transient
-    (transient-define-prefix my-vterm-transient ()
-      " <vterm mode commans>"
-      [" <vterm commands>\n---------------------------------------"
-       [" <Toggle>"
-        ("f" "vterm-toggle-forward" vterm-toggle-forward)
-        ("b" "vterm-toggle-backward" vterm-toggle-backward)]])
+  (transient-define-prefix my-vterm-transient ()
+    " <vterm mode commans>"
+    [" <vterm commands>\n---------------------------------------"
+     [" <Toggle>"
+      ("f" "vterm-toggle-forward" vterm-toggle-forward)
+      ("b" "vterm-toggle-backward" vterm-toggle-backward)]])
 
-    (defun my-vterm-insert ()
-      (interactive)
-      (vterm-send-string ";"))
-    (transient-define-prefix my-vterm-mode-transient ()
-      " <vterm misc commands>"
-      [" <vterm commands>\n--------------------------------------------------------------"
-       [" <Yank>"
-        ("p" "vterm-yank" vterm-yank) ;;
-        ("P" "vterm-yank-pop" vterm-yank-pop)] ;; M-y
-       [" <Misc>"
-        ("n" "vterm-send-next-key" vterm-send-next-key)
-        (";" "insert ;" my-vterm-insert)]
-       [" <Toggle>"
-        ("f" "vterm-toggle-forward" vterm-toggle-forward)
-        ("b" "vterm-toggle-backward" vterm-toggle-backward)]])
-    )
+  (defun my-vterm-insert ()
+    (interactive)
+    (vterm-send-string ";"))
+  (transient-define-prefix my-vterm-mode-transient ()
+    " <vterm misc commands>"
+    [" <vterm commands>\n--------------------------------------------------------------"
+     [" <Yank>"
+      ("p" "vterm-yank" vterm-yank) ;;
+      ("P" "vterm-yank-pop" vterm-yank-pop)] ;; M-y
+     [" <Misc>"
+      ("n" "vterm-send-next-key" vterm-send-next-key)
+      (";" "insert ;" my-vterm-insert)]
+     [" <Toggle>"
+      ("f" "vterm-toggle-forward" vterm-toggle-forward)
+      ("b" "vterm-toggle-backward" vterm-toggle-backward)]])
 
   ;; (general-define-key
   ;;  :states '(insert normal)
@@ -2289,38 +2293,32 @@ Git gutter:
 (use-package helpful
   :ensure t
   :preface
-  (require 'hydra)
-  (with-eval-after-load 'hydra
-    (defhydra my-hydra-helpfu (:color teal :hint nil)
-      ("c" helpful-callable "helpful callable" :column "<helpful commands>")
-      ("f" helpful-function "helpful function")
-      ("v" helpful-variable "helpful variable")
-      ("k" helpful-key "helpful key")
-      ("d" helpful-at-point "helpful at point")
-      ("C" helpful-command "helpful command")
-      ("q" nil))
-    )
-  (with-eval-after-load 'transient
-    (transient-define-prefix my-helpful-transient ()
-      "my helpful commands"
-      [[" <helpful commands>"
-        ("c" "helpful callable" helpful-callable)
-        ("f" "helpful function" helpful-function)
-        ("v" "helpful variable" helpful-variable)
-        ("k" "helpful key" helpful-key)
-        ("d" "helpful at point" helpful-key)
-        ("C" "helpful command" helpful-command)
-        ]]
-      ;; [:hide (lambda () t)
-      ;;        ("q" "quit" keyboard-quit)]
-      ))
+  (defhydra my-hydra-helpfu (:color teal :hint nil)
+    ("c" helpful-callable "helpful callable" :column "<helpful commands>")
+    ("f" helpful-function "helpful function")
+    ("v" helpful-variable "helpful variable")
+    ("k" helpful-key "helpful key")
+    ("d" helpful-at-point "helpful at point")
+    ("C" helpful-command "helpful command")
+    ("q" nil))
+
+  (transient-define-prefix my-helpful-transient ()
+    "my helpful commands"
+    [[" <helpful commands>"
+      ("c" "helpful callable" helpful-callable)
+      ("f" "helpful function" helpful-function)
+      ("v" "helpful variable" helpful-variable)
+      ("k" "helpful key" helpful-key)
+      ("d" "helpful at point" helpful-key)
+      ("C" "helpful command" helpful-command)
+      ]])
   :commands
-  (list helpful-callable
-        helpful-function
-        helpful-variable
-        helpful-key
-        helpful-at-point
-        helpful-command)
+  (helpful-callable
+   helpful-function
+   helpful-variable
+   helpful-key
+   helpful-at-point
+   helpful-command)
   :config
   ;; Note that the built-in `describe-function' includes both functions
   ;; and macros. `helpful-function' is functions only, so we provide
@@ -2347,32 +2345,8 @@ Git gutter:
   ;; look at interactive functions.
   ;; (global-set-key (kbd "C-h C") #'helpful-command)
 
-  
-
-  
   )
 
-(with-eval-after-load 'hydra
-  (declare-function straight-check-all "straight")
-  (declare-function straight-check-package "straight")
-  (declare-function straight-rebuild-all "straight")
-  (declare-function straight-rebuild-package "straight")
-  (declare-function straight-fetch-all "straight")
-  (declare-function straight-fetch-package "straight")
-  (declare-function straight-pull-all "straight")
-  (declare-function straight-pull-package "straight")
-  (declare-function straight-merge-all "straight")
-  (declare-function straight-merge-package "straight")
-  (declare-function straight-normalize-all "straight")
-  (declare-function straight-normalize-package "straight")
-  (declare-function straight-push-all "straight")
-  (declare-function straight-push-package "straight")
-  (declare-function straight-freeze-versions "straight")
-  (declare-function straight-thaw-versions "straight")
-  (declare-function straight-watcher-start "straight")
-  (declare-function straight-watcher-quit "straight")
-  (declare-function straight-get-recipe "straight")
-  (declare-function straight-prune-build "straight")
   (defhydra hydra-straight-helper (:hint nil)
     "
 _c_heck all       |_f_etch all     |_m_erge all      |_n_ormalize all   |p_u_sh all
@@ -2397,12 +2371,10 @@ _R_ebuild package |_P_ull package  |_V_ersions thaw  |_W_atcher quit    |prun_e_
     ("v" straight-freeze-versions)
     ("V" straight-thaw-versions)
     ("w" straight-watcher-start)
-    ("W" straight-watcher-quit)
     ("g" straight-get-recipe)
     ("e" straight-prune-build)
-    ("q" nil)))
+    ("q" nil))
 
-(with-eval-after-load 'transient
   (transient-define-prefix my-straight-transient ()
     " <straight commands>"
     ["                                                          <straight commands>"
@@ -2425,7 +2397,7 @@ _R_ebuild package |_P_ull package  |_V_ersions thaw  |_W_atcher quit    |prun_e_
      [("w" "straight-watcher-start" straight-watcher-start)
       ("W" "straight-watcher-stop" straight-watcher-stop)
       ("g" "straight-get-recipe" straight-get-recipe)
-      ("e" "straight-prune-build" straight-prune-build)]]))
+      ("e" "straight-prune-build" straight-prune-build)]])
 
 (use-package centaur-tabs
   :ensure t
