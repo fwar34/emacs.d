@@ -1756,8 +1756,8 @@ Git gutter:
   )
 
 (use-package volatile-highlights
+  :disabled
   :ensure t
-  :defer t
   :preface
   (declare-function vhl/install-extension "volatile-highlights")
   (declare-function vhl/disable-advice-if-defined "volatile-highlights")

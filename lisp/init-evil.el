@@ -1,5 +1,6 @@
 ;; -*- coding: utf-8; lexical-binding: t; -*-
 
+(require 'evil)
 
 ;; highlight persistent
 ;; https://stackoverflow.com/questions/25768036/emacs-evil-non-incremental-search-and-persistent-highlighting/34252236#34252236
@@ -75,7 +76,6 @@
 ;; https://www.gnu.org/software/emacs/manual/html_node/elisp/Finding-Overlays.html#Finding-Overlays
 ;; https://www.gnu.org/software/emacs/manual/html_node/elisp/Managing-Overlays.html#Managing-Overlays
 (defun fwar34/remove-fwar34-overlay-before-paste (&rest _)
-  (interactive)
   (let ((overlays (overlays-at (point))))
     (while overlays
       (let ((overlay (car overlays)))
