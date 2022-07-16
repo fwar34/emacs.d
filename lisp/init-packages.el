@@ -71,15 +71,97 @@
   (load bootstrap-file nil 'nomessage))
 
 (use-package straight
-  :load-path "straight/repos/straight.el"
+  :load-path "straight/repos/straight.el")
+
+;; evil
+(use-package evil
+  :ensure t
+  :preface
+  (declare-function evil-ex-define-cmd "evil-ex")
+  (declare-function evil-set-undo-system "evil-vars")
+  (require 'transient)
+    (transient-define-prefix my-evil-search-transient ()
+      "my evil search commands"
+      [["Commands"
+        ("," "isearch quote insert" isearch-quote-char) ;; C-q
+        ("p" "paste last from kill ring" isearch-yank-pop-only)
+        ("y" "paste from kill ring" isearch-yank-pop)]])
+  :hook
+  (after-init . evil-mode)
+  :init
+  ;; (setq evil-want-keybinding nil) must put before load evil
+  ;; See https://github.com/emacs-evil/evil-collection/issues/60 for more details.
+  (setq evil-want-keybinding nil)
+  ;; disable status in echo area
+  (setq evil-echo-state nil)
+  (setq evil-want-integration t) ;; This is optional since it's already set to t by default.
+  (setq evil-want-C-i-jump t)
+  (setq evil-want-fine-undo "Yes")
+  (setq evil-want-Y-yank-to-eol t)
+  ;; (setq evil-no-display t)              ;; not display evil state in echo area
+  :bind
+  (:map isearch-mode-map
+        ("<up>" . 'isearch-ring-retreat)
+        ("<down>" . isearch-ring-advance)
+        ("," . 'my-evil-search-transient)
+        )
+  (:map evil-normal-state-map
+        ("C-a" . evil-first-non-blank)
+        ("C-e" . evil-end-of-line))
+  :config
+  ;; 设置光标样式
+  (setq evil-motion-state-cursor '(box "red"))
+  (setq evil-visual-state-cursor '(box "orange"))
+  (setq evil-emacs-state-cursor  '((hbar . 5) "indianred"))
+  (setq evil-insert-state-cursor '((hbar . 5) "yellow")
+        evil-normal-state-cursor '(box "purple"))
+
+  (define-key evil-ex-search-keymap (kbd ";g") 'keyboard-quit)
+  ;; for quit shell-command output buffer
+  ;; (defun my-quit-window (&rest _)
+  ;;   (with-current-buffer "*Shell Command Output*"
+  ;;     (evil-local-set-key 'normal (kbd "q") 'quit-window)))
+  ;; (advice-add 'shell-command :after 'my-quit-window)
+  ;; (defadvice shell-command (after advice-find-file activate)
+  ;;   (with-current-buffer "*Shell Command Output*"
+  ;;     ;; (evil-local-set-key 'normal (kbd "q") 'quit-window)))
+  ;;     (evil-local-set-key 'normal (kbd "q") 'kill-this-buffer)))
+  (evil-ex-define-cmd "q[uit]" 'kill-this-buffer)
+
+  ;; https://emacs.stackexchange.com/questions/31334/history-of-search-terms-for-evil-mode
+  ;; (custom-set-variables '(evil-search-module 'evil-search))
+
+  ;; (when (< emacs-major-version 28)
+  ;;   (use-package undo-fu :ensure t))
+
+  ;; https://emacs-china.org/t/customize-evil-undo-system-for-redo-functionality/14969/3
+  ;; (when (fboundp 'evil-set-undo-system)
+  ;;   (evil-set-undo-system (if (>= emacs-major-version 28) 'undo-redo 'undo-tree))
+  ;;   ;; (evil-set-undo-system (if (>= emacs-major-version 28) 'undo-redo 'undo-fu))
+  ;;   )
+  (evil-set-undo-system 'undo-tree)
+  (use-package avy :ensure t)
+
+  :custom
+  ;; undo will never freeze my Emacs
+  ;; (evil-undo-system (if (>= emacs-major-version 28) 'undo-redo 'undo-fu))
+  ;; https://emacs-china.org/t/evil-insert-state-or-evil-emacs-state/16710/6?u=fwar34
+  (evil-ex-interactive-search-highlight 'selected-window)
+  (evil-want-C-g-bindings t)
+  )
+
+(use-package general
+  :ensure t
+  :after evil
+  :config
+  (general-evil-setup t)
   )
 
 ;; chords
 (use-package use-package-chords
-  :ensure t
-  )
+  :ensure t)
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; {{{
 ;; Theme
 (use-package monokai-theme
   :disabled
@@ -210,11 +292,13 @@
 ;;   :config
 ;;   (color-theme-molokai)
 ;;   )
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; }}}
+
 (when (and (display-graphic-p) (>= emacs-major-version 26))
   (use-package posframe :ensure t))
 
 (use-package pyim
+  :defer t
   :ensure t
   ;; :unless (display-graphic-p)
   :preface
@@ -563,84 +647,6 @@ current state is evil-insert-state"
   )
 
 ;; https://github.com/emacs-evil/evil-collection
-;; evil
-(use-package evil
-  :ensure t
-  :preface
-  (declare-function evil-ex-define-cmd "evil-ex")
-  (declare-function evil-set-undo-system "evil-vars")
-  (require 'transient)
-    (transient-define-prefix my-evil-search-transient ()
-      "my evil search commands"
-      [["Commands"
-        ("," "isearch quote insert" isearch-quote-char) ;; C-q
-        ("p" "paste last from kill ring" isearch-yank-pop-only)
-        ("y" "paste from kill ring" isearch-yank-pop)]])
-  :hook
-  (after-init . evil-mode)
-  :init
-  ;; (setq evil-want-keybinding nil) must put before load evil
-  ;; See https://github.com/emacs-evil/evil-collection/issues/60 for more details.
-  (setq evil-want-keybinding nil)
-  ;; disable status in echo area
-  (setq evil-echo-state nil)
-  (setq evil-want-integration t) ;; This is optional since it's already set to t by default.
-  (setq evil-want-C-i-jump t)
-  (setq evil-want-fine-undo "Yes")
-  (setq evil-want-Y-yank-to-eol t)
-  ;; (setq evil-no-display t)              ;; not display evil state in echo area
-  :bind
-  (:map isearch-mode-map
-        ("<up>" . 'isearch-ring-retreat)
-        ("<down>" . isearch-ring-advance)
-        ("," . 'my-evil-search-transient)
-        )
-  (:map evil-normal-state-map
-        ("C-a" . evil-first-non-blank)
-        ("C-e" . evil-end-of-line))
-  :config
-  ;; 设置光标样式
-  (setq evil-motion-state-cursor '(box "red"))
-  (setq evil-visual-state-cursor '(box "orange"))
-  (setq evil-emacs-state-cursor  '((hbar . 5) "indianred"))
-  (setq evil-insert-state-cursor '((hbar . 5) "yellow")
-        evil-normal-state-cursor '(box "purple"))
-
-  (define-key evil-ex-search-keymap (kbd ";g") 'keyboard-quit)
-  ;; for quit shell-command output buffer
-  ;; (defun my-quit-window (&rest _)
-  ;;   (with-current-buffer "*Shell Command Output*"
-  ;;     (evil-local-set-key 'normal (kbd "q") 'quit-window)))
-  ;; (advice-add 'shell-command :after 'my-quit-window)
-  ;; (defadvice shell-command (after advice-find-file activate)
-  ;;   (with-current-buffer "*Shell Command Output*"
-  ;;     ;; (evil-local-set-key 'normal (kbd "q") 'quit-window)))
-  ;;     (evil-local-set-key 'normal (kbd "q") 'kill-this-buffer)))
-  (evil-ex-define-cmd "q[uit]" 'kill-this-buffer)
-
-  
-
-  ;; https://emacs.stackexchange.com/questions/31334/history-of-search-terms-for-evil-mode
-  ;; (custom-set-variables '(evil-search-module 'evil-search))
-
-  ;; (when (< emacs-major-version 28)
-  ;;   (use-package undo-fu :ensure t))
-
-  ;; https://emacs-china.org/t/customize-evil-undo-system-for-redo-functionality/14969/3
-  ;; (when (fboundp 'evil-set-undo-system)
-  ;;   (evil-set-undo-system (if (>= emacs-major-version 28) 'undo-redo 'undo-tree))
-  ;;   ;; (evil-set-undo-system (if (>= emacs-major-version 28) 'undo-redo 'undo-fu))
-  ;;   )
-  (evil-set-undo-system 'undo-tree)
-  (use-package avy :ensure t)
-
-  :custom
-  ;; undo will never freeze my Emacs
-  ;; (evil-undo-system (if (>= emacs-major-version 28) 'undo-redo 'undo-fu))
-  ;; https://emacs-china.org/t/evil-insert-state-or-evil-emacs-state/16710/6?u=fwar34
-  (evil-ex-interactive-search-highlight 'selected-window)
-  (evil-want-C-g-bindings t)
-  )
 
 (use-package undo-tree
   :ensure t
@@ -699,6 +705,7 @@ current state is evil-insert-state"
   ;; Counsel, a collection of Ivy-enhanced versions of common Emacs commands.
   ;; Swiper, an Ivy-enhanced alternative to isearch.
   :ensure t
+  :defer t
   :defines
   ivy-format-function
   :functions
@@ -966,7 +973,7 @@ current state is evil-insert-state"
 ;; js2-mode setting
 (use-package js2-mode
   :ensure t
-  :after js2-mode
+  :defer t
   :preface
   (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
   )
@@ -982,7 +989,7 @@ current state is evil-insert-state"
   (add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
   (add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
   (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
-  :after web-mode
+  :defer t
   :config
   (define-key web-mode-map (kbd "C-n") 'web-mode-tag-match)
   )
@@ -1000,6 +1007,7 @@ current state is evil-insert-state"
 
 (use-package vimrc-mode
   :ensure t
+  :defer t
   :config
   (add-to-list 'auto-mode-alist '("\\.vim\\(rc\\)?\\'" . vimrc-mode))
   )
@@ -1007,8 +1015,9 @@ current state is evil-insert-state"
 ;; popwin setting
 (use-package popwin
   :ensure t
-  :hook
-  (evil-mode . popwin-mode)
+  :after evil
+  :config
+  (popwin-mode 1)
   )
 
 (use-package winum
@@ -1045,6 +1054,7 @@ current state is evil-insert-state"
 ;; yasnippet setting
 (use-package yasnippet
   :ensure t
+  :defer t
   :config
   (run-with-idle-timer 0.5 nil 'yas-global-mode)
   (setq yas-snippet-dirs '("~/.emacs.d/mysnippets"))
@@ -1103,18 +1113,18 @@ current state is evil-insert-state"
 
 (use-package go-mode
   :ensure t
+  :defer t
   :preface
   (add-to-list 'auto-mode-alist '("\\.go\\'" . go-mode))
-  :after go-mode
   :config
   (autoload 'go-mode "go-mode" nil t)
   )
 
 (use-package rust-mode
   :ensure t
+  :defer t
   :preface
   (add-to-list 'auto-mode-alist '("\\.rs\\'" . rust-mode))
-  :after rust-mode
   :config
   (autoload 'rust-mode "rust-mode" nil t)
   ;; The rust-format-buffer function will format your code with rustfmt if installed.
@@ -1182,6 +1192,7 @@ current state is evil-insert-state"
 ;; https://github.com/noctuid/lispyville
 (use-package lispyville
   :ensure t
+  :defer t
   ;; :disabled
   ;; :hook
   ;; lispyvill used with lispy
@@ -1262,7 +1273,7 @@ current state is evil-insert-state"
 
 (use-package highlight-parentheses
   :ensure t
-  :after evil
+  :defer t
   :config
   ;; (add-hook 'prog-mode-hook 'highlight-parentheses-mode)
   ;; (define-globalized-minor-mode global-highlight-parentheses-mode
@@ -1308,7 +1319,7 @@ current state is evil-insert-state"
 
 (use-package evil-nerd-commenter
   :ensure t
-  :after evil
+  :defer t
   :config
   ;; must put before (evilnc-default-hotkeys t t)
   (setq evilnc-use-comment-object-setup nil)
@@ -1359,16 +1370,6 @@ current state is evil-insert-state"
   :after evil
   )
 
-(use-package general
-  :ensure t
-  :after evil
-  :config
-  (general-evil-setup t)
-  )
-
-
-
-
 ;; 高亮符号
 (use-package highlight-symbol
   :disabled
@@ -1408,7 +1409,7 @@ current state is evil-insert-state"
 
 (use-package fix-word
   :ensure t
-  :after evil
+  :defer t
   )
 
 (use-package browse-kill-ring
@@ -1727,10 +1728,7 @@ Git gutter:
 
 (use-package diff-hl
   :ensure t
-  :after evil
-  ;; :if (not (display-graphic-p))
-  ;; :hook
-  ;; (c++-mode . diff-hl-mode)
+  :defer t
   :config
   (global-diff-hl-mode)
   (unless (display-graphic-p)
@@ -1742,7 +1740,7 @@ Git gutter:
 
 (use-package ace-popup-menu
   :ensure t
-  :after evil
+  :defer t
   :config
   (ace-popup-menu-mode 1)
   )
@@ -1754,42 +1752,6 @@ Git gutter:
   (exec-path-from-shell-initialize)
   ;; (setq exec-path-from-shell-arguments '("-l"))
   )
-
-(use-package volatile-highlights
-  :disabled
-  :ensure t
-  :preface
-  (declare-function vhl/install-extension "volatile-highlights")
-  (declare-function vhl/disable-advice-if-defined "volatile-highlights")
-  :config
-  (volatile-highlights-mode t)
-  ;;-----------------------------------------------------------------
-  ;; Supporting evil-mode.
-  (vhl/define-extension 'evil 'evil-paste-after 'evil-paste-before
-                        'evil-paste-pop 'evil-move)
-  (vhl/install-extension 'evil)
-  ;;-----------------------------------------------------------------
-  ;;-----------------------------------------------------------------
-  ;; Supporting undo-tree.
-  (vhl/define-extension 'undo-tree 'undo-tree-yank 'undo-tree-move)
-  (vhl/install-extension 'undo-tree)
-  ;;-----------------------------------------------------------------
-  )
-
-;; (use-package vterm
-;;     :ensure t
-;; )
-
-;; (use-package vterm-toggle
-;;     :ensure t
-;;     :config
-;;     (global-set-key [f2] 'vterm-toggle)
-;; )
-
-;; (use-package terminal-toggle
-;;     :ensure t
-;;     :config
-;; )
 
 (use-package multi-term
   :disabled
@@ -2326,13 +2288,39 @@ Git gutter:
 
 (use-package helpful
   :ensure t
-  :defer t
   :preface
-  (declare-function hydra-keyboard-quit "hydra")
-  (declare-function hydra-default-pre "hydra")
-  (declare-function hydra--call-interactively-remap-maybe "hydra")
-  (declare-function hydra-set-transient-map "hydra")
-  (declare-function hydra-show-hint "hydra")
+  (require 'hydra)
+  (with-eval-after-load 'hydra
+    (defhydra my-hydra-helpfu (:color teal :hint nil)
+      ("c" helpful-callable "helpful callable" :column "<helpful commands>")
+      ("f" helpful-function "helpful function")
+      ("v" helpful-variable "helpful variable")
+      ("k" helpful-key "helpful key")
+      ("d" helpful-at-point "helpful at point")
+      ("C" helpful-command "helpful command")
+      ("q" nil))
+    )
+  (with-eval-after-load 'transient
+    (transient-define-prefix my-helpful-transient ()
+      "my helpful commands"
+      [[" <helpful commands>"
+        ("c" "helpful callable" helpful-callable)
+        ("f" "helpful function" helpful-function)
+        ("v" "helpful variable" helpful-variable)
+        ("k" "helpful key" helpful-key)
+        ("d" "helpful at point" helpful-key)
+        ("C" "helpful command" helpful-command)
+        ]]
+      ;; [:hide (lambda () t)
+      ;;        ("q" "quit" keyboard-quit)]
+      ))
+  :commands
+  (list helpful-callable
+        helpful-function
+        helpful-variable
+        helpful-key
+        helpful-at-point
+        helpful-command)
   :config
   ;; Note that the built-in `describe-function' includes both functions
   ;; and macros. `helpful-function' is functions only, so we provide
@@ -2359,31 +2347,9 @@ Git gutter:
   ;; look at interactive functions.
   ;; (global-set-key (kbd "C-h C") #'helpful-command)
 
-  (with-eval-after-load 'transient
-    (transient-define-prefix my-helpful-transient ()
-      "my helpful commands"
-      [[" <helpful commands>"
-        ("c" "helpful callable" helpful-callable)
-        ("f" "helpful function" helpful-function)
-        ("v" "helpful variable" helpful-variable)
-        ("k" "helpful key" helpful-key)
-        ("d" "helpful at point" helpful-key)
-        ("C" "helpful command" helpful-command)
-        ]]
-      ;; [:hide (lambda () t)
-      ;;        ("q" "quit" keyboard-quit)]
-      ))
+  
 
-  (with-eval-after-load 'hydra
-    (defhydra my-hydra-helpfu (:color teal :hint nil)
-      ("c" helpful-callable "helpful callable" :column "<helpful commands>")
-      ("f" helpful-function "helpful function")
-      ("v" helpful-variable "helpful variable")
-      ("k" helpful-key "helpful key")
-      ("d" helpful-at-point "helpful at point")
-      ("C" helpful-command "helpful command")
-      ("q" nil))
-    )
+  
   )
 
 (with-eval-after-load 'hydra
@@ -2469,10 +2435,6 @@ _R_ebuild package |_P_ull package  |_V_ersions thaw  |_W_atcher quit    |prun_e_
   :hook
   ((dired-mode . centaur-tabs-local-mode)
    (vterm-mode . centaur-tabs-local-mode))
-  :bind
-  (:map evil-normal-state-map
-        ("H" . centaur-tabs-backward)
-        ("L" . centaur-tabs-forward))
   :config
   (centaur-tabs-mode t)
   (setq centaur-tabs-plain-icons t)
@@ -2487,6 +2449,10 @@ _R_ebuild package |_P_ull package  |_V_ersions thaw  |_W_atcher quit    |prun_e_
   ;; Note: If you're not using Spacmeacs, in order for the underline to display
   ;; correctly you must add the following line:
   (setq x-underline-at-dewscent-line t)
+
+  (with-eval-after-load 'evil
+    (define-key evil-normal-state-map (kbd "H") 'centaur-tabs-backward)
+    (define-key evil-normal-state-map (kbd "L") 'centaur-tabs-forward))
   )
 
 (use-package cargo-transient

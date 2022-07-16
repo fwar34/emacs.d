@@ -1,4 +1,7 @@
-;; -*- coding: utf-8; lexical-binding: t; -*-
+;;; init.el --- Useful preset transient commands  -*- coding:utf-8; lexical-binding: t; -*-
+;;; Commentary:
+
+;;; Code:
 
 ;; https://archive.casouri.cat/note/2020/painless-transition-to-portable-dumper/index.html
 (defvar fwar34-dumped nil
@@ -15,19 +18,19 @@
   "Evaluate IF if running with a dump file, else evaluate ELSE."
   (declare (indent 1))
   `(if fwar34-dumped
-     ,then
+       ,then
      ,@else))
 
 (fwar34-if-dump
-  (progn
-    (setq load-path fwar34-dumped-load-path)
-    (global-font-lock-mode)
-    (transient-mark-mode)
-    (add-hook 'after-init-hook
-	      (lambda ()
-		(save-excursion
-		  (switch-to-buffer "*scratch*")
-		  (lisp-interaction-mode)))))
+    (progn
+      (setq load-path fwar34-dumped-load-path)
+      (global-font-lock-mode)
+      (transient-mark-mode)
+      (add-hook 'after-init-hook
+                (lambda ()
+                  (save-excursion
+                    (switch-to-buffer "*scratch*")
+                    (lisp-interaction-mode)))))
   ;;
   (package-initialize))
 
@@ -85,22 +88,20 @@
 (require 'init-fonts)
 (require 'init-hydra)
 (require 'init-modeline)
-
-(with-eval-after-load 'evil (require 'init-evil))
-(add-hook 'after-init-hook (lambda () (require 'init-company)))
-(add-hook 'after-init-hook (lambda () (require 'init-tags)))
-(add-hook 'after-init-hook (lambda () (require 'init-eshell)))
-(add-hook 'after-init-hook (lambda () (require 'init-shell)))
-(add-hook 'after-init-hook (lambda () (require 'init-dired)))
-(add-hook 'after-init-hook (lambda () (require 'init-org)))
+(require 'init-evil)
+(require 'init-company)
+(require 'init-tags)
+(require 'init-eshell)
+(require 'init-shell)
+(require 'init-dired)
+(require 'init-org)
 ;; (add-hook 'after-init-hook (lambda () (require 'auto-save)
 ;;                              (auto-save-enable))) 
-(add-hook 'after-init-hook (lambda () (require 'init-better-default)))
-(add-hook 'after-init-hook (lambda ()
-                             (require 'init-minefunc)
-                             (require 'init-c)))
-(add-hook 'after-init-hook (lambda () (require 'init-misc)))
-(add-hook 'after-init-hook (lambda () (require 'init-builtin)))
+(require 'init-better-default)
+(require 'init-minefunc)
+(require 'init-c)
+(require 'init-misc)
+(require 'init-builtin)
 (require 'init-transient)
 (require 'init-lsp)
 (require 'init-one-key)
@@ -113,3 +114,5 @@
             (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
             (if (file-exists-p (expand-file-name "custom.el"))
                 (load-file custom-file))))
+
+;;; init.el ends here
