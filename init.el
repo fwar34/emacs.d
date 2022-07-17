@@ -34,19 +34,11 @@
   ;;
   (package-initialize))
 
-;; 设置垃圾回收，在windows下，emacs25版本会频繁发出垃圾回收
-(when (equal system-type 'windows-nt)
-  (setq gc-cons-threshold (* 512 1024 1024))
-  (setq gc-cons-percentage 0.5)
-  (run-with-idle-timer 5 t #'garbage-collect)
-  ;; 显示垃圾回收信息，可以作为调试用
-  (setq garbage-collect-message t))
-
-;; (setq gc-cons-threshold 402653184
-;;       gc-cons-percentage 0.6)
-;; (add-hook 'emacs-startup-hook (lambda ()
-;;                                 (setq gc-cons-threshold 16777216
-;;                                       gc-cons-percentage 0.1)))
+(setq gc-cons-threshold most-positive-fixnum)
+(add-hook 'emacs-startup-hook
+          (lambda ()
+            "Recover GC values after startup."
+            (setq gc-cons-threshold 800000)))
 
 ;; http://www.sohu.com/a/301863132_100034897
 ;; -q ignores personal Emacs files but loads the site files.
