@@ -1,40 +1,8 @@
-;;; init.el --- Useful preset transient commands  -*- coding:utf-8; lexical-binding: t; -*-
+;;; init.el --- Useful preset transient commands  -*- coding: utf-8; lexical-binding: t; no-byte-compile: t -*-
 ;;; Commentary:
 
 ;;; Code:
 
-;; https://archive.casouri.cat/note/2020/painless-transition-to-portable-dumper/index.html
-(defvar fwar34-dumped nil
-  "non-nil when a dump file is loaded.(Because dump.el sets this variable).")
-
-(defvar fwar34-dumped-load-path nil
-  "restore load path")
-
-(if fwar34-dumped                 
-    (message "emacs start with dump")   
-  (message "emacs start without dump"))
-
-(defmacro fwar34-if-dump (then &rest else)
-  "Evaluate IF if running with a dump file, else evaluate ELSE."
-  (declare (indent 1))
-  `(if fwar34-dumped
-       ,then
-     ,@else))
-
-(fwar34-if-dump
-    (progn
-      (setq load-path fwar34-dumped-load-path)
-      (global-font-lock-mode)
-      (transient-mark-mode)
-      (add-hook 'after-init-hook
-                (lambda ()
-                  (save-excursion
-                    (switch-to-buffer "*scratch*")
-                    (lisp-interaction-mode)))))
-  ;;
-  (package-initialize))
-
-(setq gc-cons-threshold most-positive-fixnum)
 (add-hook 'emacs-startup-hook
           (lambda ()
             "Recover GC values after startup."
@@ -55,56 +23,69 @@
                               (time-subtract after-init-time before-init-time)))
                      gcs-done)))
 
-(defun local-require (pkg)
-  (unless (featurep pkg)
-    (load (expand-file-name
-           (cond
-            ((eq pkg 'go-mode-load)
-             (format "~/.emacs.d/site-lisp/go-mode/%s" pkg))
-            (t
-             (format "~/.emacs.d/site-lisp/%s/%s" pkg pkg))))
-          t t)))
+(require 'package)
+(setq package-archives
+      '(
+        ;; option0
+        ;; ("gnu" . "https://mirrors.sjtug.sjtu.edu.cn/emacs-elpa/gnu/")
+        ;; ("melpa" . "https://mirrors.sjtug.sjtu.edu.cn/emacs-elpa/melpa/")
+        ;; option1
+        ;; ("melpa" . "https://melpa.org/packages/")
+        ;; ("melpa-stable" . "https://stable.melpa.org/packages/")
+        ;; option2
+        ("gnu" . "https://mirrors.163.com/elpa/gnu/")
+        ("melpa" . "https://mirrors.163.com/elpa/melpa/")
+        ("melpa-stable" . "https://mirrors.163.com/elpa/stable-melpa/")
+        ))
+
+;; (setq load-prefer-newer t)
+(package-initialize)
+;; (require 'auto-compile)
+;; (auto-compile-on-load-mode)
+;; (auto-compile-on-save-mode)
+
+;; 防止反复调用 package-refresh-contents 会影响加载速度
+(when (not package-archive-contents)
+  (package-refresh-contents))
 
 (add-to-list 'load-path "~/.emacs.d/lisp")
-
-;; {{{
-;; https://emacs-china.org/t/counsel-rg-bash-shell/12244?u=fwar34
-;; counsel-rg 的 --iglob 选项在 zsh bash 中不起作用，还不清楚具体原因（现在知道原因了，在 zsh 中 ! 需要加反斜杠转义，bash 中还没有试怎么才能成功）
-;; 现在去除 shell-file-name 设置，否则在 gui 启动中还需要单独给 /bin/sh 在 init-custom.el 中设置 $PATH, 
-;; (setq shell-file-name "/bin/sh")
-(require 'init-custom)
-;; }}}
-
-(require 'init-packages)
-(require 'init-ui)
-(require 'init-fonts)
-(require 'init-hydra)
-(require 'init-modeline)
+(require 'init-base)
 (require 'init-evil)
+(require 'init-packages)
+(require 'init-keybindings)
+(require 'init-ivy)
+(require 'init-workspace)
+(require 'init-dired)
+(require 'init-filebrowser)
+(require 'init-ui)
+(require 'init-modeline)
+(require 'init-lang-mode)
+(require 'init-tools)
+;; (require 'init-minefunc)
+(require 'init-terminal)
+(require 'init-better-default)
+(require 'init-fonts)
+(require 'init-input)
+(require 'init-translate)
 (require 'init-company)
+(require 'init-git)
 (require 'init-tags)
 (require 'init-eshell)
-(require 'init-shell)
-(require 'init-dired)
+(require 'init-lisp)
+(require 'init-edit)
 (require 'init-org)
-;; (add-hook 'after-init-hook (lambda () (require 'auto-save)
-;;                              (auto-save-enable))) 
-(require 'init-better-default)
-(require 'init-minefunc)
+(require 'init-builtin)
 (require 'init-c)
 (require 'init-misc)
-(require 'init-builtin)
-(require 'init-transient)
 (require 'init-lsp)
 (require 'init-one-key)
-
+(require 'init-transient)
+(require 'init-hydra)
 (require 'init-calendar)
-(require 'init-flycheck)
-;; (require 'unicad)
-(add-hook 'after-init-hook
-          (lambda ()
-            (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
-            (if (file-exists-p (expand-file-name "custom.el"))
-                (load-file custom-file))))
+(require 'init-help)
+(require 'init-web)
+(require 'init-text)
+(require 'advice-remove-button)
 
+(provide 'init)
 ;;; init.el ends here

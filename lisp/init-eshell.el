@@ -1,120 +1,57 @@
-;; -*- coding: utf-8; lexical-binding: t; -*-
-;; init eshell
+;;; init-eshell.el --- Useful preset transient commands  -*- coding:utf-8; lexical-binding: t; -*-
+;;; Commentary:
 
-;; https://emacs-china.org/t/topic/4579
-(defun fwar34/esh-history ()
-  "Interactive search eshell history."
-  (interactive)
-  (require 'em-hist)
-  (save-excursion
-    (let* ((start-pos (eshell-bol))
-           (end-pos (point-at-eol))
-           (input (buffer-substring-no-properties start-pos end-pos)))
-      (let* ((command (ivy-read "Command: "
-                                (delete-dups
-                                 (when (> (ring-size eshell-history-ring) 0)
-                                   (ring-elements eshell-history-ring)))
-                                :preselect input
-                                :action 'ivy-completion-in-region-action))
-             (cursor-move (length command)))
-        (kill-region (+ start-pos cursor-move) (+ end-pos cursor-move))
-        )))
-  ;; move cursor to eol
-  (end-of-line)
-  )
+;;; Code:
 
-(defun fwar34/ivy-eshell-history ()
-  "Interactive search eshell history."
-  (interactive)
-  (require 'em-hist)
-  (let* ((start-pos (save-excursion (eshell-bol) (point)))
-         (end-pos (point))
-         (input (buffer-substring-no-properties start-pos end-pos))
-         (command (ivy-read "Command: "
-                            (delete-dups
-                             (when (> (ring-size eshell-history-ring) 0)
-                               (ring-elements eshell-history-ring)))
-                            :initial-input input)))
-    (setf (buffer-substring start-pos end-pos) command)
-    (end-of-line))
-  )
 
 (defun my/eshell-init-keymap ()
+  ;; https://emacs-china.org/t/topic/4579
+  (defun fwar34/esh-history ()
+    "Interactive search eshell history."
+    (interactive)
+    (require 'em-hist)
+    (save-excursion
+      (let* ((start-pos (eshell-bol))
+             (end-pos (point-at-eol))
+             (input (buffer-substring-no-properties start-pos end-pos)))
+        (let* ((command (ivy-read "Command: "
+                                  (delete-dups
+                                   (when (> (ring-size eshell-history-ring) 0)
+                                     (ring-elements eshell-history-ring)))
+                                  :preselect input
+                                  :action 'ivy-completion-in-region-action))
+               (cursor-move (length command)))
+          (kill-region (+ start-pos cursor-move) (+ end-pos cursor-move))
+          )))
+    ;; move cursor to eol
+    (end-of-line))
+
+  (defun fwar34/ivy-eshell-history ()
+    "Interactive search eshell history."
+    (interactive)
+    (require 'em-hist)
+    (let* ((start-pos (save-excursion (eshell-bol) (point)))
+           (end-pos (point))
+           (input (buffer-substring-no-properties start-pos end-pos))
+           (command (ivy-read "Command: "
+                              (delete-dups
+                               (when (> (ring-size eshell-history-ring) 0)
+                                 (ring-elements eshell-history-ring)))
+                              :initial-input input)))
+      (setf (buffer-substring start-pos end-pos) command)
+      (end-of-line)))
+
   (evil-define-key 'insert eshell-mode-map (kbd "C-r") 'fwar34/ivy-eshell-history)
   (evil-define-key 'insert eshell-mode-map (kbd "M-j") 'pyim-convert-string-at-point)
   (evil-define-key 'insert eshell-mode-map ";tm" 'aweshell-toggle)
   (evil-define-key 'insert eshell-mode-map ";sh" 'aweshell-toggle)
   (evil-define-key 'insert eshell-mode-map ";g" 'evil-normal-state)
   (evil-define-key 'insert eshell-mode-map ";;" 'self-insert-command)
-  (evil-define-key 'insert eshell-mode-map (kbd "TAB") 'completion-at-point)
-  )
+  (evil-define-key 'insert eshell-mode-map (kbd "TAB") 'completion-at-point))
 (add-hook 'eshell-first-time-mode-hook 'my/eshell-init-keymap)
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; https://github.com/samrayleung/emacs.d/blob/master/lisp/init-eshell.el
-;;; Inspire by http://blog.binchen.org/posts/use-ivy-mode-to-search-bash-history.html
-(defun samray/parse-bash-history ()
-  "Parse the bash history."
-  (interactive)
-  (let (collection bash_history)
-    (shell-command "history -r") ; reload history
-    (setq collection
-          (nreverse
-           (split-string (with-temp-buffer (insert-file-contents (file-truename "~/.bash_history"))
-                                           (buffer-string))
-                         "\n"
-                         t)))
-    (when (and collection (> (length collection) 0)
-               (setq bash_history collection))
-      bash_history)))
-
-(defun samray/parse-zsh-history ()
-  "Parse the bash history."
-  (interactive)
-  (let (collection zsh_history)
-    (shell-command "history -r") ; reload history
-    (setq collection
-          (nreverse
-           (split-string (with-temp-buffer (insert-file-contents (file-truename "~/.zsh_history"))
-                                           (replace-regexp-in-string "^:[^;]*;" "" (buffer-string)))
-                         "\n"
-                         t)))
-    (when (and collection (> (length collection) 0)
-               (setq zsh_history collection))
-      zsh_history)))
-
-(defun samray/esh-history ()
-  "Interactive search eshell history."
-  (interactive)
-  (require 'em-hist)
-  (save-excursion
-    (let* ((start-pos (eshell-beginning-of-input))
-           (input (eshell-get-old-input))
-           (esh-history (when (> (ring-size eshell-history-ring) 0)
-                          (ring-elements eshell-history-ring)))
-           (all-shell-history (append esh-history (samray/parse-zsh-history) (samray/parse-bash-history)))
-           )
-      (let* ((command (ivy-read "Command: "
-                                (delete-dups all-shell-history)
-                                :initial-input input
-                                :require-match t
-                                :action 'ivy-completion-in-region-action))
-             )
-        (eshell-kill-input)
-        (insert command)
-        )))
-  ;; move cursor to eol
-  (end-of-line))
-
-(defun fwar34/eshell-clear-buffer ()
-  "Clear terminal."
-  (interactive)
-  (let ((inhibit-read-only t))
-    (erase-buffer)
-    (eshell-send-input)))
-
 (use-package eshell
-  :ensure t
+  :ensure nil
   :commands eshell
   :init
   (setq eshell-aliases-file (concat user-emacs-directory "eshell/alias"))
@@ -167,32 +104,17 @@
 
 (use-package eshell-prompt-extras
   :after eshell
-  :ensure t
   :init
   (progn
     (setq eshell-highlight-prompt nil
-          eshell-prompt-function 'epe-theme-lambda))
-  )
+          eshell-prompt-function 'epe-theme-lambda)))
 
 (use-package eshell-autojump
-  :ensure t
-  :after eshell
-  :config
-  )
+  :after eshell)
 ;;-------------------------------------------------------------
 ;; samrayleung
 ;;-------------------------------------------------------------
 ;; must install fasd
-(defun fwar34/eshell-fasd-z (&rest args)
-  "Use fasd to change direct more effectively by passing ARGS."
-  (setq args (eshell-flatten-list args))
-  (let* ((fasd (concat "fasd " (car args)))
-         (fasd-result (shell-command-to-string fasd))
-         (path (replace-regexp-in-string "\n$" "" fasd-result))
-         )
-    (eshell/cd path)
-    (eshell/echo path)
-    ))
 
 ;; Replace shell-pop package with customized function
 (defun samray/split-window-right-and-move ()
@@ -337,17 +259,17 @@
 ;; https://emacs-china.org/t/emacs-builtin-mode/11937/83?u=fwar34
 (use-package em-term
   :ensure nil
+  ;; :no-require t
+  :after eshell
   :custom
   (eshell-visual-commands '("top" "htop" "less" "more" "bat"))
   (eshell-visual-subcommands '(("git" "help" "lg" "log" "diff" "show")))
-  (eshell-visual-options '(("git" "--help" "--paginate")))
-  )
+  (eshell-visual-options '(("git" "--help" "--paginate"))))
 
 (use-package aweshell
   :straight
   (:host github :repo "manateelazycat/aweshell")
-  :ensure t
-  :commands aweshell-toggle
-  )
+  :commands aweshell-toggle)
 
 (provide 'init-eshell)
+;;; init-eshell.el ends here

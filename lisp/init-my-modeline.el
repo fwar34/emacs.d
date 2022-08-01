@@ -1,4 +1,7 @@
-;; -*- coding: utf-8; lexical-binding: t; -*-
+;;; init-my-modeline.el --- Useful preset transient commands  -*- coding:utf-8; lexical-binding: t; -*-
+;;; Commentary:
+
+;;; Code:
 ;;-------------------------------------------------------------
 ;; init-modeline
 ;; https://blog.csdn.net/xh_acmagic/article/details/78939246
@@ -57,10 +60,7 @@ DEFAULT-TEXT."
           )
       (unless (bound-and-true-p god-local-mode)
         ;; (message "ELSE................")
-        (set-face-background 'mode-line (if (display-graphic-p) "gray26" "black"))
-        ;; (set-face-background 'mode-line-inactive (if (display-graphic-p) "gray26" "black"))
-        )
-      )))
+        (set-face-background 'mode-line (if (display-graphic-p) "gray26" "black"))))))
 
 (defun fwar34/evil-state ()
   "Display evil state in differente color"
@@ -84,7 +84,7 @@ DEFAULT-TEXT."
        (t nil)))))
 
 (defun fwar34/lispy-state ()
-  "Display lispy mode in modeline"
+  "Display lispy mode in modeline."
   '(:eval
     (let ((enable-mode '(emacs-lisp-mode lisp-interaction-mode)))
       (and (member major-mode enable-mode) (not (bound-and-true-p lispyville-mode))
@@ -192,8 +192,7 @@ DEFAULT-TEXT."
       (propertize " " 'display `((space :align-to
                                         (- (+ right right-fringe right-margin) ,reserve 1.4))))
     (propertize " " 'display `((space :align-to
-                                      (- (+ right right-fringe right-margin) ,reserve)))))
-  )
+                                      (- (+ right right-fringe right-margin) ,reserve))))))
 
 ;; (setq projectile-mode-line
 ;;       (quote (:eval (when (and (bound-and-true-p projectile-mode) (projectile-project-p)) 
@@ -249,9 +248,17 @@ DEFAULT-TEXT."
       ;; https://www.gnu.org/software/emacs/manual/html_node/elisp/Face-Attributes.html
       ;; '(:eval (propertize (mapconcat 'substring-no-properties (persp-mode-line) "") 'face '(:family "Monaco" font-lock-preprocessor-face))))
       ;; '(:eval (propertize (mapconcat 'substring-no-properties (persp-mode-line) "") 'face '(:box (:color "orange" :style pressed-button) font-lock-preprocessor-face))))
-      (if (display-graphic-p)
-          '(:eval (propertize (format "%s<%d/%d>" (mapconcat 'substring-no-properties (persp-mode-line) "") (my-persp-mode-line-string) (length (persp-names))) 'face '(:box (:color "orange") font-lock-preprocessor-face)))
-        '(:eval (propertize (format "%s<%d/%d>" (mapconcat 'substring-no-properties (persp-mode-line) "") (my-persp-mode-line-string) (length (persp-names))) 'face 'font-lock-preprocessor-face)))
+      '(:eval
+        (when persp-mode
+          (if (display-graphic-p)
+              '(:eval (propertize
+                       (format "%s<%d/%d>" (mapconcat 'substring-no-properties (persp-mode-line) "") (my-persp-mode-line-string) (length (persp-names)))
+                       'face '(:box (:color "orange") font-lock-preprocessor-face)))
+            '(:eval (propertize
+                     (format "%s<%d/%d>" (mapconcat 'substring-no-properties (persp-mode-line) "") (my-persp-mode-line-string) (length (persp-names)))
+                     'face 'font-lock-preprocessor-face)))
+          )
+        )
       )
 
 (setq line-column-mode-line
@@ -394,3 +401,4 @@ DEFAULT-TEXT."
 ;; }}
 
 (provide 'init-my-modeline)
+;;; init-my-modeline.el ends here

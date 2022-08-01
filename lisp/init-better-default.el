@@ -1,4 +1,7 @@
-;; -*- coding: utf-8; lexical-binding: t; -*-
+;;; init-better-default.el --- Useful preset transient commands  -*- coding:utf-8; lexical-binding: t; -*-
+;;; Commentary:
+
+;;; Code:
 
 ;; -----------------------------------------------------------------
 ;; https://blog.csdn.net/yo746862873/article/details/52291780
@@ -88,9 +91,6 @@
 (setq ad-redefinition-action 'accept)
 ;; }}}
 
-;; 自动刷新被修改过的文件
-(global-auto-revert-mode +1)
-
 ;; 随时重新加载发生修改过的文件
 (setq load-prefer-newer t)
 
@@ -107,8 +107,8 @@
 (setq-default fill-column 80)
 ;; -----------------------------------------------------------------
 (use-package recentf
+  :ensure nil
   :after evil
-  ;; :defer 2
   :config
   (recentf-mode 1)
   ;; 补充一下，recentf 展示时，可以对文件名预处理，比如把家目录替换为 ~
@@ -130,6 +130,8 @@
   ;; 禁用备份文件
   (setq make-backup-files nil)
   (setq auto-save-default nil)
+  ;; 记录上一次文件打开的位置, 并在再次打开该文件的时候自动跳转到该位置
+  (save-place-mode)
 
   ;;-------------------------------------------------------------
   ;; paren settings
@@ -176,7 +178,7 @@
   ;;  `(show-paren-match ((t (:foreground ,mat :underline t :background nil :inverse-video nil :weight ,weight-value)))))
 
   ;; https://www.gnu.org/software/emacs/manual/html_node/emacs/Matching.html
-  ;; causes highlighting also when point is on the inside of a parenthesis. 
+  ;; causes highlighting also when point is on the inside of a parenthesis.
   ;; (setq show-paren-when-point-inside-paren t)
 
   ;;-------------------------------------------------------------
@@ -197,26 +199,11 @@
   ;;              (funcall fn)))))
   ;; (advice-add 'show-paren-function :around 'advice-show-paren-function)
   ;;-------------------------------------------------------------
-  (defadvice show-paren-function (around advice-show-paren-function activate)
-    (cond ((looking-at-p "\\s(") ad-do-it)
-          (t (save-excursion
-               (ignore-errors (backward-up-list))
-               ad-do-it))))
-
-  (defun test-make ()
-    (interactive)
-    (if (looking-at-p "\\s(")
-        (message "found")
-      (message "not found")))
-
-  (defun test-back ()
-    (interactive)
-    (backward-up-list))
-
-  (defun test-remove-advice ()
-    (interactive)
-    (advice-remove 'show-paren-function 'advice-show-paren-function))
-
+  ;; (defadvice show-paren-function (around advice-show-paren-function activate)
+  ;;   (cond ((looking-at-p "\\s(") ad-do-it)
+  ;;         (t (save-excursion
+  ;;              (ignore-errors (backward-up-list))
+  ;;              ad-do-it))))
 
   (set-cursor-color "red")
   (fset 'yes-or-no-p 'y-or-n-p)
@@ -227,55 +214,21 @@
   (add-to-list 'auto-mode-alist '("\\.ice\\'" . c++-mode))
 
   ;; 针对 CJK 字符，提高 word-wrap 的效果
-  (setq word-wrap-by-category t)
-  )
+  (setq word-wrap-by-category t))
 
 ;; https://emacs-china.org/t/emacs-builtin-mode/11937
 ;; auto reload File
 (use-package autorevert
   :ensure nil
-  :hook (after-init . global-auto-revert-mode))
+  :hook
+  ;; 自动刷新被修改过的文件
+  (after-init . global-auto-revert-mode))
 
-;; 行号
-;; (if (>= emacs-major-version 26)
-;;     ;; config built-in "display-line-number-mode" (require Emacs >= 26)
-;;     ;; enable line numbering (or "linum-mode")
-;;     (let ((hook-list '(sh-mode-hook
-;;                        cmake-mode-hook
-;;                        emacs-lisp-mode-hook
-;;                        matlab-mode-hook
-;;                        rust-mode-hook
-;;                        go-mode-hook
-;;                        clojure-mode-hook
-;;                        python-mode-hook
-;;                        c-mode-common-hook
-;;                        lua-mode-hook
-;;                        ;; org-mode-hook
-;;                        package-menu-mode-hook
-;;                        makefile-gmake-mode-hook
-;;                        ;;  Gnome
-;;                        makefile-bsdmake-mode-hook ; OS X
-;;                        ess-mode-hook)))
-;;       (setq-default display-line-numbers-width 2)
-;;       (setq-default display-line-numbers-width-start t)  ;; 行数右对齐
-;;       ;; (setq-default display-line-numbers-type 'relative)
-;;       (setq display-line-numbers-current-absolute t)
-;;       (dolist (hook-element hook-list)
-;;         (add-hook hook-element 'display-line-numbers-mode)))
-;;   ) 
 (global-display-line-numbers-mode)
 
 ;; abbrev
 ;; (abbrev-mode t)
 ;; (define-abbrev-table 'global-abbrev-table '(("lf" "liang.feng")))
-
-;; When you visit a file, point goes to the last place where it was when you previously visited the same file.
-;; remember cursor position. When file is opened, put cursor at last position
-(if (version< emacs-version "25.0")
-    (progn
-      (require 'saveplace)
-      (setq-default save-place t))
-  (save-place-mode 1))
 
 ;;-------------------------------------------------------------
 ;; code format
@@ -303,7 +256,12 @@
 ;; https://github.com/emacs-evil/evil
 (add-hook 'prog-mode-hook (lambda () (modify-syntax-entry ?_ "w")))
 (add-hook 'emacs-lisp-mode-hook (lambda () (modify-syntax-entry ?- "w")))
-(add-hook 'help-mode-hook (lambda () (modify-syntax-entry ?- "w")))
+(add-hook 'help-mode-hook (lambda ()
+                            (modify-syntax-entry ?- "w")
+                            (when (equal system-type 'windows-nt)
+                              (evil-local-set-key 'normal "q" #'kill-buffer-and-window))
+                            (when (buffer-live-p (get-buffer "*Help*"))
+                              (switch-to-buffer-other-window "*Help*"))))
 
 ;; 花括号自动换行的问题
 ;; http://ergoemacs.org/emacs/emacs_insert_brackets_by_pair.html
@@ -357,12 +315,13 @@
       (get-buffer "*Warnings*")))))
 
 (use-package diff
-  :ensure t
+  :ensure nil
   :after evil
   :config
-  (evil-define-key 'normal diff-mode-map "q" 'kill-this-buffer)
-  (evil-define-key 'normal help-mode-map "q" 'kill-buffer-and-window)
-  (evil-define-key 'motion apropos-mode-map "q" 'kill-buffer-and-window)
+  (with-eval-after-load 'evil
+    (evil-define-key 'normal diff-mode-map "q" 'kill-this-buffer)
+    (evil-define-key 'normal help-mode-map "q" 'kill-buffer-and-window)
+    (evil-define-key 'motion apropos-mode-map "q" 'kill-buffer-and-window))
   ;; create a thread to auto focus on *apropos* window
   (if (fboundp 'make-thread)
       (add-hook 'apropos-mode-hook (lambda ()
@@ -373,90 +332,54 @@
   )
 
 ;; https://emacs-china.org/t/scratch-lexical-binding/9378
-(add-hook 'emacs-startup-hook
-          (lambda ()
-            (let ((buffer (get-buffer "*scratch*")))
-              (when buffer
-                (with-current-buffer buffer
-                  (setq lexical-binding t))))))
+;; (add-hook 'emacs-startup-hook
+;;           (lambda ()
+;;             (let ((buffer (get-buffer "*scratch*")))
+;;               (when buffer
+;;                 (with-current-buffer buffer
+;;                   (setq lexical-binding t))))))
 
-;; https://emacs-china.org/t/advice/7566/7
-(add-hook 'help-mode-hook 'cursor-sensor-mode)
-(defun function-advices (function)
-  "Return FUNCTION's advices."
-  (let ((function-def (advice--symbol-function function))
-        (ad-functions '()))
-    (while (advice--p function-def)
-      (setq ad-functions (append `(,(advice--car function-def)) ad-functions))
-      (setq function-def (advice--cdr function-def)))
-    ad-functions))
+;; (defun function-advices (function)
+;;   "Return FUNCTION's advices."
+;;   (let ((function-def (advice--symbol-function function))
+;;         (ad-functions '()))
+;;     (while (advice--p function-def)
+;;       (setq ad-functions (append `(,(advice--car function-def)) ad-functions))
+;;       (setq function-def (advice--cdr function-def)))
+;;     ad-functions))
 
-(define-advice describe-function-1 (:after (function) advice-remove-button)
-  "Add a button to remove advice."
-  (when (get-buffer "*Help*")
-    (with-current-buffer "*Help*"
-      (save-excursion
-        (goto-char (point-min))
-        (let ((ad-index 0)
-              (ad-list (reverse (function-advices function))))
-          (while (re-search-forward "^:[-a-z]+ advice: \\(.+\\)$" nil t)
-            (let* ((name (string-trim (match-string 1) "'" "'"))
-                   (advice (or (intern-soft name) (nth ad-index ad-list))))
-              (when (and advice (functionp advice))
-                (let ((inhibit-read-only t))
-                  (insert " » ")
-                  (insert-text-button
-                   "Remove"
-                   'cursor-sensor-functions `((lambda (&rest _) (message "%s" ',advice)))
-                   'help-echo (format "%s" advice)
-                   'action
-                   ;; In case lexical-binding is off
-                   `(lambda (_)
-                      (when (yes-or-no-p (format "Remove %s ? " ',advice))
-                        (message "Removing %s of advice from %s" ',function ',advice)
-                        (advice-remove ',function ',advice)
-                        (revert-buffer nil t)))
-                   'follow-link t))))
-                        (setq ad-index (1+ ad-index))))))))
-
-(defun helm-advice-remove (function)
-  "Remove advice from FUNCTION."
-  (interactive (let* ((fn (function-called-at-point))
-                      (enable-recursive-minibuffers t)
-                      (val (completing-read
-                            (if fn
-                                (format "Function (default %s): " fn)
-                              "Function: ")
-                            'help--symbol-completion-table
-                            (lambda (f) (or (fboundp f) (get f 'function-documentation)))
-                            t nil nil
-                            (and fn (symbol-name fn)))))
-                 (unless (equal val "")
-                   (setq fn (intern val)))
-                 (unless (and fn (symbolp fn))
-                   (user-error "You didn't specify a function symbol"))
-                 (unless (or (fboundp fn) (get fn 'function-documentation))
-                   (user-error "Symbol's function definition is void: %s" fn))
-                 (list fn)))
-  (let* ((ad-alist (mapcar (lambda (ad) (cons (format "%S" ad) ad)) (function-advices function)))
-         (default-candidates (mapcar (lambda (ad) (car ad)) ad-alist)))
-    (helm :sources
-          (helm-build-sync-source "Advices"
-                                  :candidates default-candidates
-                                  :action
-                                  `(("Remove" . (lambda (_)
-                                                  (let ((items (helm-marked-candidates)))
-                                                    (when (yes-or-no-p (format "Remove %s ? " (if (cdr items) items (car items))))
-                                                      (mapc (lambda (item)
-                                                              (let ((ad (alist-get item ',ad-alist nil nil 'string=)))
-                                                                (message "Removing %s of advice from %s" ',function ad)
-                                                                (advice-remove ',function ad)))
-                                                            items))))))))))
+;; (define-advice describe-function-1 (:after (function) advice-remove-button)
+;;   "Add a button to remove advice."
+;;   (when (get-buffer "*Help*")
+;;     (with-current-buffer "*Help*"
+;;       (save-excursion
+;;         (goto-char (point-min))
+;;         (let ((ad-index 0)
+;;               (ad-list (reverse (function-advices function))))
+;;           (while (re-search-forward "^:[-a-z]+ advice: \\(.+\\)$" nil t)
+;;             (let* ((name (string-trim (match-string 1) "'" "'"))
+;;                    (advice (or (intern-soft name) (nth ad-index ad-list))))
+;;               (when (and advice (functionp advice))
+;;                 (let ((inhibit-read-only t))
+;;                   (insert " » ")
+;;                   (insert-text-button
+;;                    "Remove"
+;;                    'cursor-sensor-functions `((lambda (&rest _) (message "%s" ',advice)))
+;;                    'help-echo (format "%s" advice)
+;;                    'action
+;;                    ;; In case lexical-binding is off
+;;                    `(lambda (_)
+;;                       (when (yes-or-no-p (format "Remove %s ? " ',advice))
+;;                         (message "Removing %s of advice from %s" ',function ',advice)
+;;                         (advice-remove ',function ',advice)
+;;                         (revert-buffer nil t)))
+;;                    'follow-link t))))
+;;                         (setq ad-index (1+ ad-index))))))))
 
 ;; *Message* buffer should be writable in 24.4+
-(defadvice switch-to-buffer (after switch-to-buffer-after-hack activate)
-  (if (string= "*Messages*" (buffer-name))
-      (read-only-mode -1)))
+;; (defadvice switch-to-buffer (after switch-to-buffer-after-hack activate)
+;;   (if (string= "*Messages*" (buffer-name))
+;;       (read-only-mode -1)))
 
 ;; after key sequence SPC r p y(run-python) switch to python window
 (if (fboundp 'make-thread)
@@ -473,3 +396,4 @@
 ;;   )
 
 (provide 'init-better-default)
+;;; init-better-default.el ends here

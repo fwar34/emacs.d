@@ -1,9 +1,12 @@
-;; -*- coding: utf-8; lexical-binding: t; -*-
+;;; init-modeline.el --- Useful preset transient commands  -*- coding:utf-8; lexical-binding: t; -*-
+;;; Commentary:
+
+;;; Code:
+
 ;;-------------------------------------------------------------
 ;; init-modeline
 ;; https://blog.csdn.net/xh_acmagic/article/details/78939246
 ;;-------------------------------------------------------------
-
 (use-package telephone-line
   :disabled
   :unless window-system
@@ -14,18 +17,17 @@
   )
 
 
-;; (use-package init-my-modeline
-;;   :load-path "lisp"
-;;   ;; :unless window-system
-;;   )
+(use-package init-my-modeline
+  :load-path "lisp"
+  ;; :unless window-system
+  )
 
 ;; (add-hook 'after-init-hook (lambda () (require 'init-my-modeline)))
 (use-package nano-modeline
   :disabled
   :ensure t
   :config
-  (nano-modeline-mode)
-  )
+  (nano-modeline-mode))
 
 (use-package simple-modeline
   :disabled
@@ -39,7 +41,7 @@
 ;;   (mood-line-mode)
 ;;   )
 (use-package mood-line
-  :ensure t
+  :disabled
   :straight (mood-line :type git
                        :host gitlab
                        :repo "fwar34/mood-line")
@@ -82,8 +84,28 @@
 
 (use-package doom-modeline
   :disabled
-  :ensure t
-  :hook (after-init . doom-modeline-mode))
+  :hook
+  (emacs-startup . doom-modeline-mode)
+  ;; :custom
+  ;; (doom-modeline-height 15)
+  :config
+  (when (display-graphic-p)
+    ;; (setq doom-modeline-height 1) ; optional
+    (if (facep 'mode-line-active)
+        (set-face-attribute 'mode-line-active nil :family "Noto Sans" :height 130) ; For 29+
+      (set-face-attribute 'mode-line nil :family "Noto Sans" :height 130))
+    (set-face-attribute 'mode-line-inactive nil :family "Noto Sans" :height 130))
+
+  (setq doom-modeline-display-default-persp-name t)
+  ;; (setq doom-modeline-buffer-file-name-style 'truncate-upto-project)
+  ;; (setq doom-modeline-buffer-file-name-style 'truncate-from-project)
+  (setq doom-modeline-buffer-file-name-style 'truncate-nil)
+
+  (use-package anzu
+    :hook
+    (isearch-mode . anzu-mode)
+    :config
+    (use-package evil-anzu)))
 
 (use-package mood-line
   :disabled
@@ -122,3 +144,4 @@
   )
 
 (provide 'init-modeline)
+;;; init-modeline.el ends here

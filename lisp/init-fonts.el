@@ -1,4 +1,7 @@
-;; -*- coding: utf-8; lexical-binding: t; -*-
+;;; init-fonts.el --- Useful preset transient commands  -*- coding:utf-8; lexical-binding: t; -*-
+;;; Commentary:
+
+;;; Code:
 
 ;; http://xahlee.info/emacs/emacs/emacs_list_and_set_font.html
 ;; https://idiocy.org/emacs-fonts-and-fontsets.html
@@ -19,142 +22,165 @@
 ;;       nil
 ;;     t))
 
-(defun fwar34-set-fonts ()
-  "My change fonts"
-  (interactive)
-  (let ((font-list (font-family-list))
-        ;; (english-font "Ubuntu Mono")
-        (english-font "JetBrains Mono")
-        (english-font-size 24)
-        ;; (chinese-font "Sarasa Fixed Slab SC")
-        (chinese-font "Noto Sans CJK SC")
-        ;; (chinese-font "Noto Serif CJK SC")
-        ;; (chinese-font "Noto Sans SC")
-        ;; (chinese-font "Source Han Sans CN")
-        (chinese-font-size 24)
-        (setlight 'semi-light))
-    
-    ;; (print font-list)
-    ;; pcase的用法https://emacs-china.org/t/pcase-pattern/15111
-    (pcase (upcase system-name)
-      ;; -----------------------------------------------------------------------------
-      ;; 我的笔记本
-      ("FL-NOTEBOOK"
-       (pcase system-type
-         ;; Windows
-         ('windows-nt (when (member "Sarasa Fixed Slab SC" font-list)
-                        (setq english-font "Sarasa Fixed Slab SC"
-                              english-font-size 25
-                              chinese-font-size 26)))
-         ;; WSL
-         ('gnu/linux (when (member "Iosevka Curly Slab" font-list)
-                       (setq english-font "Iosevka Curly Slab"
-                             english-font-size 25
-                             chinese-font-size 26)))))
-      ;; -----------------------------------------------------------------------------
-      ;; 公司电脑
-      ("DESKTOP-ARCHLINUX"
-       (pcase system-type
-         ;; Windows
-         ('gnu/linux (when (member "Noto Sans CJK SC" font-list)
-                       (setq ;;english-font "JetBrainsMono Nerd Font"
-                        english-font "Iosevka"
-                        english-font-size 32
-                        chinese-font "Noto Sans CJK SC"
-                        ;; chinese-font "Sarasa Mono SC Nerd"
-                        chinese-font-size 32)))
-         ;; WSL
-         ;; ('gnu/linux (when (member "Iosevka Curly Slab" font-list)
-         ;;               (setq english-font "Iosevka Curly Slab"
-         ;;                     english-font-size 24
-         ;;                     chinese-font-size 24)))
-         ))
-      ;; -----------------------------------------------------------------------------
-      ;; 公司虚拟机 lxd
-      ((or "FENG-ARCHLINUX" "UBUNTU-AWESOME")
-       ;; (when (member "JetBrains Mono" font-list)
-       ;;                 (setq english-font "JetBrainsMono Nerd Font"
-       ;;                       english-font-size 24
-       ;;                       chinese-font-size 24))
-       ;; (when (member "Iosevka Curly Slab" font-list)
-       ;;                 (setq english-font "Iosevka Curly Slab" ;; Sarasa Mono SC Nerd
-       ;;                       english-font-size 24
-       ;;                       chinese-font-size 24))
-       ;; (when (member "Sarasa Mono SC Nerd" font-list)
-       ;;                 (setq english-font "Sarasa Mono SC Nerd" ;; Sarasa Mono SC Nerd
-       ;;                       english-font-size 24
-       ;;                       chinese-font-size 24))
-       (when (and (member "Iosevka" font-list) (member "Noto Sans SC" font-list))
-                       (setq english-font "Iosevka" ;; Sarasa Mono SC Nerd
-                             english-font-size 24
-                             chinese-font "Noto Sans SC"
-                             chinese-font-size 24))
-       (when (and (member "Iosevka" font-list) (member "Noto Sans CJK SC" font-list))
-         (setq english-font "Iosevka" ;; Sarasa Mono SC Nerd
-               english-font-size 24
-               chinese-font "Noto Sans CJK SC"
-               chinese-font-size 24
-               setlight nil))
-       )
-      )
-      ;; -----------------------------------------------------------------------------
-    (message "english-font %s" english-font)
-    (message "english-font-size %s" english-font-size)
-    (message "chinese-font %s" chinese-font)
-    (message "chinese-font-size %s" chinese-font-size)
-    (message "setlight %s" setlight)
-
-    ;; 单独设置 org-table 字体
-    ;; Org table font
-    ;; (custom-set-faces
-    ;;  '(org-table ((t (:family "Ubuntu Mono derivative Powerline")))))
-
-    ;; 单独设置 markdown-code-face
-    (when (equal system-type 'gnu/linux) (display-graphic-p)
-          (custom-set-faces
-           '(markdown-code-face ((t (:family english-font)))))
-          (custom-set-faces
-           '(markdown-preview-face ((t (:family english-font)))))
-          (custom-set-faces
-           '(org-table ((t (:family english-font)))))
-          )
-    ;; (markdown-pre-face markdown-code-face)
-
-    ;; 设置英文字体
-    (set-face-attribute
-     'default nil
-     :font (font-spec :name english-font
-                      ;; :weight 'normal
-                      :weight 'semi-light
-                      :slant 'normal
-                      :size english-font-size))
-
-    ;; (setq chinese-font "Noto Sans SC")
-    ;; (setq chinese-font "Noto Sans CJK SC")
-    ;; (setq chinese-font-size 24)
-    ;; 设置中文字体
-    (dolist (charset '(kana han symbol cjk-misc bopomofo))
-      (set-fontset-font
-       ;; (frame-parameter nil 'font)
-       t
-       charset
-       (font-spec :name chinese-font
-                  ;; :weight 'normal
-                  ;; :weight 'semi-light ;; 字体没有安装 weight 相关的字体的时候设置会失败
-                  :weight setlight
-                  :slant 'normal
-                  :size chinese-font-size)))
-
-    ;; (dolist (charset '(kana han symbol cjk-misc bopomofo))
-    ;;   (set-fontset-font t charset chinese-font))
-    ;; (setq face-font-rescale-alist
-    ;;       (mapcar (lambda (item) (cons item 1.2)) chinese-font))
-    )
-  )
-
 (use-package faces
+  :ensure nil
   :if (display-graphic-p)
   :config
+  (defun fwar34-set-fonts ()
+    "My change fonts"
+    (interactive)
+    (let ((font-list (font-family-list))
+          ;; (english-font "Ubuntu Mono")
+          (english-font "JetBrains Mono")
+          (english-font-size 24)
+          ;; (chinese-font "Sarasa Fixed Slab SC")
+          (chinese-font "Noto Sans CJK SC")
+          ;; (chinese-font "Noto Serif CJK SC")
+          ;; (chinese-font "Noto Sans SC")
+          ;; (chinese-font "Source Han Sans CN")
+          (chinese-font-size 24)
+          (setlight 'semi-light))
+
+      ;; (print font-list)
+      ;; pcase的用法https://emacs-china.org/t/pcase-pattern/15111
+      (pcase (upcase system-name)
+        ;; -----------------------------------------------------------------------------
+        ;; 我的笔记本
+        ("FL-NOTEBOOK"
+         (pcase system-type
+           ;; Windows
+           ('windows-nt (when (member "Sarasa Fixed Slab SC" font-list)
+                          (setq english-font "Sarasa Fixed Slab SC"
+                                english-font-size 25
+                                chinese-font-size 26)))
+           ;; WSL
+           ('gnu/linux (when (member "Iosevka Curly Slab" font-list)
+                         (setq english-font "Iosevka Curly Slab"
+                               english-font-size 25
+                               chinese-font-size 26)))))
+        ;; -----------------------------------------------------------------------------
+        ;; 我的台式机
+        ("DESKTOP-VJNEKGA"
+         (pcase system-type
+           ;; Windows
+           ('windows-nt (when (member "Sarasa Fixed Slab SC" font-list)
+                          (setq english-font "Sarasa Fixed Slab SC"
+                                english-font-size 31
+                                chinese-font "Sarasa Fixed Slab SC"
+                                chinese-font-size 31)))
+           ;; WSL
+           ('gnu/linux (when (member "Iosevka Curly Slab" font-list)
+                         (setq english-font "Iosevka Curly Slab"
+                               english-font-size 25
+                               chinese-font-size 26)))))
+        ;; -----------------------------------------------------------------------------
+        ;; 公司电脑
+        ("DESKTOP-ARCHLINUX"
+         (pcase system-type
+           ;; Windows
+           ('gnu/linux (when (member "Noto Sans CJK SC" font-list)
+                         (setq ;;english-font "JetBrainsMono Nerd Font"
+                          english-font "Iosevka"
+                          english-font-size 32
+                          chinese-font "Noto Sans CJK SC"
+                          ;; chinese-font "Sarasa Mono SC Nerd"
+                          chinese-font-size 32)))
+           ;; WSL
+           ;; ('gnu/linux (when (member "Iosevka Curly Slab" font-list)
+           ;;               (setq english-font "Iosevka Curly Slab"
+           ;;                     english-font-size 24
+           ;;                     chinese-font-size 24)))
+           ))
+        ;; -----------------------------------------------------------------------------
+        ;; 公司虚拟机 lxd
+        ((or "FENG-ARCHLINUX" "UBUNTU-AWESOME")
+         ;; (when (member "JetBrains Mono" font-list)
+         ;;                 (setq english-font "JetBrainsMono Nerd Font"
+         ;;                       english-font-size 24
+         ;;                       chinese-font-size 24))
+         ;; (when (member "Iosevka Curly Slab" font-list)
+         ;;                 (setq english-font "Iosevka Curly Slab" ;; Sarasa Mono SC Nerd
+         ;;                       english-font-size 24
+         ;;                       chinese-font-size 24))
+         ;; (when (member "Sarasa Mono SC Nerd" font-list)
+         ;;                 (setq english-font "Sarasa Mono SC Nerd" ;; Sarasa Mono SC Nerd
+         ;;                       english-font-size 24
+         ;;                       chinese-font-size 24))
+         (when (and (member "Iosevka" font-list) (member "Noto Sans SC" font-list))
+           (setq english-font "Iosevka" ;; Sarasa Mono SC Nerd
+                 english-font-size 24
+                 chinese-font "Noto Sans SC"
+                 chinese-font-size 24))
+         (when (and (member "Iosevka" font-list) (member "Noto Sans CJK SC" font-list))
+           (setq english-font "Iosevka" ;; Sarasa Mono SC Nerd
+                 english-font-size 24
+                 chinese-font "Noto Sans CJK SC"
+                 chinese-font-size 24
+                 setlight nil))
+         )
+
+        ;; 公司电脑
+        ("A120325"
+         (pcase system-type
+           ;; Windows
+           ('windows-nt (when (member "Sarasa Fixed Slab SC" font-list)
+                          (setq english-font "Sarasa Fixed Slab SC" ;; Sarasa Mono SC Nerd
+                                english-font-size 24
+                                chinese-font "Sarasa Fixed Slab SC"
+                                chinese-font-size 24)))))
+        )
+      ;; -----------------------------------------------------------------------------
+      (message "english-font %s" english-font)
+      (message "english-font-size %s" english-font-size)
+      (message "chinese-font %s" chinese-font)
+      (message "chinese-font-size %s" chinese-font-size)
+      (message "setlight %s" setlight)
+
+      ;; 单独设置 org-table 字体
+      ;; Org table font
+      ;; (custom-set-faces
+      ;;  '(org-table ((t (:family "Ubuntu Mono derivative Powerline")))))
+
+      ;; 单独设置 markdown-code-face
+      (when (equal system-type 'gnu/linux) (display-graphic-p)
+            (custom-set-faces
+             '(markdown-code-face ((t (:family english-font)))))
+            (custom-set-faces
+             '(markdown-preview-face ((t (:family english-font)))))
+            (custom-set-faces
+             '(org-table ((t (:family english-font))))))
+      ;; (markdown-pre-face markdown-code-face)
+
+      ;; 设置英文字体
+      (set-face-attribute
+       'default nil
+       :font (font-spec :name english-font
+                        ;; :weight 'normal
+                        :weight 'semi-light
+                        :slant 'normal
+                        :size english-font-size))
+
+      ;; (setq chinese-font "Noto Sans SC")
+      ;; (setq chinese-font "Noto Sans CJK SC")
+      ;; (setq chinese-font-size 24)
+      ;; 设置中文字体
+      (dolist (charset '(kana han symbol cjk-misc bopomofo))
+        (set-fontset-font
+         ;; (frame-parameter nil 'font)
+         t
+         charset
+         (font-spec :name chinese-font
+                    ;; :weight 'normal
+                    ;; :weight 'semi-light ;; 字体没有安装 weight 相关的字体的时候设置会失败
+                    :weight setlight
+                    :slant 'normal
+                    :size chinese-font-size)))
+
+      ;; (dolist (charset '(kana han symbol cjk-misc bopomofo))
+      ;;   (set-fontset-font t charset chinese-font))
+      ;; (setq face-font-rescale-alist
+      ;;       (mapcar (lambda (item) (cons item 1.2)) chinese-font))
+      ))
   (fwar34-set-fonts)
 
   ;; https://github.com/tumashu/cnfonts
@@ -231,7 +257,7 @@
     (ligature-set-ligatures 'prog-mode '("<=" ">=" "!=" ":=" "&&" "->" "::" "<-"))
     ;; Enables ligature checks globally in all buffers. You can also do it
     ;; per mode with `ligature-mode'.
-    (global-ligature-mode t)
-    ))
+    (global-ligature-mode t)))
 
 (provide 'init-fonts)
+;;; init-fonts.el ends here

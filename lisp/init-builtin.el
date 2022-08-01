@@ -1,21 +1,21 @@
-;; -*- coding: utf-8; lexical-binding: t; -*-
-;; https://emacs-china.org/t/emacs-builtin-mode/11937/63
+;;; init-builtin.el --- Useful preset transient commands  -*- coding:utf-8; lexical-binding: t; -*-
+;;; Commentary:
+
+;;; Code:
 
 (use-package winner
-  :ensure nil ;; emacs自带
+  :ensure nil
   :config
-  (winner-mode)
-  )
+  (winner-mode))
 
 (use-package ediff
   :ensure nil
   :hook
   ;; 可以应用在ediff上，恢复由ediff导致的窗体变动。
-  (ediff-quit . winner-undo)
-  )
+  (ediff-quit . winner-undo))
 
 (use-package isearch
-  :config
+  :ensure nil
   :bind
   (:map isearch-mode-map
         ([remap isearch-delete-char] . isearch-del-char))
@@ -51,8 +51,18 @@
 			  proced-auto-update-interval 1) ; 默认为5秒一次
 
 (use-package xref
-  :if (executable-find "rg")
-  :config
-  (setq xref-search-program 'ripgrep))
+  :ensure nil
+  :init
+  ;; On Emacs 28, `xref-search-program' can be set to `ripgrep'.
+  ;; `project-find-regexp' benefits from that.
+  (when (>= emacs-major-version 28)
+    (when (executable-find "rg")
+    (setq xref-search-program 'ripgrep))
+    ;; (setq xref-show-xrefs-function #'xref-show-definitions-completing-read)
+    ;; (setq xref-show-definitions-function #'xref-show-definitions-completing-read)
+    )
+  :hook
+  ((xref-after-return xref-after-jump) . recenter))
 
 (provide 'init-builtin)
+;;; init-builtin.el ends here

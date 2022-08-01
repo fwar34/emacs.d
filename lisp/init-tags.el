@@ -1,18 +1,18 @@
-;; -*- coding: utf-8; lexical-binding: t; -*-
-;;-------------------------------------------------------------
-;; init-tags.el
-;;-------------------------------------------------------------
-(defun my-gtags-init()
-  (when (executable-find "pygmentize")
-    (setenv "GTAGSLABEL" "pygments")
-    (if (eq system-type 'windows-nt)
-        ;; (setenv "GTAGSCONF" (expand-file-name "~/global/share/gtags/gtags.conf"))
-        (setenv "GTAGSCONF"
-                (let ((str (executable-find "gtags")))
-                  (string-match "global.*" str)
-                  (replace-match "global/share/gtags/gtags.conf" nil nil str 0)))
-      (setenv "GTAGSCONF" "/usr/local/share/gtags/gtags.conf")))
-  )
+;;; init-tags.el --- Useful preset transient commands  -*- coding:utf-8; lexical-binding: t; -*-
+;;; Commentary:
+
+;;; Code:
+;; (defun my-gtags-init()
+;;   (when (executable-find "pygmentize")
+;;     (setenv "GTAGSLABEL" "pygments")
+;;     (if (eq system-type 'windows-nt)
+;;         ;; (setenv "GTAGSCONF" (expand-file-name "~/global/share/gtags/gtags.conf"))
+;;         (setenv "GTAGSCONF"
+;;                 (let ((str (executable-find "gtags")))
+;;                   (string-match "global.*" str)
+;;                   (replace-match "global/share/gtags/gtags.conf" nil nil str 0)))
+;;       (setenv "GTAGSCONF" "/usr/local/share/gtags/gtags.conf")))
+;;   )
 ;; (my-gtags-init)
 
 ;; ggtags
@@ -32,21 +32,12 @@
   ;;             (when (derived-mode-p 'python-mode)
   ;;               (ggtags-mode 1))))
   ;; (ggtags-mode 1)
-  (setq-local imenu-create-index-function 'ggtags-build-imenu-index)
-  )
-
-(use-package counsel-gtags
-  :disabled
-  :ensure t
-  :defer t
-  :config
-  (setq counsel-gtags-auto-update t)
-  )
+  (setq-local imenu-create-index-function 'ggtags-build-imenu-index))
 
 ;; https://github.com/redguardtoo/counsel-etags#ctags-setup
 (use-package counsel-etags
-  :ensure t
-  :defer t
+  :commands
+  (counsel-etags-find-tag-at-point)
   :init
   ;; Setup auto update now
   (add-hook 'prog-mode-hook
@@ -75,12 +66,10 @@
   ;; Don't ask before rereading the TAGS files if they have changed
   (setq tags-revert-without-query t)
   ;; Don't warn when TAGS files are large
-  (setq large-file-warning-threshold nil)
-  )
+  (setq large-file-warning-threshold nil))
 
 (use-package citre
   :disabled
-  :ensure t
   :defer t
   :init
   ;; This is needed in `:init' block for lazy load to work.
@@ -90,6 +79,18 @@
   (global-set-key (kbd "C-x c J") 'citre-jump-back)
   (global-set-key (kbd "C-x c p") 'citre-ace-peek)
   (global-set-key (kbd "C-x c u") 'citre-update-this-tags-file)
+  :pretty-hydra
+  (my-hydra-citre
+   (:foreign-keys warn :red teal :quit-key "q" :title "<citre commands>")
+   ("Jump"
+    (("m" citre-mode "citre mode" :toggle t)
+     ("j" citre-jump "Jump to the definition of the symbol at point.")
+     ("J" citre-jump-back "Go back to the position before last ‘citre-jump’."))
+    "Peek"
+    (("p" citre-ace-peek "Peek the definition of a symbol on screen using ace jump."))
+    "Update"
+    (("u" citre-update-this-tags-file "Update the currently used tags file.")
+     ("c" citre-create-tags-file "Create a new tags file."))))
   :config
   (setq
    ;; Set these if readtags/ctags is not in your path.
@@ -102,9 +103,12 @@
    ;; citre-default-create-tags-file-location 'global-cache
    ;; See the "Create tags file" section above to know these options
    citre-use-project-root-when-creating-tags t
+   citre-auto-enable-citre-mode-modes '(prog-mode)
+   citre-peek-auto-restore-after-jump nil
    citre-prompt-language-for-ctags-command t))
 
 (use-package imenu-anywhere
-  :ensure t)
+  :commands imenu-anywhere)
 
 (provide 'init-tags)
+;;; init-tags.el ends here

@@ -1,7 +1,23 @@
+;;; init-keybindings.el --- Useful preset transient commands  -*- coding:utf-8; lexical-binding: t; -*-
+;;; Commentary:
 
-;; -*- coding: utf-8; lexical-binding: t; -*-
+;;; Code:
+
+(require 'evil)
+
+(defun my-async-task ()
+  "Async exec my tasks."
+  (interactive)
+  (let ((awesome-cheatsheet "~/.emacs.d/awesome-cheatsheets/README.md")
+        ;; (out-buffer (get-buffer-create "*my-async-task*"))
+        )
+    (unless (file-exists-p awesome-cheatsheet)
+      ;; (async-shell-command "git clone https://github.com/skywind3000/awesome-cheatsheets.git ~/.emacs.d/awesome-cheatsheets" out-buffer out-buffer)
+      (async-shell-command "git clone https://github.com/skywind3000/awesome-cheatsheets.git ~/.emacs.d/awesome-cheatsheets"))))
+
 ;; 快速打开配置文件
 (defun open-init-file()
+  "My open init file."
   (interactive)
   (find-file "~/.emacs.d/lisp/init-packages.el"))
 
@@ -83,52 +99,46 @@
   (let* ((cursion-position (point-marker)))
     (end-of-line)
     (insert str)
-    (goto-char (marker-position cursion-position)))
-  )
+    (goto-char (marker-position cursion-position))))
+
 (defun my-append-semicolon-marker ()
   "Append a ';' to end of current line, then move cursion to origion position."
   (interactive)
-  (my-append-string-marker ";")
-  )
+  (my-append-string-marker ";"))
 
 (defun my-append-string-excursion (str)
   "Append a string to end of a line, then move cursion to origion position"
   (save-excursion
     (end-of-line)
-    (insert str)
-    )
-  )
+    (insert str)))
+
 (defun my-append-semicolon-excursion ()
   "Append a ';' to end of current line, then move cursion to origion position"
   (interactive)
-  (my-append-string-excursion ";")
-  )
+  (my-append-string-excursion ";"))
 
 (defun my-append-string (str)
   "Append a string to end of a line"
   (end-of-line)
   ;;(insert-char str)
-  (insert str)
-  )
+  (insert str))
+
 (defun my-append-semicolon ()
   "Append a ';' to end of current line."
   (interactive)
   ;; (my-append-string 59)
-  (my-append-string ";")
-  )
+  (my-append-string ";"))
 
 (defun my-display-full-path-of-current-buffer ()
   "Display the full path of current file"
   (interactive)
-  (message (buffer-file-name))
-  )
+  (message (buffer-file-name)))
 
 ;; Shorter modeline
 (defvar mode-line-cleaner-alist
   '((auto-complete-mode . "α")
     ;; Major modes
-    (lisp-interaction-mode . "Λ")
-    )
+    (lisp-interaction-mode . "Λ"))
   "Alist for `clean-mode-line'.
 When you add a new element to the alist, keep in mind that you
 must pass the correct minor/major mode symbol and a string you
@@ -146,14 +156,13 @@ want to use in the modeline *in lieu of* the original.")
                 (when (eq mode major-mode)
                   (setq mode-name mode-str)))))
 
-(add-hook 'after-change-major-mode-hook 'clean-mode-line)
+;; (add-hook 'after-change-major-mode-hook 'clean-mode-line)
 
 (defun fwar34/recent-file()
   "open recent file, then set state normal"
   (interactive)
   (recentf-open-files)
-  (evil-normal-state)
-  )
+  (evil-normal-state))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; http://blog.binchen.org/index-21.html, Use ivy to open recent directories
@@ -196,16 +205,14 @@ want to use in the modeline *in lieu of* the original.")
   (insert "\n# Author: Feng\n")
   (insert "# Created Time: ")
   (insert (current-time-string))
-  (insert "\n# Content: ")
-  )
+  (insert "\n# Content: "))
 
 (defun fwar34/insert-lisp-commit ()
   "Insert lisp commit"
   (interactive)
   (insert ";;-------------------------------------------------------------\n")
   (insert ";; \n")
-  (insert ";;-------------------------------------------------------------")
-  )
+  (insert ";;-------------------------------------------------------------"))
 
 ;; reference from http://ergoemacs.org/emacs/elisp_run_current_file.html
 (defvar fwar34-run-current-file-before-hook nil "Hook for `fwar34/run-current-file'. Before the file is run.")
@@ -226,8 +233,8 @@ To build, call `universal-argument' first."
       (setq $cmd-str (format "%s run \"%s\"" $prog-name $filename)))
     (message "running %s" $filename)
     (message "%s" $cmd-str)
-    (shell-command $cmd-str))
-  )
+    (shell-command $cmd-str)))
+
 (defun fwar34/run-current-file ()
   "Execute the current file.
 
@@ -273,8 +280,7 @@ URL `http://ergoemacs.org/emacs/elisp_run_current_file.html'"
             (progn
               (message "Running")
               (shell-command $cmd-str))
-          (error "No recognized program file suffix for this file.")))
-     )
+          (error "No recognized program file suffix for this file."))))
     (run-hooks 'fwar34-run-current-file-after-hook)))
 
 ;; inspired by http://ergoemacs.org/emacs/elisp_copy-paste_register_1.html
@@ -289,8 +295,7 @@ URL `http://ergoemacs.org/emacs/elisp_run_current_file.html'"
 ;; evil-yank (beg end type register yank-handler)
 (defun test-evil-set-register (&rest _)
   (message (get-register ?0))
-  (highlight-regexp (substring-no-properties (get-register ?0)) (facep 'hl-yellow))
-  )
+  (highlight-regexp (substring-no-properties (get-register ?0)) (facep 'hl-yellow)))
 
 ;; (advice-add 'evil-set-register :after 'test-evil-set-register)
 
@@ -313,11 +318,13 @@ URL `http://ergoemacs.org/emacs/elisp_run_current_file.html'"
 
 ;; https://emacs.stackexchange.com/questions/10967/how-to-examine-the-new-line-characters-in-emacs
 ;; also save in Youdao Note
+;; Windows:
+;; 1. scoop install gow 来安装 unix 的一系列命令，比如 sed awk 等等
+;; 1. 在 windows 上面乱码可以使用 sed -i s/"\x0"// file, https://emacs.stackexchange.com/questions/21467/getting-no-conversion-nil-encoding-each-time-when-opening-a-file-which-should
 (defun convert-file-to-utf8-unix ()
   "convert current file to utf-8 and end of line is unix"
   (interactive)
-  (set-buffer-file-coding-system 'utf-8-unix)
-  )
+  (set-buffer-file-coding-system 'utf-8-unix))
 
 ;; ----------------------------------------------------------------------------------------------------
 ;; https://www.emacswiki.org/emacs/FullScreen#toc21
@@ -381,8 +388,7 @@ URL `http://ergoemacs.org/emacs/elisp_run_current_file.html'"
               (setq end-char (buffer-substring-no-properties end (+ 1 end))))
             ;; (message (buffer-substring-no-properties begin end)))
             ;; (display-message-or-buffer (buffer-substring begin (+ 1 end)))
-            (message (buffer-substring begin (+ 1 end)))))))
-  )
+            (message (buffer-substring begin (+ 1 end))))))))
 
 (defun my-test-point ()
   (interactive)
@@ -565,6 +571,7 @@ URL `http://ergoemacs.org/emacs/elisp_run_current_file.html'"
     ret))
 
 (defun my-convert-use-calculator (arg)
+  "My convert use calculator."
   (unless (featurep 'calculator)
     (require 'calculator))
   (let ((calculator-output-radix 'bin)
@@ -600,8 +607,6 @@ URL `http://ergoemacs.org/emacs/elisp_run_current_file.html'"
             )))
       (error "no number to convert")))
 
-
-
 (defun convert-radix2 (arg &optional output-radix)
   "Convert number radix and copy output"
   (message
@@ -609,23 +614,20 @@ URL `http://ergoemacs.org/emacs/elisp_run_current_file.html'"
        ;; output to hex
        (let ((number (string-to-number arg)))
          (evil-set-register ?\" (format "%X" number))
-         (format "convert %s to hex => 0x%X" arg number)
-         )
+         (format "convert %s to hex => 0x%X" arg number))
      ;; output to deci
      (let ((number (string-to-number arg 16)))
        (evil-set-register ?\" (format "%#d" number))
-       (format "convert 0x%s to decimal => %#d" arg number))))
-  )
+       (format "convert 0x%s to decimal => %#d" arg number)))))
 
 (defun my-convert-radix-hex (arg)
-  "Convert number to hex radix and copy output"
+  "Convert number to hex radix and copy output."
   (interactive (list (if (thing-at-point 'number)
                          (read-string (format "number to convert[%s]:" (my-number-at-point t)) nil nil (my-number-at-point t) nil)
                        (read-string "number to convert:"))))
   (if arg
       (message (convert-radix2 arg 'hex))
-    (error "no number to convert"))
-  )
+    (error "no number to convert")))
 
 (defun my-convert-radix-deci (arg)
   "Convert number to decimal radix and copy output"
@@ -634,8 +636,7 @@ URL `http://ergoemacs.org/emacs/elisp_run_current_file.html'"
                        (read-string "number to convert:"))))
   (if arg
       (message (convert-radix2 arg))
-    (error "no number to convert"))
-  )
+    (error "no number to convert")))
 
 ;; (defun my-convert-radix-word (input-radix output-radix)
 ;;   (interactive (list (read-string "input radix[2-16]:")
@@ -646,19 +647,22 @@ URL `http://ergoemacs.org/emacs/elisp_run_current_file.html'"
 ;; {{{
 ;; 测试工具函数
 (defun my-test-face ()
+  "My test face."
   (interactive)
   (print (plist-get (text-properties-at (point)) 'face)))
 
-(defun my-test-this-command ()
-  (interactive)
-  (let ((evt (read-event nil nil evil-escape-delay)))
-    (print this-command)
-    (print this-original-command)
-    (print (this-command-keys))))
+;; (defun my-test-this-command ()
+;;   "My test this command."
+;;   (interactive)
+;;   (let ((evt (read-event nil nil evil-escape-delay)))
+;;     (print this-command)
+;;     (print this-original-command)
+;;     (print (this-command-keys))))
 ;; (add-hook 'pre-command-hook 'my-test-this-command)
 ;; (remove-hook 'pre-command-hook 'my-test-this-command)
 
 (defun my-test-syntax-ppss ()
+  "My test syntax ppss."
   (interactive)
   (let ((ppss (syntax-ppss)))
     ;; (message "begin-------------")
@@ -670,17 +674,17 @@ URL `http://ergoemacs.org/emacs/elisp_run_current_file.html'"
     ;; (or (car (setq ppss (nthcdr 3 ppss)))
     ;;     (car (setq ppss (cdr ppss)))
     ;;     (print ppss))
-    )
-  )
+    ))
 ;; }}}
 
 (defun my-kill-line ()
+  "Kill line."
   (interactive)
   (evil-first-non-blank)
   (kill-line))
 
 (defun my-set-frame ()
-  "set emacs window position and size"
+  "Set Emacs window position and size."
   (interactive)
   (if (equal system-type 'gnu/linux)
       (progn
@@ -689,9 +693,35 @@ URL `http://ergoemacs.org/emacs/elisp_run_current_file.html'"
         ;; (set-frame-height (selected-frame) 44)
         (set-frame-position (selected-frame) 500 80)
         (set-frame-width (selected-frame) 120)
-        (set-frame-height (selected-frame) 44)
-        )
-    )
-  )
+        (set-frame-height (selected-frame) 44))))
+
+;;; {{{ 一些工具函数来辅助测试 package 的加载过程
+(defvar idle-count 0 "Define idle-count.")
+(defvar my-timer nil "Define my timer.")
+(defun start-my-timer ()
+  "Start my-timer."
+  (interactive)
+  (setq my-timer (run-with-timer 1 1 (lambda () (message "Your Emacs is idle for 0.5 seconds xxxxxxxxxxxxx %s" idle-count)
+                                       (setq idle-count (1+ idle-count))))))
+
+(defun stop-my-timer ()
+  "Stop my-timer."
+  (interactive)
+  (cancel-timer my-timer))
+
+(defun my-switch-message-buffer (&optional hook)
+  "Switch to *Message* buffer in `after-init-hook' if HOOK nil, otherwise switch to *Message* immediately."
+  (if (not hook)
+      (add-hook 'after-init-hook #'(lambda () (switch-to-buffer-other-window "*Messages*")))
+    (switch-to-buffer-other-window "*Message*")))
+;;; }}}
+
+(defun my-remove-0x00 ()
+  "Remove 0x00 in file."
+  (interactive)
+  (async-shell-command (concat "sed -i s/\"x0\"// " (buffer-file-name))))
+
+(message "minefunc.el file loaded!")
 
 (provide 'init-minefunc)
+;;; init-minefunc.el ends here

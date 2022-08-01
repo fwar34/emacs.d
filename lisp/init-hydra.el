@@ -1,4 +1,8 @@
-;; -*- coding: utf-8; lexical-binding: t; -*-
+;;; init-hydra.el --- Useful preset transient commands  -*- coding:utf-8; lexical-binding: t; -*-
+;;; Commentary:
+
+;;; Code:
+
 ;;-------------------------------------------------------------
 ;; init-hydra
 ;; https://github.com/abo-abo/hydra/blob/05871dd6c8af7b2268bd1a10eb9f8a3e423209cd/hydra-examples.el#L190
@@ -451,11 +455,13 @@
     ("py" (lambda ()
             (interactive)
             (setq default-input-method "pyim")
-            (set-input-method "pyim")))
+            (set-input-method "pyim"))
+     "Set input method to pyim" :column "<Set input method>")
     ("ri" (lambda ()
             (interactive)
             (setq default-input-method "rime")
-            (set-input-method "rime"))))
+            (set-input-method "rime"))
+     "Set input method to rime"))
   (global-set-key (kbd "M-u in") 'hydra-input-method/body))
 
 
@@ -553,3 +559,4 @@ _a_: forward"
 ;; }}}
 
 (provide 'init-hydra)
+;;; init-hydra.el ends here

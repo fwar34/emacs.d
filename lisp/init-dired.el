@@ -1,22 +1,22 @@
-;; -*- coding: utf-8; lexical-binding: t; -*-
-;; init dired
+;;; init-dired.el --- Useful preset transient commands  -*- coding:utf-8; lexical-binding: t; -*-
+;;; Commentary:
 
-(use-package dired
-  :config
-  (general-define-key
-   :states 'normal
-   :keymaps 'dired-mode-map
-   "w" 'dired-toggle-read-only
-   "," 'my-dired-hydra/body
-   "." 'hydra-dired/body)
+;;; Code:
 
-  (general-define-key
-   :states 'normal
-   :keymaps 'wdired-mode-map
-   :prefix ","
-   "qq" 'wdired-abort-changes
-   "zz" 'wdired-finish-edit)
+(with-eval-after-load 'evil
+ (with-eval-after-load 'dired
+  (evil-define-key 'normal dired-mode-map
+    "w" 'dired-toggle-read-only
+    "," 'my-dired-hydra/body
+    "." 'hydra-dired/body))
 
+ (with-eval-after-load 'wdired
+   (transient-define-prefix my-transient-wdired ()
+     "my wgrep commands"
+     [[" <wgrep commands>"
+       ("x" "wdired-abort-changes" wdired-abort-changes)
+       ("f" "wdired-finish-edit" wdired-finish-edit)]])
+  (evil-define-key 'normal wdired-mode-map "," 'my-transient-wdired))
 
   (defhydra my-dired-hydra (:hint nil :color pink)
     "
@@ -67,9 +67,7 @@ T - tag prefix
     ("z" diredp-compress-this-file)
     ("Z" dired-do-compress)
     ("q" nil)
-    ("," nil :color blue)
-    )
-  )
+    ("," nil :color blue)))
 
 ;; https://emacs-china.org/t/emacs-builtin-mode/11937/20
 ;; 显示或隐藏隐藏文件，按键P
@@ -94,16 +92,7 @@ T - tag prefix
   (require 'dired-x)
   (setq dired-dwim-target t))
 
-;; dired-imenu
-(use-package dired-imenu
-  :disabled
-  :after dired
-  :ensure t
-  )
-
 (use-package dired-rainbow
-  ;; :disabled
-  :ensure t
   :after dired
   :config
   (dired-rainbow-define-chmod directory "#6cb2eb" "d.*")
@@ -125,19 +114,9 @@ T - tag prefix
   (dired-rainbow-define fonts "#6cb2eb" ("afm" "fon" "fnt" "pfb" "pfm" "ttf" "otf"))
   (dired-rainbow-define partition "#e3342f" ("dmg" "iso" "bin" "nrg" "qcow" "toast" "vcd" "vmdk" "bak"))
   (dired-rainbow-define vc "#0074d9" ("git" "gitignore" "gitattributes" "gitmodules"))
-  (dired-rainbow-define-chmod executable-unix "#38c172" "-.*x.*")
-  )
-
-(use-package diredfl
-  :disabled
-  :ensure t
-  :after dired
-  :config
-  (diredfl-global-mode)
-  )
+  (dired-rainbow-define-chmod executable-unix "#38c172" "-.*x.*"))
 
 (use-package dired-k
-  :ensure t
   :after dired
   :config
   ;; always execute dired-k when dired buffer is opened
@@ -153,15 +132,11 @@ T - tag prefix
     (when (or (equal major-mode 'wdired-mode) (equal major-mode 'dired-mode))
       (dired-k)))
   (advice-add 'wdired-abort-changes :after 'my-wdired-advice)
-  ;; (advice-remove 'wdired-abort-changes 'my-wdired-advice)
-  (advice-add 'wdired-finish-edit :after 'my-wdired-advice)
-  ;; (advice-remove 'wdired-abort-changes 'my-wdired-advice)
-  )
+  (advice-add 'wdired-finish-edit :after 'my-wdired-advice))
 
 (use-package dired-single
     ;; https://github.com/crocket/dired-single
     ;; dired-single
-    :ensure t
     :after dired
     :init
     ;; (setq dired-single-use-magic-buffer t)
@@ -241,3 +216,4 @@ T - tag prefix
     )
 
 (provide 'init-dired)
+;;; init-dired.el ends here
