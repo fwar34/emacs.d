@@ -4,13 +4,14 @@
 ;;; Code:
 
 (use-package calendar
+  :defer t
   :ensure nil
   :config
   (setq calendar-load-hook
-        '(lambda ()
-           (set-face-foreground 'diary-face "skyblue")
-           (set-face-background 'holiday-face "slate blue")
-           (set-face-foreground 'holiday-face "white")))
+        (lambda ()
+          (set-face-foreground 'diary-face "skyblue")
+          (set-face-background 'holiday-face "slate blue")
+          (set-face-foreground 'holiday-face "white")))
   
   (setq calendar-view-holidays-initially-flag t)
   ;; 设置阴历显示，在 calendar 上用 pC 显示阴历
