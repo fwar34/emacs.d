@@ -1,6 +1,9 @@
+#+title 我的任务列表
+
+
 * 总任务 [0/0]
 ** audioserver [4/6]
-+ [X] 在 tang-cache 中预留一些 groupid，预留1000000
++ [X] :test: 在 tang-cache 中预留一些 groupid，预留1000000
 + [X] audioserver 多进程，直接在配置文件中添加配置项 CHILD_PROCESS_NUMBER=子进程数量
 + [X] audioserver 添加监控会议、人数日志，重要接口操作时间的日志
 + [X] 白名单名字 bug 修复合并
