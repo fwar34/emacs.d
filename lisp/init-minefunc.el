@@ -724,7 +724,7 @@ URL `http://ergoemacs.org/emacs/elisp_run_current_file.html'"
 (defun my-task-file-open ()
   "Open my task.org"
   (interactive)
-  (find-file "~/.emacs.d/task.org"))
+  (find-file "~/.emacs.d/org/task.org"))
 
 (message "minefunc.el file loaded!")
 
