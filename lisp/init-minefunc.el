@@ -721,6 +721,11 @@ URL `http://ergoemacs.org/emacs/elisp_run_current_file.html'"
   (interactive)
   (async-shell-command (concat "sed -i s/\"x0\"// " (buffer-file-name))))
 
+(defun my-task-file-open ()
+  "Open my task.org"
+  (interactive)
+  (find-file "~/.emacs.d/task.org"))
+
 (message "minefunc.el file loaded!")
 
 (provide 'init-minefunc)

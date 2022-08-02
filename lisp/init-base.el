@@ -96,6 +96,7 @@
    stop-my-timer
    my-switch-message-buffer
    my-remove-0x00
+   my-task-file-open
    my-set-frame))
 
 (use-package popup)
