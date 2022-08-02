@@ -250,6 +250,7 @@
     ("c" "cargo commands" cargo-transient)
     ("w" "wgrep-change-to-wgrep-mode" wgrep-change-to-wgrep-mode)
     ("i" "change input method" hydra-input-method/body)
+    ("k" "open my task.org" my-task-file-open)
     ("l" "electric-pair-mode" electric-pair-mode)]])
 
 ;; }}}

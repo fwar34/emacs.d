@@ -65,3 +65,10 @@ awesome-cheatsheet
 tags
 **/*.~undo-tree~
 undo/
+**/*.elc
+**/*.el~
+**/.flycheck*.el
+**/.#.el
+devdocs/
+awesome-cheatsheets/
+.tags/
