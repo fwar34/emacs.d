@@ -2,7 +2,7 @@
 
 
 * 总任务
-** audioserver [6/8]
+** audioserver [6/9]
 *** DONE 在 tang-cache 中预留一些 groupid，预留1000000
 *** DONE audioserver 多进程，直接在配置文件中添加配置项 CHILD_PROCESS_NUMBER=子进程数量
 *** DONE audioserver 添加监控会议、人数日志，重要接口操作时间的日志
@@ -15,10 +15,16 @@
 *** TODO [#C] [0%] 推下 audioserver 优化上线
 + [ ] trunk
 + [ ] dev
+*** TODO [#C] [0%] bug [[https://jira.quanshi.com/browse/YHYKHBUG-8495][yh8495]] 需要线下复现，然后删除 audiosever 中 userrolechange 和 usersrolechange
++ [ ] trunk
++ [ ] dev
 
 
 ** dsserver [1/1]
 *** DONE 桌面4K提测，增加一组信令
+*** TODO [#A] [0%] 桌面添加共享模式，和多共享数量限制
++ [ ] trunk
++ [ ] dev
 
 
 ** wbserver [0/1]
@@ -39,7 +45,8 @@
 + [ ] trunk
 + [ ] dev
 
-** test [/]
-DEADLINE: <2022-08-07 Sun>
-- [ ] fruits :: get apples 
-- [X] veggies :: get carrots
+  
+** tang-cache [0/1]
+*** TODO [50%] [[https://jira.quanshi.com/browse/PLB-7810][plb7810]] conference properties 添加会议时长，bms 解析，添加到 redis，提供 tang-cache 接口
++ [ ] trunk
++ [X] dev
