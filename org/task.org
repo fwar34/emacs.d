@@ -30,5 +30,5 @@
 + [ ] 下周给共享声音添加到 redis，同时添加一个信令让 mixer 切换后去查询或者下发给 mixer --召伟找我沟通的
 
 ** test [/]
-- [ ] fruits :test1: get apples
-- [X] veggies :test2: get carrots
+- [ ] fruits :: get apples
+- [X] veggies :: get carrots
