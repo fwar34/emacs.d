@@ -44,9 +44,3 @@
 *** TODO [#C] [0%] 下周给共享声音添加到 redis，同时添加一个信令让 mixer 切换后去查询或者下发给 mixer --召伟找我沟通的
 + [ ] trunk
 + [ ] dev
-
-  
-** tang-cache [0/1]
-*** TODO [50%] [[https://jira.quanshi.com/browse/PLB-7810][plb7810]] conference properties 添加会议时长，bms 解析，添加到 redis，提供 tang-cache 接口
-+ [ ] trunk
-+ [X] dev
