@@ -20,11 +20,11 @@
 + [ ] dev
 
 
-** dsserver [1/1]
+** dsserver [1/2]
 *** DONE 桌面4K提测，增加一组信令
-*** TODO [#A] [0%] 桌面添加共享模式，和多共享数量限制
+*** DOING [#A] [50%] 桌面添加共享模式，和多共享数量限制
 + [ ] trunk
-+ [ ] dev
++ [X] dev
 
 
 ** wbserver [0/1]

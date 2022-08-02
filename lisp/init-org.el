@@ -244,6 +244,12 @@ prepended to the element after the #+HEADER: tag."
         (self-insert-command 1)))))
 
 (eval-after-load "org"
+  ;; https://www.zmonster.me/2015/07/15/org-mode-planning.html
+  (setq org-todo-keywords '((sequence "TODO(t)" "DOING(i)" "|" "DONE(d)" "ABORT(a)")))
+  (setq org-todo-keyword-faces '(("DOING" . "yellow")
+                                 ("ABORT" . "orange")
+                                 ))
+
   '(cl-pushnew
     '("not" . "note")
           org-structure-template-alist))
