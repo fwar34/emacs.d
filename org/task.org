@@ -9,7 +9,7 @@
 *** DONE 白名单名字 bug 修复合并
 *** DONE 下周 bms 解析测试会的属性，audioserver 给 acm 通知测试会，在会议开启的时候 audioserver 将 acm 的测试会设置成 true
 *** DONE [#B] 在 tang-cache 中预留一些 groupid，预留1000000
-*** TODO [0%] 需要将 pincode 放到 userdefine 中去带到子会去绑定，修改5213信令去设置到 userdefined，在 pinchange 的时候也要更新 userdefined，[[https://jira.quanshi.com/browse/MEETINGQA-24348][MEETINGQA-24348]]
+*** TODO [#B] [0%] 需要将 pincode 放到 userdefine 中去带到子会去绑定，修改5213信令去设置到 userdefined，在 pinchange 的时候也要更新 userdefined，[[https://jira.quanshi.com/browse/MEETINGQA-24348][MEETINGQA-24348]]
 + [ ] trunk
 + [ ] dev
 *** TODO [#C] [0%] 推下 audioserver 优化上线
