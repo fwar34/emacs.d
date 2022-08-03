@@ -134,12 +134,12 @@
       "
     ^outline^                              ^org^
     ^^^^^^^^---------------------------------------------------------------
-    _h_: previous visible heading line     _a_: org-agenda
-    _l_: next visible heading line         _c_: org-capture
+    _h_: previous visible heading line     _x_: org-agenda
+    _l_: next visible heading line         _w_: org-capture
     _j_: same level forward                _s_: org-shifttab
     _k_: same level backward               _t_: org-cycle
-    _i_: org-insert-structure-template     _x_: org-show-todo-tree
-    _d_: org-schedule                      _w_: org-show-all
+    _i_: org-insert-structure-template     _e_: org-show-todo-tree
+    _d_: org-schedule                      _a_: org-show-all
 "
       ("h" outline-previous-visible-heading)
       ("l" outline-next-visible-heading)
@@ -148,10 +148,10 @@
       ("i" org-insert-structure-template :color blue)
       ("t" org-cycle)
       ("s" org-shifttab)
-      ("a" org-agenda :exit t)
-      ("c" org-capture :exit t)
-      ("x" org-show-todo-tree)
-      ("w" org-show-all)
+      ("x" org-agenda :exit t)
+      ("w" org-capture :exit t)
+      ("e" org-show-todo-tree)
+      ("a" org-show-all)
       ("d" org-schedule)
       ("q" nil))
     (define-key org-mode-map (kbd "M-u or") 'hydra-org/body)
