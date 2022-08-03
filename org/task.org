@@ -28,16 +28,16 @@
 
 
 ** wbserver [0/1]
-*** TODO [#B] [0%] 白板要添加 cmduserquitgroup/cmduserquitconference 接口，[[https://jira.quanshi.com/browse/PLB-7491][PLB-7491]]
+*** TODO [#B] [50%] 白板要添加 cmduserquitgroup/cmduserquitconference 接口，[[https://jira.quanshi.com/browse/PLB-7491][PLB-7491]]
 + [ ] trunk
-+ [ ] dev
++ [X] dev 已经提交出包
 
   
 ** bms [1/2]
 *** DONE bms 0x182 changeConfig 给66key补刀设置为2，大方模式触发
 *** TODO [#B] [50%] 下周 bms 解析会议时长属性添加到 redis，tang-cache 添加获取时长接口, [[https://wiki.quanshi.com/pages/viewpage.action?pageId=66677328][wiki]]
 + [ ] trunk
-+ [X] dev
++ [X] dev 已经提交出包
 
   
 ** libacctrans [0/1]
