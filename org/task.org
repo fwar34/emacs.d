@@ -12,9 +12,6 @@
 *** TODO [#B] [0%] 需要将 pincode 放到 userdefine 中去带到子会去绑定，修改5213信令去设置到 userdefined，在 pinchange 的时候也要更新 userdefined，[[https://jira.quanshi.com/browse/MEETINGQA-24348][MEETINGQA-24348]]
 + [ ] trunk
 + [ ] dev
-*** TODO [#C] [0%] 推下 audioserver 优化上线
-+ [ ] trunk
-+ [ ] dev
 *** TODO [#C] [0%] bug [[https://jira.quanshi.com/browse/YHYKHBUG-8495][yh8495]] 需要线下复现，然后删除 audiosever 中 userrolechange 和 usersrolechange
 + [ ] trunk
 + [ ] dev
@@ -42,5 +39,12 @@
   
 ** libacctrans [0/1]
 *** TODO [#C] [0%] 下周给共享声音添加到 redis，同时添加一个信令让 mixer 切换后去查询或者下发给 mixer --召伟找我沟通的
++ [ ] trunk
++ [ ] dev
+
+
+
+* audioserver 优化分支
+** TODO [#C] [0%] 推下 audioserver 优化上线
 + [ ] trunk
 + [ ] dev
