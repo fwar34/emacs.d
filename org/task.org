@@ -1,16 +1,16 @@
 #+TITLE 我的任务列表
-#+TAGS: trunk(t) dev(d)
+#+TAGS: trunk(t) dev(d) develop@dev(x) develop@trunk(y)
 
 
 * 总任务
-** audioserver [6/9]
+** audioserver [6/8]
 *** DONE 在 tang-cache 中预留一些 groupid，预留1000000          :trunk:dev:
 *** DONE audioserver 多进程，直接在配置文件中添加配置项 CHILD_PROCESS_NUMBER=子进程数量 :trunk:dev:
 *** DONE audioserver 添加监控会议、人数日志，重要接口操作时间的日志 :trunk:dev:
 *** DONE 白名单名字 bug 修复合并                                :trunk:dev:
 *** DONE 下周 bms 解析测试会的属性，audioserver 给 acm 通知测试会，在会议开启的时候 audioserver 将 acm 的测试会设置成 true :trunk:dev:
 *** DONE [#B] 在 tang-cache 中预留一些 groupid，预留1000000     :trunk:dev:
-*** TODO [#B] 需要将 pincode 放到 userdefine 中去带到子会去绑定，修改5213信令去设置到 userdefined，在 pinchange 的时候也要更新 userdefined，[[https://jira.quanshi.com/browse/MEETINGQA-24348][MEETINGQA-24348]]
+*** DOING [#B] 需要将 pincode 放到 userdefine 中去带到子会去绑定，修改5213信令去设置到 userdefined，在 pinchange 的时候也要更新 userdefined，[[https://jira.quanshi.com/browse/MEETINGQA-24348][MEETINGQA-24348]] :develop@dev:
 *** TODO [#C] bug [[https://jira.quanshi.com/browse/YHYKHBUG-8495][yh8495]] 需要线下复现，然后删除 audiosever 中 userrolechange 和 usersrolechange
 
 ** dsserver [1/2]

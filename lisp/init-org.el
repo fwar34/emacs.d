@@ -249,7 +249,9 @@ prepended to the element after the #+HEADER: tag."
   (setq org-todo-keyword-faces '(("DOING" . "palevioletred")
                                  ("ABORT" . "orange")))
   (setq org-tag-faces '(("trunk" . "brightmagenta")
-                        ("dev" . "red")))
+                        ("dev" . "red")
+                        ("develop@trunk" . "brightmagenta")
+                        ("develop@dev" . "red")))
 
   '(cl-pushnew
     '("not" . "note")
