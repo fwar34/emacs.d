@@ -10,38 +10,26 @@
 *** DONE 白名单名字 bug 修复合并                                :trunk:dev:
 *** DONE 下周 bms 解析测试会的属性，audioserver 给 acm 通知测试会，在会议开启的时候 audioserver 将 acm 的测试会设置成 true :trunk:dev:
 *** DONE [#B] 在 tang-cache 中预留一些 groupid，预留1000000     :trunk:dev:
-*** TODO [#B] [0%] 需要将 pincode 放到 userdefine 中去带到子会去绑定，修改5213信令去设置到 userdefined，在 pinchange 的时候也要更新 userdefined，[[https://jira.quanshi.com/browse/MEETINGQA-24348][MEETINGQA-24348]]
-+ [ ] trunk
-+ [ ] dev
-
-*** TODO [#C] [0%] bug [[https://jira.quanshi.com/browse/YHYKHBUG-8495][yh8495]] 需要线下复现，然后删除 audiosever 中 userrolechange 和 usersrolechange
-+ [ ] trunk
-+ [ ] dev
+*** TODO [#B] 需要将 pincode 放到 userdefine 中去带到子会去绑定，修改5213信令去设置到 userdefined，在 pinchange 的时候也要更新 userdefined，[[https://jira.quanshi.com/browse/MEETINGQA-24348][MEETINGQA-24348]]
+*** TODO [#C] bug [[https://jira.quanshi.com/browse/YHYKHBUG-8495][yh8495]] 需要线下复现，然后删除 audiosever 中 userrolechange 和 usersrolechange
 
 ** dsserver [1/2]
 *** DONE 桌面4K提测，增加一组信令
-*** DOING [#A] [0%] 桌面添加共享模式，和多共享数量限制
-**** TODO [#B] 共享的优先级（第一个还是最后一个）这期 <2022-08-03 Wed> 不急实现，下来排期实现就行 [[https://wiki.quanshi.com/pages/viewpage.action?pageId=70618111][wiki]]
-**** [ ] trunk
-**** [X] dev
+*** DOING [#A] [0%] 桌面添加共享模式，和多共享数量限制                :dev:
+SCHEDULED: <2022-08-08 Mon>
++ [ ] 共享的优先级（第一个还是最后一个）这期 <2022-08-03 Wed> 不急实现，下来排期实现就行 [[https://wiki.quanshi.com/pages/viewpage.action?pageId=70618111][wiki]]
 
 ** wbserver [0/1]
-*** TODO [#B] [33%] 白板要添加 cmduserquitgroup/cmduserquitconference 接口，[[https://jira.quanshi.com/browse/PLB-7491][PLB-7491]]
-+ [ ] trunk
-+ [X] dev 已经提交出包
+*** DOING [#B] 白板要添加 cmduserquitgroup/cmduserquitconference 接口，[[https://jira.quanshi.com/browse/PLB-7491][PLB-7491]] :dev:
 
 ** bms [1/2]
-*** DONE bms 0x182 changeConfig 给66key补刀设置为2，大方模式触发
-*** TODO [#B] [33%] 下周 bms 解析会议时长属性添加到 redis，tang-cache 添加获取时长接口, [[https://wiki.quanshi.com/pages/viewpage.action?pageId=66677328][wiki]]
-+ [ ] trunk
-+ [X] dev 已经提交出包
+*** DONE bms 0x182 changeConfig 给66key补刀设置为2，大方模式触发 :trunk:dev:
+*** DOING [#B] 下周 bms 解析会议时长属性添加到 redis，tang-cache 添加获取时长接口, [[https://wiki.quanshi.com/pages/viewpage.action?pageId=66677328][wiki]] :dev:
 
 ** libacctrans [0/1]
-*** TODO [#C] [0%] 下周给共享声音添加到 redis，同时添加一个信令让 mixer 切换后去查询或者下发给 mixer --召伟找我沟通的
-+ [ ] trunk
-+ [ ] dev
+*** TODO [#C] 下周给共享声音添加到 redis，同时添加一个信令让 mixer 切换后去查询或者下发给 mixer --召伟找我沟通的
   
 * audioserver 优化分支
 ** TODO [#C] [0%] 推下 audioserver 优化上线
-+ [ ] trunk
-+ [ ] dev
++ [ ] merge trunk 和 dev 分支的 bug 到 feature 分支
++ [ ] merge feature 分支的一些优化 到 dev 分支
