@@ -260,6 +260,7 @@
        (string-prefix-p "*ivy-occur" name)
        (string-prefix-p "*Calendar*" name)
        (string-prefix-p "*Org todo*" name)
+       (string-prefix-p "*Org tags*" name)
        (string-prefix-p "magit" name)
        (string-prefix-p "COMMIT_EDITMSG" name)
        (equal major-mode 'dired-mode)
