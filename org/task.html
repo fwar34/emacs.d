@@ -1,0 +1,388 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2022-08-03 Wed 15:33 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>&lrm;</title>
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+</style>
+</head>
+<body>
+<div id="content" class="content">
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org237b3ba">1. 总任务</a>
+<ul>
+<li><a href="#org3af08ea">1.1. audioserver <code>[6/9]</code></a>
+<ul>
+<li><a href="#org1434b73">1.1.1. <span class="done DONE">DONE</span> 在 tang-cache 中预留一些 groupid，预留1000000&#xa0;&#xa0;&#xa0;<span class="tag"><span class="trunk">trunk</span>&#xa0;<span class="dev">dev</span></span></a></li>
+<li><a href="#orgf49a2ac">1.1.2. <span class="done DONE">DONE</span> audioserver 多进程，直接在配置文件中添加配置项 CHILD<sub>PROCESS</sub><sub>NUMBER</sub>=子进程数量&#xa0;&#xa0;&#xa0;<span class="tag"><span class="trunk">trunk</span>&#xa0;<span class="dev">dev</span></span></a></li>
+<li><a href="#org8cadb08">1.1.3. <span class="done DONE">DONE</span> audioserver 添加监控会议、人数日志，重要接口操作时间的日志&#xa0;&#xa0;&#xa0;<span class="tag"><span class="trunk">trunk</span>&#xa0;<span class="dev">dev</span></span></a></li>
+<li><a href="#org6d10ea8">1.1.4. <span class="done DONE">DONE</span> 白名单名字 bug 修复合并&#xa0;&#xa0;&#xa0;<span class="tag"><span class="trunk">trunk</span>&#xa0;<span class="dev">dev</span></span></a></li>
+<li><a href="#orgc19dd18">1.1.5. <span class="done DONE">DONE</span> 下周 bms 解析测试会的属性，audioserver 给 acm 通知测试会，在会议开启的时候 audioserver 将 acm 的测试会设置成 true&#xa0;&#xa0;&#xa0;<span class="tag"><span class="trunk">trunk</span>&#xa0;<span class="dev">dev</span></span></a></li>
+<li><a href="#org0a1751c">1.1.6. <span class="done DONE">DONE</span> 在 tang-cache 中预留一些 groupid，预留1000000&#xa0;&#xa0;&#xa0;<span class="tag"><span class="trunk">trunk</span>&#xa0;<span class="dev">dev</span></span></a></li>
+<li><a href="#org8e603eb">1.1.7. <span class="todo TODO">TODO</span> <code>[0%]</code> 需要将 pincode 放到 userdefine 中去带到子会去绑定，修改5213信令去设置到 userdefined，在 pinchange 的时候也要更新 userdefined，MEETINGQA-24348</a></li>
+<li><a href="#org46578f8">1.1.8. <span class="todo TODO">TODO</span> <code>[0%]</code> bug yh8495 需要线下复现，然后删除 audiosever 中 userrolechange 和 usersrolechange</a></li>
+</ul>
+</li>
+<li><a href="#orga5a71e2">1.2. dsserver <code>[1/2]</code></a>
+<ul>
+<li><a href="#orgb4391bc">1.2.1. <span class="done DONE">DONE</span> 桌面4K提测，增加一组信令</a></li>
+<li><a href="#orgbb86c06">1.2.2. <span class="todo DOING">DOING</span> <code>[0%]</code> 桌面添加共享模式，和多共享数量限制</a></li>
+</ul>
+</li>
+<li><a href="#org3156ed9">1.3. wbserver <code>[0/1]</code></a>
+<ul>
+<li><a href="#org32ef9a4">1.3.1. <span class="todo TODO">TODO</span> <code>[33%]</code> 白板要添加 cmduserquitgroup/cmduserquitconference 接口，PLB-7491</a></li>
+</ul>
+</li>
+<li><a href="#org413ffe1">1.4. bms <code>[1/2]</code></a>
+<ul>
+<li><a href="#org5c23402">1.4.1. <span class="done DONE">DONE</span> bms 0x182 changeConfig 给66key补刀设置为2，大方模式触发</a></li>
+<li><a href="#org16061f3">1.4.2. <span class="todo TODO">TODO</span> <code>[33%]</code> 下周 bms 解析会议时长属性添加到 redis，tang-cache 添加获取时长接口, wiki</a></li>
+</ul>
+</li>
+<li><a href="#orgd55e541">1.5. libacctrans <code>[0/1]</code></a>
+<ul>
+<li><a href="#orgc4cb26a">1.5.1. <span class="todo TODO">TODO</span> <code>[0%]</code> 下周给共享声音添加到 redis，同时添加一个信令让 mixer 切换后去查询或者下发给 mixer &#x2013;召伟找我沟通的</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#org5715907">2. audioserver 优化分支</a>
+<ul>
+<li><a href="#orgfefa2e3">2.1. <span class="todo TODO">TODO</span> <code>[0%]</code> 推下 audioserver 优化上线</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<p>
+#+TITLE 我的任务列表
+</p>
+
+
+<div id="outline-container-org237b3ba" class="outline-2">
+<h2 id="org237b3ba"><span class="section-number-2">1.</span> 总任务</h2>
+<div class="outline-text-2" id="text-1">
+</div>
+<div id="outline-container-org3af08ea" class="outline-3">
+<h3 id="org3af08ea"><span class="section-number-3">1.1.</span> audioserver <code>[6/9]</code></h3>
+<div class="outline-text-3" id="text-1-1">
+</div>
+<div id="outline-container-org1434b73" class="outline-4">
+<h4 id="org1434b73"><span class="section-number-4">1.1.1.</span> <span class="done DONE">DONE</span> 在 tang-cache 中预留一些 groupid，预留1000000&#xa0;&#xa0;&#xa0;<span class="tag"><span class="trunk">trunk</span>&#xa0;<span class="dev">dev</span></span></h4>
+</div>
+<div id="outline-container-orgf49a2ac" class="outline-4">
+<h4 id="orgf49a2ac"><span class="section-number-4">1.1.2.</span> <span class="done DONE">DONE</span> audioserver 多进程，直接在配置文件中添加配置项 CHILD<sub>PROCESS</sub><sub>NUMBER</sub>=子进程数量&#xa0;&#xa0;&#xa0;<span class="tag"><span class="trunk">trunk</span>&#xa0;<span class="dev">dev</span></span></h4>
+</div>
+<div id="outline-container-org8cadb08" class="outline-4">
+<h4 id="org8cadb08"><span class="section-number-4">1.1.3.</span> <span class="done DONE">DONE</span> audioserver 添加监控会议、人数日志，重要接口操作时间的日志&#xa0;&#xa0;&#xa0;<span class="tag"><span class="trunk">trunk</span>&#xa0;<span class="dev">dev</span></span></h4>
+</div>
+<div id="outline-container-org6d10ea8" class="outline-4">
+<h4 id="org6d10ea8"><span class="section-number-4">1.1.4.</span> <span class="done DONE">DONE</span> 白名单名字 bug 修复合并&#xa0;&#xa0;&#xa0;<span class="tag"><span class="trunk">trunk</span>&#xa0;<span class="dev">dev</span></span></h4>
+</div>
+<div id="outline-container-orgc19dd18" class="outline-4">
+<h4 id="orgc19dd18"><span class="section-number-4">1.1.5.</span> <span class="done DONE">DONE</span> 下周 bms 解析测试会的属性，audioserver 给 acm 通知测试会，在会议开启的时候 audioserver 将 acm 的测试会设置成 true&#xa0;&#xa0;&#xa0;<span class="tag"><span class="trunk">trunk</span>&#xa0;<span class="dev">dev</span></span></h4>
+</div>
+<div id="outline-container-org0a1751c" class="outline-4">
+<h4 id="org0a1751c"><span class="section-number-4">1.1.6.</span> <span class="done DONE">DONE</span> 在 tang-cache 中预留一些 groupid，预留1000000&#xa0;&#xa0;&#xa0;<span class="tag"><span class="trunk">trunk</span>&#xa0;<span class="dev">dev</span></span></h4>
+</div>
+<div id="outline-container-org8e603eb" class="outline-4">
+<h4 id="org8e603eb"><span class="section-number-4">1.1.7.</span> <span class="todo TODO">TODO</span> <code>[0%]</code> 需要将 pincode 放到 userdefine 中去带到子会去绑定，修改5213信令去设置到 userdefined，在 pinchange 的时候也要更新 userdefined，<a href="https://jira.quanshi.com/browse/MEETINGQA-24348">MEETINGQA-24348</a></h4>
+<div class="outline-text-4" id="text-1-1-7">
+<ul class="org-ul">
+<li class="off"><code>[&#xa0;]</code> trunk</li>
+<li class="off"><code>[&#xa0;]</code> dev</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org46578f8" class="outline-4">
+<h4 id="org46578f8"><span class="section-number-4">1.1.8.</span> <span class="todo TODO">TODO</span> <code>[0%]</code> bug <a href="https://jira.quanshi.com/browse/YHYKHBUG-8495">yh8495</a> 需要线下复现，然后删除 audiosever 中 userrolechange 和 usersrolechange</h4>
+<div class="outline-text-4" id="text-1-1-8">
+<ul class="org-ul">
+<li class="off"><code>[&#xa0;]</code> trunk</li>
+<li class="off"><code>[&#xa0;]</code> dev</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orga5a71e2" class="outline-3">
+<h3 id="orga5a71e2"><span class="section-number-3">1.2.</span> dsserver <code>[1/2]</code></h3>
+<div class="outline-text-3" id="text-1-2">
+</div>
+<div id="outline-container-orgb4391bc" class="outline-4">
+<h4 id="orgb4391bc"><span class="section-number-4">1.2.1.</span> <span class="done DONE">DONE</span> 桌面4K提测，增加一组信令</h4>
+</div>
+<div id="outline-container-orgbb86c06" class="outline-4">
+<h4 id="orgbb86c06"><span class="section-number-4">1.2.2.</span> <span class="todo DOING">DOING</span> <code>[0%]</code> 桌面添加共享模式，和多共享数量限制</h4>
+<div class="outline-text-4" id="text-1-2-2">
+</div>
+<ol class="org-ol">
+<li><a id="orga8da6dc"></a><span class="todo TODO">TODO</span> 共享的优先级（第一个还是最后一个）这期 <span class="timestamp-wrapper"><span class="timestamp">&lt;2022-08-03 Wed&gt; </span></span> 不急实现，下来排期实现就行 <a href="https://wiki.quanshi.com/pages/viewpage.action?pageId=70618111">wiki</a><br /></li>
+<li><a id="org0067955"></a>[ ] trunk<br /></li>
+<li><a id="org9ec0467"></a>[X] dev<br /></li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-org3156ed9" class="outline-3">
+<h3 id="org3156ed9"><span class="section-number-3">1.3.</span> wbserver <code>[0/1]</code></h3>
+<div class="outline-text-3" id="text-1-3">
+</div>
+<div id="outline-container-org32ef9a4" class="outline-4">
+<h4 id="org32ef9a4"><span class="section-number-4">1.3.1.</span> <span class="todo TODO">TODO</span> <code>[33%]</code> 白板要添加 cmduserquitgroup/cmduserquitconference 接口，<a href="https://jira.quanshi.com/browse/PLB-7491">PLB-7491</a></h4>
+<div class="outline-text-4" id="text-1-3-1">
+<ul class="org-ul">
+<li class="off"><code>[&#xa0;]</code> trunk</li>
+<li class="on"><code>[X]</code> dev 已经提交出包</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org413ffe1" class="outline-3">
+<h3 id="org413ffe1"><span class="section-number-3">1.4.</span> bms <code>[1/2]</code></h3>
+<div class="outline-text-3" id="text-1-4">
+</div>
+<div id="outline-container-org5c23402" class="outline-4">
+<h4 id="org5c23402"><span class="section-number-4">1.4.1.</span> <span class="done DONE">DONE</span> bms 0x182 changeConfig 给66key补刀设置为2，大方模式触发</h4>
+</div>
+<div id="outline-container-org16061f3" class="outline-4">
+<h4 id="org16061f3"><span class="section-number-4">1.4.2.</span> <span class="todo TODO">TODO</span> <code>[33%]</code> 下周 bms 解析会议时长属性添加到 redis，tang-cache 添加获取时长接口, <a href="https://wiki.quanshi.com/pages/viewpage.action?pageId=66677328">wiki</a></h4>
+<div class="outline-text-4" id="text-1-4-2">
+<ul class="org-ul">
+<li class="off"><code>[&#xa0;]</code> trunk</li>
+<li class="on"><code>[X]</code> dev 已经提交出包</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgd55e541" class="outline-3">
+<h3 id="orgd55e541"><span class="section-number-3">1.5.</span> libacctrans <code>[0/1]</code></h3>
+<div class="outline-text-3" id="text-1-5">
+</div>
+<div id="outline-container-orgc4cb26a" class="outline-4">
+<h4 id="orgc4cb26a"><span class="section-number-4">1.5.1.</span> <span class="todo TODO">TODO</span> <code>[0%]</code> 下周给共享声音添加到 redis，同时添加一个信令让 mixer 切换后去查询或者下发给 mixer &#x2013;召伟找我沟通的</h4>
+<div class="outline-text-4" id="text-1-5-1">
+<ul class="org-ul">
+<li class="off"><code>[&#xa0;]</code> trunk</li>
+<li class="off"><code>[&#xa0;]</code> dev</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org5715907" class="outline-2">
+<h2 id="org5715907"><span class="section-number-2">2.</span> audioserver 优化分支</h2>
+<div class="outline-text-2" id="text-2">
+</div>
+<div id="outline-container-orgfefa2e3" class="outline-3">
+<h3 id="orgfefa2e3"><span class="section-number-3">2.1.</span> <span class="todo TODO">TODO</span> <code>[0%]</code> 推下 audioserver 优化上线</h3>
+<div class="outline-text-3" id="text-2-1">
+<ul class="org-ul">
+<li class="off"><code>[&#xa0;]</code> trunk</li>
+<li class="off"><code>[&#xa0;]</code> dev</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">Created: 2022-08-03 Wed 15:33</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

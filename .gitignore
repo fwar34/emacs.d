@@ -28,7 +28,6 @@ pyim/*
 #pyim/dcache/pyim-dhashcache-shortcode2word
 #pyim/dcache/pyim-dhashcache-word2code
 #pyim/dcache/pyim-dhashcache-code2word
-org/*.html
 GPATH
 GTAGS
 GRTAGS
