@@ -246,8 +246,10 @@ prepended to the element after the #+HEADER: tag."
 (with-eval-after-load 'org
   ;; https://www.zmonster.me/2015/07/15/org-mode-planning.html
   (setq org-todo-keywords '((sequence "TODO(t)" "DOING(i)" "|" "DONE(d)" "ABORT(a)")))
-  (setq org-todo-keyword-faces '(("DOING" . "yellow")
+  (setq org-todo-keyword-faces '(("DOING" . "palevioletred")
                                  ("ABORT" . "orange")))
+  (setq org-tag-faces '(("trunk" . "brightmagenta")
+                        ("dev" . "red")))
 
   '(cl-pushnew
     '("not" . "note")
