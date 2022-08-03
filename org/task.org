@@ -19,9 +19,11 @@
 
 ** dsserver [1/2]
 *** DONE 桌面4K提测，增加一组信令
-*** DOING [#A] [50%] 桌面添加共享模式，和多共享数量限制
-+ [ ] trunk
-+ [X] dev
+*** DOING [#A] [0%] 桌面添加共享模式，和多共享数量限制          :dev:trunk:
+**** TODO [#B] 共享的优先级（第一个还是最后一个）这期 <2022-08-03 Wed> 不急实现，下来排期实现就行 [[https://wiki.quanshi.com/pages/viewpage.action?pageId=70618111][wiki]]
+**** [ ] trunk
+**** [X] dev
++ test
 
 
 ** wbserver [0/1]
