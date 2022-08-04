@@ -25,7 +25,7 @@ SCHEDULED: <2022-08-08 Mon>
 ** bms [1/2]
 *** DONE bms 0x182 changeConfig 给66key补刀设置为2，大方模式触发 :trunk:dev:
 *** DOING [#B] 下周 bms 解析会议时长属性添加到 redis，tang-cache 添加获取时长接口, [[https://wiki.quanshi.com/pages/viewpage.action?pageId=66677328][wiki]] :dev:
-*** TODO 如果会中主持人呼叫参会人时（原来呼叫手机号码，现在是呼叫用户入会），即时开启等候室和锁定会议，用户也可以正常入会，bms 判断用户的 properties 中的 ignoreJoinCheck [[https://wiki.quanshi.com/pages/viewpage.action?pageId=66682878][wiki]]
+*** TODO [#A] 如果会中主持人呼叫参会人时（原来呼叫手机号码，现在是呼叫用户入会），即时开启等候室和锁定会议，用户也可以正常入会，bms 判断用户的 properties 中的 ignoreJoinCheck [[https://wiki.quanshi.com/pages/viewpage.action?pageId=66682878][wiki]]
 DEADLINE: <2022-08-05 Fri 18:00> SCHEDULED: <2022-08-05 Fri>
 
 ** libacctrans [0/1]

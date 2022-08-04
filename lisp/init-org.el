@@ -11,19 +11,22 @@
    (:foreign-keys run :color pink :title "<org-mode commands>")
    ("outline"
     (("h" outline-previous-visible-heading "previous visible heading line")
-    ("l" outline-next-visible-heading "next visible heading line")
-    ("j" outline-forward-same-level "same level forward")
-    ("k" outline-backward-same-level "same level backward")
-    ("s" org-shifttab "org-shifttab")
-    ("t" org-cycle "org-cycle"))
+     ("l" outline-next-visible-heading "next visible heading line")
+     ("j" outline-forward-same-level "same level forward")
+     ("k" outline-backward-same-level "same level backward")
+     ("s" org-shifttab "org-shifttab")
+     ("t" org-cycle "org-cycle"))
     "org"
     (("d" org-schedule "org-schedule" :exit t)
-    ("x" org-agenda "org-agenda" :exit t)
-    ("w" org-capture "org-capture" :exit t)
-    ("i" org-insert-structure-template "org-insert-structure-template" :color blue)
-    ("e" org-show-todo-tree "org-show-todo-tree")
-    ("a" org-show-all "org-show-all")
-    ("<" hydra-org-template/body "insert template" :exit t))))
+     ("y" org-deadline "org-deadline" :exit t)
+     ("x" org-agenda "org-agenda" :exit t)
+     ("w" org-capture "org-capture" :exit t)
+     ("p" org-priority "org-priority" :exit t)
+     ("m" org-time-stamp "org-time-stamp" :exit t)
+     ("i" org-insert-structure-template "org-insert-structure-template" :color blue)
+     ("<" hydra-org-template/body "insert template" :exit t)
+     ("e" org-show-todo-tree "org-show-todo-tree")
+     ("a" org-show-all "org-show-all"))))
   :config
   ;; https://emacs-china.org/t/org-org-indent-mode/16057
   ;; turn on 'org-indent-mode' by default
