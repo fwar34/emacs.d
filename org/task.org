@@ -17,6 +17,7 @@
 *** DONE 下周 bms 解析测试会的属性，audioserver 给 acm 通知测试会，在会议开启的时候 audioserver 将 acm 的测试会设置成 true :trunk:dev:
 *** DONE [#B] 在 tang-cache 中预留一些 groupid，预留1000000     :trunk:dev:
 *** DOING [#B] 需要将 pincode 放到 userdefine 中去带到子会去绑定，修改5213信令去设置到 userdefined，在 pinchange 的时候也要更新 userdefined，[[https://jira.quanshi.com/browse/MEETINGQA-24348][MEETINGQA-24348]] :develop@dev:
+**** 客户端在5213绑定 req 中需要设置 bindCode，而且要保证用户在主会和子会中的 bindCode 不变
 *** TODO [#C] bug [[https://jira.quanshi.com/browse/YHYKHBUG-8495][yh8495]] 需要线下复现，然后删除 audiosever 中 userrolechange 和 usersrolechange
 
 ** dsserver [1/2]
@@ -33,9 +34,13 @@ SCHEDULED: <2022-08-08 Mon>
 *** DOING [#B] 下周 bms 解析会议时长属性添加到 redis，tang-cache 添加获取时长接口, [[https://wiki.quanshi.com/pages/viewpage.action?pageId=66677328][wiki]] :dev:
 *** TODO [#A] 如果会中主持人呼叫参会人时（原来呼叫手机号码，现在是呼叫用户入会），即时开启等候室和锁定会议，用户也可以正常入会，bms 判断用户的 properties 中的 ignoreJoinCheck [[https://wiki.quanshi.com/pages/viewpage.action?pageId=66682878][wiki]]
 DEADLINE: <2022-08-05 Fri 18:00> SCHEDULED: <2022-08-05 Fri>
+*** TODO [#B] bms 限制的 hostsetting 长度为 10 k，需要修改限制长度，需要修改 update 和 query [[https://jira.quanshi.com/browse/MEETINGQA-30148][MEETINGQA-30148]]
 
 ** libacctrans [0/1]
 *** TODO [#C] 下周给共享声音添加到 redis，同时添加一个信令让 mixer 切换后去查询或者下发给 mixer --召伟找我沟通的
+
+** videoserver [/]
+*** TODO [#B] 任玉宝蜜蜂说需要添加一个新的请求关键帧的信令，[[https://jira.quanshi.com/browse/PLB-7903][PLB-7903]]
   
 * audioserver 优化分支
 ** TODO [#C] [0%] 推下 audioserver 优化上线
