@@ -227,7 +227,7 @@
 ;; https://depp.brause.cc/form-feed/
 (use-package form-feed
   :hook
-  (help-mode . form-feed-mode))
+  (prog-mode . form-feed-mode))
 
 (use-package hl-todo
   :config
