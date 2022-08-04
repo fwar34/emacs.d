@@ -156,9 +156,6 @@
       ("q" nil))
     (define-key org-mode-map (kbd "M-u or") 'hydra-org/body)
     (evil-define-key 'normal org-mode-map (kbd "M-u C-o C-r") 'hydra-org/body))
-  ;; (evil-define-key '(normal insert) 'global (kbd "M-u og") 'hydra-org/body)
-  ;; (with-eval-after-load 'org
-  ;;   (define-key org-mode-map (kbd "M-u og") 'hydra-org/body))
 
   ;;-------------------------------------------------------------
   ;; fwar34

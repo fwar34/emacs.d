@@ -2,19 +2,37 @@
 ;;; Commentary:
 
 ;;; Code:
-;; https://emacs-china.org/t/org-org-indent-mode/16057
-;; turn on 'org-indent-mode' by default
-(setq org-startup-indented t)
-;; (setq org-hide-leading-stars t)
-(with-eval-after-load 'org
+
+(use-package org
+  :ensure nil
+  :defer t
+  :mode-hydra
+  (org-mode
+   (:foreign-keys run :color pink :title "<org-mode commands>")
+   ("outline"
+    (("h" outline-previous-visible-heading "previous visible heading line")
+    ("l" outline-next-visible-heading "next visible heading line")
+    ("j" outline-forward-same-level "same level forward")
+    ("k" outline-backward-same-level "same level backward")
+    ("s" org-shifttab "org-shifttab")
+    ("t" org-cycle "org-cycle"))
+    "org"
+    (("d" org-schedule "org-schedule" :exit t)
+    ("x" org-agenda "org-agenda" :exit t)
+    ("w" org-capture "org-capture" :exit t)
+    ("i" org-insert-structure-template "org-insert-structure-template" :color blue)
+    ("e" org-show-todo-tree "org-show-todo-tree")
+    ("a" org-show-all "org-show-all"))))
+  :config
+  ;; https://emacs-china.org/t/org-org-indent-mode/16057
+  ;; turn on 'org-indent-mode' by default
+  (setq org-startup-indented t)
   ;; reference https://raw.githubusercontent.com/Cheukyin/.emacs.d/master/init-org-jekyll.el
   ;; http://cheukyin.github.io/jekyll/emacs/2014-08/org2jekyll.html
-  (org-babel-do-load-languages
-   'org-babel-load-languages
-   '((python . t)
-     (shell . t)
-     (emacs-lisp . t)
-     (C . t)))
+  (org-babel-do-load-languages 'org-babel-load-languages '((python . t)
+                                                           (shell . t)
+                                                           (emacs-lisp . t)
+                                                           (C . t)))
   (setq org-confirm-babel-evaluate nil)
   (setq org-src-fontify-natively t)
   ;; indent codes in org mode
@@ -29,7 +47,21 @@
       ;; Your init file should contain only one such instance.
       ;; If there is more than one, they won't work right.
       '(org-table ((t (:foreground "#6c71c4" :family "Ubuntu Mono")))))))
-  )
+
+  ;; 默认情况下，Org Mode没有打开Markdown文档的转换功能，需要将下面的小代码放到Emacs 的启动配置文件中：
+  ;; (setq org-export-backends (quote (ascii html icalendar latex md)))
+  (require 'ox-md)
+
+  ;; https://www.zmonster.me/2015/07/15/org-mode-planning.html
+  (setq org-todo-keywords '((sequence "TODO(t)" "DOING(i)" "|" "DONE(d)" "ABORT(a)")))
+  (setq org-todo-keyword-faces '(("DOING" . "palevioletred")
+                                 ("ABORT" . "orange")))
+  (setq org-tag-faces '(("trunk" . "brightmagenta")
+                        ("dev" . "red")
+                        ("develop@trunk" . "brightmagenta")
+                        ("develop@dev" . "red")))
+
+  (cl-pushnew '("not" . "note") org-structure-template-alist))
 
 (use-package htmlize :after org)
 (use-package ob-go :after org)
@@ -124,8 +156,7 @@
                              :recursive t)
 
                             ;; ("web" :components ("images" "js" "css"))
-                            )))
-  )
+                            ))))
 
 ;; reference from http://ju.outofmemory.cn/entry/348743
 ;; https://www.zmonster.me/2018/02/28/org-mode-capture.html#orgbfd201a
@@ -172,20 +203,8 @@
   
   (setq org-src-fontify-natively t))
 
-;; (add-hook 'org-mode-hook 'evil-org-mode)
-;; (evil-org-set-key-theme '(navigation insert textobjects additional calendar))
-;; (require 'evil-org-agenda)
-;; (evil-org-agenda-set-keys)
-;; https://github.com/Somelauw/evil-org-mode#common-issues
-;; (setq evil-want-C-i-jump nil)
-
-;; 默认情况下，Org Mode没有打开Markdown文档的转换功能，需要将下面的小代码放到Emacs 的启动配置文件中：
-;; (setq org-export-backends (quote (ascii html icalendar latex md)))
-(with-eval-after-load "org" '(require 'ox-md nil t))
-
 ;; 在配置文件中（我使用的是模块化的配置，所以我的配置在 init-org.el 文件中）增加如下程序，就可实现 org-mode 中的自动换行。
 (add-hook 'org-mode-hook (lambda () (setq truncate-lines nil)))
-
 
 (with-eval-after-load 'org
   (require 'org-tempo) ; Required from org 9 onwards for old template expansion
@@ -242,20 +261,6 @@ prepended to the element after the #+HEADER: tag."
       (if (or (region-active-p) (looking-back "^"))
           (hydra-org-template/body)
         (self-insert-command 1)))))
-
-(with-eval-after-load 'org
-  ;; https://www.zmonster.me/2015/07/15/org-mode-planning.html
-  (setq org-todo-keywords '((sequence "TODO(t)" "DOING(i)" "|" "DONE(d)" "ABORT(a)")))
-  (setq org-todo-keyword-faces '(("DOING" . "palevioletred")
-                                 ("ABORT" . "orange")))
-  (setq org-tag-faces '(("trunk" . "brightmagenta")
-                        ("dev" . "red")
-                        ("develop@trunk" . "brightmagenta")
-                        ("develop@dev" . "red")))
-
-  '(cl-pushnew
-    '("not" . "note")
-          org-structure-template-alist))
 
 (provide 'init-org)
 ;;; init-org.el ends here
