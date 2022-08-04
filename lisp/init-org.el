@@ -22,7 +22,8 @@
     ("w" org-capture "org-capture" :exit t)
     ("i" org-insert-structure-template "org-insert-structure-template" :color blue)
     ("e" org-show-todo-tree "org-show-todo-tree")
-    ("a" org-show-all "org-show-all"))))
+    ("a" org-show-all "org-show-all")
+    ("<" hydra-org-template/body "insert template" :exit t))))
   :config
   ;; https://emacs-china.org/t/org-org-indent-mode/16057
   ;; turn on 'org-indent-mode' by default
