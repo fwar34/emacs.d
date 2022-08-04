@@ -11,7 +11,7 @@
 
 (use-package transient-dwim
   :custom
-  (transient-detect-key-conflicts  t)
+  (transient-detect-key-conflicts t)
   :bind ("M-=" . transient-dwim-dispatch))
 
 ;; {{{
@@ -261,7 +261,7 @@ _c_heck all       |_f_etch all     |_m_erge all      |_n_ormalize all   |p_u_sh 
 _C_heck package   |_F_etch package |_M_erge package  |_N_ormlize package|p_U_sh package
 ----------------^^+--------------^^+---------------^^+----------------^^+------------||_q_uit||
 _r_ebuild all     |_p_ull all      |_v_ersions freeze|_w_atcher start   |_g_et recipe
-_R_ebuild package |_P_ull package  |_V_ersions thaw  |                  |prun_e_ build"
+_R_ebuild package |_P_ull package  |_V_ersions thaw  |^ ^               |prun_e_ build"
   ("c" straight-check-all)
   ("C" straight-check-package)
   ("r" straight-rebuild-all)
