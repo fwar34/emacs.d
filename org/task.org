@@ -3,6 +3,12 @@
 
 
 * 总任务
+** 上线任务 [0/2]
+*** DOING [#A] 上周beta的新东方优化这周(<2022-08-05 Fri>)是否要上线beta
+**** 上周上线的audioserver给新东方优化的版本，上周五上aws了，明天(<2022-08-05 Fri>)晚上上阿里
+*** DOING [#A] 周一提交的白名单优化周二是否已经上线beta，明天(<2022-08-05 Fri>)上产线
+**** 周二上beta的，明天(<2022-08-05 Fri>)晚上上产线aws，下周五(<2022-08-12 Fri>)上产线ali
+
 ** audioserver [6/8]
 *** DONE 在 tang-cache 中预留一些 groupid，预留1000000          :trunk:dev:
 *** DONE audioserver 多进程，直接在配置文件中添加配置项 CHILD_PROCESS_NUMBER=子进程数量 :trunk:dev:
