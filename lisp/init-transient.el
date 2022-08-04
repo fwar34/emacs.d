@@ -241,6 +241,7 @@
 
 (transient-define-prefix my-misc-transinet ()
   "my misc commands"
+  :transient-non-suffix 'transient--do-stay
   [[" <my misc commands>"
     ("h" "hl-todo" my-hl-todo)
     ("p" "clipboard-yank" clipboard-yank)
