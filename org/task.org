@@ -31,13 +31,13 @@ DEADLINE: <2022-08-09 Tue>
 ** wbserver [0/1]
 *** DOING [#B] 白板要添加 cmduserquitgroup/cmduserquitconference 接口，[[https://jira.quanshi.com/browse/PLB-7491][PLB-7491]] :publish@dev:
 
-** bms [1/2]
+** bms [1/4]
 *** DONE bms 0x182 changeConfig 给66key补刀设置为2，大方模式触发 :publish@trunk:publish@dev:
 *** DOING [#B] 下周 bms 解析会议时长属性添加到 redis，tang-cache 添加获取时长接口, [[https://wiki.quanshi.com/pages/viewpage.action?pageId=66677328][wiki]] :publish@dev:
 *** TODO [#A] 如果会中主持人呼叫参会人时（原来呼叫手机号码，现在是呼叫用户入会），即时开启等候室和锁定会议，用户也可以正常入会，bms 判断用户的 properties 中的 ignoreJoinCheck [[https://wiki.quanshi.com/pages/viewpage.action?pageId=66682878][wiki]]
 DEADLINE: <2022-08-05 Fri 18:00> SCHEDULED: <2022-08-05 Fri>
-*** TODO [#B] bms 限制的 hostsetting 长度为 10 k，需要修改限制长度，需要修改 update 和 query [[https://jira.quanshi.com/browse/MEETINGQA-30148][MEETINGQA-30148]]
-**** 将日志的等级调整为 crit，运维监控起来               :developping@dev:
+*** DOING [#B] bms 限制的 hostsetting 长度为 10 k，需要修改限制长度，需要修改 update 和 query [[https://jira.quanshi.com/browse/MEETINGQA-30148][MEETINGQA-30148]] :publish@dev:
+**** 将日志的等级调整为 crit，运维监控起来
 
 ** libacctrans [0/1]
 *** TODO [#C] 下周给共享声音添加到 redis，同时添加一个信令让 mixer 切换后去查询或者下发给 mixer --召伟找我沟通的
