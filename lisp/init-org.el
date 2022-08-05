@@ -60,10 +60,12 @@
   (setq org-todo-keywords '((sequence "TODO(t)" "DOING(i)" "|" "DONE(d)" "ABORT(a)")))
   (setq org-todo-keyword-faces '(("DOING" . "palevioletred")
                                  ("ABORT" . "orange")))
-  (setq org-tag-faces '(("trunk" . "brightmagenta")
-                        ("dev" . "red")
-                        ("develop@trunk" . "brightmagenta")
-                        ("develop@dev" . "red")))
+  (setq org-tag-faces '(("publish@trunk" . "brightmagenta")
+                        ("publish@dev" . "red")
+                        ("developping@trunk" . "brightmagenta")
+                        ("developping@dev" . "red")
+                        ("develop_complete_unpublish@trunk" . "brightmagenta")
+                        ("develop_complete_unpublish@dev" . "red")))
 
   (cl-pushnew '("not" . "note") org-structure-template-alist))
 
