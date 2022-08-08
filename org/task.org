@@ -27,7 +27,7 @@
 *** DOING [#A] [0%] 桌面添加共享模式，和多共享数量限制    :developping@dev:
 SCHEDULED: <2022-08-08 Mon>
 + [ ] 共享的优先级（第一个还是最后一个）这期 <2022-08-03 Wed> 不急实现，下来排期实现就行 [[https://wiki.quanshi.com/pages/viewpage.action?pageId=70618111][wiki]]
-**** 单共享的时候要替换上个实例（不论是新的还是老的客户端创建的）
+**** DONE 单共享的时候要替换上个实例（不论是新的还是老的客户端创建的） :develop_complete_unpublish@dev:
 DEADLINE: <2022-08-09 Tue>
 
 ** wbserver [0/2]
@@ -42,8 +42,7 @@ DEADLINE: <2022-08-09 Tue>
 *** DOING [#B] 下周 bms 解析会议时长属性添加到 redis，tang-cache 添加获取时长接口, [[https://wiki.quanshi.com/pages/viewpage.action?pageId=66677328][wiki]] :publish@dev:
 *** TODO [#A] 如果会中主持人呼叫参会人时（原来呼叫手机号码，现在是呼叫用户入会），即时开启等候室和锁定会议，用户也可以正常入会，bms 判断用户的 properties 中的 ignoreJoinCheck [[https://wiki.quanshi.com/pages/viewpage.action?pageId=66682878][wiki]]
 DEADLINE: <2022-08-05 Fri 18:00> SCHEDULED: <2022-08-05 Fri>
-*** DOING [#B] bms 限制的 hostsetting 长度为 10 k，需要修改限制长度，需要修改 update 和 query [[https://jira.quanshi.com/browse/MEETINGQA-30148][MEETINGQA-30148]] :publish@dev:
-**** 将日志的等级调整为 crit，运维监控起来
+*** DOING [#B] bms 限制的 hostsetting 长度为 10 k，需要修改限制长度，需要修改 update 和 query [[https://jira.quanshi.com/browse/MEETINGQA-30148][MEETINGQA-30148]] 将日志的等级调整为 crit，运维监控起来 :publish@trunk:publish@dev:
 
 ** libacctrans [0/1]
 *** TODO [#C] 下周给共享声音添加到 redis，同时添加一个信令让 mixer 切换后去查询或者下发给 mixer --召伟找我沟通的
