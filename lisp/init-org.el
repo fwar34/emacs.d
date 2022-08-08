@@ -65,7 +65,8 @@
                         ("developping@trunk" . "brightmagenta")
                         ("developping@dev" . "red")
                         ("develop_complete_unpublish@trunk" . "brightmagenta")
-                        ("develop_complete_unpublish@dev" . "red")))
+                        ("develop_complete_unpublish@dev" . "red")
+                        ("online" . "chocolate")))
 
   (cl-pushnew '("not" . "note") org-structure-template-alist))
 
