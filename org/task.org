@@ -16,19 +16,19 @@
 *** DONE audioserver 添加监控会议、人数日志，重要接口操作时间的日志 :publish@trunk:publish@dev:
 *** DONE 白名单名字 bug 修复合并                :publish@trunk:publish@dev:
 *** DONE 下周 bms 解析测试会的属性，audioserver 给 acm 通知测试会，在会议开启的时候 audioserver 将 acm 的测试会设置成 true :publish@trunk:publish@dev:
-*** DONE [#B] 在 tang-cache 中预留一些 groupid，预留1000000 :publish@trunk:publish@dev:
 *** DOING [#B] 需要将 pincode 放到 userdefine 中去带到子会去绑定，修改5213信令去设置到 userdefined，在 pinchange 的时候也要更新 userdefined，[[https://jira.quanshi.com/browse/MEETINGQA-24348][MEETINGQA-24348]] :developping@dev:
 **** 客户端在5213绑定 req 中需要设置 bindCode，而且要保证用户在主会和子会中的 bindCode 不变
 *** TODO [#C] bug [[https://jira.quanshi.com/browse/YHYKHBUG-8495][yh8495]] 需要线下复现，然后删除 audiosever 中 userrolechange 和 usersrolechange
-*** TODO [#B] [[https://jira.quanshi.com/browse/PLB-8051][PLB-8051]] 需要修改 audioserver 识别 pexip 用户的逻辑
+*** TODO [#B] [[https://jira.quanshi.com/browse/PLB-8051][PLB-8051]] 需要修改 audioserver 识别 pexip 用户的逻辑 :publish@trunk:publish@dev:
 
-** dsserver [1/2]
+** dsserver [1/3]
 *** DONE 桌面4K提测，增加一组信令
 *** DOING [#A] [0%] 桌面添加共享模式，和多共享数量限制    :developping@dev:
 SCHEDULED: <2022-08-08 Mon>
 + [ ] 共享的优先级（第一个还是最后一个）这期 <2022-08-03 Wed> 不急实现，下来排期实现就行 [[https://wiki.quanshi.com/pages/viewpage.action?pageId=70618111][wiki]]
 **** DONE 单共享的时候要替换上个实例（不论是新的还是老的客户端创建的） :develop_complete_unpublish@dev:
 DEADLINE: <2022-08-09 Tue>
+**** DOING [#B] 桌面支持多分辨率 [[https://wiki.quanshi.com/pages/viewpage.action?pageId=70617303][wiki]]
 
 ** wbserver [0/2]
 *** DOING [#B] 白板要添加 cmduserquitgroup/cmduserquitconference 接口，[[https://jira.quanshi.com/browse/PLB-7491][PLB-7491]] :publish@dev:
