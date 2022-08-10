@@ -270,5 +270,8 @@ prepended to the element after the #+HEADER: tag."
           (hydra-org-template/body)
         (self-insert-command 1)))))
 
+(use-package org-ql
+  :after org)
+
 (provide 'init-org)
 ;;; init-org.el ends here
