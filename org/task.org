@@ -10,14 +10,15 @@
 + [X] 周二上 beta 的，明天(<2022-08-05 Fri>)晚上上产线 aws 
 + [ ] 下周五(<2022-08-12 Fri>)上产线 ali
 
-** audioserver [6/8]
+** audioserver [7/9]
 *** DONE 在 tang-cache 中预留一些 groupid，预留1000000 :publish@trunk:publish@dev:
 *** DONE audioserver 多进程，直接在配置文件中添加配置项 CHILD_PROCESS_NUMBER=子进程数量 :publish@trunk:publish@dev:
 *** DONE audioserver 添加监控会议、人数日志，重要接口操作时间的日志 :publish@trunk:publish@dev:
 *** DONE 白名单名字 bug 修复合并                :publish@trunk:publish@dev:
 *** DONE 下周 bms 解析测试会的属性，audioserver 给 acm 通知测试会，在会议开启的时候 audioserver 将 acm 的测试会设置成 true :publish@trunk:publish@dev:
 *** DONE [#B] [[https://jira.quanshi.com/browse/PLB-8051][PLB-8051]] 需要修改 audioserver 识别 pexip 用户的逻辑 :publish@trunk:publish@dev:
-*** DOING [#B] 需要将 pincode 放到 userdefine 中去带到子会去绑定，修改5213信令去设置到 userdefined，在 pinchange 的时候也要更新 userdefined，[[https://jira.quanshi.com/browse/MEETINGQA-24348][MEETINGQA-24348]] :developping@dev:
+*** DONE [#B] bug [[https://jira.quanshi.com/browse/PLB-8129][PLB-8129]] 添加了翻译语言数量校验       :publish@translate:
+*** DOING [#B] 需要将 pincode 放到 userdefine 中去带到子会去绑定，修改5213信令去设置到 userdefined，在 pinchange 的时候也要更新 userdefined，[[https://jira.quanshi.com/browse/MEETINGQA-24348][MEETINGQA-24348]] :publish@dev:
 **** 客户端在5213绑定 req 中需要设置 bindCode，而且要保证用户在主会和子会中的 bindCode 不变
 *** TODO [#C] bug [[https://jira.quanshi.com/browse/YHYKHBUG-8495][yh8495]] 需要线下复现，然后删除 audiosever 中 userrolechange 和 usersrolechange
 
