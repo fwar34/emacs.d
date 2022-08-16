@@ -3,12 +3,12 @@
 
 
 * 总任务
-** 上线任务 [1/2]
+** 上线任务 [2/2]
 *** DONE [#A] 上周 beta 的新东方优化这周(<2022-08-05 Fri>)是否要上线 beta
 **** 上周上线的 audioserver 给新东方优化的版本，上周五上 aws 了，明天(<2022-08-05 Fri>)晚上上阿里
-*** DOING [#A] 周一提交的白名单优化周二是否已经上线 beta
+*** DONE [#A] 周一提交的白名单优化周二是否已经上线 beta
 + [X] 周二上 beta 的，明天(<2022-08-05 Fri>)晚上上产线 aws 
-+ [ ] 下周五(<2022-08-12 Fri>)上产线 ali
++ [X] 下周五(<2022-08-12 Fri>)上产线 ali
 
 ** audioserver [7/9]
 *** DONE 在 tang-cache 中预留一些 groupid，预留1000000 :publish@trunk:publish@dev:
@@ -20,11 +20,12 @@
 *** DONE [#B] bug [[https://jira.quanshi.com/browse/PLB-8129][PLB-8129]] 添加了翻译语言数量校验       :publish@translate:
 *** DOING [#B] 需要将 pincode 放到 userdefine 中去带到子会去绑定，修改5213信令去设置到 userdefined，在 pinchange 的时候也要更新 userdefined，[[https://jira.quanshi.com/browse/MEETINGQA-24348][MEETINGQA-24348]] :publish@dev:
 **** 客户端在5213绑定 req 中需要设置 bindCode，而且要保证用户在主会和子会中的 bindCode 不变
+**** TODO [#B] 已经修改完成 需要测试下
 *** TODO [#C] bug [[https://jira.quanshi.com/browse/YHYKHBUG-8495][yh8495]] 需要线下复现，然后删除 audiosever 中 userrolechange 和 usersrolechange
 
 ** dsserver [1/3]
 *** DONE 桌面4K提测，增加一组信令
-*** DOING [#A] [0%] 桌面添加共享模式，和多共享数量限制 :publish@trunk:developping@dev:
+*** DOING [#A] [0%] 桌面添加共享模式，和多共享数量限制 :publish@trunk:publish@dev:
 SCHEDULED: <2022-08-08 Mon>
 **** DONE 单共享的时候要替换上个实例（不论是新的还是老的客户端创建的） :develop_complete_unpublish@dev:
 DEADLINE: <2022-08-09 Tue>
