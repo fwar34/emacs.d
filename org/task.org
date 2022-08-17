@@ -4,27 +4,26 @@
 
 * 总任务
 ** 上线任务 [2/2]
-*** DONE [#A] 上周 beta 的新东方优化这周(<2022-08-05 Fri>)是否要上线 beta
+*** ONLINE [#A] 上周 beta 的新东方优化这周(<2022-08-05 Fri>)是否要上线 beta
 **** 上周上线的 audioserver 给新东方优化的版本，上周五上 aws 了，明天(<2022-08-05 Fri>)晚上上阿里
-*** DONE [#A] 周一提交的白名单优化周二是否已经上线 beta
+*** ONLINE [#A] 周一提交的白名单优化周二是否已经上线 beta
 + [X] 周二上 beta 的，明天(<2022-08-05 Fri>)晚上上产线 aws 
 + [X] 下周五(<2022-08-12 Fri>)上产线 ali
 
 ** audioserver [7/9]
-*** DONE 在 tang-cache 中预留一些 groupid，预留1000000 :publish@trunk:publish@dev:
+*** ONLINE audioserver 添加监控会议、人数日志，重要接口操作时间的日志 :publish@trunk:publish@dev:
+*** ONLINE 白名单名字 bug 修复合并              :publish@trunk:publish@dev:
+*** ONLINE 下周 bms 解析测试会的属性，audioserver 给 acm 通知测试会，在会议开启的时候 audioserver 将 acm 的测试会设置成 true :publish@trunk:publish@dev:
+*** ONLINE [#B] [[https://jira.quanshi.com/browse/PLB-8051][PLB-8051]] 需要修改 audioserver 识别 pexip 用户的逻辑 :publish@trunk:publish@dev:
 *** DONE audioserver 多进程，直接在配置文件中添加配置项 CHILD_PROCESS_NUMBER=子进程数量 :publish@trunk:publish@dev:
-*** DONE audioserver 添加监控会议、人数日志，重要接口操作时间的日志 :publish@trunk:publish@dev:
-*** DONE 白名单名字 bug 修复合并                :publish@trunk:publish@dev:
-*** DONE 下周 bms 解析测试会的属性，audioserver 给 acm 通知测试会，在会议开启的时候 audioserver 将 acm 的测试会设置成 true :publish@trunk:publish@dev:
-*** DONE [#B] [[https://jira.quanshi.com/browse/PLB-8051][PLB-8051]] 需要修改 audioserver 识别 pexip 用户的逻辑 :publish@trunk:publish@dev:
 *** DONE [#B] bug [[https://jira.quanshi.com/browse/PLB-8129][PLB-8129]] 添加了翻译语言数量校验       :publish@translate:
 *** DOING [#B] 需要将 pincode 放到 userdefine 中去带到子会去绑定，修改5213信令去设置到 userdefined，在 pinchange 的时候也要更新 userdefined，[[https://jira.quanshi.com/browse/MEETINGQA-24348][MEETINGQA-24348]] :publish@dev:
 **** 客户端在5213绑定 req 中需要设置 bindCode，而且要保证用户在主会和子会中的 bindCode 不变
 **** TODO [#B] 已经修改完成 需要测试下
 *** TODO [#C] bug [[https://jira.quanshi.com/browse/YHYKHBUG-8495][yh8495]] 需要线下复现，然后删除 audiosever 中 userrolechange 和 usersrolechange
 
-** dsserver [1/3]
-*** DONE 桌面4K提测，增加一组信令
+** dsserver [1/4]
+*** ONLINE 桌面4K提测，增加一组信令
 *** DOING [#A] [0%] 桌面添加共享模式，和多共享数量限制 :publish@trunk:publish@dev:
 SCHEDULED: <2022-08-08 Mon>
 **** DONE 单共享的时候要替换上个实例（不论是新的还是老的客户端创建的） :develop_complete_unpublish@dev:
@@ -32,15 +31,15 @@ DEADLINE: <2022-08-09 Tue>
 *** TODO [#B] 共享的优先级（第一个还是最后一个）这期 <2022-08-03 Wed> 不急实现，下来排期实现就行 [[https://wiki.quanshi.com/pages/viewpage.action?pageId=70618111][wiki]]
 *** TODO [#B] 桌面支持多分辨率 [[https://wiki.quanshi.com/pages/viewpage.action?pageId=70617303][wiki]]
 
-** wbserver [0/2]
+** wbserver [1/2]
+*** ONLINE [#B] 白板 AR 批注修改                :publish@trunk:publish@dev:
 *** DOING [#B] 白板要添加 cmduserquitgroup/cmduserquitconference 接口，[[https://jira.quanshi.com/browse/PLB-7491][PLB-7491]] :publish@dev:
-*** TODO [#B] 白板 AR 批注修改                  :publish@trunk:publish@dev:
 
 ** business
 *** TODO [#B] 白板 AR 批注添加了发送结束组的通知到 bms 的接口 :publish@trunk:publish@dev:
 
 ** bms [1/4]
-*** DONE bms 0x182 changeConfig 给66key补刀设置为2，大方模式触发 :publish@trunk:publish@dev:
+*** ONLINE bms 0x182 changeConfig 给66key补刀设置为2，大方模式触发 :publish@trunk:publish@dev:
 *** DOING [#B] 下周 bms 解析会议时长属性添加到 redis，tang-cache 添加获取时长接口, [[https://wiki.quanshi.com/pages/viewpage.action?pageId=66677328][wiki]] :publish@dev:
 *** TODO [#A] 如果会中主持人呼叫参会人时（原来呼叫手机号码，现在是呼叫用户入会），即时开启等候室和锁定会议，用户也可以正常入会，bms 判断用户的 properties 中的 ignoreJoinCheck [[https://wiki.quanshi.com/pages/viewpage.action?pageId=66682878][wiki]]
 DEADLINE: <2022-08-05 Fri 18:00> SCHEDULED: <2022-08-05 Fri>
@@ -51,6 +50,9 @@ DEADLINE: <2022-08-05 Fri 18:00> SCHEDULED: <2022-08-05 Fri>
 
 ** videoserver [0/1]
 *** TODO [#B] 任玉宝蜜蜂说需要添加一个新的请求关键帧的信令，[[https://jira.quanshi.com/browse/PLB-7903][PLB-7903]]
+
+** tang-cache
+*** ONLINE 在 tang-cache 中预留一些 groupid，预留1000000 :publish@trunk:publish@dev:
   
 * audioserver 优化分支
 ** TODO [#C] [0%] 推下 audioserver 优化上线
