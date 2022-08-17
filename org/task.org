@@ -34,6 +34,7 @@ DEADLINE: <2022-08-09 Tue>
 ** wbserver [1/2]
 *** ONLINE [#B] 白板 AR 批注修改                :publish@trunk:publish@dev:
 *** DOING [#B] 白板要添加 cmduserquitgroup/cmduserquitconference 接口，[[https://jira.quanshi.com/browse/PLB-7491][PLB-7491]] :publish@dev:
+**** warning 这个 bug 的修复上线必须等客户端上线了才行，否则会导致 [[https://jira.quanshi.com/browse/MEETINGQA-30557][MEETINGQA-30557]]
 
 ** business
 *** TODO [#B] 白板 AR 批注添加了发送结束组的通知到 bms 的接口 :publish@trunk:publish@dev:
