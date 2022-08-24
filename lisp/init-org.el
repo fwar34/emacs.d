@@ -57,8 +57,9 @@
   (require 'ox-md)
 
   ;; https://www.zmonster.me/2015/07/15/org-mode-planning.html
-  (setq org-todo-keywords '((sequence "TODO(t)" "DOING(i)" "|" "DONE(d)" "ABORT(a)" "ONLINE(o)")))
+  (setq org-todo-keywords '((sequence "TODO(t)" "DOING(i)" "TEST(u)" "|" "DONE(d)" "ABORT(a)" "ONLINE(o)")))
   (setq org-todo-keyword-faces '(("DOING" . "palevioletred")
+                                 ("TEST" . "brightred")
                                  ("ABORT" . "orange")
                                  ("ONLINE" . "limegreen")))
   (setq org-tag-faces '(("publish@trunk" . "brightmagenta")
