@@ -1,5 +1,5 @@
 #+TITLE 我的任务列表
-#+TAGS: { publish@trunk(t) developping@trunk(b) develop_complete_unpublish@trunk(y) } { publish@dev(d) developping@dev(a) develop_complete_unpublish@dev(x) } online
+#+TAGS: { publish@trunk(t) developping@trunk(b) develop_complete_unpublish@trunk(y) } { publish@dev(d) developping@dev(a) develop_complete_unpublish@dev(x) }
 
 
 * 总任务
@@ -17,9 +17,9 @@
 *** ONLINE [#B] [[https://jira.quanshi.com/browse/PLB-8051][PLB-8051]] 需要修改 audioserver 识别 pexip 用户的逻辑 :publish@trunk:publish@dev:
 *** DONE audioserver 多进程，直接在配置文件中添加配置项 CHILD_PROCESS_NUMBER=子进程数量 :publish@trunk:publish@dev:
 *** DONE [#B] bug [[https://jira.quanshi.com/browse/PLB-8129][PLB-8129]] 添加了翻译语言数量校验       :publish@translate:
-*** TEST [#B] 需要将 pincode 放到 userdefine 中去带到子会去绑定，修改5213信令去设置到 userdefined，在 pinchange 的时候也要更新 userdefined，[[https://jira.quanshi.com/browse/MEETINGQA-24348][MEETINGQA-24348]] :publish@dev:
+*** TEST [#B] 需要将 pincode 放到 userdefine 中去带到子会去绑定，修改5213信令去设置到 userdefined，在 pinchange 的时候也要更新 userdefined，[[https://jira.quanshi.com/browse/MEETINGQA-24348][MEETINGQA-24348]] :publish@trunk:publish@dev:
 **** 客户端在5213绑定 req 中需要设置 bindCode，而且要保证用户在主会和子会中的 bindCode 不变
-**** TODO [#B] 已经修改完成 需要测试下
+**** 线下E <2022-08-29 Mon> 晚上六点之后部署
 **** TODO [#B] trunk 提交了的话告诉下洪桃琴测试，bug 里面同时备注下 trunk 已经提交
 *** TODO [#C] bug [[https://jira.quanshi.com/browse/YHYKHBUG-8495][yh8495]] 需要线下复现，然后删除 audiosever 中 userrolechange 和 usersrolechange
 *** TEST [#B] 共享音乐配置桌面 4k 的修改需要合并到 trunk 出包 :publish@trunk:publish@dev:
@@ -27,6 +27,7 @@
 **** 在北京01环境自测完成
 *** TEST [#B] [[https://jira.quanshi.com/browse/MEETINGQA-30933][MEETINGQA-30933]] audioserver 去除角色改变时候触发的 operatorid 为 0 的 0x1394 逻辑 :publish@trunk:publish@dev:
 **** 需要测试
+*** TODO [#B] [[https://jira.quanshi.com/browse/PLB-8286][PLB-8286]] 客户端更新电话名字后 audioserver 没有 backup，需要看下 backup 对 redis 性能的影响（是否需要优化下 backup 的时机和机制）
 
 ** dsserver [1/4]
 *** ONLINE 桌面4K提测，增加一组信令
