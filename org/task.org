@@ -10,17 +10,17 @@
 + [X] 周二上 beta 的，明天(<2022-08-05 Fri>)晚上上产线 aws 
 + [X] 下周五(<2022-08-12 Fri>)上产线 ali
 
-** audioserver [6/11]
+** audioserver [10/12]
 *** ONLINE audioserver 添加监控会议、人数日志，重要接口操作时间的日志 :publish@trunk:publish@dev:
 *** ONLINE 白名单名字 bug 修复合并              :publish@trunk:publish@dev:
 *** ONLINE 下周 bms 解析测试会的属性，audioserver 给 acm 通知测试会，在会议开启的时候 audioserver 将 acm 的测试会设置成 true :publish@trunk:publish@dev:
 *** ONLINE [#B] [[https://jira.quanshi.com/browse/PLB-8051][PLB-8051]] 需要修改 audioserver 识别 pexip 用户的逻辑 :publish@trunk:publish@dev:
 *** DONE audioserver 多进程，直接在配置文件中添加配置项 CHILD_PROCESS_NUMBER=子进程数量 :publish@trunk:publish@dev:
 *** DONE [#B] bug [[https://jira.quanshi.com/browse/PLB-8129][PLB-8129]] 添加了翻译语言数量校验       :publish@translate:
-*** TEST [#B] 需要将 pincode 放到 userdefine 中去带到子会去绑定，修改5213信令去设置到 userdefined，在 pinchange 的时候也要更新 userdefined，[[https://jira.quanshi.com/browse/MEETINGQA-24348][MEETINGQA-24348]] :publish@trunk:publish@dev:
+*** DONE [#B] 需要将 pincode 放到 userdefine 中去带到子会去绑定，修改5213信令去设置到 userdefined，在 pinchange 的时候也要更新 userdefined，[[https://jira.quanshi.com/browse/MEETINGQA-24348][MEETINGQA-24348]] :publish@trunk:publish@dev:
 **** 客户端在5213绑定 req 中需要设置 bindCode，而且要保证用户在主会和子会中的 bindCode 不变
 **** 线下E <2022-08-29 Mon> 晚上六点之后部署
-**** TODO [#B] trunk 提交了的话告诉下洪桃琴测试，bug 里面同时备注下 trunk 已经提交
+**** DONE [#B] trunk 提交了的话告诉下洪桃琴测试，bug 里面同时备注下 trunk 已经提交
 *** TODO [#C] bug [[https://jira.quanshi.com/browse/YHYKHBUG-8495][yh8495]] 需要线下复现，然后删除 audiosever 中 userrolechange 和 usersrolechange
 *** TEST [#B] 共享音乐配置桌面 4k 的修改需要合并到 trunk 出包 :publish@trunk:publish@dev:
 *** TEST [#B] [[https://jira.quanshi.com/browse/MEETINGQA-30890][MEETINGQA-30890]] bms 和 audioserver 都要修复， bms 不发送 conf start，audioserver 收到消息去 redis 判断是个新会还是老会 :publish@trunk:publish@dev:
@@ -40,15 +40,15 @@ DEADLINE: <2022-08-09 Tue>
 **** 上周的方案改变，给桌面添加 6040 和 6042 信令，DSSInstance 重载了父类的 haveReceiver 函数, 北京01已经部署
 DEADLINE: <2022-08-22 Mon>
 
-** wbserver [1/2]
+** wbserver [2/2]
 *** ONLINE [#B] 白板 AR 批注修改                :publish@trunk:publish@dev:
-*** DOING [#B] 白板要添加 cmduserquitgroup/cmduserquitconference 接口，[[https://jira.quanshi.com/browse/PLB-7491][PLB-7491]] :publish@dev:
+*** TEST [#B] 白板要添加 cmduserquitgroup/cmduserquitconference 接口，[[https://jira.quanshi.com/browse/PLB-7491][PLB-7491]] :publish@trunk:publish@dev:
 **** warning 这个 bug 的修复上线必须等客户端上线了才行，否则会导致 [[https://jira.quanshi.com/browse/MEETINGQA-30557][MEETINGQA-30557]]
 
 ** business
 *** TODO [#B] 白板 AR 批注添加了发送结束组的通知到 bms 的接口 :publish@trunk:publish@dev:
 
-** bms [1/5]
+** bms [2/7]
 *** ONLINE bms 0x182 changeConfig 给66key补刀设置为2，大方模式触发 :publish@trunk:publish@dev:
 *** DOING [#B] 下周 bms 解析会议时长属性添加到 redis，tang-cache 添加获取时长接口, [[https://wiki.quanshi.com/pages/viewpage.action?pageId=66677328][wiki]] :publish@dev:
 *** TODO [#A] 如果会中主持人呼叫参会人时（原来呼叫手机号码，现在是呼叫用户入会），即时开启等候室和锁定会议，用户也可以正常入会，bms 判断用户的 properties 中的 ignoreJoinCheck [[https://wiki.quanshi.com/pages/viewpage.action?pageId=66682878][wiki]]
@@ -56,6 +56,10 @@ DEADLINE: <2022-08-05 Fri 18:00> SCHEDULED: <2022-08-05 Fri>
 *** DOING [#B] bms 限制的 hostsetting 长度为 10 k，需要修改限制长度，需要修改 update 和 query [[https://jira.quanshi.com/browse/MEETINGQA-30148][MEETINGQA-30148]] 将日志的等级调整为 crit，运维监控起来 :publish@trunk:publish@dev:
 *** DOING [#B] 硬件终端支持分组会议，bms 添加两个信令 [[https://wiki.quanshi.com/pages/viewpage.action?pageId=70626380][wiki]]    :publish@dev:
 **** 北京01已经部署
+*** TEST [#B] [[https://jira.quanshi.com/browse/MEETINGQA-30105][MEETINGQA-30105]] 最后个入会的时候延迟结会逻辑的判断 :publish@dev:
+**** 自测通过
+**** tang-cache 有对应修改
+*** DOING [#B] [[https://jira.quanshi.com/browse/YHYKHBUG-9502][YHYKHBUG-9502]] bms 在 queuechange 的时候需要修改 clearConference 的逻辑，清理所有线程本地的 ConferenceMan 中的会议信息 :publish@dev:
 
 ** libacctrans [0/1]
 *** TODO [#C] 下周给共享声音添加到 redis，同时添加一个信令让 mixer 切换后去查询或者下发给 mixer --召伟找我沟通的
