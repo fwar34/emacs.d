@@ -60,6 +60,7 @@ DEADLINE: <2022-08-05 Fri 18:00> SCHEDULED: <2022-08-05 Fri>
 **** 自测通过
 **** tang-cache 有对应修改
 *** DOING [#B] [[https://jira.quanshi.com/browse/YHYKHBUG-9502][YHYKHBUG-9502]] bms 在 queuechange 的时候需要修改 clearConference 的逻辑，清理所有线程本地的 ConferenceMan 中的会议信息 :publish@dev:
+*** TODO [#B] 添加客户端自己获取 groupid 的接口(国华)
 
 ** libacctrans [0/1]
 *** TODO [#C] 下周给共享声音添加到 redis，同时添加一个信令让 mixer 切换后去查询或者下发给 mixer --召伟找我沟通的
@@ -69,6 +70,9 @@ DEADLINE: <2022-08-05 Fri 18:00> SCHEDULED: <2022-08-05 Fri>
 
 ** tang-cache
 *** ONLINE 在 tang-cache 中预留一些 groupid，预留1000000 :publish@trunk:publish@dev:
+
+** fsserver-event
+*** TODO [#A] 新客户端需要添加一组新的共享文档信令
   
 * audioserver 优化分支
 ** TODO [#C] [0%] 推下 audioserver 优化上线
