@@ -48,7 +48,7 @@ DEADLINE: <2022-08-22 Mon>
 ** business
 *** TODO [#B] 白板 AR 批注添加了发送结束组的通知到 bms 的接口 :publish@trunk:publish@dev:
 
-** bms [6/9]
+** bms [4/9]
 *** ONLINE bms 0x182 changeConfig 给66key补刀设置为2，大方模式触发 :publish@trunk:publish@dev:
 *** TEST [#B] 下周 bms 解析会议时长属性添加到 redis，tang-cache 添加获取时长接口, [[https://wiki.quanshi.com/pages/viewpage.action?pageId=66677328][wiki]] :publish@trunk:publish@dev:
 **** 9月14日 trunk 出包
@@ -58,13 +58,15 @@ DEADLINE: <2022-08-05 Fri 18:00> SCHEDULED: <2022-08-05 Fri>
 *** TEST [#B] bms 限制的 hostsetting 长度为 10 k，需要修改限制长度，需要修改 update 和 query [[https://jira.quanshi.com/browse/MEETINGQA-30148][MEETINGQA-30148]] 将日志的等级调整为 crit，运维监控起来 :publish@trunk:publish@dev:
 *** DOING [#B] 硬件终端支持分组会议，bms 添加两个信令 [[https://wiki.quanshi.com/pages/viewpage.action?pageId=70626380][wiki]]    :publish@dev:
 **** 北京01已经部署
-*** TEST [#B] [[https://jira.quanshi.com/browse/MEETINGQA-30105][MEETINGQA-30105]] 最后个入会的时候延迟结会逻辑的判断 :publish@dev:
+*** DOING [#B] [[https://jira.quanshi.com/browse/MEETINGQA-30105][MEETINGQA-30105]] 最后个入会的时候延迟结会逻辑的判断 :publish@dev:
 **** 自测通过
 **** tang-cache 有对应修改
 *** TEST [#B] [[https://jira.quanshi.com/browse/YHYKHBUG-9502][YHYKHBUG-9502]] bms 在 queuechange 的时候需要修改 clearConference 的逻辑，清理所有线程本地的 ConferenceMan 中的会议信息 :publish@trunk:publish@dev:
-*** TEST [#B] 添加一组信令配合 H323 支持分组功能              :publish@dev:
+*** DOING [#B] 添加一组信令配合 H323 支持分组功能             :publish@dev:
 **** 见开他们还在测试，没有提测
 *** TODO [#B] 添加客户端自己获取 groupid 的接口(国华)
+*** TEST [#A] [[https://jira.quanshi.com/browse/YZBKHBUG-595][YZBKHBUG-595]] 修复多个线程本缓存的会议状态不一致的问题 :publish@trunk:publish@dev:
+**** 计划：9月19日出包 9月20上beta 9月23日上线
 
 ** libacctrans [0/1]
 *** TODO [#C] 下周给共享声音添加到 redis，同时添加一个信令让 mixer 切换后去查询或者下发给 mixer --召伟找我沟通的
