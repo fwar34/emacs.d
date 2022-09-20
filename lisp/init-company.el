@@ -9,8 +9,8 @@
     (remove-hook 'evil-insert-state-entry-hook #'my-evil-insert-state-entry-hook-setup)
     (use-package company
       :demand t
-      :custom
-      (company-minimum-prefix-length 1)
+      ;; :custom
+      ;; (company-minimum-prefix-length 1)
       :bind
       (:map company-active-map
             ("C-w" . evil-delete-backward-word)
@@ -51,7 +51,7 @@
       ;; (setq company-dabbrev-ignore-case nil)
       (setq company-dabbrev-ignore-case t)
       ;; Trigger completion immediately.
-      (setq company-idle-delay 0)
+      ;; (setq company-idle-delay 0.3)
       ;; I don't like the downcase word in company-dabbrev!
       (setq company-dabbrev-downcase nil
             company-clang-insert-arguments nil
