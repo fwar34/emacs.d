@@ -28,6 +28,7 @@
 *** TEST [#B] [[https://jira.quanshi.com/browse/MEETINGQA-30933][MEETINGQA-30933]] audioserver 去除角色改变时候触发的 operatorid 为 0 的 0x1394 逻辑 :publish@trunk:publish@dev:
 **** 需要测试
 *** TODO [#B] [[https://jira.quanshi.com/browse/PLB-8286][PLB-8286]] 客户端更新电话名字后 audioserver 没有 backup，需要看下 backup 对 redis 性能的影响（是否需要优化下 backup 的时机和机制）
+*** TODO [#B] 给 PhoneUserInfoNew 添加一个 vector 字段，元素是 key:value 对，需要给 acm 添加新的字段
 
 ** dsserver [1/4]
 *** ONLINE 桌面4K提测，增加一组信令
