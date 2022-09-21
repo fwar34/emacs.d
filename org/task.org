@@ -80,12 +80,8 @@ DEADLINE: <2022-08-05 Fri 18:00> SCHEDULED: <2022-08-05 Fri>
 **** 给直播用户使用的
 
 ** fsserver-event
-*** TODO [#A] 新客户端需要添加一组新的共享文档信令
-**** tang-cache
-1. 给每个文档添加 confid_groupid_attributes_map 表，表中的 field 为 key value 为 string
-2. 给会中所有的文档添加 confid_groupid_attributes 表，代表的是所有实例公共的 attributes 属性
-3. 给会议添加 confid_document_map 表，表中的 field 为 groupid，value 为 baseinfo
-= 会议删除的时候要便利 confid_docment_map 表中的 fields，然后构造表名删除 confid_groupid_attributes 表 =
+*** TEST [#A] 新客户端需要添加一组新的共享文档信令 :publish@trunk:publish@dev:
+**** 修改了 fsserver，backup 使用了 business 的机制
   
 * audioserver 优化分支
 ** TODO [#C] [0%] 推下 audioserver 优化上线
