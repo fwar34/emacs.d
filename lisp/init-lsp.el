@@ -54,6 +54,7 @@
    (rust-mode . lsp-deferred)
    (clojure-mode . lsp-deferred)
    (lua-mode . lsp-deferred)
+   (js2-mode . lsp-deferred)
    ;; (c-mode . lsp-deferred)
    ;; (c++-mode . lsp-deferred)
    ;; if you want which-key integration
