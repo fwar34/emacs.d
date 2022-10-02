@@ -43,6 +43,7 @@
   ;; clojure: This Server supports automatic install. Install this language server with M-x lsp-install-server RET clojure-lsp RET. 或者 yay -S clojure-lsp-bin
   ;; c++: yay -S ccls 或者 yay -S clang
   :defer t
+  :after company
   :if (equal system-type 'gnu/linux)
   :init
   ;; set prefix for lsp-command-keymap (few alternatives - "C-l", "C-c l")
@@ -55,13 +56,15 @@
    (clojure-mode . lsp-deferred)
    (lua-mode . lsp-deferred)
    (js2-mode . lsp-deferred)
+   (web-mode . lsp-deferred)
+   (css-mode . lsp-deferred)
    ;; (c-mode . lsp-deferred)
    ;; (c++-mode . lsp-deferred)
    ;; if you want which-key integration
    (lsp-mode . lsp-enable-which-key-integration))
   :commands lsp-deferred
   :config
-  (message "lsp-deferred xxxxxxxxx")
+  (message (format "lsp-deferred @ %s" major-mode))
   (setq ;;lsp-completion-provider :none
    lsp-enable-indentation nil
    lsp-enable-on-type-formatting nil
