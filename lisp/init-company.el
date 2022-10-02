@@ -43,9 +43,10 @@
       ;; (setq company-auto-commit-chars '(41 46 44 59 13))
 
       ;; Number the candidates (use M-1, M-2 etc to select completions).
-      (setq company-show-numbers t)
+      ;; (setq company-show-numbers t)
+      (setq company-show-quick-access 'left)
       ;; make previous/next selection in the popup cycles
-      (setq company-selection-wrap-around t) 
+      (setq company-selection-wrap-around t)
       ;; Some languages use camel case naming convention,
       ;; so company should be case sensitive.
       ;; (setq company-dabbrev-ignore-case nil)
@@ -105,11 +106,7 @@ In that case, insert the number."
       ;;              10
       ;;            (string-to-number k))))))
 
-      (defun ora--company-good-prefix-p (orig-fn prefix)
-        (unless (and (stringp prefix) (string-match-p "\\`[0-9]+\\'" prefix))
-          (funcall orig-fn prefix)))
-      (advice-add 'company--good-prefix-p :around 'ora--company-good-prefix-p)
-
+      ;; 0-9 来选择补全
       (let ((map company-active-map))
         (mapc (lambda (x) (define-key map (format "%d" x) 'ora-company-number))
               (number-sequence 0 9))
@@ -119,6 +116,12 @@ In that case, insert the number."
         ;;                       (self-insert-command 1)))
         ;; (define-key map (kbd "<return>") nil)
         )
+
+      ;; 自定义前面的补全数字提示
+      ;; (defun ora--company-good-prefix-p (orig-fn prefix)
+      ;;   (unless (and (stringp prefix) (string-match-p "\\`[0-9]+\\'" prefix))
+      ;;     (funcall orig-fn prefix)))
+      ;; (advice-add 'company--good-prefix-p :around 'ora--company-good-prefix-p)
       ;; }}}
 
       ;; {{{
