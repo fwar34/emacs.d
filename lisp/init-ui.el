@@ -237,6 +237,8 @@
   :straight
   (:host github :repo "manateelazycat/awesome-tab")
   :config
+  (when (not (display-graphic-p))
+    (setq awesome-tab-display-icon nil))
   (setq awesome-tab-height 120)
   (awesome-tab-mode t)
   (with-eval-after-load 'evil
@@ -295,6 +297,11 @@
     (bind-key (kbd "L") 'centaur-tabs-forward evil-normal-state-map)))
 
 (load-theme 'sanityinc-tomorrow-eighties-mine t)
+
+;;
+(use-package all-the-icons
+  :ensure t
+  :if (display-graphic-p))
 
 (use-package emacs
   :ensure nil
