@@ -49,7 +49,7 @@ DEADLINE: <2022-08-22 Mon>
 ** business
 *** TODO [#B] 白板 AR 批注添加了发送结束组的通知到 bms 的接口 :publish@trunk:publish@dev:
 
-** bms [4/9]
+** bms [6/11]
 *** ONLINE bms 0x182 changeConfig 给66key补刀设置为2，大方模式触发 :publish@trunk:publish@dev:
 *** TEST [#B] 下周 bms 解析会议时长属性添加到 redis，tang-cache 添加获取时长接口, [[https://wiki.quanshi.com/pages/viewpage.action?pageId=66677328][wiki]] :publish@trunk:publish@dev:
 **** 9月14日 trunk 出包
@@ -68,16 +68,16 @@ DEADLINE: <2022-08-05 Fri 18:00> SCHEDULED: <2022-08-05 Fri>
 *** TODO [#B] 添加客户端自己获取 groupid 的接口(国华)
 *** TEST [#A] [[https://jira.quanshi.com/browse/YZBKHBUG-595][YZBKHBUG-595]] 修复多个线程本缓存的会议状态不一致的问题 :publish@trunk:publish@dev:
 **** 计划：9月19日出包 9月20上beta 9月23日上线
-*** TODO [#B] 大方会议请求录制时间处理了4ms，1000个消息就是4s，导致了 bms 消息降级
-**** 5s 改大
+*** TEST [#B] 大方会议请求录制时间处理了4ms，1000个消息就是4s，导致了 bms 消息降级 :publish@trunk:publish@dev:
+**** 5s 改大 -- 未作改动
 **** 本地缓存不拷贝，recored time，0xd1 change users role info，custom msg 使用新接口，可以查下其他的逻辑是否有这种循环的，都使用新接口，下一步其他的逻辑都使用新接口
-**** 添加 conferenceMan 查找、conference 查找 user、conference 批量更新接口，发给晋波 review
+**** 添加 conferenceMan 查找、conference 查找 user、conference 批量更新接口，本地查找不到的 conference 和 user 还是需要去 redis 加载，发给晋波 review
 
 ** libacctrans [0/1]
 *** TODO [#C] 下周给共享声音添加到 redis，同时添加一个信令让 mixer 切换后去查询或者下发给 mixer --召伟找我沟通的
 
-** videoserver [0/1]
-*** DOING [#B] 任玉宝蜜蜂说需要把6181和6182 id换成新的，换成6183 6184，[[https://jira.quanshi.com/browse/PLB-7903][PLB-7903]] :publish@dev:
+** videoserver [1/1]
+*** TEST [#B] 任玉宝蜜蜂说需要把6181和6182 id换成新的，换成6183 6184，[[https://jira.quanshi.com/browse/PLB-7903][PLB-7903]] :publish@trunk:publish@dev:
 
 ** tang-cache
 *** ONLINE 在 tang-cache 中预留一些 groupid，预留1000000 :publish@trunk:publish@dev:
