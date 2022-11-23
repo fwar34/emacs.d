@@ -91,3 +91,10 @@ DEADLINE: <2022-08-05 Fri 18:00> SCHEDULED: <2022-08-05 Fri>
 ** TODO [#C] [0%] 推下 audioserver 优化上线
 + [ ] merge trunk 和 dev 分支的 bug 到 feature 分支
 + [ ] merge feature 分支的一些优化 到 dev 分支
+
+  
+* TODO
++ bms 会议室需求
++ audioserver 加密会议
++ audiserver phoneinfo 中保存举手的兼容角色，和金一沟通是否需要重新定义一个新的信令，为以后扩容添加string字段
++ mqproxy 压测工具
