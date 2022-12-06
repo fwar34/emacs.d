@@ -95,6 +95,8 @@ DEADLINE: <2022-08-05 Fri 18:00> SCHEDULED: <2022-08-05 Fri>
   
 * TODO
 + bms 会议室需求
-+ audioserver 加密会议 可以使用md5对confid字符串进行加密，返回32长度字符串, 或者uuid减去'-'，但是这个要保存在会议信息中
-+ audiserver phoneinfo 中保存举手的兼容角色，和金一沟通是否需要重新定义一个新的信令，为以后扩容添加string字段
++ audioserver 加密会议 可以使用md5对confid字符串进行加密，返回32长度字符串, 或者 uuid 减去'-'，但是这个要保存在会议信息中
++ audiserver phoneinfo 中保存举手的兼容角色，和金一沟通是否需要重新定义一个新的信令，为以后扩容添加 string 字段
 + mqproxy 压测工具，trunk tang-mq 已经提交
++ mcuserver 切换：需要跟付玲玲确认下测试过程，再对照下代码看下逻辑，修改的话要 review
++ 后入会的参会人自动静音，12月完成，acm 使用 changeConfAttribute 来设置后续入会的电话用户自动静音(GuestAudioMode M: 静音，T：解除静音)
