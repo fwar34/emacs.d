@@ -100,3 +100,4 @@ DEADLINE: <2022-08-05 Fri 18:00> SCHEDULED: <2022-08-05 Fri>
 + mqproxy 压测工具，trunk tang-mq 已经提交
 + mcuserver 切换：需要跟付玲玲确认下测试过程，再对照下代码看下逻辑，修改的话要 review
 + 后入会的参会人自动静音，12月完成，acm 使用 changeConfAttribute 来设置后续入会的电话用户自动静音(GuestAudioMode M: 静音，T：解除静音)
+  会前全体静音的设置优先级大于此设置，mcu 和 主持人或者联席主持人外呼的电话不受此设置项控制
