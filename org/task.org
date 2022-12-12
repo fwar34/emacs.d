@@ -101,3 +101,5 @@ DEADLINE: <2022-08-05 Fri 18:00> SCHEDULED: <2022-08-05 Fri>
 + mcuserver 切换：需要跟付玲玲确认下测试过程，再对照下代码看下逻辑，修改的话要 review
 + 后入会的参会人自动静音，12月完成，acm 使用 changeConfAttribute 来设置后续入会的电话用户自动静音(GuestAudioMode M: 静音，T：解除静音)
   会前全体静音的设置优先级大于此设置，mcu 和 主持人或者联席主持人外呼的电话不受此设置项控制
++ cs、ss 和 rs 之间的心跳更新机制有问题，分了两张表，rs 的 setHeartbeat 判断 RedisKey.Service_Register_Info 中 cs、ss 存在的情况下才会更新心跳表 RedisKey.Service_Heartbeat
+  这里没有必要分两张表，计划合并成一张心跳表，cs ss 直接更新心跳表
