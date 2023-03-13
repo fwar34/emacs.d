@@ -225,39 +225,39 @@
 ;;   (org-mode . valign-mode)
 ;;   )
 
-(when (display-graphic-p)
-  (use-package ligature
-    :disabled
-    :ensure t
-    :straight
-    (:host github :repo "mickeynp/ligature.el")
-    :config
-    ;; (ligature-set-ligatures 'go-mode
-    ;;                         '("->" "->>" "<=" ">=" "!=" "<-" ":="))
-    ;; Enable the "www" ligature in every possible major mode
-    (ligature-set-ligatures 't '("www"))
-    ;; Enable traditional ligature support in eww-mode, if the
-    ;; `variable-pitch' face supports it
-    (ligature-set-ligatures 'eww-mode '("ff" "fi" "ffi"))
-    ;; Enable all Cascadia Code ligatures in programming modes
-					; (ligature-set-ligatures 'prog-mode '("|||>" "<|||" "<==>" "<!--" "####" "~~>" "***" "||=" "||>"
-					;                                      ":::" "::=" "=:=" "===" "==>" "=!=" "=>>" "=<<" "=/=" "!=="
-					;                                      "!!." ">=>" ">>=" ">>>" ">>-" ">->" "->>" "-->" "---" "-<<"
-					;                                      "<~~" "<~>" "<*>" "<||" "<|>" "<$>" "<==" "<=>" "<=<" "<->"
-					;                                      "<--" "<-<" "<<=" "<<-" "<<<" "<+>" "</>" "###" "#_(" "..<"
-					;                                      "..." "+++" "/==" "///" "_|_" "www" "&&" "^=" "~~" "~@" "~="
-					;                                      "~>" "~-" "**" "*>" "*/" "||" "|}" "|]" "|=" "|>" "|-" "{|"
-					;                                      "[|" "]#" "::" ":=" ":>" ":<" "$>" "==" "=>" "!=" "!!" ">:"
-					;                                      ">=" ">>" ">-" "-~" "-|" "->" "--" "-<" "<~" "<*" "<|" "<:"
-					;                                      "<$" "<=" "<>" "<-" "<<" "<+" "</" "#{" "#[" "#:" "#=" "#!"
-					;                                      "##" "#(" "#?" "#_" "%%" ".=" ".-" ".." ".?" "+>" "++" "?:"
-					;                                      "?=" "?." "??" ";;" "/*" "/=" "/>" "//" "__" "~~" "(*" "*)"
-					;                                      "\\\\" "://"))
-    ;; (ligature-set-ligatures 'prog-mode '("<=" ">=" "!=" "|=" "||" ":=" "->" "->>" "&&" ">>>" "<<<" "?:"))
-    (ligature-set-ligatures 'prog-mode '("<=" ">=" "!=" ":=" "&&" "->" "::" "<-"))
-    ;; Enables ligature checks globally in all buffers. You can also do it
-    ;; per mode with `ligature-mode'.
-    (global-ligature-mode t)))
+  ;; (use-package ligature
+  ;;   :disabled
+  ;;   :if (display-graphic-p)
+  ;;   :ensure t
+  ;;   :straight
+  ;;   (:host github :repo "mickeynp/ligature.el")
+  ;;   :config
+  ;;   ;; (ligature-set-ligatures 'go-mode
+  ;;   ;;                         '("->" "->>" "<=" ">=" "!=" "<-" ":="))
+  ;;   ;; Enable the "www" ligature in every possible major mode
+  ;;   (ligature-set-ligatures 't '("www"))
+  ;;   ;; Enable traditional ligature support in eww-mode, if the
+  ;;   ;; `variable-pitch' face supports it
+  ;;   (ligature-set-ligatures 'eww-mode '("ff" "fi" "ffi"))
+  ;;   ;; Enable all Cascadia Code ligatures in programming modes
+  ;;   				; (ligature-set-ligatures 'prog-mode '("|||>" "<|||" "<==>" "<!--" "####" "~~>" "***" "||=" "||>"
+  ;;   				;                                      ":::" "::=" "=:=" "===" "==>" "=!=" "=>>" "=<<" "=/=" "!=="
+  ;;   				;                                      "!!." ">=>" ">>=" ">>>" ">>-" ">->" "->>" "-->" "---" "-<<"
+  ;;   				;                                      "<~~" "<~>" "<*>" "<||" "<|>" "<$>" "<==" "<=>" "<=<" "<->"
+  ;;   				;                                      "<--" "<-<" "<<=" "<<-" "<<<" "<+>" "</>" "###" "#_(" "..<"
+  ;;   				;                                      "..." "+++" "/==" "///" "_|_" "www" "&&" "^=" "~~" "~@" "~="
+  ;;   				;                                      "~>" "~-" "**" "*>" "*/" "||" "|}" "|]" "|=" "|>" "|-" "{|"
+  ;;   				;                                      "[|" "]#" "::" ":=" ":>" ":<" "$>" "==" "=>" "!=" "!!" ">:"
+  ;;   				;                                      ">=" ">>" ">-" "-~" "-|" "->" "--" "-<" "<~" "<*" "<|" "<:"
+  ;;   				;                                      "<$" "<=" "<>" "<-" "<<" "<+" "</" "#{" "#[" "#:" "#=" "#!"
+  ;;   				;                                      "##" "#(" "#?" "#_" "%%" ".=" ".-" ".." ".?" "+>" "++" "?:"
+  ;;   				;                                      "?=" "?." "??" ";;" "/*" "/=" "/>" "//" "__" "~~" "(*" "*)"
+  ;;   				;                                      "\\\\" "://"))
+  ;;   ;; (ligature-set-ligatures 'prog-mode '("<=" ">=" "!=" "|=" "||" ":=" "->" "->>" "&&" ">>>" "<<<" "?:"))
+  ;;   (ligature-set-ligatures 'prog-mode '("<=" ">=" "!=" ":=" "&&" "->" "::" "<-"))
+  ;;   ;; Enables ligature checks globally in all buffers. You can also do it
+  ;;   ;; per mode with `ligature-mode'.
+  ;;   (global-ligature-mode t))
 
 (provide 'init-fonts)
 ;;; init-fonts.el ends here
