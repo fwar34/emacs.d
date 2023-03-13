@@ -239,7 +239,7 @@
   :config
   (when (not (display-graphic-p))
     (setq awesome-tab-display-icon nil))
-  (setq awesome-tab-height 120)
+  (setq awesome-tab-height 140)
   (awesome-tab-mode t)
   (with-eval-after-load 'evil
     (bind-key (kbd "H") 'awesome-tab-backward-tab evil-normal-state-map)

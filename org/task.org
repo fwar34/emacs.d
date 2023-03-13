@@ -49,7 +49,7 @@ DEADLINE: <2022-08-22 Mon>
 ** business
 *** TODO [#B] 白板 AR 批注添加了发送结束组的通知到 bms 的接口 :publish@trunk:publish@dev:
 
-** bms [4/9]
+** bms [6/11]
 *** ONLINE bms 0x182 changeConfig 给66key补刀设置为2，大方模式触发 :publish@trunk:publish@dev:
 *** TEST [#B] 下周 bms 解析会议时长属性添加到 redis，tang-cache 添加获取时长接口, [[https://wiki.quanshi.com/pages/viewpage.action?pageId=66677328][wiki]] :publish@trunk:publish@dev:
 **** 9月14日 trunk 出包
@@ -68,16 +68,16 @@ DEADLINE: <2022-08-05 Fri 18:00> SCHEDULED: <2022-08-05 Fri>
 *** TODO [#B] 添加客户端自己获取 groupid 的接口(国华)
 *** TEST [#A] [[https://jira.quanshi.com/browse/YZBKHBUG-595][YZBKHBUG-595]] 修复多个线程本缓存的会议状态不一致的问题 :publish@trunk:publish@dev:
 **** 计划：9月19日出包 9月20上beta 9月23日上线
-*** TODO [#B] 大方会议请求录制时间处理了4ms，1000个消息就是4s，导致了 bms 消息降级
-**** 5s 改大
+*** TEST [#B] 大方会议请求录制时间处理了4ms，1000个消息就是4s，导致了 bms 消息降级 :publish@trunk:publish@dev:
+**** 5s 改大 -- 未作改动
 **** 本地缓存不拷贝，recored time，0xd1 change users role info，custom msg 使用新接口，可以查下其他的逻辑是否有这种循环的，都使用新接口，下一步其他的逻辑都使用新接口
-**** 添加 conferenceMan 查找、conference 查找 user、conference 批量更新接口，发给晋波 review
+**** 添加 conferenceMan 查找、conference 查找 user、conference 批量更新接口，本地查找不到的 conference 和 user 还是需要去 redis 加载，发给晋波 review
 
 ** libacctrans [0/1]
 *** TODO [#C] 下周给共享声音添加到 redis，同时添加一个信令让 mixer 切换后去查询或者下发给 mixer --召伟找我沟通的
 
-** videoserver [0/1]
-*** DOING [#B] 任玉宝蜜蜂说需要把6181和6182 id换成新的，换成6183 6184，[[https://jira.quanshi.com/browse/PLB-7903][PLB-7903]] :publish@dev:
+** videoserver [1/1]
+*** TEST [#B] 任玉宝蜜蜂说需要把6181和6182 id换成新的，换成6183 6184，[[https://jira.quanshi.com/browse/PLB-7903][PLB-7903]] :publish@trunk:publish@dev:
 
 ** tang-cache
 *** ONLINE 在 tang-cache 中预留一些 groupid，预留1000000 :publish@trunk:publish@dev:
@@ -91,3 +91,15 @@ DEADLINE: <2022-08-05 Fri 18:00> SCHEDULED: <2022-08-05 Fri>
 ** TODO [#C] [0%] 推下 audioserver 优化上线
 + [ ] merge trunk 和 dev 分支的 bug 到 feature 分支
 + [ ] merge feature 分支的一些优化 到 dev 分支
+
+  
+* TODO
++ bms 会议室需求
++ audioserver 加密会议 可以使用md5对confid字符串进行加密，返回32长度字符串, 或者 uuid 减去'-'，但是这个要保存在会议信息中
++ audiserver phoneinfo 中保存举手的兼容角色，和金一沟通是否需要重新定义一个新的信令，为以后扩容添加 string 字段
++ mqproxy 压测工具，trunk tang-mq 已经提交
++ mcuserver 切换：需要跟付玲玲确认下测试过程，再对照下代码看下逻辑，修改的话要 review
++ 后入会的参会人自动静音，12月完成，acm 使用 changeConfAttribute 来设置后续入会的电话用户自动静音(GuestAudioMode M: 静音，T：解除静音)
+  会前全体静音的设置优先级大于此设置，mcu 和 主持人或者联席主持人外呼的电话不受此设置项控制
++ cs、ss 和 rs 之间的心跳更新机制有问题，分了两张表，rs 的 setHeartbeat 判断 RedisKey.Service_Register_Info 中 cs、ss 存在的情况下才会更新心跳表 RedisKey.Service_Heartbeat,
+  但是如果 redis 重启后，RedisKey.Service_Register_Info 中就没有 cs、ss 了，更新心跳就会失败, 这里没有必要分两张表，计划合并成一张心跳表，cs ss 直接更新心跳表

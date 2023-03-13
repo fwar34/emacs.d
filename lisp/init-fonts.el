@@ -58,6 +58,16 @@
                          (setq english-font "Iosevka Curly Slab"
                                english-font-size 25
                                chinese-font-size 26)))))
+
+        ;; -----------------------------------------------------------------------------
+        ;; 我的笔记本 archlinux
+        ("ARCHLINUX-DELL"
+         (pcase system-type
+           ('gnu/linux (when (member "Sarasa Mono SC Nerd" font-list)
+                         (setq english-font "Sarasa Mono SC Nerd"
+                               english-font-size 23
+                               chinese-font "Sarasa Mono SC Nerd"
+                               chinese-font-size 23)))))
         ;; -----------------------------------------------------------------------------
         ;; 我的台式机
         ("DESKTOP-VJNEKGA"
