@@ -397,7 +397,8 @@ DEFAULT-TEXT."
     (unless (bound-and-true-p god-local-mode)
       (set-face-background 'mode-line (if (display-graphic-p) "gray26" "black"))))
   )
-(add-hook 'post-command-hook 'my-show-wgrep-or-wdired-state)
+;; TODO 需要重新设置
+;; (add-hook 'post-command-hook 'my-show-wgrep-or-wdired-state)
 ;; }}
 
 (provide 'init-my-modeline)
