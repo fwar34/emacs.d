@@ -103,3 +103,20 @@ DEADLINE: <2022-08-05 Fri 18:00> SCHEDULED: <2022-08-05 Fri>
   会前全体静音的设置优先级大于此设置，mcu 和 主持人或者联席主持人外呼的电话不受此设置项控制
 + cs、ss 和 rs 之间的心跳更新机制有问题，分了两张表，rs 的 setHeartbeat 判断 RedisKey.Service_Register_Info 中 cs、ss 存在的情况下才会更新心跳表 RedisKey.Service_Heartbeat,
   但是如果 redis 重启后，RedisKey.Service_Register_Info 中就没有 cs、ss 了，更新心跳就会失败, 这里没有必要分两张表，计划合并成一张心跳表，cs ss 直接更新心跳表
++ 看下 rs 分配 cs ss 逻辑
++ 支持电话用户的角色，已经有现成的字段和信令来支持，需要注意的就是 acm 和 应用端的角色的对应关系
++ 跟秦菲和志新讨论下监控的角色定义，audioserver 直接透传，在监控端也有直接外呼接口，通知到 audioserver 应该是已经转换过后的角色了(即 audioserver 跟客户端之间定义的新角色)
++ 自动静音后入会的参会人排除主持人等
++ 
++ 用户掉线补发组销毁消息给 bms done
++ 电话用户改名不支持国际号码的修复 done
++ bms 修复 leader 发了结束会议的时候又有用户入会导致的用户入会后会议被结束
+
+* TODO
++ 新的会议分组需求
+  + 分组的打开和关闭需要做处理（bms通知audioserver audioserver通知cdts等）
+  + bms 给用户身上添加分组的标志
+  + 在3月的任务中添加分组的wiki
+  + 对现有逻辑的影响，测试的覆盖范围
+  
++ 将不听某人说话的配置修改成响应信号的，不用重启
