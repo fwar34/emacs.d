@@ -62,28 +62,6 @@ DEFAULT-TEXT."
         ;; (message "ELSE................")
         (set-face-background 'mode-line (if (display-graphic-p) "gray26" "black"))))))
 
-(defun fwar34/evil-state ()
-  "Display evil state in differente color"
-  '(:eval
-    (when (bound-and-true-p evil-local-mode)
-      (cond
-       ;; ((equal 'normal evil-state) (propertize evil-mode-line-tag 'face 'spaceline-evil-normal))
-       ;; ((equal 'insert evil-state) (propertize evil-mode-line-tag 'face 'spaceline-evil-insert))
-       ;; ((equal 'emacs evil-state) (propertize evil-mode-line-tag 'face 'spaceline-evil-emacs))
-       ;; ((equal 'replace evil-state) (propertize evil-mode-line-tag 'face 'spaceline-evil-replace))
-       ;; ((equal 'visual evil-state) (propertize evil-mode-line-tag 'face 'spaceline-evil-visual))
-       ;; ((equal 'motion evil-state) (propertize evil-mode-line-tag 'face 'spaceline-evil-motion))
-       ;; ((equal 'operator evil-state) (propertize evil-mode-line-tag 'face 'spaceline-modified))
-       ((equal 'normal evil-state) (propertize evil-mode-line-tag 'face 'fwar34/spaceline-evil-normal))
-       ((equal 'insert evil-state) (propertize evil-mode-line-tag 'face 'fwar34/spaceline-evil-insert))
-       ((equal 'emacs evil-state) (propertize evil-mode-line-tag 'face 'fwar34/spaceline-evil-emacs))
-       ((equal 'replace evil-state) (propertize evil-mode-line-tag 'face 'fwar34/spaceline-evil-replace))
-       ((equal 'visual evil-state) (propertize evil-mode-line-tag 'face 'fwar34/spaceline-evil-visual))
-       ((equal 'motion evil-state) (propertize evil-mode-line-tag 'face 'fwar34/spaceline-evil-motion))
-       ((equal 'operator evil-state) (propertize evil-mode-line-tag 'face 'fwar34/spaceline-modified))
-       (t nil)))))
-
-
 (defun fwar34/meow-state ()
   "Display evil state in differente color"
   '(:eval
@@ -366,7 +344,7 @@ DEFAULT-TEXT."
        ;; " "
        ;; '(:eval (zilongshanren/display-mode-indent-width))
        ;; projectile-mode-line
-       ;; " "
+       " "
        my-selection-info
        " "
        (zilong/modeline--evil-substitute)
