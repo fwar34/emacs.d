@@ -96,7 +96,7 @@
       (flycheck-emacs-lisp-load-path 'inherit)
       (flycheck-indication-mode 'right-fringe))
     (flycheck-mode)))
-(add-hook 'pre-command-hook #'my-flycheck-evil-insert-state-entry-hook-setup2)
+; (add-hook 'pre-command-hook #'my-flycheck-evil-insert-state-entry-hook-setup2)
 
 (use-package god-mode
   :functions

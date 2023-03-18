@@ -28,7 +28,7 @@
 ;; |----------+-----------+-----------------------+-----------------|
 ;;-------------------------------------------------------------
 (use-package hydra
-  :after evil
+  ; :after evil
   :ensure t
   :init
   (define-prefix-command 'M-u-map)
@@ -54,7 +54,7 @@
     ("k" previous-line)
     ("m" set-mark-command "mark")
     ;; ("a" move-beginning-of-line "beg")
-    ("a" evil-first-non-blank "beg")
+    ; ("a" evil-first-non-blank "beg")
     ("e" move-end-of-line "end")
     ("d" delete-region "del" :color blue)
     ("y" kill-ring-save "yank" :color blue)
@@ -155,7 +155,8 @@
       ("d" org-schedule :exit t)
       ("q" nil))
     (define-key org-mode-map (kbd "M-u or") 'hydra-org/body)
-    (evil-define-key 'normal org-mode-map (kbd "M-u C-o C-r") 'hydra-org/body))
+    ; (evil-define-key 'normal org-mode-map (kbd "M-u C-o C-r") 'hydra-org/body)
+    )
 
   ;;-------------------------------------------------------------
   ;; fwar34
@@ -231,7 +232,8 @@
       ("q" nil))
     ;; (global-set-key (kbd "M-u ap") 'hydra-apropos/body)
     (define-key apropos-mode-map (kbd "M-u ap") 'hydra-apropos/body)
-    (evil-define-key 'normal apropos-mode-map "M-u C-a C-p" 'hydra-apropos/body))
+    ; (evil-define-key 'normal apropos-mode-map "M-u C-a C-p" 'hydra-apropos/body)
+    )
 
   ;;-------------------------------------------------------------
   ;; ivy and swiper
@@ -307,7 +309,8 @@
       ("q" (message "Abort") :exit t)
       ("v" nil))
       (define-key org-agenda-mode-map (kbd "M-u ad") 'hydra-org-agenda-view/body)
-      (evil-define-key 'normal org-agenda-mode-map (kbd "M-u C-a C-d") 'hydra-org-agenda-view/body))
+      ; (evil-define-key 'normal org-agenda-mode-map (kbd "M-u C-a C-d") 'hydra-org-agenda-view/body)
+      )
 
   ;;-------------------------------------------------------------
   ;; pyim
@@ -329,7 +332,8 @@
       ;;这里是给像vim的/和?(evil-search-forward和evil-search-backward)搜索切换输入法添加快捷键
       ;; 上面两个搜索内部使用的是isearch相关的函数
     (define-key isearch-mode-map (kbd "M-u py") 'hydra-pyim/body)
-    (evil-define-key 'normal isearch-mode-map (kbd "M-u C-p C-y") 'hydra-pyim/body))
+    ; (evil-define-key 'normal isearch-mode-map (kbd "M-u C-p C-y") 'hydra-pyim/body)
+    )
   ;; (add-hook 'isearch-mode-hook '(lambda ()
   ;;                                  (local-set-key (kbd "M-u py") 'hydra-pyim/body)))
   ;; (define-key evil-motion-state-map (kbd "M-u py") 'hydra-pyim/body)
@@ -347,7 +351,8 @@
       ("sl" isearch-yank-line)
       ("q" nil "cancale" :color blue))
       (define-key isearch-mode-map (kbd "M-u is") 'hydra-isearch/body)
-      (evil-define-key 'normal isearch-mode-map (kbd "M-u C-i C-s") 'hydra-isearch/body))
+      ; (evil-define-key 'normal isearch-mode-map (kbd "M-u C-i C-s") 'hydra-isearch/body)
+      )
 
   ;;-------------------------------------------------------------
   ;; jump to error
@@ -371,7 +376,8 @@
       ("q" nil "cancel" :exit t :column nil))
     ;; (global-set-key (kbd "M-u li") 'hydra-lispyville/body)
     (define-key lispyville-mode-map (kbd "M-u li") 'hydra-lispyville/body)
-    (evil-define-key 'normal lispyville-mode-map (kbd "M-u C-l C-i") 'hydra-lispyville/body))
+    ; (evil-define-key 'normal lispyville-mode-map (kbd "M-u C-l C-i") 'hydra-lispyville/body)
+    )
   
   ;;-------------------------------------------------------------
   ;; dired
@@ -383,7 +389,8 @@
       ("ha" dired-hide-all "hide all subdirectories, leaving only their header lines.")
       ("q" nil "cancel" :exit t :column nil))
     (define-key dired-mode-map (kbd "M-u dj") 'hydra-dired/body)
-    (evil-define-key 'normal dired-mode-map (kbd "M-u C-d C-j") 'hydra-dired/body))
+    ; (evil-define-key 'normal dired-mode-map (kbd "M-u C-d C-j") 'hydra-dired/body)
+    )
 
   ;;-------------------------------------------------------------
   ;; magit
@@ -417,7 +424,8 @@
       ("q" nil "cancel" :exit t :column nil))
     ;; (global-set-key (kbd "M-u if") 'hydra-info/body)
     (define-key Info-mode-map (kbd "M-u if") 'hydra-info/body)
-    (evil-define-key 'normal Info-mode-map (kbd "M-u C-i C-f") 'hydra-info/body))
+    ; (evil-define-key 'normal Info-mode-map (kbd "M-u C-i C-f") 'hydra-info/body)
+    )
 
   ;;-------------------------------------------------------------
   ;; font settings

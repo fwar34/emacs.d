@@ -44,7 +44,7 @@
   ("C-c C-s" . rg-menu)
   :config
   ;; (rg-enable-menu)
-  (add-hook 'rg-mode-hook (lambda () (evil-set-initial-state 'rg-mode 'emacs)))
+  ; (add-hook 'rg-mode-hook (lambda () (evil-set-initial-state 'rg-mode 'emacs)))
 
   (general-define-key
    :states 'emacs
@@ -52,7 +52,8 @@
    :prefix ","
    :keymaps 'rg-mode-map
    "," 'self-insert-command
-   "gs" 'evil-avy-goto-char))
+   ; "gs" 'evil-avy-goto-char
+   ))
 
 (use-package xclip
   :disabled
@@ -71,11 +72,12 @@
   :if (and (display-graphic-p) (string-equal "FL-NOTEBOOK" (upcase (system-name))))
   :config
   (global-disable-mouse-mode)
-  (mapc 'disable-mouse-in-keymap
-	(list evil-motion-state-map
-	      evil-normal-state-map
-	      evil-visual-state-map
-	      evil-insert-state-map)))
+  ; (mapc 'disable-mouse-in-keymap
+  ;   (list evil-motion-state-map
+  ;         evil-normal-state-map
+  ;         evil-visual-state-map
+  ;         evil-insert-state-map))
+  )
 
 (use-package fzf
   :unless (equal system-type 'windows-nt)

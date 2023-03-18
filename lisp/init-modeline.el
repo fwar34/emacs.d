@@ -68,7 +68,7 @@
   ;; When nil, winum-mode will not display window numbers in the mode-line.
   ;; You might want this to be nil if you use a package that already manages window numbers in the mode-line.
   (setq winum-auto-setup-mode-line nil)
-  (setq spaceline-highlight-face-func 'spaceline-highlight-face-evil-state)
+  ; (setq spaceline-highlight-face-func 'spaceline-highlight-face-evil-state)
   ;; (spaceline-spacemacs-theme))
   (spaceline-emacs-theme))
 

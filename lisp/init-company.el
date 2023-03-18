@@ -9,7 +9,7 @@
   ;; (company-minimum-prefix-length 1)
   :bind
   (:map company-active-map
-        ("C-w" . evil-delete-backward-word)
+        ; ("C-w" . evil-delete-backward-word)
         ("C-u" . company-previous-page)
         ("C-d" . company-next-page)
         ("C-j" . company-filter-candidates)
@@ -132,13 +132,13 @@ In that case, insert the number."
   )
 
   (with-eval-after-load 'company
-    (if (fboundp 'evil-declare-change-repeat)
-        (mapc 'evil-declare-change-repeat
-              '(company-complete-common
-                company-select-next
-                company-select-previous
-                company-complete-selection
-                company-complete-number)))
+    ;; (if (fboundp 'evil-declare-change-repeat)
+    ;;     (mapc 'evil-declare-change-repeat
+    ;;           '(company-complete-common
+    ;;             company-select-next
+    ;;             company-select-previous
+    ;;             company-complete-selection
+    ;;             company-complete-number)))
     ;; 使用 c-n/c-p 来选择 company 的候选补全项
     (define-key company-active-map (kbd "M-n") nil)
     (define-key company-active-map (kbd "M-p") nil)

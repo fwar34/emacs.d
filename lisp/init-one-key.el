@@ -7,8 +7,8 @@
   :config
   (setq one-key-menu-test-alist
         '(
-          (("n" . "evil normal state") . evil-normal-state)
-          (("i" . "evil insert state") . evil-insert-state)
+          ; (("n" . "evil normal state") . evil-normal-state)
+          ; (("i" . "evil insert state") . evil-insert-state)
           ))
   (defun one-key-menu-test ()
     "The `one-key' menu for TEST."

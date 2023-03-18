@@ -37,8 +37,8 @@
   ;; (defadvice youdao-dictionary-search-at-point (after advice-youdao-point activate)
   ;;   (with-current-buffer "*Youdao Dictionary*"
   ;;     (evil-local-set-key 'normal (kbd "q") 'quit-window)))
-  (with-eval-after-load 'evil
-    (evil-define-key 'normal youdao-dictionary-mode-map "q" 'kill-buffer-and-window))
+  ;; (with-eval-after-load 'evil
+  ;;   (evil-define-key 'normal youdao-dictionary-mode-map "q" 'kill-buffer-and-window))
   ;; (add-hook 'youdao-dictionary-mode-hook (lambda () (interactive) (evil-local-set-key 'normal "q" #'kill-buffer-and-window)))
   ;; (add-hook 'youdao-dictionary-mode-hook
   ;;           (lambda ()

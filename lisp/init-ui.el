@@ -138,7 +138,7 @@
 ;; rainbow-mode
 (use-package rainbow-mode
   :disabled
-  :after evil
+  ; :after evil
   :config
   (rainbow-mode 1))
 
@@ -241,9 +241,9 @@
     (setq awesome-tab-display-icon nil))
   (setq awesome-tab-height 140)
   (awesome-tab-mode t)
-  (with-eval-after-load 'evil
-    (bind-key (kbd "H") 'awesome-tab-backward-tab evil-normal-state-map)
-    (bind-key (kbd "L") 'awesome-tab-forward-tab evil-normal-state-map))
+  ; (with-eval-after-load 'evil
+  ;   (bind-key (kbd "H") 'awesome-tab-backward-tab evil-normal-state-map)
+  ;   (bind-key (kbd "L") 'awesome-tab-forward-tab evil-normal-state-map))
 
   (setq awesome-tab-terminal-dark-select-background-color "color-237")
   (setq awesome-tab-terminal-dark-select-foreground-color "brightred")
@@ -292,9 +292,10 @@
   ;; correctly you must add the following line:
   (setq x-underline-at-dewscent-line t)
 
-  (with-eval-after-load 'evil
-    (bind-key (kbd "H") 'centaur-tabs-backward evil-normal-state-map)
-    (bind-key (kbd "L") 'centaur-tabs-forward evil-normal-state-map)))
+  ; (with-eval-after-load 'evil
+  ;   (bind-key (kbd "H") 'centaur-tabs-backward evil-normal-state-map)
+  ;   (bind-key (kbd "L") 'centaur-tabs-forward evil-normal-state-map))
+  )
 
 (load-theme 'sanityinc-tomorrow-eighties-mine t)
 

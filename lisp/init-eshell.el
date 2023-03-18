@@ -48,7 +48,7 @@
   (evil-define-key 'insert eshell-mode-map ";g" 'evil-normal-state)
   (evil-define-key 'insert eshell-mode-map ";;" 'self-insert-command)
   (evil-define-key 'insert eshell-mode-map (kbd "TAB") 'completion-at-point))
-(add-hook 'eshell-first-time-mode-hook 'my/eshell-init-keymap)
+; (add-hook 'eshell-first-time-mode-hook 'my/eshell-init-keymap)
 
 (use-package eshell
   :ensure nil

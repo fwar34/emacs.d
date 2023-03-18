@@ -3,7 +3,7 @@
 
 ;;; Code:
 
-(require 'evil)
+; (require 'evil)
 
 (defun my-async-task ()
   "Async exec my tasks."
@@ -162,7 +162,8 @@ want to use in the modeline *in lieu of* the original.")
   "open recent file, then set state normal"
   (interactive)
   (recentf-open-files)
-  (evil-normal-state))
+  ; (evil-normal-state)
+  )
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; http://blog.binchen.org/index-21.html, Use ivy to open recent directories
@@ -293,9 +294,9 @@ URL `http://ergoemacs.org/emacs/elisp_run_current_file.html'"
     (message yank-content)))
 
 ;; evil-yank (beg end type register yank-handler)
-(defun test-evil-set-register (&rest _)
-  (message (get-register ?0))
-  (highlight-regexp (substring-no-properties (get-register ?0)) (facep 'hl-yellow)))
+; (defun test-evil-set-register (&rest _)
+  ; (message (get-register ?0))
+  ; (highlight-regexp (substring-no-properties (get-register ?0)) (facep 'hl-yellow)))
 
 ;; (advice-add 'evil-set-register :after 'test-evil-set-register)
 
@@ -367,7 +368,7 @@ URL `http://ergoemacs.org/emacs/elisp_run_current_file.html'"
 
     (beginning-of-defun)
     (setq begin (point))
-    (evil-end-of-line)
+    ; (evil-end-of-line)
     (setq end (point))
     (setq end-char (buffer-substring-no-properties end (+ 1 end)))
     ;; 去除每行末尾的空字符
@@ -382,8 +383,8 @@ URL `http://ergoemacs.org/emacs/elisp_run_current_file.html'"
           (message (buffer-substring begin (+ 1 end)))
           (progn
             (while (not (string= end-char ")"))
-              (evil-next-line)
-              (evil-end-of-line)
+              ; (evil-next-line)
+              ; (evil-end-of-line)
               (setq end (point))
               (setq end-char (buffer-substring-no-properties end (+ 1 end))))
             ;; (message (buffer-substring-no-properties begin end)))
@@ -402,8 +403,8 @@ URL `http://ergoemacs.org/emacs/elisp_run_current_file.html'"
   (interactive)
   (switch-to-buffer (get-buffer-create "*command-output*"))
   (erase-buffer)
-  (with-current-buffer "*command-output*"
-    (evil-local-set-key 'normal (kbd "q") 'evil-buffer))
+  ; (with-current-buffer "*command-output*"
+  ;   (evil-local-set-key 'normal (kbd "q") 'evil-buffer))
       ;; (start-process "my-make" "*make-output*" "make")
       (apply 'start-process "mycommands" "*command-output*" program program-args)
   (goto-char (point-max)))
@@ -412,8 +413,8 @@ URL `http://ergoemacs.org/emacs/elisp_run_current_file.html'"
   (interactive)
   (switch-to-buffer (get-buffer-create "*command-output*"))
   (erase-buffer)
-  (with-current-buffer "*command-output*"
-    (evil-local-set-key 'normal (kbd "q") 'evil-buffer))
+  ; (with-current-buffer "*command-output*"
+  ;   (evil-local-set-key 'normal (kbd "q") 'evil-buffer))
       ;; (start-process "my-make" "*make-output*" "make")
       (start-process-shell-command "mycommands" "*command-output*" command)
   (goto-char (point-max)))
@@ -423,8 +424,8 @@ URL `http://ergoemacs.org/emacs/elisp_run_current_file.html'"
     (start-process-shell-command "mycommands" "*command-output*" command)
     (switch-to-buffer (get-buffer-create "*command-output*"))
     (erase-buffer)
-    (with-current-buffer "*command-output*"
-      (evil-local-set-key 'normal (kbd "q") 'evil-buffer))
+    ; (with-current-buffer "*command-output*"
+    ;   (evil-local-set-key 'normal (kbd "q") 'evil-buffer))
     ;; (start-process "my-make" "*make-output*" "make")
     (goto-char (point-max))))
 
@@ -591,16 +592,16 @@ URL `http://ergoemacs.org/emacs/elisp_run_current_file.html'"
           (message
            (cond
             ((string-equal output-radix "2")
-             (evil-set-register ?\" (my-convert-use-calculator number))
+             ; (evil-set-register ?\" (my-convert-use-calculator number))
              (format "convert %s to bin => %s" arg (my-convert-use-calculator number)))
             ((string-equal output-radix "8")
-             (evil-set-register ?\" (format "%#o" number))
+             ; (evil-set-register ?\" (format "%#o" number))
              (format "convert decimal %s to octal => %#o" arg number))
             ((string-equal output-radix "10")
-             (evil-set-register ?\" (format "%#d" number))
+             ; (evil-set-register ?\" (format "%#d" number))
              (format "convert %s to decimal => %#d" arg number))
             ((string-equal output-radix "16")
-             (evil-set-register ?\" (format "%X" number))
+             ; (evil-set-register ?\" (format "%X" number))
              (format "convert %s to hex => %X" arg number))
             (t
              "not convert")
@@ -613,11 +614,11 @@ URL `http://ergoemacs.org/emacs/elisp_run_current_file.html'"
    (if output-radix
        ;; output to hex
        (let ((number (string-to-number arg)))
-         (evil-set-register ?\" (format "%X" number))
+         ; (evil-set-register ?\" (format "%X" number))
          (format "convert %s to hex => 0x%X" arg number))
      ;; output to deci
      (let ((number (string-to-number arg 16)))
-       (evil-set-register ?\" (format "%#d" number))
+       ; (evil-set-register ?\" (format "%#d" number))
        (format "convert 0x%s to decimal => %#d" arg number)))))
 
 (defun my-convert-radix-hex (arg)
@@ -680,7 +681,7 @@ URL `http://ergoemacs.org/emacs/elisp_run_current_file.html'"
 (defun my-kill-line ()
   "Kill line."
   (interactive)
-  (evil-first-non-blank)
+  ; (evil-first-non-blank)
   (kill-line))
 
 (defun my-set-frame ()

@@ -54,7 +54,8 @@
 
 (use-package general
   :config
-  (general-evil-setup t))
+  ;; (general-evil-setup t)
+  )
 
 ;; install manually
 ;; C-x C-f ~/gnu-elpa-keyring-update-2019.3.tar

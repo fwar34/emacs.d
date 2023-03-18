@@ -108,7 +108,7 @@
 ;; -----------------------------------------------------------------
 (use-package recentf
   :ensure nil
-  :after evil
+  ; :after evil
   :config
   (recentf-mode 1)
   ;; 补充一下，recentf 展示时，可以对文件名预处理，比如把家目录替换为 ~
@@ -258,8 +258,8 @@
 (add-hook 'emacs-lisp-mode-hook (lambda () (modify-syntax-entry ?- "w")))
 (add-hook 'help-mode-hook (lambda ()
                             (modify-syntax-entry ?- "w")
-                            (when (equal system-type 'windows-nt)
-                              (evil-local-set-key 'normal "q" #'kill-buffer-and-window))
+                            ; (when (equal system-type 'windows-nt)
+                            ;   (evil-local-set-key 'normal "q" #'kill-buffer-and-window))
                             (when (buffer-live-p (get-buffer "*Help*"))
                               (switch-to-buffer-other-window "*Help*"))))
 
@@ -316,12 +316,12 @@
 
 (use-package diff
   :ensure nil
-  :after evil
+  ; :after evil
   :config
-  (with-eval-after-load 'evil
-    (evil-define-key 'normal diff-mode-map "q" 'kill-this-buffer)
-    (evil-define-key 'normal help-mode-map "q" 'kill-buffer-and-window)
-    (evil-define-key 'motion apropos-mode-map "q" 'kill-buffer-and-window))
+  ; (with-eval-after-load 'evil
+  ;   (evil-define-key 'normal diff-mode-map "q" 'kill-this-buffer)
+  ;   (evil-define-key 'normal help-mode-map "q" 'kill-buffer-and-window)
+  ;   (evil-define-key 'motion apropos-mode-map "q" 'kill-buffer-and-window))
   ;; create a thread to auto focus on *apropos* window
   (if (fboundp 'make-thread)
       (add-hook 'apropos-mode-hook (lambda ()

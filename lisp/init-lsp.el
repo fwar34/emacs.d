@@ -139,10 +139,11 @@
     (lsp-ui-sideline-show-diagnostics t)
     :config
 
-    (evil-define-key 'normal go-mode-map "K" 'lsp-ui-doc-glance)
+    ; (evil-define-key 'normal go-mode-map "K" 'lsp-ui-doc-glance)
     ;; (evil-define-key 'normal go-mode-map "K" 'lsp-ui-doc-show)
-    (evil-define-key 'normal lsp-ui-doc-frame-mode-map "H" 'lsp-ui-doc-unfocus-frame)
-    (evil-define-key 'normal lsp-ui-doc-frame-mode-map "q" 'lsp-ui-doc-hide))
+    ; (evil-define-key 'normal lsp-ui-doc-frame-mode-map "H" 'lsp-ui-doc-unfocus-frame)
+    ; (evil-define-key 'normal lsp-ui-doc-frame-mode-map "q" 'lsp-ui-doc-hide)
+    )
 
   ;; if you are ivy user
   (use-package lsp-ivy

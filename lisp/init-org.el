@@ -79,16 +79,16 @@
   :config
   (org-bullets-mode 1))
 
-(use-package evil-org
-  ;; https://github.com/Somelauw/evil-org-mode/blob/master/doc/keythemes.org
-  :hook
-  (org-mode . evil-org-mode)
-  :config
-  (evil-org-set-key-theme '(textobjects insert navigation additional shift todo heading return))
-  ;; If you want < and > to promote / demote headings and items on a single press, add the following to your org setup:
-  (evil-define-key 'normal evil-org-mode-map
-    (kbd ">") 'org-meta-right
-    (kbd "<") 'org-meta-left))
+; (use-package evil-org
+;   ;; https://github.com/Somelauw/evil-org-mode/blob/master/doc/keythemes.org
+;   :hook
+;   (org-mode . evil-org-mode)
+;   :config
+;   (evil-org-set-key-theme '(textobjects insert navigation additional shift todo heading return))
+;   ;; If you want < and > to promote / demote headings and items on a single press, add the following to your org setup:
+;   (evil-define-key 'normal evil-org-mode-map
+;     (kbd ">") 'org-meta-right
+;     (kbd "<") 'org-meta-left))
 
 ;; 在 wslg 下面不停的弹出新的 emacs 进程
 ;; org-pomodoro setting

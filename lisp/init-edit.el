@@ -35,11 +35,11 @@
            :jump t
            :keymaps 'wgrep-mode-map
            "," #'my-hydra-wgrep/body)
-  :preface
-  (defun my-ivy-occur-mode-hook-setup ()
-    (evil-local-set-key 'normal (kbd ",") #'my-hydra-wgrep/body))
+  ; :preface
+  ; (defun my-ivy-occur-mode-hook-setup ()
+    ; (evil-local-set-key 'normal (kbd ",") #'my-hydra-wgrep/body))
   :config
-  (add-hook 'ivy-occur-grep-mode-hook #'my-ivy-occur-mode-hook-setup))
+  ; (add-hook 'ivy-occur-grep-mode-hook #'my-ivy-occur-mode-hook-setup))
 
 (defun my-evil-insert-state-entry-hook-setup2 ()
   "Enable some packages in evil-state-entry-hook."
@@ -54,7 +54,7 @@
         :after yasnippet
         :config
         (setq ivy-yasnippet-expand-keys nil)))))
-(add-hook 'evil-insert-state-entry-hook #'my-evil-insert-state-entry-hook-setup2)
+; (add-hook 'evil-insert-state-entry-hook #'my-evil-insert-state-entry-hook-setup2)
 
 (use-package fix-word
   :commands
@@ -66,9 +66,10 @@
   :commands
   browse-kill-ring
   :config
-  (with-eval-after-load 'evil
-    (evil-define-key 'normal browse-kill-ring-mode-map "q" 'browse-kill-ring-quit)
-    (evil-define-key 'normal browse-kill-ring-mode-map (kbd "RET") 'browse-kill-ring-insert-and-quit)))
+  ; (with-eval-after-load 'evil
+  ;   (evil-define-key 'normal browse-kill-ring-mode-map "q" 'browse-kill-ring-quit)
+  ;   (evil-define-key 'normal browse-kill-ring-mode-map (kbd "RET") 'browse-kill-ring-insert-and-quit))
+  )
 
 ;; Emacs minor mode for Eclipse-like moving and duplications of lines or selections with convenient key bindings.
 (use-package move-dup

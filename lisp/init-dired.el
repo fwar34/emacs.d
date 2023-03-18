@@ -3,12 +3,12 @@
 
 ;;; Code:
 
-(with-eval-after-load 'evil
- (with-eval-after-load 'dired
-  (evil-define-key 'normal dired-mode-map
-    "w" 'dired-toggle-read-only
-    "," 'my-dired-hydra/body
-    "." 'hydra-dired/body))
+(with-eval-after-load 'dired
+ ; (with-eval-after-load 'dired
+ ;  (evil-define-key 'normal dired-mode-map
+ ;    "w" 'dired-toggle-read-only
+ ;    "," 'my-dired-hydra/body
+ ;    "." 'hydra-dired/body))
 
  (with-eval-after-load 'wdired
    (transient-define-prefix my-transient-wdired ()
@@ -16,7 +16,8 @@
      [[" <wgrep commands>"
        ("x" "wdired-abort-changes" wdired-abort-changes)
        ("f" "wdired-finish-edit" wdired-finish-edit)]])
-  (evil-define-key 'normal wdired-mode-map "," 'my-transient-wdired))
+  ; (evil-define-key 'normal wdired-mode-map "," 'my-transient-wdired)
+  )
 
   (defhydra my-dired-hydra (:hint nil :color pink)
     "
@@ -144,29 +145,29 @@ T - tag prefix
     ;; (add-hook 'dired-mode-hook (lambda () (rename-buffer "*dired-buffer*")))
 
     ;; key map
-    (with-eval-after-load 'evil
-      (defun my-dired-init ()
-        "Bunch of stuff to run for dired, either immediately or when it's loaded."
-        (define-key dired-mode-map [remap dired-find-file] 'dired-single-buffer)
-        (define-key dired-mode-map [remap dired-mouse-find-file-other-window] 'dired-single-buffer-mouse)
-        (define-key dired-mode-map [remap dired-up-directory] 'dired-single-up-directory)
-        (evil-define-key 'normal dired-mode-map "q" 'kill-this-buffer)
-        (evil-define-key 'emacs dired-mode-map "q" 'kill-this-buffer)
-        (evil-define-key 'normal dired-mode-map "f" 'swiper)
-        (evil-define-key 'normal dired-mode-map "h" 'dired-single-up-directory)
-        (evil-define-key 'normal dired-mode-map "l" 'dired-single-buffer)
-        (evil-define-key 'normal dired-mode-map "^" 'dired-single-up-directory)
-        (if (display-graphic-p)
-            (progn
-              (evil-define-key 'normal dired-mode-map [return] 'dired-single-buffer)
-              (evil-define-key 'normal dired-mode-map [mouse-1] 'dired-single-buffer-mouse))
-          (evil-define-key 'normal dired-mode-map (kbd "RET") 'dired-single-buffer)))
-      ;; if dired's already loaded, then the keymap will be bound
-      (if (boundp 'dired-mode-map)
-          ;; we're good to go; just add our bindings
-          (my-dired-init)
-        ;; it's not loaded yet, so add our bindings to the load-hook
-        (add-hook 'dired-load-hook 'my-dired-init)))
+    ; (with-eval-after-load 'evil
+    ;   (defun my-dired-init ()
+    ;     "Bunch of stuff to run for dired, either immediately or when it's loaded."
+    ;     (define-key dired-mode-map [remap dired-find-file] 'dired-single-buffer)
+    ;     (define-key dired-mode-map [remap dired-mouse-find-file-other-window] 'dired-single-buffer-mouse)
+    ;     (define-key dired-mode-map [remap dired-up-directory] 'dired-single-up-directory)
+    ;     (evil-define-key 'normal dired-mode-map "q" 'kill-this-buffer)
+    ;     (evil-define-key 'emacs dired-mode-map "q" 'kill-this-buffer)
+    ;     (evil-define-key 'normal dired-mode-map "f" 'swiper)
+    ;     (evil-define-key 'normal dired-mode-map "h" 'dired-single-up-directory)
+    ;     (evil-define-key 'normal dired-mode-map "l" 'dired-single-buffer)
+    ;     (evil-define-key 'normal dired-mode-map "^" 'dired-single-up-directory)
+    ;     (if (display-graphic-p)
+    ;         (progn
+    ;           (evil-define-key 'normal dired-mode-map [return] 'dired-single-buffer)
+    ;           (evil-define-key 'normal dired-mode-map [mouse-1] 'dired-single-buffer-mouse))
+    ;       (evil-define-key 'normal dired-mode-map (kbd "RET") 'dired-single-buffer)))
+    ;   ;; if dired's already loaded, then the keymap will be bound
+    ;   (if (boundp 'dired-mode-map)
+    ;       ;; we're good to go; just add our bindings
+    ;       (my-dired-init)
+    ;     ;; it's not loaded yet, so add our bindings to the load-hook
+    ;     (add-hook 'dired-load-hook 'my-dired-init)))
     :config
     ;;-------------------------------------------------------------
     ;; advice-add 

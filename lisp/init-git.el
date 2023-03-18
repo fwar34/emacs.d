@@ -16,7 +16,7 @@
   ;;  ("SPC c p" . git-gutter:previous-hunk))
   ;; :if (not (display-graphic-p))
   :ensure t
-  :after evil
+  ; :after evil
   ;; :if (display-graphic-p)
   :config
   ;; If you enable global minor mode
@@ -59,8 +59,8 @@
 
   ;; https://github.com/noctuid/evil-guide
   ;; you could use this to have git-gutter’s commands for navigating hunks save the current location before jumping:
-  (evil-add-command-properties 'git-gutter:next-hunk :jump t)
-  (evil-add-command-properties 'git-gutter:previous-hunk :jump t)
+  ; (evil-add-command-properties 'git-gutter:next-hunk :jump t)
+  ; (evil-add-command-properties 'git-gutter:previous-hunk :jump t)
 
   (defhydra hydra-git-gutter (:body-pre (git-gutter-mode 1)
                                         :hint nil)
@@ -104,7 +104,7 @@ Git gutter:
   ;; windows 下 svn 命令行可以使用 https://www.visualsvn.com/downloads/ 中的 “Apache Subversion command line tools”，或者直接 scoop install sliksvn
   ;; scoop install unxutils sliksvn
   ;; mine/vimfiles/windows.ps1，scoop安装脚本
-  :after evil
+  ; :after evil
   :config
   (global-diff-hl-mode)
   (unless (display-graphic-p)
