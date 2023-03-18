@@ -50,9 +50,9 @@
 
 (add-to-list 'load-path "~/.emacs.d/lisp")
 (require 'init-base)
-(require 'init-evil)
+;; (require 'init-evil)
 (require 'init-packages)
-(require 'init-keybindings)
+;; (require 'init-keybindings)
 (require 'init-ivy)
 (require 'init-workspace)
 (require 'init-dired)
@@ -86,6 +86,7 @@
 (require 'init-web)
 (require 'init-text)
 (require 'advice-remove-button)
+(require 'init-meow)
 
 (provide 'init)
 ;;; init.el ends here
