@@ -26,7 +26,7 @@
                         (looking-at lispy-outline)))))))
 
 (defun lispyville--lispy-keybindings-active-p ()
-  "Return whether lispy keybindings are active."
+  " whether lispy keybindings are active."
   (and lispy-mode
        (memq evil-state lispyville-insert-states)
        (lispyville--special-p)))
@@ -82,6 +82,18 @@ DEFAULT-TEXT."
        ((equal 'motion evil-state) (propertize evil-mode-line-tag 'face 'fwar34/spaceline-evil-motion))
        ((equal 'operator evil-state) (propertize evil-mode-line-tag 'face 'fwar34/spaceline-modified))
        (t nil)))))
+
+
+(defun fwar34/meow-state ()
+  "Display evil state in differente color"
+  '(:eval
+      (cond
+       ((string-equal " NORMAL " (meow-indicator)) (propertize (meow-indicator) 'face 'fwar34/spaceline-evil-normal))
+       ((string-equal " INSERT " (meow-indicator)) (propertize (meow-indicator) 'face 'fwar34/spaceline-evil-insert))
+       ((string-equal " KEYPAD " (meow-indicator)) (propertize (meow-indicator) 'face 'fwar34/spaceline-evil-replace))
+       ((string-equal " MOTION " (meow-indicator)) (propertize (meow-indicator) 'face 'fwar34/spaceline-evil-motion))
+       ((string-equal " BEACON " (meow-indicator)) (propertize (meow-indicator) 'face 'fwar34/spaceline-modified))
+       (t nil))))
 
 (defun fwar34/lispy-state ()
   "Display lispy mode in modeline."
@@ -319,7 +331,8 @@ DEFAULT-TEXT."
        ;; mode-line-process
        ;; evil state
        " "
-       (fwar34/evil-state)
+       (fwar34/meow-state)
+       ;; '(:eval (meow-indicator))
        '(:eval (when (featurep 'lispyville)
                  (lispyville-mode-line-string " @lispy-special@")))
        ;; (fwar34/wgrep-state)
