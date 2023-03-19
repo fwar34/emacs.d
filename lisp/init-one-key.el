@@ -1,7 +1,6 @@
 ;; -*- coding: utf-8; lexical-binding: t; -*-
 
 (use-package one-key
-  :ensure t
   :straight
   (:host github :repo "manateelazycat/one-key")
   :bind

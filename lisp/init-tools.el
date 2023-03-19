@@ -115,5 +115,12 @@
   (add-hook 'python-mode-hook
             (lambda () (setq-local devdocs-current-docs '("python~3.10")))))
 
+(use-package color-rg
+  :disabled
+  :straight
+  (:type github :repo "manateelazycat/color-rg")
+  :config
+  )
+
 (provide 'init-tools)
 ;;; init-tools.el ends here
