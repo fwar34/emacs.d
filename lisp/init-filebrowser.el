@@ -38,6 +38,15 @@
 :init
 (with-eval-after-load 'winum
   (define-key winum-keymap (kbd "M-0") #'treemacs-select-window))
+:bind
+(:map global-map
+      ("M-0"       . treemacs-select-window)
+      ("C-x t 1"   . treemacs-delete-other-windows)
+      ("C-x t t"   . treemacs)
+      ("C-x t d"   . treemacs-select-directory)
+      ("C-x t B"   . treemacs-bookmark)
+      ("C-x t C-t" . treemacs-find-file)
+      ("C-x t M-t" . treemacs-find-tag))
 :config
 (progn
   (treemacs-follow-mode t)
@@ -54,25 +63,16 @@
      (treemacs-git-mode 'simple)))
 
   (treemacs-hide-gitignored-files-mode nil))
-:bind
-(:map global-map
-      ("M-0"       . treemacs-select-window)
-      ("C-x t 1"   . treemacs-delete-other-windows)
-      ("C-x t t"   . treemacs)
-      ("C-x t d"   . treemacs-select-directory)
-      ("C-x t B"   . treemacs-bookmark)
-      ("C-x t C-t" . treemacs-find-file)
-      ("C-x t M-t" . treemacs-find-tag)))
 
-(use-package treemacs-projectile
-  :after (treemacs projectile)
-  :ensure t)
+;; (use-package treemacs-projectile
+;;   :after (treemacs projectile)
+;;   :ensure t)
 
-
-(use-package treemacs-persp ;;treemacs-perspective if you use perspective.el vs. persp-mode
-  :after (treemacs persp-mode) ;;or perspective vs. persp-mode
-  :ensure t
-  :config (treemacs-set-scope-type 'Perspectives))  
+;; (use-package treemacs-persp ;;treemacs-perspective if you use perspective.el vs. persp-mode
+;;   :after (treemacs persp-mode) ;;or perspective vs. persp-mode
+;;   :ensure t
+;;   :config (treemacs-set-scope-type 'Perspectives))
+)
 
 (provide 'init-filebrowser)
 ;;; init-filebrowser.el ends here
