@@ -45,15 +45,21 @@
   :config
   ;; (rg-enable-menu)
   ; (add-hook 'rg-mode-hook (lambda () (evil-set-initial-state 'rg-mode 'emacs)))
+  
+(transient-define-prefix my-rg-transient ()
+    "my ivy minibuffer commands"
+    [[" <ivy commands>"
+      ("RET" "ivy-done" ivy-done)
+      ("," "self insert \",\"" self-insert-command)]])
+  (bind-key "," 'my-rg-transient rg-mode-map)
 
-  (general-define-key
-   :states 'emacs
-   :jump t
-   :prefix ","
-   :keymaps 'rg-mode-map
-   "," 'self-insert-command
-   ; "gs" 'evil-avy-goto-char
-   ))
+  ;; https://github.com/DogLooksGood/meomacs/blob/master/editor.org#rgel
+  (autoload 'rg-project "wgrep" nil t)
+  (autoload 'rg-project "rg" nil t)
+  (with-eval-after-load "wgrep"
+    (define-key wgrep-mode-map (kbd "C-c C-c") #'wgrep-finish-edit))
+  (define-key project-prefix-map "r" 'rg-project)
+  )
 
 (use-package xclip
   :disabled

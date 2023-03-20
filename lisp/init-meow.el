@@ -59,6 +59,7 @@
      '("/" . meow-keypad-describe-key)
      '("?" . meow-cheatsheet))
     (meow-leader-define-key
+     '("o" . other-window)
      '("ww" . major-mode-hydras/persp-mode/body)
      '("bb" . persp-switch-last)
      )
