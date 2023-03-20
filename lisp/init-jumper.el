@@ -26,6 +26,8 @@
                  counsel-imenu
                  beginning-of-defun
                  dired-single-buffer
+                 beginning-of-buffer
+                 end-of-buffer
                  dired-jump
                  ;; ivy-done
                  end-of-defun
@@ -51,7 +53,8 @@
                  counsel-describe-function
                  counsel-describe-variable
                  counsel-describe-symbol
-                 counsel-recentf))
+                 counsel-recentf
+                 ))
     (advice-add con :before #'my-jumper-advice-for-function)))
 
 (provide 'init-jumper)
