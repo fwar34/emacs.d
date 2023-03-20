@@ -15,6 +15,7 @@
   :config
   (message "better-jumper config")
   (dolist (con '(ivy-switch-buffer
+                 persp-ivy-switch-buffer
                  counsel-gtags-dwim
                  counsel-gtags-find-definition
                  counsel-gtags-find-reference
@@ -31,10 +32,8 @@
                  dired-jump
                  ;; ivy-done
                  end-of-defun
-                 counsel-etags-find-tag-at-point
-                 counsel-etags-list-tag
-                 counsel-etags-grep
-                 counsel-etags-find-tag
+                 mark-whole-buffer
+                 mark-defun
                  counsel-rg
                  counsel-ag
                  my-search-forward-word
@@ -54,6 +53,15 @@
                  counsel-describe-variable
                  counsel-describe-symbol
                  counsel-recentf
+                 meow-visit
+                 counsel-etags-recent-tag
+                 counsel-etags-find-tag
+                 counsel-etags-grep
+                 counsel-etags-find-tag-at-point
+                 counsel-etags-list-tag
+                 counsel-etags-list-tag-in-current-file
+                 xref-find-definitions
+                 xref-find-references
                  ))
     (advice-add con :before #'my-jumper-advice-for-function)))
 

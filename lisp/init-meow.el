@@ -31,6 +31,7 @@
                                        (git-gutter:previous-hunk (line-number-at-pos)))))
   (global-set-key (kbd "C-c d=") 'diff-hl-diff-goto-hunk)
   (global-set-key (kbd "C-]") 'counsel-etags-find-tag-at-point)
+  (global-set-key (kbd "C-r") 'undo-redo)
   )
 
 ;;; Code:
@@ -77,13 +78,13 @@
      '("2" . meow-expand-2)
      '("1" . meow-expand-1)
      '("-" . negative-argument)
-     '("/" . meow-reverse)
+     '("/" . meow-visit)
      '("," . meow-inner-of-thing)
      '("." . meow-bounds-of-thing)
      '("[" . meow-beginning-of-thing)
      '("]" . meow-end-of-thing)
      '("a" . meow-join)
-     ;; '("A" . )
+     '("A" . mark-whole-buffer)
      '("b" . meow-back-word)
      '("B" . meow-back-symbol)
      '("c" . meow-change)
@@ -122,7 +123,7 @@
      '("T" . meow-till-expand)
      '("u" . meow-undo)
      '("U" . meow-undo-in-selection)
-     '("v" . meow-visit)
+     '("v" . meow-reverse)
      '("w" . meow-next-word)
      '("W" . meow-next-symbol)
      '("x" . meow-delete)
@@ -155,6 +156,11 @@
      '(";ii" . counsel-imenu)
      '(";fa" . counsel-rg)
      '(";tl" . counsel-etags-list-tag)
+     '(";tr" . counsel-etags-recent-tag)
+     '(";tf" . counsel-etags-find-tag)
+     '(";tg" . counsel-etags-grep)
+     '(";tl" . counsel-etags-list-tag)
+     '(";tc" . counsel-etags-list-tag-in-current-file)
      '(";li" . swiper)
      '(";kr" . browse-kill-ring)
      '(";rm" . counsel-recentf)
@@ -162,11 +168,67 @@
      '(";kw" . kill-buffer-and-window)
      '(";bs" . persp-ivy-switch-buffer)
      '(";kb" . persp-kill-buffer*)
+     '(";tm" . vterm-toggle)
+     '(";fo" . my-find-other-file)
+     '(";yw" . youdao-dictionary-search-at-point)
+     '(";yy" . youdao-dictionary-search-at-point+)
+     '(";yd" . youdao-dictionary-search-from-input)
+     '(";fw" . (lambda () (interactive) (my-search-whole-word 'counsel-rg)))
+     '(";fs" . (lambda () (interactive) (my-search-forward-word 'counsel-rg)))
+     '(";ls" . my-swiper-forward-word)
+     '(";lw" . swiper-thing-at-point)
+     '(";zz" . save-buffer)
+     '(";md" . mark-defun)
+     '(";xd" . (lambda (identifier)
+                 (interactive (list (xref--read-identifier "Find definitions of: ")))
+                 (unless (featurep 'ivy-xref)
+                   (require 'ivy-xref))
+                 (xref-find-definitions identifier)))
+
+     '(";xr" . (lambda (identifier)
+                 (interactive (list (xref--read-identifier "Find references of: ")))
+                 (unless (featurep 'ivy-xref)
+                   (require 'ivy-xref))
+                 (xref-find-references identifier)))
+     '(";dj" . dired-jump) ;; open the dired from current file
+
      ))
   :config
   (meow-setup)
   (meow-global-mode 1)
   (key-mappings-setup)
+
+  ;; Use jk to escape from insert state to normal state
+  (defvar meow-two-char-escape-sequence ";g")
+  (defvar meow-two-char-escape-delay 0.5)
+  (defvar meow-two-char-exclude-modes '(vterm-mode))
+  (defun meow--two-char-exit-insert-state (s)
+    "Exit meow insert state when pressing consecutive two keys.
+
+S is string of the two-key sequence."
+    (when (and (meow-insert-mode-p) (not (member major-mode meow-two-char-exclude-modes)))
+      (let ((modified (buffer-modified-p))
+            (undo-list buffer-undo-list))
+        (insert (elt s 0))
+        (let* ((second-char (elt s 1))
+               (event
+                (if defining-kbd-macro
+                    (read-event nil nil)
+                  (read-event nil nil meow-two-char-escape-delay))))
+          (when event
+            (if (and (characterp event) (= event second-char))
+                (progn
+                  (backward-delete-char 1)
+                  (set-buffer-modified-p modified)
+                  (setq buffer-undo-list undo-list)
+                  (meow-insert-exit))
+              (push event unread-command-events)))))))
+  (defun meow-two-char-exit-insert-state ()
+    "Exit meow insert state when pressing consecutive two keys."
+    (interactive)
+    (meow--two-char-exit-insert-state meow-two-char-escape-sequence))
+  (define-key meow-insert-state-keymap (substring meow-two-char-escape-sequence 0 1)
+    #'meow-two-char-exit-insert-state)
   )
 
 (provide 'init-meow)

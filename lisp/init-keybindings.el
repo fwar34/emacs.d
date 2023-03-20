@@ -275,7 +275,7 @@
                       "fe" 'end-of-defun
                       "fm" 'mark-defun
                       "xd" (lambda (identifier)
-                             (interactive (list (xref--read-identifier "Find references of: ")))
+                             (interactive (list (xref--read-identifier "Find definitions of: ")))
                              (unless (featurep 'ivy-xref)
                                (require 'ivy-xref))
                              (xref-find-definitions identifier))

@@ -26,7 +26,7 @@
   ;; https://www.jianshu.com/p/2c1ac913d2cb
   ;; 如果想保留自己在其他mode下的快捷键，将快捷键添加到 term-bind-key-alist这个列表中
   ; (add-to-list 'term-bind-key-alist '("M-l" . evil-buffer))
-  (add-to-list 'term-bind-key-alist '("M-y" . term-paste))
+  ;; (add-to-list 'term-bind-key-alist '("M-y" . term-paste))
   (add-to-list 'term-bind-key-alist '("C-x C-x" . (lambda () (interactive) (term-send-raw-string "\C-x"))))
   ;; 修改快捷键的map,如果你发你定义自己的快捷键与该major-mode的冲突，可以直接修改它的key-map
   ;; (define-key term-mode-map (kbd "C-=") 'evil-buffer)
@@ -73,7 +73,11 @@
 
 (use-package vterm
   :unless (equal system-type 'windows-nt)
-  :commands vterm)
+  :commands vterm
+  :init
+  (add-hook 'vterm-mode-hook #'(lambda () (message "enter veterm hook") (meow-insert)))
+  
+  )
 
 (use-package vterm-toggle
   :preface
@@ -89,7 +93,7 @@
 	; (";g" . evil-normal-state)
 	(";vv" . my-vterm-mode-transient))
   :config
-  ; (evil-define-key 'insert vterm-mode-map (kbd "C-j") 'vterm-toggle-insert-cd)
+  (define-key vterm-mode-map (kbd "C-j") 'vterm-toggle-insert-cd)
 
   ;; https://github.com/akermu/emacs-libvterm#keybindings
   ;; 使用 C-q 在 vtem 中发送下个字符到 terminal, 比如 ";"
@@ -115,7 +119,8 @@
       ("P" "vterm-yank-pop" vterm-yank-pop)] ;; M-y
      [" <Misc>"
       ("n" "vterm-send-next-key" vterm-send-next-key)
-      (";" "insert ;" my-vterm-insert)]
+      (";" "insert ;" my-vterm-insert)
+      ("x" "send C-x" (lambda () (interactive) (term-send-raw-string "\C-x")))]
      [" <Toggle>"
       ("f" "vterm-toggle-forward" vterm-toggle-forward)
       ("b" "vterm-toggle-backward" vterm-toggle-backward)]])
