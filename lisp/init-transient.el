@@ -23,13 +23,11 @@
 (use-package transient
   :straight
   (:host github :repo "magit/transient")
-  :init
-  (define-prefix-command 'M-i-map)
-  (global-set-key (kbd "M-i") 'M-i-map)
   :config
+  (message "transient config")
   (transient-bind-q-to-quit)
-  (global-set-key (kbd "M-i mt") 'pmx-transient-toy)
-  (global-set-key (kbd "M-i tt") 'my-transient-yank)
+  (global-set-key (kbd "C-c tt") 'pmx-transient-toy)
+  (global-set-key (kbd "C-c ty") 'my-transient-yank)
   ;; (setq transient-display-buffer-action '(display-buffer-below-selected))
 
   (transient-define-suffix pmx-show-prefix ()

@@ -1,6 +1,37 @@
 ;;; init-meow.el --- Useful preset transient commands  -*- coding:utf-8; lexical-binding: t; -*-
 ;;; Commentary:
 
+(defun key-mappings-setup ()
+  (global-set-key (kbd "C-c du") #'(lambda ()
+                              (interactive)
+                              (if (featurep 'diff-hl)
+                                  (diff-hl-diff-goto-hunk)
+                                (define-advice git-gutter:popup-hunk (:around (orig-fun &rest args) my-git-gutter:popup-hunk)
+                                  (let ((res (apply orig-fun args)))
+                                    (when res
+                                      (switch-to-buffer-other-window res)
+                                      (evil-local-set-key 'normal (kbd "q") 'kill-buffer-and-window))))
+                                (git-gutter:popup-hunk))))
+                      (global-set-key (kbd "C-c dr") #'(lambda ()
+                              (interactive)
+                              (if (featurep 'diff-hl)
+                                  (diff-hl-revert-hunk)
+                                (progn
+                                  (advice-remove 'git-gutter:popup-hunk 'git-gutter:popup-hunk@my-git-gutter:popup-hunk)
+                                  (git-gutter:revert-hunk)))))
+                      (global-set-key (kbd "C-c dn") #'(lambda ()
+                              (interactive)
+                              (if (featurep 'diff-hl)
+                                  (diff-hl-next-hunk)
+                                (git-gutter:next-hunk (line-number-at-pos)))))
+                      (global-set-key (kbd "C-c dp") #'(lambda ()
+                              (interactive)
+                              (if (featurep 'diff-hl)
+                                  (diff-hl-previous-hunk)
+                                (git-gutter:previous-hunk (line-number-at-pos)))))
+                      (global-set-key (kbd "C-c d=") 'diff-hl-diff-goto-hunk)
+  )
+
 ;;; Code:
 (use-package meow
   :init
@@ -102,6 +133,15 @@
      '("%" . meow-query-replace)
      '("<escape>" . ignore))
     (meow-normal-define-key
+     '(";1" . winum-select-window-1)
+     '(";2" . winum-select-window-2)
+     '(";3" . winum-select-window-3)
+     '(";4" . winum-select-window-4)
+     '(";5" . winum-select-window-5)
+     '(";6" . winum-select-window-6)
+     '(";7" . winum-select-window-7)
+     '(";8" . winum-select-window-8)
+     '(";9" . winum-select-window-9)
      '(";so" . symbol-overlay-put)
      '(";st" . symbol-overlay-transient)
      '(";ma" . magit)
@@ -110,6 +150,7 @@
   :config
   (meow-setup)
   (meow-global-mode 1)
+  (key-mappings-setup)
   )
 
 (provide 'init-meow)

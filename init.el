@@ -79,7 +79,7 @@
 (require 'init-misc)
 (require 'init-lsp)
 (require 'init-one-key)
-;; (require 'init-transient)
+(require 'init-transient)
 (require 'init-hydra)
 (require 'init-calendar)
 (require 'init-help)
