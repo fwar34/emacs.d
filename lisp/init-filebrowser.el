@@ -3,20 +3,6 @@
 
 ;;; Code:
 
-;; https://www.emacswiki.org/emacs/NeoTree
-(use-package neotree
-  :commands
-  neotree-toggle
-  :config
-  ;; Note: For users who want to use the icons theme. Pls make sure you have
-  ;; installed the all-the-icons package and its fonts.
-  ;; (setq neo-theme (if (display-graphic-p) 'icons 'arrow))
-  ;; (setq neo-theme (when (display-graphic-p) 'icons))
-  ;; (setq neo-theme 'arrow)
-  ;; Every time when the neotree window is opened, let it find current file and jump to node.
-  (setq neo-smart-open t)
-  )
-
 (use-package dired-sidebar
   :bind (("C-x C-n" . dired-sidebar-toggle-sidebar))
   :commands (dired-sidebar-toggle-sidebar)
@@ -45,6 +31,48 @@
   (interactive)
   (dired-sidebar-toggle-sidebar)
   (ibuffer-sidebar-toggle-sidebar))
+
+(use-package treemacs
+:ensure t
+:defer t
+:init
+(with-eval-after-load 'winum
+  (define-key winum-keymap (kbd "M-0") #'treemacs-select-window))
+:config
+(progn
+  (treemacs-follow-mode t)
+  (treemacs-filewatch-mode t)
+  (treemacs-fringe-indicator-mode 'always)
+  (when treemacs-python-executable
+    (treemacs-git-commit-diff-mode t))
+
+  (pcase (cons (not (null (executable-find "git")))
+	       (not (null treemacs-python-executable)))
+    (`(t . t)
+     (treemacs-git-mode 'deferred))
+    (`(t . _)
+     (treemacs-git-mode 'simple)))
+
+  (treemacs-hide-gitignored-files-mode nil))
+:bind
+(:map global-map
+      ("M-0"       . treemacs-select-window)
+      ("C-x t 1"   . treemacs-delete-other-windows)
+      ("C-x t t"   . treemacs)
+      ("C-x t d"   . treemacs-select-directory)
+      ("C-x t B"   . treemacs-bookmark)
+      ("C-x t C-t" . treemacs-find-file)
+      ("C-x t M-t" . treemacs-find-tag)))
+
+(use-package treemacs-projectile
+  :after (treemacs projectile)
+  :ensure t)
+
+
+(use-package treemacs-persp ;;treemacs-perspective if you use perspective.el vs. persp-mode
+  :after (treemacs persp-mode) ;;or perspective vs. persp-mode
+  :ensure t
+  :config (treemacs-set-scope-type 'Perspectives))  
 
 (provide 'init-filebrowser)
 ;;; init-filebrowser.el ends here

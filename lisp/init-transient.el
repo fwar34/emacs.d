@@ -2,9 +2,6 @@
 ;;; Commentary:
 
 ;;; Code:
-(define-prefix-command 'M-u-map)
-(global-set-key (kbd "M-u") 'M-u-map)
-
 (use-package cargo-transient
   :custom
   (cargo-transient-buffer-name-function 'project-prefixed-buffer-name))
@@ -12,7 +9,7 @@
 (use-package transient-dwim
   :custom
   (transient-detect-key-conflicts t)
-  :bind ("M-=" . transient-dwim-dispatch))
+  :bind ("C-c dd" . transient-dwim-dispatch))
 
 ;; {{{
 ;;----------------------------------------------------------------
@@ -24,7 +21,6 @@
   :straight
   (:host github :repo "magit/transient")
   :config
-  (message "transient config")
   (transient-bind-q-to-quit)
   (global-set-key (kbd "C-c tt") 'pmx-transient-toy)
   (global-set-key (kbd "C-c ty") 'my-transient-yank)
@@ -227,7 +223,7 @@
 ;; }}}
 
 ;; {{{ my transient commands
-(global-set-key (kbd "M-u ll") 'my-misc-transinet)
+(global-set-key (kbd "C-c sc") 'my-misc-transinet)
 
 (transient-define-prefix my-hl-todo ()
   "my hl-todo commands"

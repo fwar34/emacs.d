@@ -35,13 +35,11 @@
 
 (use-package rg
   :bind
-  (("C-c s" . rg-menu)
+  (("C-c rg" . rg-menu)
    :map rg-mode-map
    ("w" . wgrep-change-to-wgrep-mode)
    ("j" . compilation-next-error)
    ("k" . compilation-previous-error))
-  :bind*
-  ("C-c C-s" . rg-menu)
   :config
   ;; (rg-enable-menu)
   ; (add-hook 'rg-mode-hook (lambda () (evil-set-initial-state 'rg-mode 'emacs)))
