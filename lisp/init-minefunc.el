@@ -3,7 +3,14 @@
 
 ;;; Code:
 
-; (require 'evil)
+(defun highlight-remove-all ()
+    "Remove all highlight overlay."
+    (interactive)
+    (hi-lock-mode -1)
+    (hi-lock-mode 1)
+    ;; (highlight-symbol-remove-all)
+    (symbol-overlay-remove-all)
+    (lazy-highlight-cleanup t))
 
 (defun my-async-task ()
   "Async exec my tasks."

@@ -66,7 +66,8 @@
 (use-package init-minefunc
   :load-path "lisp"
   :commands
-  (my-async-task
+  (highlight-remove-all
+   my-async-task
    my-search-whole-word
    my-search-forward-word
    my-swiper-forward-word

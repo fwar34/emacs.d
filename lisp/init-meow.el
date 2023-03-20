@@ -3,7 +3,6 @@
 
 ;;; Code:
 (use-package meow
-  :ensure t
   :init
   (defun meow-setup ()
     (setq meow-cheatsheet-layout meow-cheatsheet-layout-qwerty)
@@ -99,11 +98,14 @@
      '("'" . repeat)
      '("`" . meow-last-buffer)
      '("\\" . meow-comment)
+     '("&" . meow-query-replace-regexp)
+     '("%" . meow-query-replace)
      '("<escape>" . ignore))
     (meow-normal-define-key
      '(";so" . symbol-overlay-put)
      '(";st" . symbol-overlay-transient)
      '(";ma" . magit)
+     '(";xx" . highlight-remove-all)
      ))
   :config
   (meow-setup)
