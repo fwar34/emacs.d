@@ -62,6 +62,7 @@
      '("o" . other-window)
      '("ww" . major-mode-hydras/persp-mode/body)
      '("bb" . persp-switch-last)
+     '("ir" . ivy-resume)
      )
     (meow-normal-define-key
      '("0" . meow-expand-0)
@@ -147,6 +148,10 @@
      '(";st" . symbol-overlay-transient)
      '(";ma" . magit)
      '(";xx" . highlight-remove-all)
+     '(";ii" . counsel-imenu)
+     '(";fa" . counsel-rg)
+     '(";tl" . counsel-etags-list-tag)
+     '(";li" . swiper)
      ))
   :config
   (meow-setup)

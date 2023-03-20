@@ -87,6 +87,7 @@
 (require 'init-text)
 (require 'advice-remove-button)
 (require 'init-meow)
+(require 'init-jumper)
 
 (provide 'init)
 ;;; init.el ends here

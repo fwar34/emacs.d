@@ -1,0 +1,58 @@
+;;; init-packages.el --- Packages -*- coding:utf-8; lexical-binding: t; -*-
+;;; Commentary:
+
+;;; Code:
+
+(use-package better-jumper
+  :straight
+  (:host github :repo "gilbertw1/better-jumper")
+  :bind
+  ("C-o" . 'better-jumper-jump-backward)
+  ("C-i" . 'better-jumper-jump-forward)
+  :init
+  (defun my-jumper-advice-for-function (&rest _)
+    (better-jumper-set-jump))
+  :config
+  (message "better-jumper config")
+  (dolist (con '(ivy-switch-buffer
+                 counsel-gtags-dwim
+                 counsel-gtags-find-definition
+                 counsel-gtags-find-reference
+                 counsel-gtags-find-symbol
+                 counsel-gtags-find-file
+                 counsel-gtags-go-forward
+                 counsel-gtags-go-backward
+                 counsel-find-file
+                 counsel-imenu
+                 beginning-of-defun
+                 dired-single-buffer
+                 dired-jump
+                 ;; ivy-done
+                 end-of-defun
+                 counsel-etags-find-tag-at-point
+                 counsel-etags-list-tag
+                 counsel-etags-grep
+                 counsel-etags-find-tag
+                 counsel-rg
+                 counsel-ag
+                 my-search-forward-word
+                 my-search-whole-word
+                 lispyville-beginning-of-defun
+                 lispyville-end-of-defun
+                 lispyville--maybe-enter-special
+                 swiper
+                 swiper-all
+                 my-swiper-forward-word
+                 swiper-thing-at-point
+                 swiper-all-thing-at-point
+                 find-function
+                 find-variable
+                 find-function-on-key
+                 counsel-describe-function
+                 counsel-describe-variable
+                 counsel-describe-symbol
+                 counsel-recentf))
+    (advice-add con :before #'my-jumper-advice-for-function)))
+
+(provide 'init-jumper)
+;;; init-packages.el ends here
