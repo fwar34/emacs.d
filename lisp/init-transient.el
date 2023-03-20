@@ -22,7 +22,7 @@
   (:host github :repo "magit/transient")
   :config
   (transient-bind-q-to-quit)
-  (global-set-key (kbd "C-c tt") 'pmx-transient-toy)
+  (global-set-key (kbd "C-c to") 'pmx-transient-toy)
   (global-set-key (kbd "C-c ty") 'my-transient-yank)
   ;; (setq transient-display-buffer-action '(display-buffer-below-selected))
 

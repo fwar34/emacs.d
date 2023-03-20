@@ -33,46 +33,46 @@
   (ibuffer-sidebar-toggle-sidebar))
 
 (use-package treemacs
-:ensure t
-:defer t
-:init
-(with-eval-after-load 'winum
-  (define-key winum-keymap (kbd "M-0") #'treemacs-select-window))
-:bind
-(:map global-map
-      ("M-0"       . treemacs-select-window)
-      ("C-x t 1"   . treemacs-delete-other-windows)
-      ("C-x t t"   . treemacs)
-      ("C-x t d"   . treemacs-select-directory)
-      ("C-x t B"   . treemacs-bookmark)
-      ("C-x t C-t" . treemacs-find-file)
-      ("C-x t M-t" . treemacs-find-tag))
-:config
-(progn
-  (treemacs-follow-mode t)
-  (treemacs-filewatch-mode t)
-  (treemacs-fringe-indicator-mode 'always)
-  (when treemacs-python-executable
-    (treemacs-git-commit-diff-mode t))
+  :ensure t
+  :defer t
+  :init
+  (with-eval-after-load 'winum
+    (define-key winum-keymap (kbd "M-0") #'treemacs-select-window))
+  :bind
+  (:map global-map
+        ("M-0"    . treemacs-select-window)
+        ("C-c t1" . treemacs-delete-other-windows)
+        ("C-c tt" . treemacs)
+        ("C-c td" . treemacs-select-directory)
+        ("C-c tB" . treemacs-bookmark)
+        ("C-c tf" . treemacs-find-file)
+        ("C-c tg" . treemacs-find-tag))
+  :config
+  (progn
+    (treemacs-follow-mode t)
+    (treemacs-filewatch-mode t)
+    (treemacs-fringe-indicator-mode 'always)
+    (when treemacs-python-executable
+      (treemacs-git-commit-diff-mode t))
 
-  (pcase (cons (not (null (executable-find "git")))
-	       (not (null treemacs-python-executable)))
-    (`(t . t)
-     (treemacs-git-mode 'deferred))
-    (`(t . _)
-     (treemacs-git-mode 'simple)))
+    (pcase (cons (not (null (executable-find "git")))
+	             (not (null treemacs-python-executable)))
+      (`(t . t)
+       (treemacs-git-mode 'deferred))
+      (`(t . _)
+       (treemacs-git-mode 'simple)))
 
-  (treemacs-hide-gitignored-files-mode nil))
+    (treemacs-hide-gitignored-files-mode nil))
 
-;; (use-package treemacs-projectile
-;;   :after (treemacs projectile)
-;;   :ensure t)
+  ;; (use-package treemacs-projectile
+  ;;   :after (treemacs projectile)
+  ;;   :ensure t)
 
-;; (use-package treemacs-persp ;;treemacs-perspective if you use perspective.el vs. persp-mode
-;;   :after (treemacs persp-mode) ;;or perspective vs. persp-mode
-;;   :ensure t
-;;   :config (treemacs-set-scope-type 'Perspectives))
-)
+  ;; (use-package treemacs-persp ;;treemacs-perspective if you use perspective.el vs. persp-mode
+  ;;   :after (treemacs persp-mode) ;;or perspective vs. persp-mode
+  ;;   :ensure t
+  ;;   :config (treemacs-set-scope-type 'Perspectives))
+  )
 
 (provide 'init-filebrowser)
 ;;; init-filebrowser.el ends here
