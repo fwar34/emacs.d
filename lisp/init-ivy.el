@@ -25,6 +25,7 @@
    ([remap describe-variable] . counsel-describe-variable)
    ([remap describe-symbol] . counsel-describe-symbol)
    ([remap hungry-delete-backward] . ivy-backward-delete-char)
+   ([remap find-file] . counsel-find-file)
    ("M-x" . counsel-M-x)
    :map ivy-minibuffer-map
    ("M-l" . ivy-restrict-to-matches)

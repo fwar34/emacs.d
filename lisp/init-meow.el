@@ -152,6 +152,12 @@
      '(";fa" . counsel-rg)
      '(";tl" . counsel-etags-list-tag)
      '(";li" . swiper)
+     '(";kr" . browse-kill-ring)
+     '(";rm" . counsel-recentf)
+     '(";ff" . counsel-find-file)
+     '(";kw" . kill-buffer-and-window)
+     '(";bs" . persp-ivy-switch-buffer)
+     '(";kb" . persp-kill-buffer*)
      ))
   :config
   (meow-setup)
