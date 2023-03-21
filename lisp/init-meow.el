@@ -35,7 +35,9 @@
   )
 
 (defun meow-insert-setup ()
-  (bind-key "C-w" 'backward-kill-word meow-insert-state-keymap))
+  ;; (bind-key "C-w" 'backward-kill-word meow-insert-state-keymap)
+  (define-key meow-insert-state-keymap (kbd "C-w") #'backward-kill-word)
+  )
 
 ;;; Code:
 (use-package meow

@@ -37,8 +37,8 @@
   :defer t
   :init
   (with-eval-after-load 'winum
-    (define-key winum-keymap (kbd "M-0") #'treemacs-select-window)
-    (define-key winum-keymap (kbd "; TAB") #'treemacs-select-window))
+    (define-key winum-keymap (kbd "M-0") #'treemacs-select-window))
+  (add-hook 'treemacs-mode-hook #'(lambda () (local-set-key (kbd "; TAB") #'other-window)))
   :bind
   (:map global-map
         ("M-0"    . treemacs-select-window)
