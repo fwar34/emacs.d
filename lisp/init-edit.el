@@ -76,5 +76,14 @@
          ("M-n"   . move-dup-move-lines-down)
          ("C-M-n" . move-dup-duplicate-down)))
 
+(use-package evil-nerd-commenter
+  :commands
+  (evilnc-comment-or-uncomment-lines
+   evilnc-copy-and-comment-lines)
+  :config
+  ;; must put before (evilnc-default-hotkeys t t)
+  (setq evilnc-use-comment-object-setup nil)
+  (evilnc-default-hotkeys t t))
+
 (provide 'init-edit)
 ;;; init-edit.el ends here
