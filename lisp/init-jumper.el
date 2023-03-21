@@ -62,6 +62,8 @@
                  counsel-etags-list-tag-in-current-file
                  xref-find-definitions
                  xref-find-references
+                 avy-goto-word-0
+                 avy-goto-char-2
                  ))
     (advice-add con :before #'my-jumper-advice-for-function)))
 
