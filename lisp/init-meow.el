@@ -67,7 +67,9 @@
      '("/" . meow-keypad-describe-key)
      '("?" . meow-cheatsheet))
     (meow-leader-define-key
-     '("fn" . my-display-function)
+     ;; '("fn" . c-display-defun-name)
+     '("qq" . save-buffers-kill-terminal)
+     '("fn" . (lambda () (message (c-defun-name))))
      '("ww" . major-mode-hydras/persp-mode/body)
      '("bb" . persp-switch-last)
      '("ir" . ivy-resume)
@@ -222,10 +224,11 @@
              (unless (featurep 'counsel)
                (require 'counsel))
              (project-find-file)))
-     '("; pg" . 'project-find-regexp)
-     '("; se" . 'open-init-file)
-     '("; rr" . 'fwar34/counsel-goto-recent-directory)
-     '("; rc" . 'fwar34/run-current-file)
+     '("; pg" . project-find-regexp)
+     '("; se" . open-init-file)
+     '("; rr" . fwar34/counsel-goto-recent-directory)
+     '("; rc" . fwar34/run-current-file)
+     '("; SPC" . counsel-M-x)
 
      ))
   :config

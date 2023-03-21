@@ -13,7 +13,6 @@
   (defun my-jumper-advice-for-function (&rest _)
     (better-jumper-set-jump))
   :config
-  (message "better-jumper config")
   (dolist (con '(ivy-switch-buffer
                  persp-ivy-switch-buffer
                  counsel-gtags-dwim
