@@ -67,7 +67,7 @@
      '("/" . meow-keypad-describe-key)
      '("?" . meow-cheatsheet))
     (meow-leader-define-key
-     '("f" . other-window)
+     '("fn" . my-display-function)
      '("ww" . major-mode-hydras/persp-mode/body)
      '("bb" . persp-switch-last)
      '("ir" . ivy-resume)
