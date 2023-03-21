@@ -69,6 +69,10 @@
                  avy-goto-char-2
                  scroll-up-command
                  scroll-down-command
+                 git-gutter:previous-hunk
+                 git-gutter:next-hunk
+                 diff-hl-previous-hunk
+                 diff-hl-next-hunk
                  ))
     (advice-add con :before #'my-jumper-advice-for-function)))
 

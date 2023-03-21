@@ -1,43 +1,8 @@
 ;;; init-meow.el --- Useful preset transient commands  -*- coding:utf-8; lexical-binding: t; -*-
 ;;; Commentary:
 
-(defun key-mappings-setup ()
-  (global-set-key (kbd "C-c du") #'(lambda ()
-                                     (interactive)
-                                     (if (featurep 'diff-hl)
-                                         (diff-hl-diff-goto-hunk)
-                                       (define-advice git-gutter:popup-hunk (:around (orig-fun &rest args) my-git-gutter:popup-hunk)
-                                         (let ((res (apply orig-fun args)))
-                                           (when res
-                                             (switch-to-buffer-other-window res)
-                                             (evil-local-set-key 'normal (kbd "q") 'kill-buffer-and-window))))
-                                       (git-gutter:popup-hunk))))
-  (global-set-key (kbd "C-c dr") #'(lambda ()
-                                     (interactive)
-                                     (if (featurep 'diff-hl)
-                                         (diff-hl-revert-hunk)
-                                       (progn
-                                         (advice-remove 'git-gutter:popup-hunk 'git-gutter:popup-hunk@my-git-gutter:popup-hunk)
-                                         (git-gutter:revert-hunk)))))
-  (global-set-key (kbd "C-c dn") #'(lambda ()
-                                     (interactive)
-                                     (if (featurep 'diff-hl)
-                                         (diff-hl-next-hunk)
-                                       (git-gutter:next-hunk (line-number-at-pos)))))
-  (global-set-key (kbd "C-c dp") #'(lambda ()
-                                     (interactive)
-                                     (if (featurep 'diff-hl)
-                                         (diff-hl-previous-hunk)
-                                       (git-gutter:previous-hunk (line-number-at-pos)))))
-  (global-set-key (kbd "C-c d=") 'diff-hl-diff-goto-hunk)
-  (global-set-key (kbd "C-]") 'counsel-etags-find-tag-at-point)
-  (global-set-key (kbd "C-r") 'undo-redo)
-  )
-
 (defun meow-insert-setup ()
-  ;; (bind-key "C-w" 'backward-kill-word meow-insert-state-keymap)
   (define-key meow-insert-state-keymap (kbd "C-w") #'backward-kill-word)
-  ;; (define-key meow-insert-state-keymap (kbd ";tm") 'vterm-toggle)
   )
 
 ;;; Code:
@@ -73,6 +38,36 @@
      '("ww" . major-mode-hydras/persp-mode/body)
      '("bb" . persp-switch-last)
      '("ir" . ivy-resume)
+     '("ff" . (lambda () (interactive) (fzf-find-file-in-dir "~")))
+     '("d=" . diff-hl-diff-goto-hunk)
+     '("du" . (lambda ()
+                (interactive)
+                (if (featurep 'diff-hl)
+                    (diff-hl-diff-goto-hunk)
+                  (define-advice git-gutter:popup-hunk (:around (orig-fun &rest args) my-git-gutter:popup-hunk)
+                    (let ((res (apply orig-fun args)))
+                      (when res
+                        (switch-to-buffer-other-window res)
+                        (evil-local-set-key 'normal (kbd "q") 'kill-buffer-and-window))))
+                  (git-gutter:popup-hunk))))
+     '("dr" . (lambda ()
+                (interactive)
+                (if (featurep 'diff-hl)
+                    (diff-hl-revert-hunk)
+                  (progn
+                    (advice-remove 'git-gutter:popup-hunk 'git-gutter:popup-hunk@my-git-gutter:popup-hunk)
+                    (git-gutter:revert-hunk)))))
+     '("dn" . (lambda ()
+                (interactive)
+                (if (featurep 'diff-hl)
+                    (diff-hl-next-hunk)
+                  (git-gutter:next-hunk (line-number-at-pos)))))
+     '("dp" . (lambda ()
+                (interactive)
+                (if (featurep 'diff-hl)
+                    (diff-hl-previous-hunk)
+                  (git-gutter:previous-hunk (line-number-at-pos)))))
+     
      )
     (meow-normal-define-key
      '("0" . meow-expand-0)
@@ -229,12 +224,13 @@
      '("; rr" . fwar34/counsel-goto-recent-directory)
      '("; rc" . fwar34/run-current-file)
      '("; SPC" . counsel-M-x)
+     '("C-]" . counsel-etags-find-tag-at-point)
+     '("C-r" . undo-redo)
 
      ))
   :config
   (meow-setup)
   (meow-global-mode 1)
-  (key-mappings-setup)
   (meow-insert-setup)
 
   ;; Use jk to escape from insert state to normal state
