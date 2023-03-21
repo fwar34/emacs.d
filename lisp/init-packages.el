@@ -99,6 +99,7 @@
 ; (add-hook 'pre-command-hook #'my-flycheck-evil-insert-state-entry-hook-setup2)
 
 (use-package god-mode
+  :disabled
   :functions
   which-key-enable-god-mode-support
   evil-make-intercept-map

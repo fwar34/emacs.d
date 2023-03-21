@@ -57,6 +57,7 @@
                  meow-last-buffer
                  meow-query-replace
                  meow-query-replace-regexp
+                 meow-goto-line
                  counsel-etags-recent-tag
                  counsel-etags-find-tag
                  counsel-etags-grep
