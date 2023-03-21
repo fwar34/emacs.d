@@ -34,6 +34,9 @@
   (global-set-key (kbd "C-r") 'undo-redo)
   )
 
+(defun meow-insert-setup ()
+  (bind-key "C-w" 'backward-kill-word meow-insert-state-keymap))
+
 ;;; Code:
 (use-package meow
   :init
@@ -200,6 +203,7 @@
   (meow-setup)
   (meow-global-mode 1)
   (key-mappings-setup)
+  (meow-insert-setup)
 
   ;; Use jk to escape from insert state to normal state
   (defvar meow-two-char-escape-sequence ";g")
@@ -230,8 +234,7 @@ S is string of the two-key sequence."
     "Exit meow insert state when pressing consecutive two keys."
     (interactive)
     (meow--two-char-exit-insert-state meow-two-char-escape-sequence))
-  (define-key meow-insert-state-keymap (substring meow-two-char-escape-sequence 0 1)
-    #'meow-two-char-exit-insert-state)
+  (define-key meow-insert-state-keymap (substring meow-two-char-escape-sequence 0 1) #'meow-two-char-exit-insert-state)
   )
 
 (provide 'init-meow)

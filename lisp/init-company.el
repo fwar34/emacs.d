@@ -9,7 +9,7 @@
   ;; (company-minimum-prefix-length 1)
   :bind
   (:map company-active-map
-        ; ("C-w" . evil-delete-backward-word)
+        ("C-w" . backward-kill-word)
         ("C-u" . company-previous-page)
         ("C-d" . company-next-page)
         ("C-j" . company-filter-candidates)

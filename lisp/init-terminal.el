@@ -75,7 +75,6 @@
   :unless (equal system-type 'windows-nt)
   :commands vterm
   :init
-  (add-hook 'vterm-mode-hook #'(lambda () (message "enter veterm hook") (meow-insert)))
   
   )
 
@@ -89,11 +88,13 @@
   (:map vterm-mode-map
 	([f5] . vterm-toggle)
 	([f12] . vterm-toggle-cd)
-	(";tm" . vterm-toggle)
+	("; tm" . vterm-toggle)
 	; (";g" . evil-normal-state)
-	(";vv" . my-vterm-mode-transient))
+	("; vv" . my-vterm-mode-transient))
   :config
   (define-key vterm-mode-map (kbd "C-j") 'vterm-toggle-insert-cd)
+  (add-hook 'vterm-mode-hook #'(lambda () (message "enter veterm hook")
+                                 (bind-key "; tm" 'vterm-toggle meow-insert-state-keymap)))
 
   ;; https://github.com/akermu/emacs-libvterm#keybindings
   ;; 使用 C-q 在 vtem 中发送下个字符到 terminal, 比如 ";"
