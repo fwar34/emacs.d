@@ -76,7 +76,7 @@
   )
 
 (use-package fzf
-  :unless (equal system-type 'windows-nt)
+  ;; :unless (equal system-type 'windows-nt)
   :commands
   (fzf
    fzf-directory

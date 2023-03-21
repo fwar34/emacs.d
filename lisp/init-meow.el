@@ -1,8 +1,9 @@
 ;;; init-meow.el --- Useful preset transient commands  -*- coding:utf-8; lexical-binding: t; -*-
 ;;; Commentary:
 
-(defun meow-insert-setup ()
+(defun meow-other-setup ()
   (define-key meow-insert-state-keymap (kbd "C-w") #'backward-kill-word)
+  (define-key meow-normal-state-keymap [?\C-?] 'ignore)
   )
 
 ;;; Code:
@@ -143,7 +144,6 @@
      '("\\" . meow-comment)
      '("&" . meow-query-replace-regexp)
      '("%" . meow-query-replace)
-     '("<backspace>" . ignore)
      '("RET" . ignore)
      '("<escape>" . ignore))
     (meow-normal-define-key
@@ -230,12 +230,13 @@
      '("; SPC" . counsel-M-x)
      '("C-]" . counsel-etags-find-tag-at-point)
      '("C-r" . undo-redo)
+     '("; ud" . undo-tree-visualize)
 
      ))
   :config
   (meow-setup)
   (meow-global-mode 1)
-  (meow-insert-setup)
+  (meow-other-setup)
 
   ;; Use jk to escape from insert state to normal state
   (defvar meow-two-char-escape-sequence ";g")

@@ -8,6 +8,9 @@
   undo-tree-visualize
   :custom
   (undo-tree-history-directory-alist '(("." .  "~/.emacs.d/undo")))
+  :init
+  (add-hook 'undo-tree-mode-hook #'(lambda ()
+                                     (local-set-key (kbd "q") 'quit-window)))
   :config
   (global-undo-tree-mode))
 
