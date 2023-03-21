@@ -53,6 +53,7 @@
                  counsel-describe-symbol
                  counsel-recentf
                  meow-visit
+                 meow-reverse
                  meow-last-buffer
                  meow-query-replace
                  meow-query-replace-regexp
@@ -66,6 +67,8 @@
                  xref-find-references
                  avy-goto-word-0
                  avy-goto-char-2
+                 scroll-up-command
+                 scroll-down-command
                  ))
     (advice-add con :before #'my-jumper-advice-for-function)))
 
