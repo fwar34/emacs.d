@@ -72,7 +72,7 @@
 (require 'init-tags)
 (require 'init-eshell)
 ; (require 'init-lisp)
-; (require 'init-edit)
+(require 'init-edit)
 (require 'init-org)
 (require 'init-builtin)
 (require 'init-c)

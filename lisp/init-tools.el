@@ -34,12 +34,11 @@
     :override t))
 
 (use-package rg
-  :bind
-  (("C-c rg" . rg-menu)
-   :map rg-mode-map
-   ("w" . wgrep-change-to-wgrep-mode)
-   ("j" . compilation-next-error)
-   ("k" . compilation-previous-error))
+  ;; :bind
+  ;; (:map rg-mode-map
+  ;;  ("w" . wgrep-change-to-wgrep-mode)
+  ;;  ("j" . compilation-next-error)
+  ;;  ("k" . compilation-previous-error))
   :config
   ;; (rg-enable-menu)
   ; (add-hook 'rg-mode-hook (lambda () (evil-set-initial-state 'rg-mode 'emacs)))
@@ -50,13 +49,6 @@
       ("RET" "ivy-done" ivy-done)
       ("," "self insert \",\"" self-insert-command)]])
   (bind-key "," 'my-rg-transient rg-mode-map)
-
-  ;; https://github.com/DogLooksGood/meomacs/blob/master/editor.org#rgel
-  (autoload 'rg-project "wgrep" nil t)
-  (autoload 'rg-project "rg" nil t)
-  (with-eval-after-load "wgrep"
-    (define-key wgrep-mode-map (kbd "C-c C-c") #'wgrep-finish-edit))
-  (define-key project-prefix-map "r" 'rg-project)
   )
 
 (use-package xclip

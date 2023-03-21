@@ -30,21 +30,20 @@
     (("x" wgrep-abort-changes "Discard all changes and return to original mode.")
      ("f" wgrep-finish-edit "Apply changes to file buffers.")
      ("w" wgrep-change-to-wgrep-mode "Change to wgrep mode."))))
-  :general
-  (:states 'normal
-           :jump t
-           :keymaps 'wgrep-mode-map
-           "," #'my-hydra-wgrep/body)
+  :init
+  (with-eval-after-load "wgrep"
+    (define-key wgrep-mode-map (kbd "C-c C-c") #'wgrep-finish-edit))
   :preface
   (defun my-ivy-occur-mode-hook-setup ()
     (local-set-key (kbd ",") #'my-hydra-wgrep/body))
   :config
+  (define-key wgrep-mode-map (kbd ",") 'my-hydra-wgrep/body)
   (add-hook 'ivy-occur-grep-mode-hook #'my-ivy-occur-mode-hook-setup))
 
-(defun my-evil-insert-state-entry-hook-setup2 ()
-  "Enable some packages in evil-state-entry-hook."
+(defun my-meow-insert-state-entry-hook-setup2 ()
+  "Enable some packages in meow-state-entry-hook."
   (when (or (not (featurep 'yasnippet)) (and (boundp 'yas/global-mode) (not yas/global-mode)) (not (boundp 'yas/global-mode)))
-    (remove-hook 'evil-insert-state-entry-hook #'my-evil-insert-state-entry-hook-setup2)
+    (remove-hook 'meow-insert-mode-hook #'my-meow-insert-state-entry-hook-setup2)
     (use-package yasnippet
       :config
       (yas-global-mode)
@@ -54,7 +53,7 @@
         :after yasnippet
         :config
         (setq ivy-yasnippet-expand-keys nil)))))
-(add-hook 'meow-insert-mode-hook #'my-evil-insert-state-entry-hook-setup2)
+(add-hook 'meow-insert-mode-hook #'my-meow-insert-state-entry-hook-setup2)
 
 (use-package fix-word
   :commands

@@ -73,6 +73,8 @@
                  git-gutter:next-hunk
                  diff-hl-previous-hunk
                  diff-hl-next-hunk
+                 rg-menu
+                 
                  ))
     (advice-add con :before #'my-jumper-advice-for-function)))
 

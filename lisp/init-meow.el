@@ -39,6 +39,8 @@
      '("bb" . persp-switch-last)
      '("ir" . ivy-resume)
      '("ff" . (lambda () (interactive) (fzf-find-file-in-dir "~")))
+     '("rp" . rg-project)
+     '("rg" . rg-menu)
      '("d=" . diff-hl-diff-goto-hunk)
      '("du" . (lambda ()
                 (interactive)
@@ -141,6 +143,8 @@
      '("\\" . meow-comment)
      '("&" . meow-query-replace-regexp)
      '("%" . meow-query-replace)
+     '("<backspace>" . ignore)
+     '("RET" . ignore)
      '("<escape>" . ignore))
     (meow-normal-define-key
      '("; 1" . winum-select-window-1)
