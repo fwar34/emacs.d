@@ -31,9 +31,9 @@
   ;; 修改快捷键的map,如果你发你定义自己的快捷键与该major-mode的冲突，可以直接修改它的key-map
   ;; (define-key term-mode-map (kbd "C-=") 'evil-buffer)
   ;; (define-key term-raw-map (kbd "C-=") 'evil-buffer)
-  ; (evil-define-key 'insert term-raw-map ";tm" 'evil-buffer)
-  ; (evil-define-key 'insert term-raw-map ";;" (lambda () (interactive) (term-send-raw-string ";")))
-  ; (evil-define-key 'insert term-raw-map ";g" 'evil-normal-state)
+  ; (define-key term-raw-map ";tm" 'vterm-toggle)
+  ; (define-key term-raw-map ";;" (lambda () (term-send-raw-string ";")))
+  ;; (define-key term-raw-map ";g" 'evil-normal-state)
   
   (defun my-multi-term ()
     (interactive)
@@ -93,8 +93,9 @@
 	("; vv" . my-vterm-mode-transient))
   :config
   (define-key vterm-mode-map (kbd "C-j") 'vterm-toggle-insert-cd)
-  (add-hook 'vterm-mode-hook #'(lambda () (message "enter veterm hook")
-                                 (bind-key "; tm" 'vterm-toggle meow-insert-state-keymap)))
+  ; (define-key vterm-mode-map (kbd ";tm") 'vterm-toggle)
+  ;; (add-hook 'vterm-mode-hook #'(lambda () (message "enter veterm hook")
+  ;;                                ))
 
   ;; https://github.com/akermu/emacs-libvterm#keybindings
   ;; 使用 C-q 在 vtem 中发送下个字符到 terminal, 比如 ";"

@@ -37,6 +37,7 @@
 (defun meow-insert-setup ()
   ;; (bind-key "C-w" 'backward-kill-word meow-insert-state-keymap)
   (define-key meow-insert-state-keymap (kbd "C-w") #'backward-kill-word)
+  ;; (define-key meow-insert-state-keymap (kbd ";tm") 'vterm-toggle)
   )
 
 ;;; Code:
@@ -154,10 +155,21 @@
      '("; 7" . winum-select-window-7)
      '("; 8" . winum-select-window-8)
      '("; 9" . winum-select-window-9)
+     '("; x2" . split-window-below)
+     '("; x3" . split-window-right)
+     '("; bb" . meow-last-buffer)
      '("; so" . symbol-overlay-put)
      '("; st" . symbol-overlay-transient)
      '("; ma" . magit)
      '("; xx" . highlight-remove-all)
+     '("; ci" . evilnc-comment-or-uncomment-lines)
+     '("; cl" . evilnc-quick-comment-or-uncomment-to-the-line)
+     '("; cc" . evilnc-copy-and-comment-lines)
+     '("; cp" . evilnc-comment-or-uncomment-paragraphs)
+     '("; cr" . comment-or-uncomment-region)
+     '("; cv" . evilnc-toggle-invert-comment-line-by-line)
+     '("; ." . evilnc-copy-and-comment-operator)
+     '("; \\" . evilnc-comment-operator) ; if you prefer backslash key
      '("; ii" . counsel-imenu)
      '("; fa" . counsel-rg)
      '("; tl" . counsel-etags-list-tag)
@@ -170,6 +182,11 @@
      '("; kr" . browse-kill-ring)
      '("; rm" . counsel-recentf)
      '("; ff" . counsel-find-file)
+     '("; fd" . my-display-full-path-of-current-buffer)
+     '("; fb" . beginning-of-defun)
+     '("; fe" . end-of-defun)
+     '("; fz" . (lambda () (interactive) (counsel-fzf "" "~")))
+     '("; sw" . transpose-words) ;;swap two words next to each other
      '("; kw" . kill-buffer-and-window)
      '("; bs" . persp-ivy-switch-buffer)
      '("; kb" . persp-kill-buffer*)
@@ -200,6 +217,16 @@
      '("; TAB" . other-window)
      '("; ;w" . avy-goto-word-0)
      '("; gs" . avy-goto-char-2)
+     '("; do" . delete-other-windows)
+     '("; pf" . (lambda () (interactive)
+             (unless (featurep 'counsel)
+               (require 'counsel))
+             (project-find-file)))
+     '("; pg" . 'project-find-regexp)
+     '("; se" . 'open-init-file)
+     '("; rr" . 'fwar34/counsel-goto-recent-directory)
+     '("; rc" . 'fwar34/run-current-file)
+
      ))
   :config
   (meow-setup)
@@ -236,7 +263,27 @@ S is string of the two-key sequence."
     "Exit meow insert state when pressing consecutive two keys."
     (interactive)
     (meow--two-char-exit-insert-state meow-two-char-escape-sequence))
-  (define-key meow-insert-state-keymap (substring meow-two-char-escape-sequence 0 1) #'meow-two-char-exit-insert-state)
+  ;; (define-key meow-insert-state-keymap (substring meow-two-char-escape-sequence 0 1) #'meow-two-char-exit-insert-state)
+  (bind-key (substring meow-two-char-escape-sequence 0 1) #'meow-two-char-exit-insert-state meow-insert-state-keymap)
+  (add-hook 'meow-insert-enter-hook (lambda ()
+                                      (when (member major-mode meow-two-char-exclude-modes)
+                                        (message "meow-insert")
+                                        ;; (local-set-key (kbd "; tm") 'vterm-toggle)
+                                        ;; (define-key term-mode-map (kbd ";tm") 'vterm-toggle)
+                                        (general-define-key
+                                         :keymaps 'term-raw-map
+                                         :prefix ";"
+                                         "tm" 'vterm-toggle
+                                         ";" #'(lambda () (term-send-raw-string ";")))
+                                        ;; (bind-key (kbd ";tm") 'vterm-toggle term-raw-map)
+                                        ;; (define-key term-raw-map (kbd ";tm") 'vterm-toggle)
+                                        ;; (define-key term-raw-map (kbd ";;") (lambda () (term-send-raw-string ";")))
+
+                                        ;; (unbind-key (substring meow-two-char-escape-sequence 0 1) meow-insert-state-keymap)
+                                        ;; (bind-key (substring meow-two-char-escape-sequence 0 1) #'meow-two-char-exit-insert-state meow-insert-state-keymap)
+                                          )
+                                      
+                                      ))
   )
 
 (provide 'init-meow)

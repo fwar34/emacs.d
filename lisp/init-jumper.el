@@ -54,6 +54,9 @@
                  counsel-describe-symbol
                  counsel-recentf
                  meow-visit
+                 meow-last-buffer
+                 meow-query-replace
+                 meow-query-replace-regexp
                  counsel-etags-recent-tag
                  counsel-etags-find-tag
                  counsel-etags-grep
