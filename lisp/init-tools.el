@@ -120,9 +120,17 @@
             (lambda () (setq-local devdocs-current-docs '("python~3.10")))))
 
 (use-package color-rg
-  :disabled
+  ;; :disabled
   :straight
-  (:type github :repo "manateelazycat/color-rg")
+  (:host github :repo "manateelazycat/color-rg")
+  :config
+  )
+
+(use-package blink-search
+  ;; :disabled
+  :load-path "elpa/blink-search"
+  ;; :straight
+  ;; (:host github :repo "manateelazycat/blink-search")
   :config
   )
 
