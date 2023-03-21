@@ -151,13 +151,13 @@
 ;;----------------------------------------------------------------
 ;; https://magit.vc/manual/transient.html
 ;; https://gist.github.com/abrochard/dd610fc4673593b7cbce7a0176d897de
-;; ‘define-transient-command’ is an obsolete alias (as of Transient 0.3.0); use ‘transient-define-prefix’ instead.
+;; ‘transient-define-prefix’ is an obsolete alias (as of Transient 0.3.0); use ‘transient-define-prefix’ instead.
 ;;----------------------------------------------------------------
 ;; A simple transient
 (defun test-function-1 ()
   (interactive)
   (message "Test function"))
-(define-transient-command test-transient-1 ()
+(transient-define-prefix test-transient-1 ()
   "Test Transient Title"
   ["Actions"
    ("a" "Action a" test-function-1)
@@ -171,7 +171,7 @@
   (interactive
    (list (transient-args 'test-transient-2)))
   (message "args: %s" args))
-(define-transient-command test-transient-2 ()
+(transient-define-prefix test-transient-2 ()
   "Test Transient Title"
   ["Arguments"
    ("-s" "Switch" "--switch")
@@ -188,13 +188,13 @@
    (list (transient-args 'test-transient-3)))
   (message "args %s" args))
 
-(define-infix-argument test-transient-3:--message ()
-  :description "Message"
-  :class 'transient-option
-  :shortarg "-m"
-  :argument "--message=")
+;; (define-infix-argument test-transient-3:--message ()
+;;   :description "Message"
+;;   :class 'transient-option
+;;   :shortarg "-m"
+;;   :argument "--message=")
 
-(define-transient-command test-transient-3 ()
+(transient-define-prefix test-transient-3 ()
   "Test Transient Title"
   ["Arguments"
    ("-s" "Switch" "--switch")
@@ -211,7 +211,7 @@
    (list (transient-args 'test-transient-4)))
   (message "args %s" args))
 
-(define-transient-command test-transient-4 ()
+(transient-define-prefix test-transient-4 ()
   "Test Transient Title"
   ["Arguments"
    ("-s" "Switch" "--switch")
