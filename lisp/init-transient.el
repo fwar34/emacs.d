@@ -248,8 +248,9 @@
     ("k" "open my task.org" my-task-file-open)
     ("l" "electric-pair-mode" electric-pair-mode)]
    [" <page scroll>"
-    ("d" "scroll page down" evil-scroll-page-down :transient t)
-    ("u" "scroll page up" evil-scroll-page-up :transient t)]])
+    ("d" "scroll page down" scroll-down-command :transient t)
+    ("u" "scroll page up" scroll-up-command :transient t)
+    ]])
 
 ;; }}}
 

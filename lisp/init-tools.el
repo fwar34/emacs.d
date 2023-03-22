@@ -41,9 +41,9 @@
   ;;  ("k" . compilation-previous-error))
   :config
   ;; (rg-enable-menu)
-  ; (add-hook 'rg-mode-hook (lambda () (evil-set-initial-state 'rg-mode 'emacs)))
+  ;; (add-hook 'rg-mode-hook (lambda () (evil-set-initial-state 'rg-mode 'emacs)))
   
-(transient-define-prefix my-rg-transient ()
+  (transient-define-prefix my-rg-transient ()
     "my ivy minibuffer commands"
     [[" <ivy commands>"
       ("RET" "ivy-done" ivy-done)
@@ -115,11 +115,36 @@
   ;; :disabled
   :straight
   (:host github :repo "manateelazycat/color-rg")
-  :config
+  :commands
+  (color-rg-search-input
+   color-rg-search-symbol
+   color-rg-search-input-in-project
+   color-rg-search-symbol-in-project
+   color-rg-search-symbol-in-current-file
+   color-rg-search-input-in-current-file
+   color-rg-search-project-rails
+   color-rg-search-symbol-with-type
+   color-rg-search-project-with-type
+   color-rg-search-project-rails-with-type)
+  :init
+  (transient-define-prefix my-color-rg-transient ()
+    "my color-rg commands"
+    [[" <color-rg commands>"
+      ("ic" "Search user's input with current directory" color-rg-search-input)
+      ("sc" "Search current symbol with current directory" color-rg-search-symbol)
+      ("ip" "Search user's input in project" color-rg-search-input-in-project)
+      ("sp" "Search current symbol in project" color-rg-search-symbol-in-project)
+      ("sf" "Search current symbol in current file" color-rg-search-symbol-in-current-file)
+      ("if" "Search user's input in current file" color-rg-search-input-in-current-file)
+      ("ir" "Search user's input in rails project" color-rg-search-project-rails)
+      ("st" "Search current symbol with current directory and special file extensions" color-rg-search-symbol-with-type)
+      ("it" "Search user's input in project and special file extensions" color-rg-search-project-with-type)
+      ("xx" "Search user's input in rails project and special file extensions" color-rg-search-project-rails-with-type)
+      ]])
   )
 
 (use-package blink-search
-  :disabled
+  ;; :disabled
   :load-path "elpa/blink-search"
   ;; :straight
   ;; (:host github :repo "manateelazycat/blink-search")
