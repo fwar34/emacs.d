@@ -35,11 +35,12 @@
     
     (meow-leader-define-key
      ;; '("fn" . c-display-defun-name)
+     '("bs" . switch-to-buffer)
      '("qq" . save-buffers-kill-terminal)
      '("fn" . (lambda () (message (c-defun-name))))
      '("ww" . major-mode-hydras/persp-mode/body)
      '("bb" . persp-switch-last)
-     '("bs" . blink-search)
+     '("bl" . blink-search)
      '("rc" . my-color-rg-transient)
      '("ir" . ivy-resume)
      '("ff" . (lambda () (interactive) (fzf-find-file-in-dir "~")))
