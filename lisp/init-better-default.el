@@ -90,6 +90,11 @@
 ;; Suppressing ad-handle-definition Warnings in Emacs
 (setq ad-redefinition-action 'accept)
 ;; }}}
+;; (setq scroll-step 1
+;;       scroll-margin 1
+;;       scroll-conservatively 100000
+;;       auto-window-vscroll nil
+;;       scroll-preserve-screen-position t)
 
 ;; 随时重新加载发生修改过的文件
 (setq load-prefer-newer t)
