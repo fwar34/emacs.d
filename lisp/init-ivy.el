@@ -33,7 +33,15 @@
    ("C-w" . ivy-backward-kill-word))
   :config
   ;; https://melpa.org/#/ivy-hydra
+  ;; This package provides the `hydra-ivy/body' command, which is a
+  ;; quasi-prefix map, with many useful bindings.  These bindings are
+  ;; shorter than usual, using mostly unprefixed keys.
   (use-package ivy-hydra
+    :ensure t)
+
+  ;; https://melpa.org/#/ivy-avy
+  ;; This package adds a "C-'" binding to Ivy minibuffer that uses Avy.
+  (use-package ivy-avy
     :ensure t)
 
   ;; 调整 counsel 搜索的方式: 忽略单词顺序
@@ -80,6 +88,7 @@
                                   "--iglob" "!makefile.*"
                                   "--iglob" "!*.lo"
                                   "--iglob" "!*.html"
+                                  "--iglob" "!#*.*#"
                                   "."))
 
   ;; https://emacs-china.org/t/emacs-helm-ag/6764
@@ -96,6 +105,7 @@
       ("s" "ivy-restrict-to-matches" ivy-restrict-to-matches)
       ("d" "swiper-avy" swiper-avy)
       ("c" "ivy-occur" ivy-occur)
+      ("l" "ivy-avy" ivy-avy)
       ("f" "ivy-call" ivy-call :transient t) ;; M-return
       ("a" "ivy-beginning-of-buffer" ivy-beginning-of-buffer :transient t)
       ("e" "ivy-end-of-buffer" ivy-end-of-buffer :transient t)
