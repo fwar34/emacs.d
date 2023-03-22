@@ -154,18 +154,6 @@
   :hook
   (prog-mode . highlight-numbers-mode))
 
-;; highlight-quoted
-(use-package highlight-quoted
-  :disabled
-  :hook
-  (emacs-lisp-mode . highlight-quoted-mode))
-
-;; highlight-defined
-(use-package highlight-defined
-  :disabled
-  :hook
-  (emacs-lisp-mode . highlight-defined-mode))
-
 (use-package highlight-parentheses
   :disabled
   :config

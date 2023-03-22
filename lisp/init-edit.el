@@ -75,9 +75,10 @@
 ;; Emacs minor mode for Eclipse-like moving and duplications of lines or selections with convenient key bindings.
 (use-package move-dup
   :bind (("M-p"   . move-dup-move-lines-up)
-         ("C-M-p" . move-dup-duplicate-up)
+         ;; ("C-M-p" . move-dup-duplicate-up)
          ("M-n"   . move-dup-move-lines-down)
-         ("C-M-n" . move-dup-duplicate-down)))
+         ;; ("C-M-n" . move-dup-duplicate-down)
+         ))
 
 (use-package evil-nerd-commenter
   :commands

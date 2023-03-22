@@ -49,6 +49,25 @@
   ;; (add-hook 'clojure-mode-hook 'cider-mode)
   )
 
+(use-package lisp-extra-font-lock
+  :disabled
+  :ensure t
+  :config
+  (lisp-extra-font-lock-global-mode 1)
+  )
+
+;; highlight-quoted
+(use-package highlight-quoted
+  ;; :disabled
+  :hook
+  (emacs-lisp-mode . highlight-quoted-mode))
+
+;; highlight-defined
+(use-package highlight-defined
+  ;; :disabled
+  :hook
+  (emacs-lisp-mode . highlight-defined-mode))
+
 ;; (use-package inf-clojure
 ;;   :disabled
 ;;   :ensure t
