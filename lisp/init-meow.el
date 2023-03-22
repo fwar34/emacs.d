@@ -35,7 +35,7 @@
     
     (meow-leader-define-key
      ;; '("fn" . c-display-defun-name)
-     '("bs" . switch-to-buffer)
+     '("bs" . ivy-switch-buffer)
      '("qq" . save-buffers-kill-terminal)
      '("fn" . (lambda () (message (c-defun-name))))
      '("ww" . major-mode-hydras/persp-mode/body)
