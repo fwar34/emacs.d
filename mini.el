@@ -52,5 +52,8 @@
 (require 'init-base)
 ;; (require 'init-evil)
 
+(setq viper-mode t)
+(require 'viper)
+
 (provide 'init)
 ;;; init.el ends here

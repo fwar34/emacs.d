@@ -17,6 +17,7 @@ server/*
 bookmarks
 lisp/*.*archive
 **/#*.*#
+**/*~
 lisp/GPATH
 lisp/GRTAGS
 lisp/GTAGS
