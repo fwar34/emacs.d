@@ -58,6 +58,11 @@
                  meow-query-replace
                  meow-query-replace-regexp
                  meow-goto-line
+                 meow-search
+                 meow-inner-of-thing
+                 meow-bounds-of-thing
+                 meow-beginning-of-thing
+                 meow-end-of-thing
                  counsel-etags-recent-tag
                  counsel-etags-find-tag
                  counsel-etags-grep

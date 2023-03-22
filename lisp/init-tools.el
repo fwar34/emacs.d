@@ -34,11 +34,11 @@
     :override t))
 
 (use-package rg
-  ;; :bind
-  ;; (:map rg-mode-map
-  ;;  ("w" . wgrep-change-to-wgrep-mode)
-  ;;  ("j" . compilation-next-error)
-  ;;  ("k" . compilation-previous-error))
+  :bind
+  (:map rg-mode-map
+   ;; ("j" . compilation-next-error)
+   ;; ("k" . compilation-previous-error)
+   ("w" . wgrep-change-to-wgrep-mode))
   :config
   ;; (rg-enable-menu)
   ;; (add-hook 'rg-mode-hook (lambda () (evil-set-initial-state 'rg-mode 'emacs)))
