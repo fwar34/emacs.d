@@ -306,5 +306,16 @@ _R_ebuild package |_P_ull package  |_V_ersions thaw  |^ ^               |prun_e_
     ("g" "straight-get-recipe" straight-get-recipe)
     ("e" "straight-prune-build" straight-prune-build)]])
 
+(use-package calc-transient
+  :disabled
+  :straight
+  (:host github :repo "karthink/calc-transient"))
+
+(use-package transient-showcase
+  :demand t
+  :straight
+  (:host github :repo "positron-solutions/transient-showcase")
+  )
+
 (provide 'init-transient)
 ;;; init-transient.el ends here

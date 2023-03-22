@@ -155,7 +155,6 @@
       ("d" org-schedule :exit t)
       ("q" nil))
     (define-key org-mode-map (kbd "M-u or") 'hydra-org/body)
-    ; (evil-define-key 'normal org-mode-map (kbd "M-u C-o C-r") 'hydra-org/body)
     )
 
   ;;-------------------------------------------------------------
