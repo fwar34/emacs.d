@@ -33,7 +33,8 @@
    ("C-w" . ivy-backward-kill-word))
   :config
   ;; https://melpa.org/#/ivy-hydra
-  (use-package ivy-hydra)
+  (use-package ivy-hydra
+    :ensure t)
 
   ;; 调整 counsel 搜索的方式: 忽略单词顺序
   (setq ivy-re-builders-alist
@@ -106,10 +107,15 @@
   (bind-key "," 'my-ivy-minibuffer-transient ivy-minibuffer-map)
 
   (use-package amx
+    :ensure t
     :config
     (amx-mode))
 
+  (use-package flx
+    :ensure t)
+
   (use-package ivy-xref
+    :ensure t
     :init
     ;; xref initialization is different in Emacs 27 - there are two different
     ;; variables which can be set rather than just one
@@ -165,6 +171,7 @@
   )
 
 (use-package ivy-rich
+  :ensure t
   :hook
   (ivy-mode . ivy-rich-mode)
   :config

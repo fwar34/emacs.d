@@ -243,7 +243,20 @@
   (meow-setup)
   (meow-global-mode 1)
   (meow-other-setup)
+  (add-to-list 'meow-mode-state-list '(color-rg-mode . insert))
+  (add-to-list 'meow-mode-state-list '(vterm-mode . insert))
+  (add-to-list 'meow-mode-state-list '(blink-search-mode . insert))
 
+  (add-to-list 'meow-char-thing-table '(?o . do/end))
+  (meow-thing-register 'do/end
+                       '(pair ("do" "fn") ("end"))
+                       '(pair ("do" "fn") ("end")))
+  (meow-thing-register 'quoted
+                       '(regexp "`" "`\\|'")
+                       '(regexp "`" "`\\|'"))
+  (setq meow-grab-fill-commands '(meow-query-replace meow-query-replace-regexp eval-expression)
+        meow-esc-delay 0.001)
+  
   ;; Use jk to escape from insert state to normal state
   (defvar meow-two-char-escape-sequence ";g")
   (defvar meow-two-char-escape-delay 0.5)
