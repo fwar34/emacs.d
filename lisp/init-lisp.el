@@ -18,8 +18,8 @@
 
 ;; https://github.com/noctuid/lispyville
 (use-package lispyville
+  :disabled
   :defer t
-  ;; :disabled
   ;; :hook
   ;; lispyvill used with lispy
   ;; (lispy-mode . lispyville-mode)
