@@ -169,7 +169,7 @@
   :hook
   (prog-mode . global-tree-sitter-mode)
   :config
-  (use-package tree-sitter-langs)
+  (use-package tree-sitter-langs :ensure t)
   ;; (global-tree-sitter-mode)
   (add-hook 'tree-sitter-after-on-hook 'tree-sitter-hl-mode))
 
