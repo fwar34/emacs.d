@@ -246,6 +246,7 @@
   (add-to-list 'meow-mode-state-list '(color-rg-mode . insert))
   (add-to-list 'meow-mode-state-list '(vterm-mode . insert))
   (add-to-list 'meow-mode-state-list '(blink-search-mode . insert))
+  (add-to-list 'meow-mode-state-list '(magit-status-mode . insert))
 
   (add-to-list 'meow-char-thing-table '(?o . do/end))
   (meow-thing-register 'do/end
