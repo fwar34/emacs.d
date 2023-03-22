@@ -179,7 +179,7 @@
 (use-package tree-sitter
   ;; :disabled
   :hook
-  (emacs-startup . global-tree-sitter-mode)
+  (prog-mode . global-tree-sitter-mode)
   :config
   (use-package tree-sitter-langs)
   ;; (global-tree-sitter-mode)
@@ -187,7 +187,6 @@
 
 ;; beacon
 (use-package beacon
-  :disabled
   :hook
   (emacs-startup . beacon-mode))
 
@@ -243,7 +242,6 @@
   (prog-mode . form-feed-mode))
 
 (use-package hl-todo
-  :disabled
   :config
   (global-hl-todo-mode))
 
