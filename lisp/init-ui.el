@@ -210,6 +210,14 @@
   ;;   (define-key map (kbd "n") 'symbol-overlay-jump-next)
   ;;   (define-key map (kbd "p") 'symbol-overlay-jump-prev)
   ;;   (setq symbol-overlay-map map))
+  (define-key symbol-overlay-map (kbd "h") 'meow-left)
+  (define-key symbol-overlay-map (kbd "?") 'symbol-overlay-map-help)
+  (define-key symbol-overlay-map (kbd "e") 'meow-line)
+  (define-key symbol-overlay-map (kbd "i") 'meow-append)
+  (define-key symbol-overlay-map (kbd "v") 'symbol-overlay-put)
+  (define-key symbol-overlay-map (kbd "V") 'symbol-overlay-echo-mark)
+  (define-key symbol-overlay-map (kbd "y") 'symbol-overlay-save-symbol)
+  (define-key symbol-overlay-map (kbd "w") 'meow-next-word)
   )
 
 
