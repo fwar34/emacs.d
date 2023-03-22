@@ -190,18 +190,19 @@
 (use-package symbol-overlay
   ;;默认n,p,i,q在高亮的地方点击为下一个，上一个，取消所有的高亮，替换
   :commands symbol-overlay
-  :config
+  :init
   (transient-define-prefix symbol-overlay-transient ()
     "Symbol Overlay transient"
     ["Symbol Overlay"
      ["Overlays"
-      ("." "Add/Remove at point" symbol-overlay-put)
-      ("k" "Remove All" symbol-overlay-remove-all)]
+      ("." "Add/Remove at point" symbol-overlay-put :transient t)
+      ("k" "Remove All" symbol-overlay-remove-all :transient t)]
      ["Move to Symbol"
-      ("n" "Next" symbol-overlay-switch-forward)
-      ("p" "Previous" symbol-overlay-switch-backward)]
+      ("n" "Next" symbol-overlay-switch-forward :transient t)
+      ("p" "Previous" symbol-overlay-switch-backward :transient t)]
      ["Other"
-      ("m" "Hightlight symbol-at-point" symbol-overlay-mode)]])
+      ("m" "Hightlight symbol-at-point" symbol-overlay-mode :transient t)]])
+  :config
   ;; Or you may prefer to overwrite the keymap
   ;; (let ((map (make-sparse-keymap)))
   ;;   (define-key map (kbd "r") 'symbol-overlay-query-replace)
