@@ -130,6 +130,7 @@
 ;; {{{ highlight -----------------------------------------------------------------------------
 ;; 上色括号之类的符号
 (use-package rainbow-delimiters
+  :disabled
   :hook
   (prog-mode . rainbow-delimiters-mode))
 
@@ -142,17 +143,20 @@
 
 ;; 上色变量
 (use-package rainbow-identifiers
+  :disabled
   :hook
   (prog-mode . rainbow-identifiers-mode))
 
 ;; highlight-numbers
 (use-package highlight-numbers
+  :disabled
   :unless window-system
   :hook
   (prog-mode . highlight-numbers-mode))
 
 ;; highlight-quoted
 (use-package highlight-quoted
+  :disabled
   :hook
   (emacs-lisp-mode . highlight-quoted-mode))
 
@@ -163,6 +167,7 @@
   (emacs-lisp-mode . highlight-defined-mode))
 
 (use-package highlight-parentheses
+  :disabled
   :config
   ;; (add-hook 'prog-mode-hook 'highlight-parentheses-mode)
   ;; (define-globalized-minor-mode global-highlight-parentheses-mode
@@ -172,7 +177,7 @@
 ;; }}} -----------------------------------------------------------------------------
 
 (use-package tree-sitter
-  :disabled
+  ;; :disabled
   :hook
   (emacs-startup . global-tree-sitter-mode)
   :config
@@ -182,6 +187,7 @@
 
 ;; beacon
 (use-package beacon
+  :disabled
   :hook
   (emacs-startup . beacon-mode))
 
@@ -237,6 +243,7 @@
   (prog-mode . form-feed-mode))
 
 (use-package hl-todo
+  :disabled
   :config
   (global-hl-todo-mode))
 
