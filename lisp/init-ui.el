@@ -230,6 +230,7 @@
   (prog-mode . form-feed-mode))
 
 (use-package hl-todo
+  :disabled
   :config
   (global-hl-todo-mode))
 

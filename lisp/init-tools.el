@@ -145,7 +145,7 @@
 
 (use-package blink-search
   ;; :disabled
-  :load-path "elpa/blink-search"
+  :load-path "blink-search"
   ;; :straight
   ;; (:host github :repo "manateelazycat/blink-search")
   :config
