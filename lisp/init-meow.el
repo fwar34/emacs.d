@@ -221,7 +221,7 @@
                     (require 'ivy-xref))
                   (xref-find-references identifier)))
      '("; dj" . dired-jump) ;; open the dired from current file
-     '("==" . indent-region)
+     '("=" . indent-region)
      '("; TAB" . other-window)
      '("; ;w" . avy-goto-word-0)
      '("; gs" . avy-goto-char-2)

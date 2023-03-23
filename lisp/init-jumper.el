@@ -12,6 +12,7 @@
   :init
   (defun my-jumper-advice-for-function (&rest _)
     (better-jumper-set-jump))
+  (define-key c++-mode-map (kbd "C-i") #'better-jumper-jump-forward)
   :config
   (dolist (con '(ivy-switch-buffer
                  persp-ivy-switch-buffer
@@ -37,9 +38,6 @@
                  counsel-ag
                  my-search-forward-word
                  my-search-whole-word
-                 lispyville-beginning-of-defun
-                 lispyville-end-of-defun
-                 lispyville--maybe-enter-special
                  swiper
                  swiper-all
                  my-swiper-forward-word
@@ -80,6 +78,7 @@
                  diff-hl-previous-hunk
                  diff-hl-next-hunk
                  rg-menu
+                 indent-region
                  
                  ))
     (advice-add con :before #'my-jumper-advice-for-function)))

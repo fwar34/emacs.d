@@ -22,7 +22,21 @@
   :init (smart-hungry-delete-add-default-hooks))
 
 (use-package expand-region
-  :commands er/expand-region)
+  :commands er/expand-region
+  ;; :bind ("M-=" . er/expand-region)
+  )
+
+(use-package embrace
+  :ensure t
+  :pretty-hydra
+  (my-hydra-embrace
+   (:foreign-keys warn :color teal :quit-key "q" :title "<embrace commands>")
+   ("Column"
+    (("a" embrace-add "embrace-add")
+    ("c" embrace-change "embrace-change")
+    ("d" embrace-delete "embrace-change"))))
+  :bind
+  ("M-=" . my-hydra-embrace/body))
 
 (use-package wgrep
   :commands
