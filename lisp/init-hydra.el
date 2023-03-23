@@ -358,8 +358,8 @@
   (defhydra hydra-error (:foreign-keys run)
     "goto-error"
     ("h" first-error "first")
-    ("j" next-error "next")
-    ("k" previous-error "prev")
+    ("n" next-error "next")
+    ("p" previous-error "prev")
     ("v" recenter-top-bottom "recenter")
     ("q" nil "quit"))
   (global-set-key (kbd "M-u er") 'hydra-error/body)
