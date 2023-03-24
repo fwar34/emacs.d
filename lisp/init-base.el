@@ -14,6 +14,11 @@
 (require 'bind-key)
 (setq use-package-always-ensure t)
 
+(define-prefix-command 'M-u-map)
+(global-set-key (kbd "M-u") 'M-u-map)
+;; (define-prefix-command 'C-j-map)
+;; (global-set-key (kbd "C-j") 'C-j-map)
+
 (use-package auto-compile
   :no-require t)
 

@@ -48,16 +48,15 @@
    ("<wgrep-mode commands>"
     (("x" wgrep-abort-changes "Discard all changes and return to original mode.")
      ("f" wgrep-finish-edit "Apply changes to file buffers.")
-     ("w" wgrep-change-to-wgrep-mode "Change to wgrep mode."))))
+     ("w" wgrep-change-to-wgrep-mode "Change to wgrep mode.")
+     ("s" wgrep-save-all-buffers "Wgrep save all buffers"))))
   :init
+  (global-set-key (kbd "M-u wg") #'my-hydra-wgrep/body)
   (with-eval-after-load "wgrep"
     (define-key wgrep-mode-map (kbd "C-c C-c") #'wgrep-finish-edit))
-  :preface
-  (defun my-ivy-occur-mode-hook-setup ()
-    (local-set-key (kbd ",") #'my-hydra-wgrep/body))
   :config
-  (define-key wgrep-mode-map (kbd ",") 'my-hydra-wgrep/body)
-  (add-hook 'ivy-occur-grep-mode-hook #'my-ivy-occur-mode-hook-setup))
+  (define-key ivy-occur-grep-mode-map (kbd ",") 'my-hydra-wgrep/body)
+  )
 
 (defun my-meow-insert-state-entry-hook-setup2 ()
   "Enable some packages in meow-state-entry-hook."

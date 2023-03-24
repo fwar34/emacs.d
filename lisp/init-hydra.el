@@ -31,8 +31,6 @@
   ; :after evil
   :ensure t
   :init
-  (define-prefix-command 'M-u-map)
-  (global-set-key (kbd "M-u") 'M-u-map)
   :config
 
   (defhydra hydra-zoom (global-map "C-M-s")

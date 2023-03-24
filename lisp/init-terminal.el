@@ -88,15 +88,20 @@
   (:map vterm-mode-map
 	([f5] . vterm-toggle)
 	([f12] . vterm-toggle-cd)
-	("; tm" . vterm-toggle)
+	;; (";tm" . vterm-toggle)
 	; (";g" . evil-normal-state)
-	("; vv" . my-vterm-mode-transient))
+	;; (";vv" . my-vterm-mode-transient)
+    )
   :config
   (define-key vterm-mode-map (kbd "C-j") 'vterm-toggle-insert-cd)
   ; (define-key vterm-mode-map (kbd ";tm") 'vterm-toggle)
   ;; (add-hook 'vterm-mode-hook #'(lambda () (message "enter veterm hook")
   ;;                                ))
-
+  (general-define-key
+   :keymaps 'vterm-mode-map
+   :prefix ";"
+   ";" 'self-insert-command
+   "tm" 'vterm-toggle)
   ;; https://github.com/akermu/emacs-libvterm#keybindings
   ;; 使用 C-q 在 vtem 中发送下个字符到 terminal, 比如 ";"
   ; (evil-define-key 'insert vterm-mode-map (kbd "C-q") 'vterm-send-next-key)

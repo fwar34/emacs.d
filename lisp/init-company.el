@@ -9,6 +9,7 @@
   ;; (company-minimum-prefix-length 1)
   :init
   (add-hook 'c++-mode-hook #'company-mode)
+  (add-hook 'c-mode-hook #'company-mode)
   :bind
   (:map company-active-map
         ("C-w" . backward-kill-word)

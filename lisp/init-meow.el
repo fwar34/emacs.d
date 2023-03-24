@@ -232,6 +232,7 @@
                   (project-find-file)))
      '("; pg" . project-find-regexp)
      '("; se" . open-init-file)
+     '("; ce" . meow-motion-mode)
      '("; rr" . fwar34/counsel-goto-recent-directory)
      '("; rc" . fwar34/run-current-file)
      '("; SPC" . counsel-M-x)
@@ -266,50 +267,34 @@
   (defvar meow-two-char-exclude-modes '(vterm-mode))
   (defun meow--two-char-exit-insert-state (s)
     "Exit meow insert state when pressing consecutive two keys.
-
 S is string of the two-key sequence."
-    (when (and (meow-insert-mode-p) (not (member major-mode meow-two-char-exclude-modes)))
-      (let ((modified (buffer-modified-p))
-            (undo-list buffer-undo-list))
-        (insert (elt s 0))
-        (let* ((second-char (elt s 1))
-               (event
-                (if defining-kbd-macro
-                    (read-event nil nil)
-                  (read-event nil nil meow-two-char-escape-delay))))
-          (when event
-            (if (and (characterp event) (= event second-char))
-                (progn
-                  (backward-delete-char 1)
-                  (set-buffer-modified-p modified)
-                  (setq buffer-undo-list undo-list)
-                  (meow-insert-exit))
-              (push event unread-command-events)))))))
+    (when (meow-insert-mode-p)
+        (let ((modified (buffer-modified-p))
+              (undo-list buffer-undo-list))
+          (insert (elt s 0))
+          (let* ((second-char (elt s 1))
+                 (event
+                  (if defining-kbd-macro
+                      (read-event nil nil)
+                    (read-event nil nil meow-two-char-escape-delay))))
+            (when event
+              (if (and (characterp event) (= event second-char))
+                  (progn
+                    (backward-delete-char 1)
+                    (set-buffer-modified-p modified)
+                    (setq buffer-undo-list undo-list)
+                    (meow-insert-exit))
+                (push event unread-command-events)))))))
   (defun meow-two-char-exit-insert-state ()
     "Exit meow insert state when pressing consecutive two keys."
     (interactive)
     (meow--two-char-exit-insert-state meow-two-char-escape-sequence))
   ;; (define-key meow-insert-state-keymap (substring meow-two-char-escape-sequence 0 1) #'meow-two-char-exit-insert-state)
-  (bind-key (substring meow-two-char-escape-sequence 0 1) #'meow-two-char-exit-insert-state meow-insert-state-keymap)
-  (add-hook 'meow-insert-enter-hook (lambda ()
-                                      (when (member major-mode meow-two-char-exclude-modes)
-                                        (message "meow-insert")
-                                        ;; (local-set-key (kbd "; tm") 'vterm-toggle)
-                                        ;; (define-key term-mode-map (kbd ";tm") 'vterm-toggle)
-                                        (general-define-key
-                                         :keymaps 'term-raw-map
-                                         :prefix ";"
-                                         "tm" 'vterm-toggle
-                                         ";" #'(lambda () (term-send-raw-string ";")))
-                                        ;; (bind-key (kbd ";tm") 'vterm-toggle term-raw-map)
-                                        ;; (define-key term-raw-map (kbd ";tm") 'vterm-toggle)
-                                        ;; (define-key term-raw-map (kbd ";;") (lambda () (term-send-raw-string ";")))
-
-                                        ;; (unbind-key (substring meow-two-char-escape-sequence 0 1) meow-insert-state-keymap)
-                                        ;; (bind-key (substring meow-two-char-escape-sequence 0 1) #'meow-two-char-exit-insert-state meow-insert-state-keymap)
-                                        )
-                                      
-                                      ))
+  (define-key meow-insert-state-keymap (substring meow-two-char-escape-sequence 0 1) #'(lambda ()
+                                                                                         (interactive)
+                                                                                         (unless (equal major-mode 'vterm-mode)
+                                                                                           (meow-two-char-exit-insert-state)
+                                                                                             )))
   )
 
 (provide 'init-meow)
