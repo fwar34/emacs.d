@@ -34,7 +34,8 @@
    ("Column"
     (("a" embrace-add "embrace-add")
     ("c" embrace-change "embrace-change")
-    ("d" embrace-delete "embrace-change"))))
+    ("d" embrace-delete "embrace-change")
+    ("=" c-indent-line-or-region "c-indent-line-or-region"))))
   :bind
   ("M-=" . my-hydra-embrace/body))
 

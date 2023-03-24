@@ -239,11 +239,12 @@
   [[" <my misc commands>"
     ("h" "hl-todo" my-hl-todo)
     ("p" "clipboard-yank" clipboard-yank)
-    ("s" "shortdoc-display-group" shortdoc-display-group)
+    ("j" "shortdoc-display-group" shortdoc-display-group)
     ("e" "hydra etags hydra" hydra-counsel-etags/body)
     ("t" "straight commands" my-straight-transient)
     ("c" "cargo commands" cargo-transient)
     ("w" "wgrep-change-to-wgrep-mode" wgrep-change-to-wgrep-mode)
+    ("s" "wgrep-save-all-buffers" wgrep-save-all-buffers)
     ("i" "change input method" hydra-input-method/body)
     ("k" "open my task.org" my-task-file-open)
     ("l" "electric-pair-mode" electric-pair-mode)]

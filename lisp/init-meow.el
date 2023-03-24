@@ -207,7 +207,7 @@
      '("; fs" . (lambda () (interactive) (my-search-forward-word 'counsel-rg)))
      '("; ls" . my-swiper-forward-word)
      '("; lw" . swiper-thing-at-point)
-     '("; zz" . save-buffer)
+     '("; ee" . save-buffer)
      '("; md" . mark-defun)
      '("; xd" . (lambda (identifier)
                   (interactive (list (xref--read-identifier "Find definitions of: ")))
