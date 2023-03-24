@@ -263,6 +263,7 @@
   
   ;; Use jk to escape from insert state to normal state
   (defvar meow-two-char-escape-sequence ";g")
+  (defvar meow-three-char-vterm-toggle-sequence ";tm")
   (defvar meow-two-char-escape-delay 0.5)
   (defvar meow-two-char-exclude-modes '(vterm-mode))
   (defun meow--two-char-exit-insert-state (s)
@@ -289,12 +290,44 @@ S is string of the two-key sequence."
     "Exit meow insert state when pressing consecutive two keys."
     (interactive)
     (meow--two-char-exit-insert-state meow-two-char-escape-sequence))
+  
+  (defun meow-three-char-vterm-toggle (s)
+    (when (meow-insert-mode-p)
+      (let ((modified (buffer-modified-p))
+            (undo-list buffer-undo-list))
+        (vterm-send-string (char-to-string (elt s 0)))
+        (let* ((second-char (elt s 1))
+               (third-char (elt s 2))
+               (event
+                (if defining-kbd-macro
+                    (read-event nil nil)
+                  (read-event nil nil meow-two-char-escape-delay))))
+          (when event
+            (vterm-send-string (char-to-string event))
+            (if (and (characterp event) (= event second-char))
+                (progn
+                  (let ((event2
+                        (if defining-kbd-macro
+                            (read-event nil nil)
+                          (read-event nil nil meow-two-char-escape-delay))))
+                    (when event2
+                      (if (and (characterp event2) (= event2 third-char))
+                          (progn
+                            (message "xxxxxxx")
+                            (vterm-send-backspace)
+                            (vterm-send-backspace)
+                            (message "yyyyyyy")
+                            ;; (set-buffer-modified-p modified)
+                            ;; (setq buffer-undo-list undo-list)
+                            (vterm-toggle))
+                        (push event2 unread-command-events)))))
+              (push event unread-command-events)))))))
   ;; (define-key meow-insert-state-keymap (substring meow-two-char-escape-sequence 0 1) #'meow-two-char-exit-insert-state)
   (define-key meow-insert-state-keymap (substring meow-two-char-escape-sequence 0 1) #'(lambda ()
                                                                                          (interactive)
-                                                                                         (unless (equal major-mode 'vterm-mode)
-                                                                                           (meow-two-char-exit-insert-state)
-                                                                                             )))
+                                                                                         (if (member major-mode meow-two-char-exclude-modes)
+                                                                                             (meow-three-char-vterm-toggle meow-three-char-vterm-toggle-sequence)
+                                                                                           (meow-two-char-exit-insert-state))))
   )
 
 (provide 'init-meow)
