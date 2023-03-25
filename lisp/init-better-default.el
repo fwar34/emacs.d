@@ -262,16 +262,6 @@
 (add-hook 'prog-mode-hook (lambda () (modify-syntax-entry ?_ "w")))
 (add-hook 'emacs-lisp-mode-hook (lambda () (modify-syntax-entry ?- "w")))
 
-(defun my-help-setup ()
-  (modify-syntax-entry ?- "w")
-  ;; (when (equal system-type 'windows-nt)
-  ;;   (evil-local-set-key 'normal "q" #'kill-buffer-and-window))
-  (when (buffer-live-p (get-buffer "*Help*"))
-    (switch-to-buffer-other-window "*Help*")
-    (remove-hook 'help-mode-hook #'my-help-setup)))
-
-(add-hook 'help-mode-hook #'my-help-setup)
-
 ;; 花括号自动换行的问题
 ;; http://ergoemacs.org/emacs/emacs_insert_brackets_by_pair.html
 (when (fboundp 'electric-pair-mode)
@@ -327,10 +317,6 @@
   :ensure nil
   ; :after evil
   :config
-  ; (with-eval-after-load 'evil
-  ;   (evil-define-key 'normal diff-mode-map "q" 'kill-this-buffer)
-  ;   (evil-define-key 'normal help-mode-map "q" 'kill-buffer-and-window)
-  ;   (evil-define-key 'motion apropos-mode-map "q" 'kill-buffer-and-window))
   ;; create a thread to auto focus on *apropos* window
   (if (fboundp 'make-thread)
       (add-hook 'apropos-mode-hook (lambda ()

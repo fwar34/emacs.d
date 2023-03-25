@@ -6,6 +6,14 @@
   (define-key meow-normal-state-keymap [?\C-?] 'ignore)
   )
 
+(defun my-global-prefix-setup ()
+  (global-set-key (kbd "C-c C-x r") #'meow-start-kmacro-or-insert-counter)
+  (global-set-key (kbd "C-c C-x b") #'meow-beacon-end-and-apply-kmacro)
+  (global-set-key (kbd "C-c C-x a") #'meow-kmacro-lines)
+  (global-set-key (kbd "C-c C-x s") #'meow-kmacro-matches)
+  (global-set-key (kbd "C-c C-x e") #'meow-end-or-call-kmacro)
+)
+
 ;;; Code:
 (use-package meow
   :init
@@ -34,7 +42,7 @@
      '("?" . meow-cheatsheet))
     
     (meow-leader-define-key
-     '("u" . "M-u mm")
+     '("uu" . "C-c C-x")
      ;; '("fn" . c-display-defun-name)
      '("bs" . ivy-switch-buffer)
      '("qq" . save-buffers-kill-terminal)
@@ -248,6 +256,8 @@
   (meow-setup)
   (meow-global-mode 1)
   (meow-other-setup)
+  (my-global-prefix-setup)
+  
   (add-to-list 'meow-mode-state-list '(color-rg-mode . insert))
   (add-to-list 'meow-mode-state-list '(vterm-mode . insert))
   (add-to-list 'meow-mode-state-list '(blink-search-mode . insert))

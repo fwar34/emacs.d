@@ -27,11 +27,11 @@
    (:foreign-keys warn :color teal :quit-key "q" :title "<helpful commands>")
    ("Column"
     (("c" helpful-callable "helpful callable")
-    ("f" helpful-function "helpful function")
-    ("v" helpful-variable "helpful variable")
-    ("k" helpful-key "helpful key")
-    ("d" helpful-at-point "helpful at point")
-    ("C" helpful-command "helpful command"))))
+     ("f" helpful-function "helpful function")
+     ("v" helpful-variable "helpful variable")
+     ("k" helpful-key "helpful key")
+     ("d" helpful-at-point "helpful at point")
+     ("C" helpful-command "helpful command"))))
   :commands
   (helpful-callable
    helpful-function
@@ -65,6 +65,33 @@
   ;; look at interactive functions.
   ;; (global-set-key (kbd "C-h C") #'helpful-command)
   )
+
+(defun my-help-setup ()
+  (modify-syntax-entry ?- "w")
+  (let ((help-buffer (get-buffer "*Help*")))
+    (when (and (buffer-live-p help-buffer) (not (get-buffer-window "*Help*")))
+      (switch-to-buffer-other-window help-buffer))))
+(add-hook 'help-mode-hook #'my-help-setup)
+
+(define-key diff-mode-map "q" 'kill-this-buffer)
+(define-key help-mode-map "q" 'kill-buffer-and-window)
+(define-key help-mode-map (kbd "C-i") #'help-go-forward)
+(define-key help-mode-map (kbd "C-o") #'help-go-back)
+(transient-define-prefix my-help-transient ()
+  "Help transient"
+  [["Help actions"
+   ("b" "help-go-back" help-go-back :transient t)
+   ("f" "help-go-forward" help-go-forward :transient t)
+   ("s" "help-view-source" help-view-source)
+   ("i" "help-goto-info" help-goto-info)
+   ("c" "help-customize" help-customize)
+   ("w" "Show the docs for the symbol at point" help-follow-symbol)]
+  ["Help buttons"
+   ("p" "Move to the Previous Button in the help buffer" backward-button)
+   ("n" "Move to the Next Button in the help buffer" forward-button)]])
+(define-key help-mode-map (kbd "M-u mm") #'my-help-transient)
+(add-hook 'apropos-mode-hook #'(lambda ()
+                                 (local-set-key (kbd "q") #'kill-buffer-and-window)))
 
 (provide 'init-help)
 ;;; init-help.el ends here

@@ -734,7 +734,5 @@ URL `http://ergoemacs.org/emacs/elisp_run_current_file.html'"
   (interactive)
   (find-file "~/.emacs.d/org/task.org"))
 
-(message "minefunc.el file loaded!")
-
 (provide 'init-minefunc)
 ;;; init-minefunc.el ends here
