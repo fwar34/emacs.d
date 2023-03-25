@@ -261,12 +261,16 @@
 ;; https://github.com/emacs-evil/evil
 (add-hook 'prog-mode-hook (lambda () (modify-syntax-entry ?_ "w")))
 (add-hook 'emacs-lisp-mode-hook (lambda () (modify-syntax-entry ?- "w")))
-(add-hook 'help-mode-hook (lambda ()
-                            (modify-syntax-entry ?- "w")
-                            ; (when (equal system-type 'windows-nt)
-                            ;   (evil-local-set-key 'normal "q" #'kill-buffer-and-window))
-                            (when (buffer-live-p (get-buffer "*Help*"))
-                              (switch-to-buffer-other-window "*Help*"))))
+
+(defun my-help-setup ()
+  (modify-syntax-entry ?- "w")
+  ;; (when (equal system-type 'windows-nt)
+  ;;   (evil-local-set-key 'normal "q" #'kill-buffer-and-window))
+  (when (buffer-live-p (get-buffer "*Help*"))
+    (switch-to-buffer-other-window "*Help*")
+    (remove-hook 'help-mode-hook #'my-help-setup)))
+
+(add-hook 'help-mode-hook #'my-help-setup)
 
 ;; 花括号自动换行的问题
 ;; http://ergoemacs.org/emacs/emacs_insert_brackets_by_pair.html

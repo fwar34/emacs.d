@@ -79,6 +79,7 @@
                  diff-hl-next-hunk
                  rg-menu
                  indent-region
+                 push-button
                  
                  ))
     (advice-add con :before #'my-jumper-advice-for-function)))
