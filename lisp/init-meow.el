@@ -34,10 +34,11 @@
      '("?" . meow-cheatsheet))
     
     (meow-leader-define-key
+     '("u" . "M-u mm")
      ;; '("fn" . c-display-defun-name)
      '("bs" . ivy-switch-buffer)
      '("qq" . save-buffers-kill-terminal)
-     '("fn" . (lambda () (message (c-defun-name))))
+     '("fn" . (lambda () (interactive) (message (c-defun-name))))
      '("ww" . major-mode-hydras/persp-mode/body)
      '("bb" . persp-switch-last)
      '("bl" . blink-search)

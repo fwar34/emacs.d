@@ -59,7 +59,6 @@
     ("q" nil "quit"))
   (hydra-set-property 'hydra-vi :verbosity 1)
   (global-set-key (kbd "M-u vi") 'hydra-vi/body)
-  (global-set-key (kbd "M-u C-v C-i") 'hydra-vi/body)
 
   ;;-------------------------------------------------------------
   ;; window
@@ -122,7 +121,6 @@
     ("L" hydra-move-splitter-right "resize right" :color red)
     ("q" nil "quit menu" :color blue :column nil))
   (global-set-key (kbd "M-u wi") 'hydra-window/body)
-  (global-set-key (kbd "M-u C-w C-i") 'hydra-window/body)
   ;; (evil-define-key '(normal insert) 'global (kbd "M-u wi") 'hydra-window/body)
 
   ;;-------------------------------------------------------------
@@ -168,7 +166,6 @@
   ;; (define-key evil-normal-state-map (kbd "M-u f") 'hydra-fwar34/body)
   ;; (evil-define-key '(normal insert) 'global (kbd "M-u fw") 'hydra-fwar34/body)
   (global-set-key (kbd "M-u fw") 'hydra-fwar34/body)
-  (global-set-key (kbd "M-u C-f C-w") 'hydra-fwar34/body)
 
   ;;-------------------------------------------------------------
   ;; M-um
@@ -205,10 +202,6 @@
     ("cl" ivy-yasnippet)
     ("q" nil "cancale"))
   (global-set-key (kbd "M-u mm") 'hydra-M-um/body)
-  (global-set-key (kbd "M-u C-m C-m") 'hydra-M-um/body)
-  ;; (evil-define-key '(normal insert) 'global (kbd "M-u mm") 'hydra-M-um/body)
-  ;; (define-key evil-ex-completion-map (kbd "M-u m") 'hydra-M-um/body)
-  ;; (define-key evil-ex-search-keymap (kbd "M-u m") 'hydra-M-um/body)
 
   ;;-------------------------------------------------------------
   ;; apropos
@@ -227,9 +220,7 @@
       ("u" apropos-user-option "user-option")
       ("e" apropos-value "value")
       ("q" nil))
-    ;; (global-set-key (kbd "M-u ap") 'hydra-apropos/body)
     (define-key apropos-mode-map (kbd "M-u ap") 'hydra-apropos/body)
-    ; (evil-define-key 'normal apropos-mode-map "M-u C-a C-p" 'hydra-apropos/body)
     )
 
   ;;-------------------------------------------------------------

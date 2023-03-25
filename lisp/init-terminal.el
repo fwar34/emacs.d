@@ -97,6 +97,9 @@
   ;; (add-hook 'vterm-mode-hook #'(lambda () (message "enter veterm hook")
   ;;                                (local-set-key (kbd ";tm") #'vterm-toggle)
   ;;                                ))
+  (define-key vterm-mode-map (kbd "C-w") #'vterm--self-insert)
+
+  
   ;; (general-define-key
   ;;  :keymaps 'vterm-mode-map
   ;;  :prefix ";"

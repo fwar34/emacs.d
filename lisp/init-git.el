@@ -3,6 +3,7 @@
 
 ;;; Code:
 (use-package magit
+  :ensure t
   :commands magit
   :config
   ;; https://www.helplib.com/GitHub/article_131559
@@ -101,6 +102,7 @@ Git gutter:
   (set-face-foreground 'git-gutter-fr:deleted "red"))
 
 (use-package diff-hl
+  :ensure t
   ;; windows 下 svn 命令行可以使用 https://www.visualsvn.com/downloads/ 中的 “Apache Subversion command line tools”，或者直接 scoop install sliksvn
   ;; scoop install unxutils sliksvn
   ;; mine/vimfiles/windows.ps1，scoop安装脚本
