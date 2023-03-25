@@ -303,25 +303,27 @@ S is string of the two-key sequence."
                     (read-event nil nil)
                   (read-event nil nil meow-two-char-escape-delay))))
           (when event
-            (vterm-send-string (char-to-string event))
             (if (and (characterp event) (= event second-char))
                 (progn
+                  (vterm-send-string (char-to-string event))
                   (let ((event2
-                        (if defining-kbd-macro
-                            (read-event nil nil)
-                          (read-event nil nil meow-two-char-escape-delay))))
+                         (if defining-kbd-macro
+                             (read-event nil nil)
+                           (read-event nil nil meow-two-char-escape-delay))))
                     (when event2
                       (if (and (characterp event2) (= event2 third-char))
                           (progn
-                            (message "xxxxxxx")
                             (vterm-send-backspace)
                             (vterm-send-backspace)
-                            (message "yyyyyyy")
                             ;; (set-buffer-modified-p modified)
                             ;; (setq buffer-undo-list undo-list)
                             (vterm-toggle))
                         (push event2 unread-command-events)))))
-              (push event unread-command-events)))))))
+              (if (and (characterp event) (= event ?g))
+                  (progn
+                    (vterm-send-backspace)
+                    (meow-insert-exit))
+                (push event unread-command-events))))))))
   ;; (define-key meow-insert-state-keymap (substring meow-two-char-escape-sequence 0 1) #'meow-two-char-exit-insert-state)
   (define-key meow-insert-state-keymap (substring meow-two-char-escape-sequence 0 1) #'(lambda ()
                                                                                          (interactive)

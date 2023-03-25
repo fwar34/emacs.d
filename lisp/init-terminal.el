@@ -86,12 +86,9 @@
   ([f5] . vterm-toggle)
   ([f12] . vterm-toggle-cd)
   (:map vterm-mode-map
+	("," . my-vterm-mode-transient)
 	([f5] . vterm-toggle)
-	([f12] . vterm-toggle-cd)
-	;; (";tm" . vterm-toggle)
-	; (";g" . evil-normal-state)
-	;; (";vv" . my-vterm-mode-transient)
-    )
+	([f12] . vterm-toggle-cd))
   :config
 ;; (define-prefix-command 'u-map)
 ;; (global-set-key (kbd ";t") 'u-map)
@@ -119,7 +116,7 @@
   (defun my-vterm-insert ()
     "My vterm insert \",\"."
     (interactive)
-    (vterm-send-string ";"))
+    (vterm-send-string ","))
 
   (transient-define-prefix my-vterm-mode-transient ()
     " <vterm misc commands>"
@@ -129,7 +126,7 @@
       ("P" "vterm-yank-pop" vterm-yank-pop)] ;; M-y
      [" <Misc>"
       ("n" "vterm-send-next-key" vterm-send-next-key)
-      (";" "insert ;" my-vterm-insert)
+      ("," "insert ," my-vterm-insert)
       ("x" "send C-x" (lambda () (interactive) (term-send-raw-string "\C-x")))]
      [" <Toggle>"
       ("f" "vterm-toggle-forward" vterm-toggle-forward)
