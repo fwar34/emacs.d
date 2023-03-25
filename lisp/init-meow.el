@@ -319,7 +319,7 @@ S is string of the two-key sequence."
                             ;; (setq buffer-undo-list undo-list)
                             (vterm-toggle))
                         (push event2 unread-command-events)))))
-              (if (and (characterp event) (= event ?g))
+              (if (and (characterp event) (= event (string-to-char (substring meow-two-char-escape-sequence 1 2))))
                   (progn
                     (vterm-send-backspace)
                     (meow-insert-exit))
