@@ -424,7 +424,7 @@
                (set-face-attribute 'default nil :height (- old-face-attribute 10))))
        "decrease font 10" :column "fonts commands")
       ("q" nil "cancel" :exit t :column nil))
-    (global-set-key (kbd "M-u ft") 'hydra-font/body)
+    (global-set-key (kbd "M-u ft") 'hydra-font/body))
 
   (defhydra hydra-input-method (:color blue)
     ("py" (lambda ()
