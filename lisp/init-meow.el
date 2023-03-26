@@ -265,12 +265,24 @@
   ;; (add-to-list 'meow-mode-state-list '(text-mode . insert))
 
   (add-to-list 'meow-char-thing-table '(?o . do/end))
+  (add-to-list 'meow-char-thing-table '(?' . quoted))
+  ;; (add-to-list 'meow-char-thing-table '(?< . angle-brackets))
+  ;; (add-to-list 'meow-char-thing-table '(?> . angle-brackets))
   (meow-thing-register 'do/end
                        '(pair ("do" "fn") ("end"))
                        '(pair ("do" "fn") ("end")))
+  ;; (meow-thing-register 'do/end
+  ;;                        '(pair (\"do\") (\"end\"))
+  ;;                        '(pair (\"do\") (\"end\")))
   (meow-thing-register 'quoted
-                       '(regexp "`" "`\\|'")
-                       '(regexp "`" "`\\|'"))
+                       '(regexp "`\\|'" "`\\|'")
+                       '(regexp "`\\|'" "`\\|'"))
+  ;; (meow-thing-register 'quoted
+  ;;                        '(regexp \"`\\\\|'\" \"`\\\\|'\")
+  ;;                        '(regexp \"`\\\\|'\" \"`\\\\|'\"))
+  ;; (meow-thing-register 'angle-brackets
+  ;;                      '(regexp "\\<" "\\>"))
+
   (setq meow-grab-fill-commands '(meow-query-replace meow-query-replace-regexp eval-expression)
         meow-esc-delay 0.001)
   
