@@ -19,7 +19,7 @@
   ;; Counsel, a collection of Ivy-enhanced versions of common Emacs commands.
   ;; Swiper, an Ivy-enhanced alternative to isearch.
   :bind
-  (([remap switch-to-buffer] . ivy-switch-buffer)
+  (;; ([remap switch-to-buffer] . ivy-switch-buffer)
    ([remap isearch-forward] . swiper)
    ([remap describe-function] . counsel-describe-function)
    ([remap describe-variable] . counsel-describe-variable)

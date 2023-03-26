@@ -239,7 +239,6 @@
     ("ch" counsel-command-history "counsel-command-history")
     ("q" nil "cancel" :exit t :column nil))
   (global-set-key (kbd "M-u iv") 'hydra-ivy-swiper/body)
-  (global-set-key (kbd "M-u C-i C-v") 'hydra-ivy-swiper/body)
 
   ;;-------------------------------------------------------------
   ;; counsel-etags
@@ -261,7 +260,6 @@
     ("q" nil))
   ;; (global-set-key (kbd "M-u ap") 'hydra-apropos/body)
   (global-set-key (kbd "M-u tt") 'hydra-counsel-etags/body)
-  (global-set-key (kbd "M-u C-t C-t") 'hydra-counsel-etags/body)
 
   ;;-------------------------------------------------------------
   ;; agenda
@@ -297,7 +295,6 @@
       ("q" (message "Abort") :exit t)
       ("v" nil))
       (define-key org-agenda-mode-map (kbd "M-u ad") 'hydra-org-agenda-view/body)
-      ; (evil-define-key 'normal org-agenda-mode-map (kbd "M-u C-a C-d") 'hydra-org-agenda-view/body)
       )
 
   ;;-------------------------------------------------------------
@@ -315,7 +312,6 @@
     ("to" pyim-toggle-input-ascii)
     ("q" nil))
   (global-set-key (kbd "M-u py") 'hydra-pyim/body)
-  (global-set-key (kbd "M-u C-p C-y") 'hydra-pyim/body)
   (with-eval-after-load 'isearch
       ;;这里是给像vim的/和?(evil-search-forward和evil-search-backward)搜索切换输入法添加快捷键
       ;; 上面两个搜索内部使用的是isearch相关的函数
@@ -339,7 +335,6 @@
       ("sl" isearch-yank-line)
       ("q" nil "cancale" :color blue))
       (define-key isearch-mode-map (kbd "M-u is") 'hydra-isearch/body)
-      ; (evil-define-key 'normal isearch-mode-map (kbd "M-u C-i C-s") 'hydra-isearch/body)
       )
 
   ;;-------------------------------------------------------------
@@ -352,7 +347,6 @@
     ("v" recenter-top-bottom "recenter")
     ("q" nil "quit"))
   (global-set-key (kbd "M-u er") 'hydra-error/body)
-  (global-set-key (kbd "M-u C-e C-r") 'hydra-error/body)
 
   ;;-------------------------------------------------------------
   ;; lispyville
@@ -377,7 +371,6 @@
       ("ha" dired-hide-all "hide all subdirectories, leaving only their header lines.")
       ("q" nil "cancel" :exit t :column nil))
     (define-key dired-mode-map (kbd "M-u dj") 'hydra-dired/body)
-    ; (evil-define-key 'normal dired-mode-map (kbd "M-u C-d C-j") 'hydra-dired/body)
     )
 
   ;;-------------------------------------------------------------
@@ -412,7 +405,6 @@
       ("q" nil "cancel" :exit t :column nil))
     ;; (global-set-key (kbd "M-u if") 'hydra-info/body)
     (define-key Info-mode-map (kbd "M-u if") 'hydra-info/body)
-    ; (evil-define-key 'normal Info-mode-map (kbd "M-u C-i C-f") 'hydra-info/body)
     )
 
   ;;-------------------------------------------------------------
@@ -432,10 +424,7 @@
                (set-face-attribute 'default nil :height (- old-face-attribute 10))))
        "decrease font 10" :column "fonts commands")
       ("q" nil "cancel" :exit t :column nil))
-    ;; (define-key magit-mode-map (kbd "M-u ft") 'hydra-font/body)
     (global-set-key (kbd "M-u ft") 'hydra-font/body)
-    (global-set-key (kbd "M-u C-f C-t") 'hydra-font/body))
-  ;; (evil-define-key 'normal 'global (kbd "M-u ft") 'hydra-font/body)
 
   (defhydra hydra-input-method (:color blue)
     ("py" (lambda ()
