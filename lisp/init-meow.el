@@ -156,12 +156,12 @@
      '(">" . meow-open-below)
      '("'" . repeat)
      ;; '("`" . meow-last-buffer)
-     '("`" . meow-goto-line)
+     '("`" . mark-whole-buffer)
      '("\\" . meow-comment)
      '("&" . meow-query-replace-regexp)
      '("%" . meow-query-replace)
      ;; '("RET" . ignore)
-     '("RET" . mark-whole-buffer)
+     '("RET" . meow-goto-line)
      '("<escape>" . ignore))
     
     (meow-normal-define-key
