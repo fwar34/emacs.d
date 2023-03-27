@@ -3,6 +3,7 @@
 
 (defun meow-other-setup ()
   (define-key meow-insert-state-keymap (kbd "C-w") #'backward-kill-word)
+  (define-key meow-insert-state-keymap (kbd "TAB") #'c-indent-line-or-region)
   (define-key meow-normal-state-keymap [?\C-?] 'ignore)
   )
 
