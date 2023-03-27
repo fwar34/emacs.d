@@ -3,7 +3,11 @@
 
 (defun meow-other-setup ()
   (define-key meow-insert-state-keymap (kbd "C-w") #'backward-kill-word)
-  (define-key meow-insert-state-keymap (kbd "TAB") #'c-indent-line-or-region)
+  (define-key meow-insert-state-keymap (kbd "TAB") #'(lambda () (interactive)
+                                                       (cl-case major-mode
+                                                         ('c++-mode (c-indent-line-or-region))
+                                                         ('magit-status-mode (magit-section-toggle (magit-current-section)))
+                                                         ('vterm-mode (vterm-send-tab)))))
   (define-key meow-normal-state-keymap [?\C-?] 'ignore)
   )
 

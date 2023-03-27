@@ -22,6 +22,7 @@
       ("k" "helpful key" helpful-key)
       ("d" "helpful at point" helpful-key)
       ("C" "helpful command" helpful-command)]])
+  (global-set-key (kbd "M-u hp") #'my-helpful-transient)
   :pretty-hydra
   (my-hydra-helpful
    (:foreign-keys warn :color teal :quit-key "q" :title "<helpful commands>")
@@ -66,12 +67,12 @@
   ;; (global-set-key (kbd "C-h C") #'helpful-command)
   )
 
-(defun my-help-setup ()
-  (modify-syntax-entry ?- "w")
-  (let ((help-buffer (get-buffer "*Help*")))
-    (when (and (buffer-live-p help-buffer) (not (get-buffer-window "*Help*")))
-      (switch-to-buffer-other-window help-buffer))))
-(add-hook 'help-mode-hook #'my-help-setup)
+;; (defun my-help-setup ()
+;;   (modify-syntax-entry ?- "w")
+;;   (let ((help-buffer (get-buffer "*Help*")))
+;;     (when (and (buffer-live-p help-buffer) (not (get-buffer-window "*Help*")))
+;;       (switch-to-buffer-other-window help-buffer))))
+;; (add-hook 'help-mode-hook #'my-help-setup)
 
 (define-key diff-mode-map "q" 'kill-this-buffer)
 (define-key help-mode-map "q" 'kill-buffer-and-window)
@@ -79,6 +80,7 @@
 (define-key help-mode-map (kbd "C-o") #'help-go-back)
 (transient-define-prefix my-help-transient ()
   "Help transient"
+  :transient-non-suffix 'transient--do-stay
   [["Help actions"
    ("b" "help-go-back" help-go-back :transient t)
    ("f" "help-go-forward" help-go-forward :transient t)
@@ -87,8 +89,8 @@
    ("c" "help-customize" help-customize)
    ("w" "Show the docs for the symbol at point" help-follow-symbol)]
   ["Help buttons"
-   ("p" "Move to the Previous Button in the help buffer" backward-button)
-   ("n" "Move to the Next Button in the help buffer" forward-button)]])
+   ("p" "Move to the Previous Button in the help buffer" backward-button :transient t)
+   ("n" "Move to the Next Button in the help buffer" forward-button :transient t)]])
 (define-key help-mode-map (kbd "M-u mm") #'my-help-transient)
 (add-hook 'apropos-mode-hook #'(lambda ()
                                  (local-set-key (kbd "q") #'kill-buffer-and-window)))

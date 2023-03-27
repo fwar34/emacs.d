@@ -83,6 +83,7 @@
 (require 'init-transient)
 (require 'init-hydra)
 (require 'init-calendar)
+(require 'init-window)
 (require 'init-help)
 (require 'init-web)
 (require 'init-text)
