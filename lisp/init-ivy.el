@@ -84,11 +84,14 @@
                                   "--path-separator"
                                   "/"
                                   "--iglob" "!tags"
+                                  "--iglob" "!.tag"
                                   "--iglob" "!makefile"
                                   "--iglob" "!makefile.*"
                                   "--iglob" "!*.lo"
                                   "--iglob" "!*.html"
                                   "--iglob" "!#*.*#"
+                                  "--iglob" "!**/doxygen-doc/*"
+                                  "--iglob" "!**/debian/*"
                                   "."))
 
   ;; https://emacs-china.org/t/emacs-helm-ag/6764

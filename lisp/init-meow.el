@@ -195,7 +195,7 @@
      '("; ." . evilnc-copy-and-comment-operator)
      '("; \\" . evilnc-comment-operator) ; if you prefer backslash key
      '("; ii" . counsel-imenu)
-     '("; fa" . counsel-rg)
+     '("; fa" . (lambda () (interactive) (counsel-rg nil (my-project-root))))
      '("; tl" . counsel-etags-list-tag)
      '("; tr" . counsel-etags-recent-tag)
      '("; tf" . counsel-etags-find-tag)
@@ -267,6 +267,8 @@
   (add-to-list 'meow-mode-state-list '(vterm-mode . insert))
   (add-to-list 'meow-mode-state-list '(blink-search-mode . insert))
   (add-to-list 'meow-mode-state-list '(magit-status-mode . insert))
+  (add-to-list 'meow-mode-state-list '(helpful-mode . motion))
+  (add-to-list 'meow-mode-state-list '(help-mode . motion))
   ;; (add-to-list 'meow-mode-state-list '(text-mode . insert))
 
   (add-to-list 'meow-char-thing-table '(?o . do/end))

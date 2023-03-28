@@ -103,7 +103,8 @@
    my-switch-message-buffer
    my-remove-0x00
    my-task-file-open
-   my-set-frame))
+   my-set-frame
+   my-project-root))
 
 (use-package popup)
 

@@ -75,9 +75,11 @@
 ;; (add-hook 'help-mode-hook #'my-help-setup)
 
 (define-key diff-mode-map "q" 'kill-this-buffer)
-(define-key help-mode-map "q" 'kill-buffer-and-window)
+;; (define-key help-mode-map "q" 'kill-buffer-and-window)
 (define-key help-mode-map (kbd "C-i") #'help-go-forward)
 (define-key help-mode-map (kbd "C-o") #'help-go-back)
+(define-key help-mode-map (kbd "n") #'forward-button)
+(define-key help-mode-map (kbd "p") #'backward-button)
 (transient-define-prefix my-help-transient ()
   "Help transient"
   :transient-non-suffix 'transient--do-stay
