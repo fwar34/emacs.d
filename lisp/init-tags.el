@@ -36,6 +36,7 @@
 
 ;; https://github.com/redguardtoo/counsel-etags#ctags-setup
 (use-package counsel-etags
+  :disabled
   :commands
   (counsel-etags-find-tag-at-point)
   :init
@@ -69,7 +70,7 @@
   (setq large-file-warning-threshold nil))
 
 (use-package citre
-  :disabled
+  ;; :disabled
   :defer t
   :init
   ;; This is needed in `:init' block for lazy load to work.
