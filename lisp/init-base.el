@@ -6,7 +6,6 @@
 ;; Setup `use-package'
 ;; https://phenix3443.github.io/notebook/emacs/modes/use-package-manual.html
 (unless (package-installed-p 'use-package)
-  (package-refresh-contents)
   (package-install 'use-package))
 
 (eval-when-compile
