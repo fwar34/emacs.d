@@ -21,6 +21,8 @@
 (use-package auto-compile
   :no-require t)
 
+;; (setq straight-repository-branch "develop")
+(setq straight-disable-native-compile t)
 ;; straight.el
 (defvar bootstrap-version)
 (let ((bootstrap-file

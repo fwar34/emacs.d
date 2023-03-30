@@ -98,5 +98,12 @@
   ;;(add-to-list 'completion-at-point-functions #'cape-line)
   )
 
+(use-package corfu-terminal
+  :if (not (display-graphic-p))
+  :straight
+  (:type git :repo "https://codeberg.org/akib/emacs-corfu-terminal")
+  :config
+  (corfu-terminal-mode +1))
+
 (provide 'init-corfu)
 ;;; init-corfu.el ends here

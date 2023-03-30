@@ -24,19 +24,23 @@
                      gcs-done)))
 
 (require 'package)
-(setq package-archives
-      '(
-        ;; option0
-        ("gnu" . "https://mirrors.sjtug.sjtu.edu.cn/emacs-elpa/gnu/")
-        ("melpa" . "https://mirrors.sjtug.sjtu.edu.cn/emacs-elpa/melpa/")
-        ;; option1
-        ;; ("melpa" . "https://melpa.org/packages/")
-        ;; ("melpa-stable" . "https://stable.melpa.org/packages/")
-        ;; option2
-        ; ("gnu" . "https://mirrors.163.com/elpa/gnu/")
-        ; ("melpa" . "https://mirrors.163.com/elpa/melpa/")
-        ; ("melpa-stable" . "https://mirrors.163.com/elpa/stable-melpa/")
-        ))
+;; (setq package-archives
+;;       '(
+;;         ;; option0
+;;         ("gnu" . "https://mirrors.sjtug.sjtu.edu.cn/emacs-elpa/gnu/")
+;;         ("melpa" . "https://mirrors.sjtug.sjtu.edu.cn/emacs-elpa/melpa/")
+;;         ;; option1
+;;         ;; ("melpa" . "https://melpa.org/packages/")
+;;         ;; ("melpa-stable" . "https://stable.melpa.org/packages/")
+;;         ;; option2
+;;         ; ("gnu" . "https://mirrors.163.com/elpa/gnu/")
+;;         ; ("melpa" . "https://mirrors.163.com/elpa/melpa/")
+;;         ; ("melpa-stable" . "https://mirrors.163.com/elpa/stable-melpa/")
+;;         ))
+
+(setq package-archives '(("gnu"   . "http://1.15.88.122/gnu/")
+("nongnu" . "http://1.15.88.122/nongnu/")
+			 ("melpa" . "http://1.15.88.122/melpa/")))
 
 ;; (setq load-prefer-newer t)
 (package-initialize)
