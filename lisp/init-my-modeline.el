@@ -315,23 +315,23 @@ DEFAULT-TEXT."
                  (lispyville-mode-line-string " @lispy-special@")))
        ;; (fwar34/wgrep-state)
        (fwar34/lispy-state)
-       " "
+       ;; " "
        ;; git info
-       '(:eval (when (> (window-width) 90)
-                 `(vc-mode vc-mode)
-                 ;; reference from spaceline
-                 (string-trim (concat vc-mode
-                                 (when (buffer-file-name)
-                                   (pcase (vc-state (buffer-file-name))
-                                     (`up-to-date " ")
-                                     (`edited "@Mod")
-                                     (`added "@Add")
-                                     (`unregistered "@??")
-                                     (`removed "@Del")
-                                     (`needs-merge "@Con")
-                                     (`needs-update "@Upd")
-                                     (`ignored "@Ign")
-                                     (_ "@Unk")))))))
+       ;; '(:eval (when (> (window-width) 90)
+       ;;           `(vc-mode vc-mode)
+       ;;           ;; reference from spaceline
+       ;;           (string-trim (concat vc-mode
+       ;;                           (when (buffer-file-name)
+       ;;                             (pcase (vc-state (buffer-file-name))
+       ;;                               (`up-to-date " ")
+       ;;                               (`edited "@Mod")
+       ;;                               (`added "@Add")
+       ;;                               (`unregistered "@??")
+       ;;                               (`removed "@Del")
+       ;;                               (`needs-merge "@Con")
+       ;;                               (`needs-update "@Upd")
+       ;;                               (`ignored "@Ign")
+       ;;                               (_ "@Unk")))))))
 
        ;; " %1"
        " "

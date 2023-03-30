@@ -67,12 +67,12 @@
   ;; (global-set-key (kbd "C-h C") #'helpful-command)
   )
 
-;; (defun my-help-setup ()
-;;   (modify-syntax-entry ?- "w")
-;;   (let ((help-buffer (get-buffer "*Help*")))
-;;     (when (and (buffer-live-p help-buffer) (not (get-buffer-window "*Help*")))
-;;       (switch-to-buffer-other-window help-buffer))))
-;; (add-hook 'help-mode-hook #'my-help-setup)
+(defun my-help-setup ()
+  (modify-syntax-entry ?- "w")
+  (let ((help-buffer (get-buffer "*Help*")))
+    (when (and (buffer-live-p help-buffer) (not (get-buffer-window "*Help*")))
+      (switch-to-buffer-other-window help-buffer))))
+(add-hook 'help-mode-hook #'my-help-setup)
 
 (define-key diff-mode-map "q" 'kill-this-buffer)
 ;; (define-key help-mode-map "q" 'kill-buffer-and-window)

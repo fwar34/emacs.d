@@ -44,7 +44,6 @@
   ;; 注意： C-x = 用来检测光标下字符的数字，(insert 数字) 用来测试数字对应的字符。
   ;; (setq company-auto-commit-chars '(41 46 44 59 13))
 
-  ;; (setq company-show-numbers t)
   ;; Number the candidates (use M-1, M-2 etc to select completions).
   (setq company-show-quick-access 'left)
   ;; make previous/next selection in the popup cycles
@@ -59,9 +58,9 @@
   ;; Trigger completion immediately.
   (setq company-idle-delay 0.1)
   ;; I don't like the downcase word in company-dabbrev!
-  (setq company-dabbrev-downcase nil
-        company-clang-insert-arguments nil
-        company-require-match nil
+  (setq ;;;  company-dabbrev-downcase nil
+        ;;;  company-clang-insert-arguments nil
+        ;; company-require-match nil
         company-etags-ignore-case t)
 
   ;; (company-backends '((company-capf :with company-tempo)
@@ -119,15 +118,15 @@ In that case, insert the number."
   ;;            (string-to-number k))))))
 
   ;; 0-9 来选择补全
-  ;; (let ((map company-active-map))
-  ;;   (mapc (lambda (x) (define-key map (format "%d" x) 'ora-company-number))
-  ;;         (number-sequence 0 9))
-  ;;   ;; (define-key map " " (lambda ()
-  ;;   ;;                       (interactive)
-  ;;   ;;                       (company-abort)
-  ;;   ;;                       (self-insert-command 1)))
-  ;;   ;; (define-key map (kbd "<return>") nil)
-  ;;   )
+  (let ((map company-active-map))
+    (mapc (lambda (x) (define-key map (format "%d" x) 'ora-company-number))
+          (number-sequence 0 9))
+    ;; (define-key map " " (lambda ()
+    ;;                       (interactive)
+    ;;                       (company-abort)
+    ;;                       (self-insert-command 1)))
+    ;; (define-key map (kbd "<return>") nil)
+    )
 
   ;; 自定义前面的补全数字提示
   ;; (defun ora--company-good-prefix-p (orig-fn prefix)
@@ -143,7 +142,7 @@ In that case, insert the number."
     (let ((newseq))
       (mapcar #'(lambda (c) (if (not (member c newseq)) (add-to-list 'newseq c))) candidates)
       newseq))
-  ;; (add-to-list 'company-transformers 'eye/company-remove-dups)
+  (add-to-list 'company-transformers 'eye/company-remove-dups)
   ;; }}}
   )
 

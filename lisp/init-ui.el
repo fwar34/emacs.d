@@ -235,6 +235,7 @@
   (global-hl-todo-mode))
 
 (use-package awesome-tab
+  :disabled
   :straight
   (:host github :repo "manateelazycat/awesome-tab")
   :config

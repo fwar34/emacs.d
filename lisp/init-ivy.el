@@ -119,9 +119,9 @@
       ("P" "yank-from-kill-ring" yank-from-kill-ring)]])
   (bind-key "," 'my-ivy-minibuffer-transient ivy-minibuffer-map)
 
-  ;; (define-key ivy-occur-grep-mode-map (kbd "n") #'next-error)
-  ;; (define-key ivy-occur-grep-mode-map (kbd "p") #'previous-error)
-  ;; (define-key ivy-occur-grep-mode-map (kbd "b") #'first-error)
+  (define-key ivy-occur-grep-mode-map (kbd "n") #'next-error)
+  (define-key ivy-occur-grep-mode-map (kbd "p") #'previous-error)
+  (define-key ivy-occur-grep-mode-map (kbd "b") #'first-error)
 
   (use-package amx
     :ensure t
