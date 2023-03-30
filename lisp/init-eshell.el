@@ -38,7 +38,7 @@
                                (when (> (ring-size eshell-history-ring) 0)
                                  (ring-elements eshell-history-ring)))
                               :initial-input input)))
-      (setf (buffer-substring start-pos end-pos) command)
+      (setf (buffer-substring-no-properties start-pos end-pos) command)
       (end-of-line)))
 
   (evil-define-key 'insert eshell-mode-map (kbd "C-r") 'fwar34/ivy-eshell-history)

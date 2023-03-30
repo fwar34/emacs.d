@@ -228,7 +228,7 @@ structure element. HEADER string includes more parameters that are
 prepended to the element after the #+HEADER: tag."
     (let (text)
       (when (region-active-p)
-        (setq text (buffer-substring (region-beginning) (region-end)))
+        (setq text (buffer-substring-no-properties (region-beginning) (region-end)))
         (delete-region (region-beginning) (region-end))
         (deactivate-mark))
       (when header (insert "#+HEADER: " header) (forward-line))
