@@ -105,7 +105,8 @@
    my-remove-0x00
    my-task-file-open
    my-set-frame
-   my-project-root))
+   my-project-root
+   my-word-at-point))
 
 (use-package popup)
 
