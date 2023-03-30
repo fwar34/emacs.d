@@ -256,7 +256,7 @@
      '("; ce" . meow-motion-mode)
      '("; rr" . fwar34/counsel-goto-recent-directory)
      '("; rc" . fwar34/run-current-file)
-     '("; SPC" . counsel-M-x)
+     '("; SPC" . execute-extended-command)
      '("C-]" . counsel-etags-find-tag-at-point)
      '("C-r" . undo-redo)
      '("; ud" . undo-tree-visualize)

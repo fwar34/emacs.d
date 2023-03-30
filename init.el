@@ -72,6 +72,7 @@
 ; (require 'init-input)
 (require 'init-translate)
 ;; (require 'init-company)
+(require 'init-consult)
 (require 'init-vertico)
 (require 'init-corfu)
 (require 'init-git)
