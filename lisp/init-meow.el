@@ -26,6 +26,10 @@
 ;;; Code:
 (use-package meow
   :init
+  ;; 将 C-f C-b 映射成别的功能时需要重新设置这两个变量，meow-left meow-right 最终会使用 C-f C-b 按键
+  (setq meow--kbd-backward-char "<left>")
+  (setq meow--kbd-forward-char "<right>")
+  
   (defun meow-setup ()
     (setq meow-cheatsheet-layout meow-cheatsheet-layout-qwerty)
     (meow-motion-overwrite-define-key
