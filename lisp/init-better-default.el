@@ -250,10 +250,13 @@
 ;; https://www.gnu.org/software/emacs/manual/html_node/ccmode/c_002doffsets_002dalist.html#c_002doffsets_002dalist
 ;; https://www.gnu.org/software/emacs/manual/html_node/ccmode/Style-Variables.html#Style-Variables
 ;; https://www.gnu.org/software/emacs/manual/html_node/ccmode/Custom-Line_002dUp.html#Custom-Line_002dUp
+;; https://www.gnu.org/software/emacs/manual/html_node/ccmode/Syntactic-Analysis.html
+;; C-c C-s (c-show-syntactic-information) 显示当前行的语法分析，高亮当前行所对齐的行
 (c-set-offset 'innamespace 0)
 ;; (c-set-offset 'inclass 4)
 (c-set-offset 'inline-open 0)
 (c-set-offset 'inline-close 0)
+(c-set-offset 'label 4)
 ;; disable guess python indent warning
 (setq python-indent-guess-indent-offset-verbose nil)
 
