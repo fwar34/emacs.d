@@ -34,8 +34,9 @@
         ;; ("melpa-stable" . "https://stable.melpa.org/packages/")
         ;; option2
         ("gnu" . "https://mirrors.163.com/elpa/gnu/")
+        ("nongnu" . "https://mirrors.163.com/elpa/nongnu/")
         ("melpa" . "https://mirrors.163.com/elpa/melpa/")
-        ("melpa-stable" . "https://mirrors.163.com/elpa/stable-melpa/")
+        ;; ("melpa-stable" . "https://mirrors.163.com/elpa/stable-melpa/")
         ))
 
 ;; (setq load-prefer-newer t)

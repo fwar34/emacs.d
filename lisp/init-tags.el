@@ -55,6 +55,7 @@
     (add-to-list 'counsel-etags-ignore-filenames "*.log")
     (add-to-list 'counsel-etags-ignore-filenames "*.html")
     (add-to-list 'counsel-etags-ignore-filenames "*.tag")
+    (add-to-list 'counsel-etags-ignore-filenames ".!.tags")
     (add-to-list 'counsel-etags-ignore-filenames "TAGS")
     (add-to-list 'counsel-etags-ignore-filenames "*.xml")
     (add-to-list 'counsel-etags-ignore-filenames "*.json"))
@@ -69,16 +70,17 @@
   (setq large-file-warning-threshold nil))
 
 (use-package citre
-  :disabled
+  ;; :disabled
   :defer t
   :init
   ;; This is needed in `:init' block for lazy load to work.
   (require 'citre-config)
   ;; Bind your frequently used commands.
-  (global-set-key (kbd "C-x c j") 'citre-jump)
-  (global-set-key (kbd "C-x c J") 'citre-jump-back)
-  (global-set-key (kbd "C-x c p") 'citre-ace-peek)
-  (global-set-key (kbd "C-x c u") 'citre-update-this-tags-file)
+  (global-set-key (kbd "C-c c j") 'citre-jump)
+  (global-set-key (kbd "C-c c J") 'citre-jump-back)
+  (global-set-key (kbd "C-c c p") 'citre-peek)
+  (global-set-key (kbd "C-c c P") 'citre-ace-peek)
+  (global-set-key (kbd "C-c c u") 'citre-update-this-tags-file)
   :pretty-hydra
   (my-hydra-citre
    (:foreign-keys warn :red teal :quit-key "q" :title "<citre commands>")
@@ -87,7 +89,8 @@
      ("j" citre-jump "Jump to the definition of the symbol at point.")
      ("J" citre-jump-back "Go back to the position before last ‘citre-jump’."))
     "Peek"
-    (("p" citre-ace-peek "Peek the definition of a symbol on screen using ace jump."))
+    (("p" citre-peek "Peek the definition of symbol at pointthe symbol in BUF at POINT.")
+     ("P" citre-ace-peek "Peek the definition of a symbol on screen using ace jump."))
     "Update"
     (("u" citre-update-this-tags-file "Update the currently used tags file.")
      ("c" citre-create-tags-file "Create a new tags file."))))
