@@ -31,6 +31,8 @@
     (meow-motion-overwrite-define-key
      '("j" . meow-next)
      '("k" . meow-prev)
+     '("C-f" . scroll-up-command)
+     '("C-b" . scroll-down-command)
      '(";g" . meow-normal-mode)
      '("<escape>" . ignore))
     (meow-leader-define-key
@@ -261,6 +263,8 @@
      '("C-r" . undo-redo)
      '("; ud" . undo-tree-visualize)
 
+     '("C-f" . scroll-up-command)
+     '("C-b" . scroll-down-command)
      ))
   :config
   (meow-setup)
