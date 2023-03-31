@@ -81,6 +81,14 @@
   (global-set-key (kbd "C-c c p") 'citre-peek)
   (global-set-key (kbd "C-c c P") 'citre-ace-peek)
   (global-set-key (kbd "C-c c u") 'citre-update-this-tags-file)
+
+  (defun citre-jump+ ()
+    "Jump to the definition of the symbol at point. Fallback to `xref-find-definitions'."
+    (interactive)
+    (condition-case _
+        (citre-jump)
+      (error (call-interactively #'xref-find-definitions))))
+  
   :pretty-hydra
   (my-hydra-citre
    (:foreign-keys warn :red teal :quit-key "q" :title "<citre commands>")

@@ -187,6 +187,11 @@
   ;; }}}
   )
 
+;; Better experience with icons
+;; Enable it before`ivy-rich-mode' for better performance
+(use-package all-the-icons-ivy-rich
+  :hook (ivy-mode . all-the-icons-ivy-rich-mode))
+
 (use-package ivy-rich
   :ensure t
   :hook
