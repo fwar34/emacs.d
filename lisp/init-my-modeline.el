@@ -349,15 +349,16 @@ DEFAULT-TEXT."
        " "
        (zilong/modeline--evil-substitute)
        ;; '(:eval (mode-line-fill 'mode-line (+ 7 (string-width (encoding-string)))))
-       '(:eval (mode-line-fill (+ 7 (string-width (encoding-string)))))
+       ;; '(:eval (mode-line-fill (+ 7 (string-width (encoding-string)))))
+       '(:eval (mode-line-fill (string-width (encoding-string))))
        encoding-mode-line
-       " "
+       ;; " "
        ;; "["
        ;; time-mode-line
        ;; (propertize (format-time-string "[%H:%M]") 'face 'font-lock-constant-face) ;; size
        ;; (propertize (format-time-string "%H:%M") 'face 'font-lock-constant-face) ;; size
        ;; "]"
-       my-modeline-time
+       ;; my-modeline-time
        ;; mode-line-end-spaces
        ))
 
