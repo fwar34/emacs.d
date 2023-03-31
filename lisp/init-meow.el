@@ -2,7 +2,11 @@
 ;;; Commentary:
 
 (defun meow-other-setup ()
-  (define-key meow-insert-state-keymap (kbd "C-w") #'backward-kill-word)
+  (define-key meow-insert-state-keymap (kbd "C-w") #'(lambda (arg)
+                                                       (interactive "p")
+                                                       (pcase major-mode
+                                                         ('vterm-mode (vterm--self-insert))
+                                                         (x (backward-kill-word arg)))))
   (define-key meow-insert-state-keymap (kbd "TAB") #'(lambda () (interactive)
                                                        (cl-case major-mode
                                                          ('c++-mode (c-indent-line-or-region))

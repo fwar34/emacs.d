@@ -84,8 +84,8 @@
 (define-key help-mode-map (kbd "C-o") #'help-go-back)
 (define-key help-mode-map (kbd "n") #'forward-button)
 (define-key help-mode-map (kbd "p") #'backward-button)
-(define-key help-mode-map (kbd "h") #'ignore)
-(define-key help-mode-map (kbd "l") #'ignore)
+(define-key help-mode-map (kbd "h") #'backward-char)
+(define-key help-mode-map (kbd "l") #'forward-char)
 (transient-define-prefix my-help-transient ()
   "Help transient"
   :transient-non-suffix 'transient--do-stay

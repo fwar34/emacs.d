@@ -70,7 +70,7 @@
   (setq large-file-warning-threshold nil))
 
 (use-package citre
-  ;; :disabled
+  :disabled ;; 会死循环，先禁用
   :defer t
   :init
   ;; This is needed in `:init' block for lazy load to work.
