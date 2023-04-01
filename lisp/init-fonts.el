@@ -81,8 +81,8 @@
            ;; WSL
            ('gnu/linux (when (member "Iosevka Curly Slab" font-list)
                          (setq english-font "Iosevka Curly Slab"
-                               english-font-size 25
-                               chinese-font-size 26)))))
+                               english-font-size 30
+                               chinese-font-size 31)))))
         ;; -----------------------------------------------------------------------------
         ;; 公司电脑
         ("DESKTOP-ARCHLINUX"
@@ -140,6 +140,7 @@
                                 chinese-font-size 24)))))
         )
       ;; -----------------------------------------------------------------------------
+      (message "host name %s" (upcase system-name))
       (message "english-font %s" english-font)
       (message "english-font-size %s" english-font-size)
       (message "chinese-font %s" chinese-font)
