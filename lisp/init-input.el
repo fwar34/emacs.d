@@ -65,7 +65,7 @@
                       my-englist-p
                       my-pyim-predicate-in-doc-string-p
                       my-pyim-predicate-org-in-src-block-p
-                      pyim-probe-evil-normal-mode)) ;; pyim-probe-dynamic-english 和 pyim-probe-auto-english 二选一
+                      meow-normal-mode-p)) ;; pyim-probe-dynamic-english 和 pyim-probe-auto-english 二选一
 
       ;;根据环境自动切换到半角标点输入模式
       (setq-default pyim-punctuation-half-width-functions
@@ -127,8 +127,8 @@
       ;; {{{
       ;; 当前没有输入内容的时候直接使用evil-escape的按键（；g）的直接返回到normal模式
       (defun my-pyim-self-insert-command (orig-func key)
-        (let ((fkey (elt evil-escape-key-sequence 0))
-              (skey (elt evil-escape-key-sequence 1))
+        (let ((fkey (elt meow-two-char-escape-sequence 0))
+              (skey (elt meow-two-char-escape-sequence 1))
               (last-char (if (and (local-variable-p 'my-last-char) (numberp my-last-char))
                              my-last-char
                            nil)))
@@ -143,11 +143,11 @@
                        (char-equal key skey)
                        (and (local-variable-p 'last-event-time)
                             (floatp last-event-time)
-                            (< (- (float-time) last-event-time) evil-escape-delay)))
+                            (< (- (float-time) last-event-time) meow-two-char-escape-delay)))
                   (progn
-                    (evil-escape--delete)
-                    (evil-repeat-stop)
-                    (evil-normal-state))
+                    (backward-delete-char 1)
+                    ;; (toggle-input-method)
+                    (meow-normal-mode))
                 (if (numberp key)
                     (funcall orig-func key)
                   (setq unread-command-events (append unread-command-events (list key))))))))
@@ -169,7 +169,7 @@
       (rime-disable-predicates '(my-rime-predicate-in-doc-string-p
                                  rime-predicate-in-code-string-p
                                  rime-predicate-in-code-string-after-ascii-p
-                                 rime-predicate-evil-mode-p
+                                 meow-normal-mode-p
                                  rime-predicate-prog-in-code-p
                                  rime-predicate-hydra-p
                                  rime-predicate-space-after-cc-p
@@ -200,8 +200,8 @@
 
       ;; {{{
       (defun my-rime-self-insert-command (orig-func key)
-        (let ((fkey (elt evil-escape-key-sequence 0))
-              (skey (elt evil-escape-key-sequence 1))
+        (let ((fkey (elt meow-two-char-escape-sequence 0))
+              (skey (elt meow-two-char-escape-sequence 1))
               (last-char (if (and (local-variable-p 'my-last-char) (numberp my-last-char))
                              my-last-char
                            nil)))
@@ -216,11 +216,11 @@
                        (char-equal key skey)
                        (and (local-variable-p 'last-event-time)
                             (floatp last-event-time)
-                            (< (- (float-time) last-event-time) evil-escape-delay)))
+                            (< (- (float-time) last-event-time) meow-two-char-escape-delay)))
                   (progn
-                    (evil-escape--delete)
-                    (evil-repeat-stop)
-                    (evil-normal-state))
+                    (backward-delete-char 1)
+                    ;; (toggle-input-method)
+                    (meow-normal-mode))
                 (if (numberp key)
                     (funcall orig-func key)
                   (setq unread-command-events (append unread-command-events (list key))))))))
