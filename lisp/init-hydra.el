@@ -510,7 +510,7 @@
   #("
 _a_: forward"
     6 13 (face warning))
-  ("a" forward-char))
+  ("a" forward-char)))
 
 ;; }}}
 

@@ -13,6 +13,7 @@
     (message "input unless xxxxxxx")
 
     (use-package pyim
+      :if (equal system-type 'windows-nt)
       :init
       (defun my-pyim-predicate-org-in-src-block-p ()
         "Whether point is in an org-mode's code source block."
@@ -24,6 +25,8 @@
         (or
          (eq (plist-get (text-properties-at (point)) 'face) 'font-lock-doc-face)
          (eq (plist-get (text-properties-at (point)) 'face) 'font-lock-string-face)))
+      ;; :custom
+      ;; (default-input-method "pyim")
       :config
       (message "pyim xxxxxx")
       ;; 激活 basedict 拼音词库，五笔用户请继续阅读 README
@@ -33,10 +36,10 @@
         (pyim-basedict-enable))
 
       ;; (setq default-input-method "pyim")
-      (defun my-chinese-setup ()
-        "Set up my private Chinese environment."
-        (setq default-input-method "pyim"))
-      (add-hook 'set-language-environment-hook 'my-chinese-setup)
+      ;; (defun my-chinese-setup ()
+      ;;   "Set up my private Chinese environment."
+      ;;   (setq default-input-method "pyim"))
+      ;; (add-hook 'set-language-environment-hook 'my-chinese-setup)
 
       ;; 按 "C-<return>" 将光标前的 regexp 转换为可以搜索中文的 regexp.
       ;; (define-key minibuffer-local-map (kbd "C-<return>") 'pyim-cregexp-convert-at-point)
@@ -158,13 +161,15 @@
       )
 
     (use-package rime
-      ;; pacman -S librime
+      ;; Arch: pacman -S librime
+      ;; Ubuntu: sudo apt install librime-dev
       :if (equal system-type 'gnu/linux)
       :init
       (defun my-rime-predicate-in-doc-string-p ()
         "Whether point is in the doc string."
         (eq (plist-get (text-properties-at (point)) 'face) 'font-lock-doc-face))
       :custom
+      (default-input-method "rime")
       (rime-show-candidate 'posframe)
       (rime-disable-predicates '(my-rime-predicate-in-doc-string-p
                                  rime-predicate-in-code-string-p
@@ -190,13 +195,17 @@
       :config
       (message "rime xxxxxx")
       ;; (setq default-input-method "rime")
-      (defun my-chinese-setup ()
-        "Set up my private Chinese environment."
-        (setq default-input-method "rime"))
-      (add-hook 'set-language-environment-hook 'my-chinese-setup)
+      ;; (defun my-chinese-setup ()
+      ;;   "Set up my private Chinese environment."
+      ;;   (setq default-input-method "rime"))
+      ;; (add-hook 'set-language-environment-hook 'my-chinese-setup)
 
       ;; support shift-l, shift-r, control-l, control-r
       (setq rime-inline-ascii-trigger 'shift-l)
+
+      ;; https://github.com/DogLooksGood/emacs-rime/issues/161#issuecomment-979907791
+      ;; 避免退出 emacs core
+      (add-hook 'kill-emacs-hook #'rime-lib-finalize)
 
       ;; {{{
       (defun my-rime-self-insert-command (orig-func key)
