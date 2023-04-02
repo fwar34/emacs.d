@@ -66,7 +66,7 @@
 (require 'init-terminal)
 (require 'init-better-default)
 (require 'init-fonts)
-; (require 'init-input)
+(require 'init-input)
 (require 'init-translate)
 (require 'init-company)
 (require 'init-git)

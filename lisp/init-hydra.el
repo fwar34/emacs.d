@@ -298,31 +298,26 @@
       )
 
   ;;-------------------------------------------------------------
-  ;; pyim
-  (defhydra hydra-pyim (:color blue :hint nil)
-    "
-                             ^pyim^
-    ^^^^^^^^-------------------------------------------------------
-    _si_: set input pyim
-    _co_: convert string at point
-    _to_: toggle input english
-    "
-    ("si" (lambda () (set-input-method "pyim")))
-    ("co" pyim-convert-string-at-point)
-    ("to" pyim-toggle-input-ascii)
-    ("q" nil))
-  (global-set-key (kbd "M-u py") 'hydra-pyim/body)
+  ;; input
+  (defhydra my-hydra-input (:color blue)
+    ("py" (lambda ()
+            (interactive)
+            (setq default-input-method "pyim")
+            (set-input-method "pyim"))
+     "Set input method to pyim" :column "<Set input method>")
+    ("ri" (lambda ()
+            (interactive)
+            (setq default-input-method "rime")
+            (set-input-method "rime"))
+     "Set input method to rime")
+    ("co" pyim-convert-string-at-point "pyim-convert-string-at-point" :column "<Pyim>")
+    ("to" pyim-toggle-input-ascii "pyim-toggle-input-ascii")
+    ("q" nil "quit" :column nil))
+  (global-set-key (kbd "M-u in") 'my-hydra-input/body)
   (with-eval-after-load 'isearch
       ;;这里是给像vim的/和?(evil-search-forward和evil-search-backward)搜索切换输入法添加快捷键
       ;; 上面两个搜索内部使用的是isearch相关的函数
-    (define-key isearch-mode-map (kbd "M-u py") 'hydra-pyim/body)
-    ; (evil-define-key 'normal isearch-mode-map (kbd "M-u C-p C-y") 'hydra-pyim/body)
-    )
-  ;; (add-hook 'isearch-mode-hook '(lambda ()
-  ;;                                  (local-set-key (kbd "M-u py") 'hydra-pyim/body)))
-  ;; (define-key evil-motion-state-map (kbd "M-u py") 'hydra-pyim/body)
-  ;; (evil-define-key 'normal motion  (kbd "M-u py") 'hydra-pyim/body)
-
+    (define-key isearch-mode-map (kbd "M-u in") 'my-hydra-input/body))
   ;;-------------------------------------------------------------
   ;; isearch
   (with-eval-after-load 'isearch
@@ -425,20 +420,6 @@
        "decrease font 10" :column "fonts commands")
       ("q" nil "cancel" :exit t :column nil))
     (global-set-key (kbd "M-u ft") 'hydra-font/body))
-
-  (defhydra hydra-input-method (:color blue)
-    ("py" (lambda ()
-            (interactive)
-            (setq default-input-method "pyim")
-            (set-input-method "pyim"))
-     "Set input method to pyim" :column "<Set input method>")
-    ("ri" (lambda ()
-            (interactive)
-            (setq default-input-method "rime")
-            (set-input-method "rime"))
-     "Set input method to rime"))
-  (global-set-key (kbd "M-u in") 'hydra-input-method/body))
-
 
 ;; {{{ test for hydra
 ;; (define-key ivy-minibuffer-map "\C-o"
