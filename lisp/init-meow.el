@@ -12,6 +12,11 @@
                                                          ('c++-mode (c-indent-line-or-region))
                                                          ('magit-status-mode (magit-section-toggle (magit-current-section)))
                                                          ('vterm-mode (vterm-send-tab)))))
+  (define-key meow-insert-state-keymap (kbd "C-j") #'(lambda ()
+                                                       (interactive)
+                                                       (pcase major-mode
+                                                         ('vterm-mode (vterm-toggle-insert-cd))
+                                                         (x nil))))
   (define-key meow-normal-state-keymap [?\C-?] 'ignore)
   )
 
