@@ -25,8 +25,8 @@
         (or
          (eq (plist-get (text-properties-at (point)) 'face) 'font-lock-doc-face)
          (eq (plist-get (text-properties-at (point)) 'face) 'font-lock-string-face)))
-      ;; :custom
-      ;; (default-input-method "pyim")
+      :custom
+      (default-input-method "pyim")
       :config
       (message "pyim xxxxxx")
       ;; 激活 basedict 拼音词库，五笔用户请继续阅读 README
