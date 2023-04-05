@@ -82,8 +82,8 @@
   ;; fix: gopls requires a module at the root of your workspace. You can work with multiple modules by opening each one as a workspace folder.
   ;; https://go.googlesource.com/tools/+/refs/heads/master/gopls/doc/emacs.md
   ;; https://go.googlesource.com/tools/+/refs/heads/master/gopls/doc/workspace.md
-  (lsp-register-custom-settings
-   '(("gopls.experimentalWorkspaceModule" t t)))
+  ;; (lsp-register-custom-settings
+  ;;  '(("gopls.experimentalWorkspaceModule" t t)))
   ;; }}}
   
   (use-package lsp-diagnostics

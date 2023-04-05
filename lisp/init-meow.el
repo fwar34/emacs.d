@@ -11,7 +11,8 @@
                                                        (cl-case major-mode
                                                          ('c++-mode (c-indent-line-or-region))
                                                          ('magit-status-mode (magit-section-toggle (magit-current-section)))
-                                                         ('vterm-mode (vterm-send-tab)))))
+                                                         ('vterm-mode (vterm-send-tab))
+                                                         (t (indent-for-tab-command)))))
   (define-key meow-insert-state-keymap (kbd "C-j") #'(lambda ()
                                                        (interactive)
                                                        (pcase major-mode
