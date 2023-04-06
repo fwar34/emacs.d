@@ -224,6 +224,7 @@
 
 ;; {{{ my transient commands
 (global-set-key (kbd "C-c sc") 'my-misc-transinet)
+(global-set-key (kbd "M-u sc") 'my-misc-transinet)
 
 (transient-define-prefix my-hl-todo ()
   "my hl-todo commands"
@@ -245,7 +246,7 @@
     ("c" "cargo commands" cargo-transient)
     ("w" "wgrep-change-to-wgrep-mode" wgrep-change-to-wgrep-mode)
     ("s" "wgrep-save-all-buffers" wgrep-save-all-buffers)
-    ("i" "change input method" hydra-input-method/body)
+    ("i" "change input method" my-hydra-input/body)
     ("k" "open my task.org" my-task-file-open)
     ("l" "electric-pair-mode" electric-pair-mode)]
    [" <page scroll>"
